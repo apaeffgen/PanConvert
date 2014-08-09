@@ -1,0 +1,14 @@
+<RCC>
+  <qresource>
+    <file>icons/freferences</file>
+    <file>icons/preferences</file>
+    <file>icons/opml</file>
+    <file>icons/save_as</file>
+    <file>icons/export_latex</file>
+    <file>icons/export</file>
+    <file>icons/close</file>
+    <file>icons/open</file>
+    <file>icons/new</file>
+    <file>icons/save</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,351 @@
+#!/usr/local/bin/python3
+# -*- coding: utf-8 -*-
+import codecs
+import os
+from PyQt5 import QtWidgets
+from source.dialog_preferences import *
+from source.converter.markdown import *
+from source.converter.latex import *
+from source.converter.opml import *
+from source.converter.html import *
+from source.converter.epub import *
+from source.converter.manual_converter import *
+from source.gui.panconvert_gui import Ui_notepad
+
+
+# noinspection PyStatementEffect,PyAttributeOutsideInit,PyAttributeOutsideInit,PyAttributeOutsideInit
+class StartQT5(QtWidgets.QMainWindow):#, QtWidgets.QDialog):
+
+    """File Dialog Functions"""
+
+    def file_dialog(self):
+        global text, data, openfile
+
+        fd = QtWidgets.QFileDialog(self)
+
+        self.filename = fd.getOpenFileName()
+        openfile = self.filename[0]
+        from os.path import isfile
+        if isfile(self.filename[0]):
+            try:
+                text = codecs.open(self.filename[0], 'r', 'utf-8').read()
+                data = self.ui.editor_window.setPlainText(text)
+                self.ui.actionSave.setEnabled(False)
+            except:
+                text = 'No Preview of the File-Data possible. Try to manually convert. Good Luck.'
+                data = self.ui.editor_window.setPlainText(text)
+                #QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                #                          'No Preview of the File-Data possible. Try to manually convert. Good Luck.')
+
+    def file_save(self):
+        from os.path import isfile
+        try:
+            isfile(self.filename[0])
+            file = codecs.open(self.filename[0], 'w', 'utf-8')
+            file.write(self.ui.editor_window.toPlainText())
+            file.close()
+        except AttributeError:
+            self.file_save_as()
+
+    def file_save_as(self):
+        fd = QtWidgets.QFileDialog(self)
+        self.filename = fd.getSaveFileName(self)
+        file = codecs.open(self.filename[0], 'w', 'utf-8')
+        filedata = self.ui.editor_window.toPlainText()
+        file.write(filedata)
+        file.close()
+
+    def file_new(self):
+        global text
+        from os.path import isfile
+        text = ''
+        self.ui.editor_window.setPlainText(text)
+        self.ui.actionSave.setEnabled(True)
+        if isfile(self.filename[0]):
+            self.ui.actionSave.setEnabled(False)
+
+
+    '''Export Functions'''
+
+
+    def file_export_html2markdown(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_html2markdown(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_markdown2html(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_md2html(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_md2latex(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_md2latex(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_opml2html(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_opml2html(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_opml2latex(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_opml2latex(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_opml2markdown_pandoc(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_opml2markdown(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_html2opml(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_html2opml(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_markdown2opml(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_markdown2opml(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_html2latex(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_html2latex(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_latex2html(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_latex2html(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_latex2opml(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_latex2opml(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_latex2markdown(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_latex2markdown(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    def file_export_manualconverter(self):
+        global text, openfile
+        text = self.ui.editor_window.toPlainText()
+        if text == '':
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+        elif text != 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
+            output_content = convert_universal(text,toFormat,fromFormat,extraParameter)
+            self.ui.editor_window.setPlainText(output_content)
+            #self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
+            #                                   " so, please check the quality of the created output.")
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        elif text == 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
+            output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
+            self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
+                                               " so, please check the quality of the created output.")
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                          'Something went terribly wrong. Please get some help. Google never was your'
+                                          ' is your friend. Just the NSA is.')
+
+    def file_export_markdown2epub(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_md2epub(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
+    '''Gui-Event Definitions'''
+
+    def __init__(self, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+        self.ui = Ui_notepad()
+        self.ui.setupUi(self)
+        self.ui.actionOpen.triggered.connect(self.file_dialog)
+        self.ui.actionSave.triggered.connect(self.file_save)
+        self.ui.actionSave_AS.triggered.connect(self.file_save_as)
+        self.ui.actionNew.triggered.connect(self.file_new)
+        self.ui.actionMarkdown2Latex.triggered.connect(self.file_export_md2latex)
+        self.ui.actionOpml2latex.triggered.connect(self.file_export_opml2latex)
+        self.ui.actionLatex2Opml.triggered.connect(self.file_export_latex2opml)
+        self.ui.actionLatex2Markdown.triggered.connect(self.file_export_latex2markdown)
+        self.ui.actionOpml2Markdown.triggered.connect(self.file_export_opml2markdown_pandoc)
+        self.ui.actionMarkdown2opml.triggered.connect(self.file_export_markdown2opml)
+        self.ui.actionHtml2Markdown.triggered.connect(self.file_export_html2markdown)
+        self.ui.actionMarkdown2html.triggered.connect(self.file_export_md2latex)
+        self.ui.actionOpml2html.triggered.connect(self.file_export_opml2html)
+        self.ui.actionHtml2opml.triggered.connect(self.file_export_html2opml)
+        self.ui.actionHtml2Latex.triggered.connect(self.file_export_html2latex)
+        self.ui.actionLatex2html.triggered.connect(self.file_export_latex2html)
+        self.ui.ButtonConvert.clicked.connect(self.event_triggered)
+        self.ui.actionPreferences.triggered.connect(self.event_dialog)
+        self.ui.actionHelp.triggered.connect(self.help_dialog)
+        self.ui.actionSave.setEnabled(True)
+
+    """External Dialog Windows - Trigger Functions"""
+
+    def help_dialog(self):
+        import webbrowser
+        systempath = os.getcwd()
+        webbrowser.open_new('file://' + systempath + '/source/help.html')
+
+    def event_dialog(self):
+        self.PreferenceDialog = PreferenceDialog(self)
+        self.PreferenceDialog.show()
+
+
+
+    '''Gui-Trigger-Function for RadioButtons'''
+
+    def event_triggered(self):
+        global fromFormat,toFormat,extraParameter
+        fromFormat = self.ui.FromParameter.text()
+        toFormat = self.ui.ToParameter.text()
+        standard_conversion = self.ui.StandardConversion.isChecked()
+        extraParameter = self.ui.ExtraParameter.text()
+
+        if standard_conversion is True:
+            if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.file_export_md2latex()
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.file_export_markdown2opml()
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.file_export_opml2markdown_pandoc()
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.file_export_opml2latex()
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.file_export_latex2markdown()
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
+                self.file_export_latex2opml()
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.file_export_html2markdown()
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.file_export_markdown2html()
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.file_export_opml2html()
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.file_export_html2opml()
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.file_export_latex2html()
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.file_export_html2latex()
+            else:
+                QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                              'The from-Format and to-Format should not be identical. '
+                                              'Please make a different choice.')
+        elif fromFormat is "" or toFormat is "":
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'If you fill in Arguments and uncheck the Box "Standard", you have to '
+                                          'provide at least the following Parameters: From, To. <br><br>'
+                                          '  Some Formats like odt, epub need an input '
+                                          'for "Parameter". Otherwise there will be no output at all')
+        elif fromFormat is not "" and toFormat is not "":# and extraParameter is not "":
+            self.file_export_manualconverter()
+
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                              'Either is this feature not implemented at the moment,'
+                                              ' or you have forgotten the extra Parameter for odt, epub Format. '
+                                              ' Please consult the help - System for more Information')
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    myapp = StartQT5()
+    myapp.show()
+    sys.exit(app.exec_())
