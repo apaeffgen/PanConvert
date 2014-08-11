@@ -36,7 +36,6 @@ class PreferenceDialog(QtWidgets.QDialog):
         PreferenceDialog.close(self)
 
     def input_path(self):
-        #TODO: Relative Path for preference.txt
         systempath = os.getcwd()
         d = open(systempath + "/source/preferences.txt", "w")
         outputpath = self.ui.Pandoc_Path.text()

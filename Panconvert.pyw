@@ -31,7 +31,7 @@ from source.gui.panconvert_gui import Ui_notepad
 
 
 # noinspection PyStatementEffect,PyAttributeOutsideInit,PyAttributeOutsideInit,PyAttributeOutsideInit
-class StartQT5(QtWidgets.QMainWindow):#, QtWidgets.QDialog):
+class StartQT5(QtWidgets.QMainWindow):
 
     """File Dialog Functions"""
 
