@@ -41,245 +41,239 @@
    <property name="mouseTracking">
     <bool>false</bool>
    </property>
-   <layout class="QGridLayout" name="gridLayout_3">
+   <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMaximumSize</enum>
+     <widget class="QGroupBox" name="BoxFromFormat">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>120</height>
+       </size>
       </property>
-      <property name="horizontalSpacing">
-       <number>-1</number>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>100</height>
+       </size>
       </property>
-      <property name="verticalSpacing">
-       <number>50</number>
+      <property name="title">
+       <string>From Format</string>
       </property>
-      <item row="0" column="1">
-       <widget class="QGroupBox" name="BoxToFormat">
-        <property name="minimumSize">
-         <size>
-          <width>140</width>
-          <height>120</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>140</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>To Format</string>
-        </property>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>33</y>
-           <width>106</width>
-           <height>77</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QRadioButton" name="ButtonToLatex">
-            <property name="text">
-             <string>Latex</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="ButtonToOpml">
-            <property name="text">
-             <string>Opml</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="ButtonToMarkdown">
-            <property name="text">
-             <string>Markdown</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="ButtonToHtml">
-            <property name="text">
-             <string>Html</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QGroupBox" name="BoxFromFormat">
-        <property name="minimumSize">
-         <size>
-          <width>140</width>
-          <height>120</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>140</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>From Format</string>
-        </property>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>30</y>
-           <width>103</width>
-           <height>77</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QRadioButton" name="ButtonFromHtml">
-            <property name="text">
-             <string>Html</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="ButtonFromLatex">
-            <property name="text">
-             <string>Latex</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="ButtonFromMarkdown">
-            <property name="text">
-             <string>Markdown</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="ButtonFromOpml">
-            <property name="text">
-             <string>Opml</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QCheckBox" name="StandardConversion">
-          <property name="text">
-           <string>Standard</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <property name="autoRepeat">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="ButtonConvert">
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Convert</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="3">
-       <layout class="QGridLayout" name="gridLayout_2">
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>92</width>
+         <height>77</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <widget class="QLabel" name="labelFromBox">
+         <widget class="QRadioButton" name="ButtonFromHtml">
           <property name="text">
-           <string>From</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="FromParameter">
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="text">
-           <string>markdown</string>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
+           <string>Html</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="labelToBox">
+         <widget class="QRadioButton" name="ButtonFromLatex">
           <property name="text">
-           <string>To</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="ToParameter">
-          <property name="text">
-           <string>odt</string>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
+           <string>Latex</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="labelParameter">
+         <widget class="QRadioButton" name="ButtonFromMarkdown">
           <property name="text">
-           <string>Parameter</string>
+           <string>Markdown</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="ExtraParameter">
+        <item row="3" column="0">
+         <widget class="QRadioButton" name="ButtonFromOpml">
           <property name="text">
-           <string>-o filename.odt</string>
+           <string>Opml</string>
           </property>
-          <property name="clearButtonEnabled">
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
            <bool>true</bool>
           </property>
          </widget>
         </item>
        </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="BoxToFormat">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>135</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>135</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>To Format</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>13</x>
+         <y>31</y>
+         <width>92</width>
+         <height>96</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="ButtonToLatex">
+          <property name="text">
+           <string>Latex</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="ButtonToOpml">
+          <property name="text">
+           <string>Opml</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="ButtonToMarkdown">
+          <property name="text">
+           <string>Markdown</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QRadioButton" name="ButtonToHtml">
+          <property name="text">
+           <string>Html</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QRadioButton" name="ButtonToLyx">
+          <property name="text">
+           <string>Lyx</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelFromBox">
+        <property name="text">
+         <string>From</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="FromParameter">
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string>markdown</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelToBox">
+        <property name="text">
+         <string>To</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="ToParameter">
+        <property name="text">
+         <string>odt</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelParameter">
+        <property name="text">
+         <string>Parameter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="ExtraParameter">
+        <property name="text">
+         <string>-o filename.odt</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
-    <item row="1" column="0">
+    <item row="0" column="3">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="StandardConversion">
+        <property name="text">
+         <string>Standard</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonConvert">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Convert</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0" colspan="4">
      <widget class="QPlainTextEdit" name="editor_window"/>
     </item>
    </layout>
@@ -354,12 +348,19 @@
     </property>
     <addaction name="actionPreferences"/>
    </widget>
+   <widget class="QMenu" name="menuLyx">
+    <property name="title">
+     <string>Lyx</string>
+    </property>
+    <addaction name="actionMarkdown2Lyx"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit_2"/>
    <addaction name="menuMarkdown"/>
    <addaction name="menuLatex"/>
    <addaction name="menuOpml"/>
    <addaction name="menuHtml"/>
+   <addaction name="menuLyx"/>
    <addaction name="menuExtras"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -519,6 +520,11 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionMarkdown2Lyx">
+   <property name="text">
+    <string>Markdown2Lyx</string>
    </property>
   </action>
  </widget>

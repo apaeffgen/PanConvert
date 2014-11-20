@@ -20,16 +20,19 @@ __author__ = 'apaeffgen'
 import codecs
 
 from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 from source.dialog_preferences import *
 from source.converter.markdown import *
 from source.converter.latex import *
 from source.converter.opml import *
 from source.converter.html import *
 from source.converter.epub import *
+from source.converter.lyx import *
 from source.converter.manual_converter import *
 from source.gui.panconvert_gui import Ui_notepad
 
-
+#TODO: Copy/Paste. In Ui + Function
+#TODO: Batch-Conversion. In Ui + Function
 # noinspection PyStatementEffect,PyAttributeOutsideInit,PyAttributeOutsideInit,PyAttributeOutsideInit
 class StartQT5(QtWidgets.QMainWindow):
 
@@ -38,7 +41,9 @@ class StartQT5(QtWidgets.QMainWindow):
     def file_dialog(self):
         global text, data, openfile
 
+
         fd = QtWidgets.QFileDialog(self)
+        fd.setDirectory(QtCore.QDir.homePath())
 
         self.filename = fd.getOpenFileName()
         openfile = self.filename[0]
@@ -66,6 +71,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def file_save_as(self):
         fd = QtWidgets.QFileDialog(self)
+        fd.setDirectory(QtCore.QDir.homePath())
         self.filename = fd.getSaveFileName(self)
         file = codecs.open(self.filename[0], 'w', 'utf-8')
         filedata = self.ui.editor_window.toPlainText()
@@ -229,7 +235,20 @@ class StartQT5(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
+    def file_export_markdown2lyx(self):
+        global text
+        text = self.ui.editor_window.toPlainText()
+        if text is not "":
+            output_content = convert_markdown2lyx(text)
+            self.ui.editor_window.setPlainText(output_content)
+            self.ui.actionSave.setEnabled(False)
+            text = output_content
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'You have no Data to be converted. Please make an input')
+
     def file_export_manualconverter(self):
+        #Fixme: Messages after filewrite
         global text, openfile
         text = self.ui.editor_window.toPlainText()
         if text == '':
@@ -265,7 +284,7 @@ class StartQT5(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
-    '''Gui-Event Definitions'''
+    """Gui-Event Definitions"""
 
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -287,6 +306,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionHtml2opml.triggered.connect(self.file_export_html2opml)
         self.ui.actionHtml2Latex.triggered.connect(self.file_export_html2latex)
         self.ui.actionLatex2html.triggered.connect(self.file_export_latex2html)
+        self.ui.actionMarkdown2Lyx.triggered.connect(self.file_export_markdown2lyx)
         self.ui.ButtonConvert.clicked.connect(self.event_triggered)
         self.ui.actionPreferences.triggered.connect(self.event_dialog)
         self.ui.actionHelp.triggered.connect(self.help_dialog)
@@ -300,12 +320,13 @@ class StartQT5(QtWidgets.QMainWindow):
         webbrowser.open_new('file://' + systempath + '/source/help.html')
 
     def event_dialog(self):
+        """ References to dialog_preferences.py"""
         self.PreferenceDialog = PreferenceDialog(self)
         self.PreferenceDialog.show()
 
 
 
-    '''Gui-Trigger-Function for RadioButtons'''
+    """Gui-Trigger-Function for RadioButtons"""
 
     def event_triggered(self):
         global fromFormat,toFormat,extraParameter
@@ -319,6 +340,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.file_export_md2latex()
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
                 self.file_export_markdown2opml()
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
+                self.file_export_markdown2lyx()
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
                 self.file_export_opml2markdown_pandoc()
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
@@ -341,7 +364,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.file_export_html2latex()
             else:
                 QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                              'The from-Format and to-Format should not be identical. '
+                                              'The from-Format and to-Format should not be identical.<br><br> '
+                                              'If you picket to-Lyx, only from-markdown is a valid option.<br><br>'
                                               'Please make a different choice.')
         elif fromFormat is "" or toFormat is "":
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',

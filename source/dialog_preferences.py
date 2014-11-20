@@ -18,32 +18,47 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QSettings
 from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 import os
 
+global path_pandoc
+
 
 class PreferenceDialog(QtWidgets.QDialog):
+
+    global path_pandoc
 
     def __init__(self, parent=None):
 
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_DialogPreferences()
         self.ui.setupUi(self)
-        self.ui.ButtonSave.clicked.connect(self.input_path)
+        self.ui.ButtonSave.clicked.connect(self.settings)
         self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+        settings = QSettings('Pandoc', 'PanConvert')
+        path_pandoc = settings.value('path_pandoc')
+        path_multimarkdown = settings.value('path_multimarkdown')
+        self.ui.Pandoc_Path.insert(path_pandoc)
+        self.ui.Markdown_Path.insert(path_multimarkdown)
+
+
 
     def cancel_dialog(self):
         PreferenceDialog.close(self)
 
-    def input_path(self):
-        systempath = os.getcwd()
-        d = open(systempath + "/source/preferences.txt", "w")
-        outputpath = self.ui.Pandoc_Path.text()
+    def settings(self):
 
-        d.writelines(outputpath)
-        d.close()
+
+        settings = QSettings('Pandoc', 'PanConvert')
+        settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
+        settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
+        settings.sync()
+        settings.status()
 
         PreferenceDialog.close(self)
+
+
 
 if __name__ == "__main__":
     import sys

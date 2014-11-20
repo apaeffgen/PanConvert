@@ -31,15 +31,14 @@ import subprocess
 import platform
 import os
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QSettings
 
-def get_path():
-    systempath = os.getcwd()
-    d = open(systempath + "/source/preferences.txt", "r")
-    #d = open("preferences.txt", "r")
-    path = d.readline()
-    d.close()
+def get_path_pandoc():
 
-    if len(path) == 0:
+    settings = QSettings('Pandoc', 'PanConvert')
+    path_pandoc = settings.value('path_pandoc','')
+
+    if len(path_pandoc) == 0:
 
         if platform.system() == 'Darwin' or platform.system() == 'Linux':
             args = ['which', 'pandoc']
@@ -48,8 +47,10 @@ def get_path():
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
 
-            path = str.rstrip(p.communicate(path.encode('utf-8'))[0].decode('utf-8'))
-            return path
+            path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+            settings.setValue('path_pandoc', path_pandoc)
+            settings.sync()
+            return path_pandoc
 
         elif platform.system() == 'Windows':
             args = ['where', 'pandoc']
@@ -58,15 +59,17 @@ def get_path():
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
 
-            path = str.rstrip(p.communicate(path.encode('utf-8'))[0].decode('utf-8'))
-            return path
+            path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+            settings.setValue('path_pandoc', path_pandoc)
+            settings.sync()
+            return path_pandoc
         else:
             QtWidgets.QMessageBox.warning(None, 'Error-Message',
                                           'Could not detect the actual operating system. Please fill in the Path'
                                           ' to Pandoc manually via Preferences.')
 
-    elif len(path) != 0:
-        return path
+    elif len(path_pandoc) != 0:
+        return path_pandoc
 
     else:
        QtWidgets.QMessageBox.warning(None, 'Error-Message',
@@ -122,9 +125,9 @@ def _read_file(source, format, encoding='utf-8'):
 # noinspection PyPep8
 def _process_file(source, to, format, extra_args):
     try:
-        path = get_path()
-        args = [path, '--from=' + format, '--to=' + to]
-
+        path_pandoc = get_path_pandoc()
+        args = [path_pandoc, '--from=' + format, '--to=' + to]
+#FIXME: Change to multiple Arguments
         if extra_args is not '' :
             args.append(extra_args)
 
@@ -147,9 +150,9 @@ def get_pandoc_formats():
     Return 2 lists. "from_formats" and "to_formats".
     """
     try:
-        path = get_path()
+        path_pandoc = get_path_pandoc()
         p = subprocess.Popen(
-                [path, '-h'],
+                [path_pandoc, '-h'],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
         help_text = p.communicate()[0].decode().splitlines(False)

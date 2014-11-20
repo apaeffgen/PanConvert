@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>103</height>
+    <width>510</width>
+    <height>113</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -22,9 +22,9 @@
   <widget class="QLabel" name="label_Pandoc_Path">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>12</y>
-     <width>137</width>
+     <x>50</x>
+     <y>20</y>
+     <width>157</width>
      <height>16</height>
     </rect>
    </property>
@@ -35,21 +35,24 @@
   <widget class="QLineEdit" name="Pandoc_Path">
    <property name="geometry">
     <rect>
-     <x>205</x>
-     <y>12</y>
-     <width>142</width>
-     <height>21</height>
+     <x>214</x>
+     <y>20</y>
+     <width>221</width>
+     <height>17</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
+   <property name="placeholderText">
+    <string>/usr/local/bin/pandoc</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="ButtonSave">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>51</y>
+     <x>270</x>
+     <y>70</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -61,14 +64,49 @@
   <widget class="QPushButton" name="ButtonCancel">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>50</y>
+     <x>200</x>
+     <y>70</y>
      <width>71</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Markdown_Path">
+   <property name="geometry">
+    <rect>
+     <x>214</x>
+     <y>44</y>
+     <width>221</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>/usr/local/bin/multimarkdown</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_Markdown_Path">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>39</y>
+     <width>157</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Path to Markdown Binary</string>
    </property>
   </widget>
  </widget>
