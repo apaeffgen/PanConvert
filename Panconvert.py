@@ -249,7 +249,7 @@ class StartQT5(QtWidgets.QMainWindow):
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_manualconverter(self):
-        #Fixme: Messages after filewrite
+
         global text, openfile
         text = self.ui.editor_window.toPlainText()
         if text == '':
@@ -257,11 +257,15 @@ class StartQT5(QtWidgets.QMainWindow):
                                           'You have no Data to be converted. Please make an input')
         elif text != 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
             output_content = convert_universal(text,toFormat,fromFormat,extraParameter)
-            self.ui.editor_window.setPlainText(output_content)
-            #self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
-            #                                   " so, please check the quality of the created output.")
+
             self.ui.actionSave.setEnabled(False)
-            text = output_content
+            if output_content is not '':
+                self.ui.editor_window.setPlainText(output_content)
+            else:
+                QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                          'There should be a file written to the folder where Panconvert'
+                                          ' is stored. Please check at this location.')
+
         elif text == 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
             output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
             self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
@@ -271,7 +275,7 @@ class StartQT5(QtWidgets.QMainWindow):
         else:
             QtWidgets.QMessageBox.warning(None, 'Error-Message',
                                           'Something went terribly wrong. Please get some help. Google never was your'
-                                          ' is your friend. Just the NSA is.')
+                                          '/ is your friend. Just the NSA is.')
 
     def file_export_markdown2epub(self):
         global text

@@ -127,9 +127,12 @@ def _process_file(source, to, format, extra_args):
     try:
         path_pandoc = get_path_pandoc()
         args = [path_pandoc, '--from=' + format, '--to=' + to]
-#FIXME: Change to multiple Arguments
+
         if extra_args is not '' :
-            args.append(extra_args)
+            extra_args = extra_args.split()
+            for arg in extra_args:
+                args.append(arg)
+
 
         p = subprocess.Popen(
                 args,
