@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_prefpane.ui'
 #
-# Created: Sat Nov 15 16:27:28 2014
+# Created: Sun Nov 23 11:29:15 2014
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DialogPreferences(object):
     def setupUi(self, DialogPreferences):
         DialogPreferences.setObjectName("DialogPreferences")
-        DialogPreferences.resize(510, 113)
+        DialogPreferences.resize(498, 238)
         DialogPreferences.setMinimumSize(QtCore.QSize(400, 100))
         self.label_Pandoc_Path = QtWidgets.QLabel(DialogPreferences)
         self.label_Pandoc_Path.setGeometry(QtCore.QRect(50, 20, 157, 16))
@@ -22,10 +22,10 @@ class Ui_DialogPreferences(object):
         self.Pandoc_Path.setText("")
         self.Pandoc_Path.setObjectName("Pandoc_Path")
         self.ButtonSave = QtWidgets.QPushButton(DialogPreferences)
-        self.ButtonSave.setGeometry(QtCore.QRect(270, 70, 71, 31))
+        self.ButtonSave.setGeometry(QtCore.QRect(360, 120, 71, 31))
         self.ButtonSave.setObjectName("ButtonSave")
         self.ButtonCancel = QtWidgets.QPushButton(DialogPreferences)
-        self.ButtonCancel.setGeometry(QtCore.QRect(200, 70, 71, 31))
+        self.ButtonCancel.setGeometry(QtCore.QRect(360, 90, 71, 31))
         self.ButtonCancel.setObjectName("ButtonCancel")
         self.Markdown_Path = QtWidgets.QLineEdit(DialogPreferences)
         self.Markdown_Path.setGeometry(QtCore.QRect(214, 44, 221, 17))
@@ -39,6 +39,39 @@ class Ui_DialogPreferences(object):
         sizePolicy.setHeightForWidth(self.label_Markdown_Path.sizePolicy().hasHeightForWidth())
         self.label_Markdown_Path.setSizePolicy(sizePolicy)
         self.label_Markdown_Path.setObjectName("label_Markdown_Path")
+        self.BoxFromFormat = QtWidgets.QGroupBox(DialogPreferences)
+        self.BoxFromFormat.setGeometry(QtCore.QRect(40, 70, 131, 121))
+        self.BoxFromFormat.setObjectName("BoxFromFormat")
+        self.ButtonFromHtml = QtWidgets.QRadioButton(self.BoxFromFormat)
+        self.ButtonFromHtml.setGeometry(QtCore.QRect(20, 30, 102, 20))
+        self.ButtonFromHtml.setObjectName("ButtonFromHtml")
+        self.ButtonFromLatex = QtWidgets.QRadioButton(self.BoxFromFormat)
+        self.ButtonFromLatex.setGeometry(QtCore.QRect(20, 50, 102, 20))
+        self.ButtonFromLatex.setObjectName("ButtonFromLatex")
+        self.ButtonFromMarkdown = QtWidgets.QRadioButton(self.BoxFromFormat)
+        self.ButtonFromMarkdown.setGeometry(QtCore.QRect(20, 70, 102, 20))
+        self.ButtonFromMarkdown.setObjectName("ButtonFromMarkdown")
+        self.ButtonFromOpml = QtWidgets.QRadioButton(self.BoxFromFormat)
+        self.ButtonFromOpml.setGeometry(QtCore.QRect(20, 90, 102, 20))
+        self.ButtonFromOpml.setObjectName("ButtonFromOpml")
+        self.BoxToFormat = QtWidgets.QGroupBox(DialogPreferences)
+        self.BoxToFormat.setGeometry(QtCore.QRect(210, 70, 111, 141))
+        self.BoxToFormat.setObjectName("BoxToFormat")
+        self.ButtonToHtml = QtWidgets.QRadioButton(self.BoxToFormat)
+        self.ButtonToHtml.setGeometry(QtCore.QRect(10, 30, 102, 20))
+        self.ButtonToHtml.setObjectName("ButtonToHtml")
+        self.ButtonToLatex = QtWidgets.QRadioButton(self.BoxToFormat)
+        self.ButtonToLatex.setGeometry(QtCore.QRect(10, 50, 102, 20))
+        self.ButtonToLatex.setObjectName("ButtonToLatex")
+        self.ButtonToMarkdown = QtWidgets.QRadioButton(self.BoxToFormat)
+        self.ButtonToMarkdown.setGeometry(QtCore.QRect(10, 70, 102, 20))
+        self.ButtonToMarkdown.setObjectName("ButtonToMarkdown")
+        self.ButtonToOpml = QtWidgets.QRadioButton(self.BoxToFormat)
+        self.ButtonToOpml.setGeometry(QtCore.QRect(10, 90, 102, 20))
+        self.ButtonToOpml.setObjectName("ButtonToOpml")
+        self.ButtonToLyx = QtWidgets.QRadioButton(self.BoxToFormat)
+        self.ButtonToLyx.setGeometry(QtCore.QRect(10, 110, 102, 20))
+        self.ButtonToLyx.setObjectName("ButtonToLyx")
 
         self.retranslateUi(DialogPreferences)
         QtCore.QMetaObject.connectSlotsByName(DialogPreferences)
@@ -52,4 +85,15 @@ class Ui_DialogPreferences(object):
         self.ButtonCancel.setText(_translate("DialogPreferences", "Cancel"))
         self.Markdown_Path.setPlaceholderText(_translate("DialogPreferences", "/usr/local/bin/multimarkdown"))
         self.label_Markdown_Path.setText(_translate("DialogPreferences", "Path to Markdown Binary"))
+        self.BoxFromFormat.setTitle(_translate("DialogPreferences", "Default From"))
+        self.ButtonFromHtml.setText(_translate("DialogPreferences", "HTML"))
+        self.ButtonFromLatex.setText(_translate("DialogPreferences", "Latex"))
+        self.ButtonFromMarkdown.setText(_translate("DialogPreferences", "Markdown"))
+        self.ButtonFromOpml.setText(_translate("DialogPreferences", "Opml"))
+        self.BoxToFormat.setTitle(_translate("DialogPreferences", "Default To"))
+        self.ButtonToHtml.setText(_translate("DialogPreferences", "HTML"))
+        self.ButtonToLatex.setText(_translate("DialogPreferences", "Latex"))
+        self.ButtonToMarkdown.setText(_translate("DialogPreferences", "Markdown"))
+        self.ButtonToOpml.setText(_translate("DialogPreferences", "Opml"))
+        self.ButtonToLyx.setText(_translate("DialogPreferences", "Lyx"))
 

@@ -18,8 +18,8 @@ __author__ = 'apaeffgen'
 import sys
 from cx_Freeze import setup, Executable
 
-#Fixme: Repair Path to icon on MacOS
-mac_icon = "gui.icons.icon.icns"
+
+
 base = None
 if sys.platform == 'win32':
     base = 'Win32GUI'
@@ -35,7 +35,7 @@ executables = [
 ]
 
 setup(name='PanConvert',
-      version='0.1a',
+      version='0.1.1',
       description='Gui Wrapper for PanDocs',
       options=options,
       executables=executables

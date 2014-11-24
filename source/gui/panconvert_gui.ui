@@ -59,54 +59,66 @@
       <property name="title">
        <string>From Format</string>
       </property>
-      <widget class="QWidget" name="layoutWidget">
+      <widget class="QRadioButton" name="ButtonFromHtml">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>30</y>
-         <width>92</width>
-         <height>77</height>
+         <width>56</width>
+         <height>20</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="ButtonFromHtml">
-          <property name="text">
-           <string>Html</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="ButtonFromLatex">
-          <property name="text">
-           <string>Latex</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QRadioButton" name="ButtonFromMarkdown">
-          <property name="text">
-           <string>Markdown</string>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QRadioButton" name="ButtonFromOpml">
-          <property name="text">
-           <string>Opml</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <property name="text">
+        <string>Html</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ButtonFromLatex">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>49</y>
+         <width>60</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Latex</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ButtonFromMarkdown">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>68</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Markdown</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ButtonFromOpml">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>87</y>
+         <width>60</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Opml</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
       </widget>
      </widget>
     </item>
@@ -160,7 +172,7 @@
            <bool>true</bool>
           </property>
           <property name="checked">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>

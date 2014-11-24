@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
-    <height>113</height>
+    <width>498</width>
+    <height>238</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -51,8 +51,8 @@
   <widget class="QPushButton" name="ButtonSave">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>70</y>
+     <x>360</x>
+     <y>120</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -64,8 +64,8 @@
   <widget class="QPushButton" name="ButtonCancel">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>70</y>
+     <x>360</x>
+     <y>90</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -108,6 +108,149 @@
    <property name="text">
     <string>Path to Markdown Binary</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="BoxFromFormat">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>70</y>
+     <width>131</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Default From</string>
+   </property>
+   <widget class="QRadioButton" name="ButtonFromHtml">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>HTML</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonFromLatex">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Latex</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonFromMarkdown">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Markdown</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonFromOpml">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>90</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Opml</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="BoxToFormat">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>111</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Default To</string>
+   </property>
+   <widget class="QRadioButton" name="ButtonToHtml">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>HTML</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonToLatex">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Latex</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonToMarkdown">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Markdown</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonToOpml">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Opml</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ButtonToLyx">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Lyx</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

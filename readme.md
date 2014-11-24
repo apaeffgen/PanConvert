@@ -5,6 +5,7 @@
 Running the program you must have installed the following additional software-packages:
 
 - pandoc
+- multimarkdown (optional for Lyx conversion)
 - python3
 - QT5
 - pyqt5
@@ -13,25 +14,27 @@ Not working is python2, QT4 and pyqt4. There can be some issues with older versi
 initially used.
 
 
-On Linux most actual distributions come preinstalled with the first 3 packages. Package-Managers allow to install pandoc.
+On Linux most actual distributions come preinstalled with the last 3 packages. Package-Managers allow to install pandoc.
+Multimarkdown has to be compiled from source
 
 On Windows you have to manually install all the packages by hand. See all the links below.
 
 On MacOS homebrew can be used to install python3, QT5 and pyqt5. Pandoc has to be downloaded from the pandoc-homepage.
 
 
-http://johnmacfarlane.net/pandoc/
-https://www.python.org/downloads/
-http://qt-project.org/downloads
-http://www.riverbankcomputing.co.uk/software/pyqt/download5
-http://brew.sh
+- http://johnmacfarlane.net/pandoc/
+- http://fletcherpenney.net/multimarkdown/
+- https://www.python.org/downloads/
+- http://qt-project.org/downloads
+- http://www.riverbankcomputing.co.uk/software/pyqt/download5
+- http://brew.sh
 
 If all the dependencies are properly installed, you can run the program:
 On the commandline you have to first cd into the appropriate directory.
 
-- on windows by double-clicking on Panconvert.pyw
-- on Linux by starting the commandline: python3 Panconvert.pyw
-- on MaOS by opening the terminal and typing python3 Panconvert.pyw
+- on windows by double-clicking on Panconvert.py
+- on Linux by starting the commandline: python3 Panconvert.py
+- on MaOS by opening the terminal and typing python3 Panconvert.py
 
 ## Usage
 

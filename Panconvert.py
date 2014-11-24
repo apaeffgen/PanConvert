@@ -18,6 +18,7 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import codecs
+import platform
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
@@ -311,6 +312,45 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionPreferences.triggered.connect(self.event_dialog)
         self.ui.actionHelp.triggered.connect(self.help_dialog)
         self.ui.actionSave.setEnabled(True)
+
+
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        From_Markdown = settings.value('From_Markdown', False)
+        From_Html = settings.value('From_Html', False)
+        From_Latex = settings.value('From_Latex', False)
+        From_Opml = settings.value('From_Opml', False)
+
+        To_Markdown = settings.value('To_Markdown', False)
+        To_Html = settings.value('To_Html', False)
+        To_Latex = settings.value('To_Latex', False)
+        To_Opml = settings.value('To_Opml', False)
+        To_Lyx = settings.value('To_Lyx', False)
+
+
+        if platform.system() == 'Windows' or platform.system() == 'Linux':
+            self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
+            self.ui.ButtonFromHtml.setChecked(strtobool(From_Html))
+            self.ui.ButtonFromLatex.setChecked(strtobool(From_Latex))
+            self.ui.ButtonFromOpml.setChecked(strtobool(From_Opml))
+            self.ui.ButtonToMarkdown.setChecked(strtobool(To_Markdown))
+            self.ui.ButtonToHtml.setChecked(strtobool(To_Html))
+            self.ui.ButtonToLatex.setChecked(strtobool(To_Latex))
+            self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
+            self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
+
+        else:
+            self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
+            self.ui.ButtonFromHtml.setChecked(From_Html)
+            self.ui.ButtonFromLatex.setChecked(From_Latex)
+            self.ui.ButtonFromOpml.setChecked(From_Opml)
+            self.ui.ButtonToMarkdown.setChecked(To_Markdown)
+            self.ui.ButtonToHtml.setChecked(To_Html)
+            self.ui.ButtonToLatex.setChecked(To_Latex)
+            self.ui.ButtonToOpml.setChecked(To_Opml)
+            self.ui.ButtonToLyx.setChecked(To_Lyx)
+
+
 
     """External Dialog Windows - Trigger Functions"""
 
