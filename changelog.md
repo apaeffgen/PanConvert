@@ -1,3 +1,9 @@
+# Version 0.1.2
+
+## Bug Fixes
+- Fixed: Message after filewrite to filesystem (e.g. odt-Export)
+- Fixed: Change to multiple Arguments
+
 # Version 0.1.1
 
 ## New Features
@@ -9,5 +15,3 @@
 
 - Preferences are saved as QSettings
 - Set open/save-path to homefolder
-- Fixed: Message after filewrite to filesystem (e.g. odt-Export)
-- Fixed: Change to multiple Arguments
