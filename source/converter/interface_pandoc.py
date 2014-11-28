@@ -129,7 +129,7 @@ def _process_file(source, to, format, extra_args):
         args = [path_pandoc, '--from=' + format, '--to=' + to]
 
         if extra_args is not '' :
-            extra_args = extra_args.split()
+            extra_args = extra_args.split(';')
             for arg in extra_args:
                 args.append(arg)
 

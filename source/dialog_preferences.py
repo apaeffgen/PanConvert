@@ -55,27 +55,28 @@ class PreferenceDialog(QtWidgets.QDialog):
         To_Lyx = settings.value('To_Lyx', False)
 
 
-        if platform.system() == 'Windows' or platform.system() == 'Linux':
-            self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
-            self.ui.ButtonFromHtml.setChecked(strtobool(From_Html))
-            self.ui.ButtonFromLatex.setChecked(strtobool(From_Latex))
-            self.ui.ButtonFromOpml.setChecked(strtobool(From_Opml))
-            self.ui.ButtonToMarkdown.setChecked(strtobool(To_Markdown))
-            self.ui.ButtonToHtml.setChecked(strtobool(To_Html))
-            self.ui.ButtonToLatex.setChecked(strtobool(To_Latex))
-            self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
-            self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
+        if settings.value('From_Markdown') is not None:
+            if platform.system() == 'Windows' or platform.system() == 'Linux':
+                self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
+                self.ui.ButtonFromHtml.setChecked(strtobool(From_Html))
+                self.ui.ButtonFromLatex.setChecked(strtobool(From_Latex))
+                self.ui.ButtonFromOpml.setChecked(strtobool(From_Opml))
+                self.ui.ButtonToMarkdown.setChecked(strtobool(To_Markdown))
+                self.ui.ButtonToHtml.setChecked(strtobool(To_Html))
+                self.ui.ButtonToLatex.setChecked(strtobool(To_Latex))
+                self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
+                self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
 
-        else:
-            self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
-            self.ui.ButtonFromHtml.setChecked(From_Html)
-            self.ui.ButtonFromLatex.setChecked(From_Latex)
-            self.ui.ButtonFromOpml.setChecked(From_Opml)
-            self.ui.ButtonToMarkdown.setChecked(To_Markdown)
-            self.ui.ButtonToHtml.setChecked(To_Html)
-            self.ui.ButtonToLatex.setChecked(To_Latex)
-            self.ui.ButtonToOpml.setChecked(To_Opml)
-            self.ui.ButtonToLyx.setChecked(To_Lyx)
+            else:
+                self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
+                self.ui.ButtonFromHtml.setChecked(From_Html)
+                self.ui.ButtonFromLatex.setChecked(From_Latex)
+                self.ui.ButtonFromOpml.setChecked(From_Opml)
+                self.ui.ButtonToMarkdown.setChecked(To_Markdown)
+                self.ui.ButtonToHtml.setChecked(To_Html)
+                self.ui.ButtonToLatex.setChecked(To_Latex)
+                self.ui.ButtonToOpml.setChecked(To_Opml)
+                self.ui.ButtonToLyx.setChecked(To_Lyx)
 
 
 

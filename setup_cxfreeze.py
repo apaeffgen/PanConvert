@@ -26,7 +26,8 @@ if sys.platform == 'win32':
 
 options = {
     'build_exe': {
-        'includes': 'atexit'
+        'includes': 'atexit',
+        "include_msvcr": True
     }
 }
 
@@ -35,7 +36,7 @@ executables = [
 ]
 
 setup(name='PanConvert',
-      version='0.1.1',
+      version='0.1.2',
       description='Gui Wrapper for PanDocs',
       options=options,
       executables=executables
