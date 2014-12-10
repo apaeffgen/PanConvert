@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui.ui'
 #
-# Created: Sun Nov 23 11:04:57 2014
+# Created: Sat Dec  6 23:09:27 2014
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,6 +83,7 @@ class Ui_notepad(object):
         self.gridLayout_2.addWidget(self.labelFromBox, 0, 0, 1, 1)
         self.FromParameter = QtWidgets.QLineEdit(self.centralwidget)
         self.FromParameter.setInputMask("")
+        self.FromParameter.setText("")
         self.FromParameter.setClearButtonEnabled(True)
         self.FromParameter.setObjectName("FromParameter")
         self.gridLayout_2.addWidget(self.FromParameter, 0, 1, 1, 1)
@@ -90,6 +91,7 @@ class Ui_notepad(object):
         self.labelToBox.setObjectName("labelToBox")
         self.gridLayout_2.addWidget(self.labelToBox, 1, 0, 1, 1)
         self.ToParameter = QtWidgets.QLineEdit(self.centralwidget)
+        self.ToParameter.setText("")
         self.ToParameter.setClearButtonEnabled(True)
         self.ToParameter.setObjectName("ToParameter")
         self.gridLayout_2.addWidget(self.ToParameter, 1, 1, 1, 1)
@@ -97,6 +99,7 @@ class Ui_notepad(object):
         self.labelParameter.setObjectName("labelParameter")
         self.gridLayout_2.addWidget(self.labelParameter, 2, 0, 1, 1)
         self.ExtraParameter = QtWidgets.QLineEdit(self.centralwidget)
+        self.ExtraParameter.setText("")
         self.ExtraParameter.setClearButtonEnabled(True)
         self.ExtraParameter.setObjectName("ExtraParameter")
         self.gridLayout_2.addWidget(self.ExtraParameter, 2, 1, 1, 1)
@@ -104,7 +107,7 @@ class Ui_notepad(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.StandardConversion = QtWidgets.QCheckBox(self.centralwidget)
-        self.StandardConversion.setChecked(True)
+        self.StandardConversion.setChecked(False)
         self.StandardConversion.setAutoRepeat(False)
         self.StandardConversion.setObjectName("StandardConversion")
         self.verticalLayout_3.addWidget(self.StandardConversion)
@@ -257,11 +260,8 @@ class Ui_notepad(object):
         self.ButtonToHtml.setText(_translate("notepad", "Html"))
         self.ButtonToLyx.setText(_translate("notepad", "Lyx"))
         self.labelFromBox.setText(_translate("notepad", "From"))
-        self.FromParameter.setText(_translate("notepad", "markdown"))
         self.labelToBox.setText(_translate("notepad", "To"))
-        self.ToParameter.setText(_translate("notepad", "odt"))
         self.labelParameter.setText(_translate("notepad", "Parameter"))
-        self.ExtraParameter.setText(_translate("notepad", "-o filename.odt"))
         self.StandardConversion.setText(_translate("notepad", "Standard"))
         self.ButtonConvert.setText(_translate("notepad", "Convert"))
         self.menuFile.setTitle(_translate("notepad", "File"))

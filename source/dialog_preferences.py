@@ -37,12 +37,26 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.ui.ButtonSave.clicked.connect(self.settings)
         self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+
+        #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
+
+        #Paths and Parameters
         path_pandoc = settings.value('path_pandoc')
         self.ui.Pandoc_Path.insert(path_pandoc)
         path_multimarkdown = settings.value('path_multimarkdown')
         self.ui.Markdown_Path.insert(path_multimarkdown)
 
+        fromParameter = settings.value('fromParameter')
+        self.ui.FromParameter.insert(fromParameter)
+        toParameter = settings.value('toParameter')
+        self.ui.ToParameter.insert(toParameter)
+        xtraParameter = settings.value('xtraParameter')
+        self.ui.XtraParameter.insert(xtraParameter)
+
+
+        #Checkboxes
+        Standard_Conversion = settings.value('Standard_Conversion', False)
         From_Markdown = settings.value('From_Markdown', False)
         From_Html = settings.value('From_Html', False)
         From_Latex = settings.value('From_Latex', False)
@@ -66,6 +80,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToLatex.setChecked(strtobool(To_Latex))
                 self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
                 self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
+                self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
@@ -77,6 +92,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToLatex.setChecked(To_Latex)
                 self.ui.ButtonToOpml.setChecked(To_Opml)
                 self.ui.ButtonToLyx.setChecked(To_Lyx)
+                self.ui.StandardConversion.setChecked(Standard_Conversion)
 
 
 
@@ -93,6 +109,13 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
+
+
+        settings.setValue('fromParameter', self.ui.FromParameter.text())
+        settings.setValue('toParameter', self.ui.ToParameter.text())
+        settings.setValue('xtraParameter', self.ui.XtraParameter.text())
+
+        settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
 
         settings.setValue('From_Markdown', self.ui.ButtonFromMarkdown.isChecked())
         settings.setValue('From_Html', self.ui.ButtonFromHtml.isChecked())

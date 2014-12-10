@@ -36,7 +36,7 @@ executables = [
 ]
 
 setup(name='PanConvert',
-      version='0.1.2',
+      version='0.1.3',
       description='Gui Wrapper for PanDocs',
       options=options,
       executables=executables

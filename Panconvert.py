@@ -264,12 +264,16 @@ class StartQT5(QtWidgets.QMainWindow):
             else:
                 QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'There should be a file written to the folder where Panconvert'
-                                          ' is stored. Please check at this location.')
+                                          ' is stored. Please check at this location. <br><br> If not, somthing'
+                                          ' went terribly wrong. Sorry for the inconvenience')
+
+
 
         elif text == 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
             output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
-            self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
-                                               " so, please check the quality of the created output.")
+            #self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
+            #                                   " so, please check the quality of the created output.")
+            self.ui.editor_window.setPlainText(output_content)
             self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
@@ -320,6 +324,11 @@ class StartQT5(QtWidgets.QMainWindow):
 
         settings = QSettings('Pandoc', 'PanConvert')
 
+        fromParameter = settings.value('fromParameter')
+        toParameter = settings.value('toParameter')
+        xtraParameter = settings.value('xtraParameter')
+
+        Standard_Conversion = settings.value('Standard_Conversion', False)
         From_Markdown = settings.value('From_Markdown', False)
         From_Html = settings.value('From_Html', False)
         From_Latex = settings.value('From_Latex', False)
@@ -334,6 +343,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if settings.value('From_Markdown') is not None:
             if platform.system() == 'Windows' or platform.system() == 'Linux':
+                self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
                 self.ui.ButtonFromHtml.setChecked(strtobool(From_Html))
                 self.ui.ButtonFromLatex.setChecked(strtobool(From_Latex))
@@ -343,8 +353,12 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.ButtonToLatex.setChecked(strtobool(To_Latex))
                 self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
                 self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
+                self.ui.FromParameter.setText(fromParameter)
+                self.ui.ToParameter.setText(toParameter)
+                self.ui.ExtraParameter.setText(xtraParameter)
 
             else:
+                self.ui.StandardConversion.setChecked(Standard_Conversion)
                 self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
                 self.ui.ButtonFromHtml.setChecked(From_Html)
                 self.ui.ButtonFromLatex.setChecked(From_Latex)
@@ -354,6 +368,9 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.ButtonToLatex.setChecked(To_Latex)
                 self.ui.ButtonToOpml.setChecked(To_Opml)
                 self.ui.ButtonToLyx.setChecked(To_Lyx)
+                self.ui.FromParameter.setText(fromParameter)
+                self.ui.ToParameter.setText(toParameter)
+                self.ui.ExtraParameter.setText(xtraParameter)
 
 
 

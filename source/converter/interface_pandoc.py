@@ -29,7 +29,6 @@ from __future__ import with_statement
 
 import subprocess
 import platform
-import os
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 
@@ -137,9 +136,23 @@ def _process_file(source, to, format, extra_args):
         p = subprocess.Popen(
                 args,
                 stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
 
-        return p.communicate(source.encode('utf-8'))[0].decode('utf-8')
+        #Original Code without error-handling
+        #output = p.communicate(source.encode('utf-8'))[0].decode('utf-8')
+
+        output1, error1 = p.communicate(source.encode('utf-8'))
+        output = output1.decode('utf-8')
+        error = error1.decode('utf-8')
+
+        if p.returncode != 0:
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                          'An Error occurred. <br><br>{}'.format(error))
+        else:
+            return output
+
+
 
     except OSError:
         QtWidgets.QMessageBox.warning(None, 'Error-Message',
