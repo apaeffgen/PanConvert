@@ -1,4 +1,4 @@
-# Readme first (Version 0.1.3)
+# Readme first (Version 0.1.3 and above)
 ## Update from previous versions
 If Panconvert 0.1.1 or above had been used, the previous settings have to be deleted, or Panconvert 0.1.3 will crash: 
 
@@ -44,7 +44,8 @@ On the commandline you have to first cd into the appropriate directory.
 
 ## Usage
 
-There is a Helpfile help.html in the source directory. It can be used also inside the started Gui.
+There is help available at http://panconvert.sourceforge.net/help.html
+The help can be used also inside the started Gui.
 
 ## License
 

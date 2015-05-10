@@ -1,3 +1,11 @@
+## Version 0.1.4
+
+### New Features
+- Added Preference for Open/Safe-Path (Standard is the Home-Directory)
+- Added a Help menu for the pandoc user guide
+- Added a undo function
+- Removed save button, changed to save buffer (Only in Memory)
+
 ## Version 0.1.3
 
 ### New Features

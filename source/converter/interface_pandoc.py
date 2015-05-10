@@ -92,7 +92,7 @@ def _convert(reader, processor, source, to, format=None, extra_args=(), encoding
 
     formats = {
         'dbk': 'docbook',
-        'md': 'markdown',
+        'md': 'markdown_strict',
         'rest': 'rst',
         'tex': 'latex',
     }

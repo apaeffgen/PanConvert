@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>265</height>
+    <width>655</width>
+    <height>357</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,75 +19,11 @@
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
-  <widget class="QLabel" name="label_Pandoc_Path">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>20</y>
-     <width>157</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Path to Pandoc Binary</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="Pandoc_Path">
-   <property name="geometry">
-    <rect>
-     <x>214</x>
-     <y>20</y>
-     <width>391</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string>/usr/local/bin/pandoc</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="Markdown_Path">
-   <property name="geometry">
-    <rect>
-     <x>214</x>
-     <y>44</y>
-     <width>391</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string>/usr/local/bin/multimarkdown</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_Markdown_Path">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>39</y>
-     <width>157</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="text">
-    <string>Path to Markdown Binary</string>
-   </property>
-  </widget>
   <widget class="QGroupBox" name="BoxFromFormat">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>70</y>
+     <y>150</y>
      <width>131</width>
      <height>121</height>
     </rect>
@@ -152,7 +88,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>70</y>
+     <y>150</y>
      <width>111</width>
      <height>141</height>
     </rect>
@@ -230,7 +166,7 @@
    <property name="geometry">
     <rect>
      <x>370</x>
-     <y>70</y>
+     <y>150</y>
      <width>231</width>
      <height>161</height>
     </rect>
@@ -321,7 +257,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>220</y>
+     <y>300</y>
      <width>316</width>
      <height>32</height>
     </rect>
@@ -348,6 +284,84 @@
       </property>
       <property name="checked">
        <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>20</y>
+     <width>381</width>
+     <height>85</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="Pandoc_Path">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>/usr/local/bin/pandoc</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Markdown_Path">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>/usr/local/bin/multimarkdown</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Dialog_Path">
+      <property name="placeholderText">
+       <string>/Users</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>159</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_Pandoc_Path">
+      <property name="text">
+       <string>Path to Pandoc Binary</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Markdown_Path">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Path to Markdown Binary</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Dialog_Path">
+      <property name="text">
+       <string>Open / Save - Path</string>
       </property>
      </widget>
     </item>

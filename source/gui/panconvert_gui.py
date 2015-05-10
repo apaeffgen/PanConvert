@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui.ui'
 #
-# Created: Sat Dec  6 23:09:27 2014
+# Created: Sun May 10 15:21:43 2015
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -111,6 +111,9 @@ class Ui_notepad(object):
         self.StandardConversion.setAutoRepeat(False)
         self.StandardConversion.setObjectName("StandardConversion")
         self.verticalLayout_3.addWidget(self.StandardConversion)
+        self.ButtonRevert = QtWidgets.QPushButton(self.centralwidget)
+        self.ButtonRevert.setObjectName("ButtonRevert")
+        self.verticalLayout_3.addWidget(self.ButtonRevert)
         self.ButtonConvert = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonConvert.setMaximumSize(QtCore.QSize(100, 16777215))
         self.ButtonConvert.setObjectName("ButtonConvert")
@@ -205,6 +208,10 @@ class Ui_notepad(object):
         self.actionHelp.setObjectName("actionHelp")
         self.actionMarkdown2Lyx = QtWidgets.QAction(notepad)
         self.actionMarkdown2Lyx.setObjectName("actionMarkdown2Lyx")
+        self.actionUndo = QtWidgets.QAction(notepad)
+        self.actionUndo.setObjectName("actionUndo")
+        self.actionPandoc_Docs = QtWidgets.QAction(notepad)
+        self.actionPandoc_Docs.setObjectName("actionPandoc_Docs")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addSeparator()
@@ -221,10 +228,12 @@ class Ui_notepad(object):
         self.menuOpml.addAction(self.actionLatex2Opml)
         self.menuOpml.addAction(self.actionHtml2opml)
         self.menuExtras.addAction(self.actionHelp)
+        self.menuExtras.addAction(self.actionPandoc_Docs)
         self.menuHtml.addAction(self.actionMarkdown2html)
         self.menuHtml.addAction(self.actionOpml2html)
         self.menuHtml.addAction(self.actionLatex2html)
         self.menuEdit_2.addAction(self.actionPreferences)
+        self.menuEdit_2.addAction(self.actionUndo)
         self.menuLyx.addAction(self.actionMarkdown2Lyx)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit_2.menuAction())
@@ -263,6 +272,7 @@ class Ui_notepad(object):
         self.labelToBox.setText(_translate("notepad", "To"))
         self.labelParameter.setText(_translate("notepad", "Parameter"))
         self.StandardConversion.setText(_translate("notepad", "Standard"))
+        self.ButtonRevert.setText(_translate("notepad", "Revert"))
         self.ButtonConvert.setText(_translate("notepad", "Convert"))
         self.menuFile.setTitle(_translate("notepad", "File"))
         self.menuMarkdown.setTitle(_translate("notepad", "Markdown"))
@@ -273,10 +283,10 @@ class Ui_notepad(object):
         self.menuEdit_2.setTitle(_translate("notepad", "Edit"))
         self.menuLyx.setTitle(_translate("notepad", "Lyx"))
         self.toolBar.setWindowTitle(_translate("notepad", "toolBar"))
-        self.actionSave.setText(_translate("notepad", "Save"))
+        self.actionSave.setText(_translate("notepad", "Save Buffer"))
         self.actionOpen.setText(_translate("notepad", "Open"))
         self.actionOpen.setShortcut(_translate("notepad", "Ctrl+O"))
-        self.actionSave_AS.setText(_translate("notepad", "Save AS"))
+        self.actionSave_AS.setText(_translate("notepad", "Save File"))
         self.actionSave_AS.setShortcut(_translate("notepad", "Ctrl+S"))
         self.actionNew.setText(_translate("notepad", "New"))
         self.actionNew.setToolTip(_translate("notepad", "New"))
@@ -297,5 +307,7 @@ class Ui_notepad(object):
         self.actionLatex2html.setText(_translate("notepad", "latex2html"))
         self.actionHelp.setText(_translate("notepad", "Help"))
         self.actionMarkdown2Lyx.setText(_translate("notepad", "Markdown2Lyx"))
+        self.actionUndo.setText(_translate("notepad", "Undo"))
+        self.actionPandoc_Docs.setText(_translate("notepad", "Pandoc Documentation"))
 
 import source.gui.icons_rc

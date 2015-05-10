@@ -40,11 +40,15 @@ class StartQT5(QtWidgets.QMainWindow):
     """File Dialog Functions"""
 
     def file_dialog(self):
-        global text, data, openfile
+        global text, data, openfile, path_dialog
 
 
         fd = QtWidgets.QFileDialog(self)
-        fd.setDirectory(QtCore.QDir.homePath())
+        if path_dialog == '':
+            fd.setDirectory(QtCore.QDir.homePath())
+        else:
+            fd.setDirectory(path_dialog)
+
 
         self.filename = fd.getOpenFileName()
         openfile = self.filename[0]
@@ -53,7 +57,7 @@ class StartQT5(QtWidgets.QMainWindow):
             try:
                 text = codecs.open(self.filename[0], 'r', 'utf-8').read()
                 data = self.ui.editor_window.setPlainText(text)
-                self.ui.actionSave.setEnabled(False)
+
             except:
                 text = 'No Preview of the File-Data possible. Try to manually convert. Good Luck.'
                 data = self.ui.editor_window.setPlainText(text)
@@ -71,8 +75,15 @@ class StartQT5(QtWidgets.QMainWindow):
             self.file_save_as()
 
     def file_save_as(self):
+        global path_dialog
+
         fd = QtWidgets.QFileDialog(self)
-        fd.setDirectory(QtCore.QDir.homePath())
+
+        if path_dialog == '':
+            fd.setDirectory(QtCore.QDir.homePath())
+        else:
+            fd.setDirectory(path_dialog)
+
         self.filename = fd.getSaveFileName(self)
         file = codecs.open(self.filename[0], 'w', 'utf-8')
         filedata = self.ui.editor_window.toPlainText()
@@ -84,165 +95,176 @@ class StartQT5(QtWidgets.QMainWindow):
         from os.path import isfile
         text = ''
         self.ui.editor_window.setPlainText(text)
+        text = self.ui.editor_window(text)
         self.ui.actionSave.setEnabled(True)
-        if isfile(self.filename[0]):
-            self.ui.actionSave.setEnabled(False)
+        # if isfile(self.filename[0]):
+            # self.ui.actionSave.setEnabled(False)
+
+    def buffer_save(self):
+        global text, text_undo
+        text_undo = text
+        text = self.ui.editor_window.toPlainText()
+
+    def undo(self):
+        global text,text_undo
+        text = text_undo
+        self.ui.editor_window.setPlainText(text_undo)
 
 
     '''Export Functions'''
 
 
     def file_export_html2markdown(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_html2markdown(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_markdown2html(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_md2html(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_md2latex(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_md2latex(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_opml2html(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_opml2html(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_opml2latex(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_opml2latex(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_opml2markdown_pandoc(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_opml2markdown(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_html2opml(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_html2opml(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_markdown2opml(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_markdown2opml(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_html2latex(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_html2latex(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_latex2html(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_latex2html(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_latex2opml(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_latex2opml(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_latex2markdown(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_latex2markdown(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
 
     def file_export_markdown2lyx(self):
-        global text
+        global text, text_undo
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text is not "":
             output_content = convert_markdown2lyx(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
@@ -250,15 +272,15 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def file_export_manualconverter(self):
 
-        global text, openfile
+        global text, text_undo, openfile
         text = self.ui.editor_window.toPlainText()
+        text_undo = text
         if text == '':
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'You have no Data to be converted. Please make an input')
         elif text != 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
             output_content = convert_universal(text,toFormat,fromFormat,extraParameter)
 
-            self.ui.actionSave.setEnabled(False)
             if output_content is not '':
                 self.ui.editor_window.setPlainText(output_content)
             else:
@@ -274,7 +296,6 @@ class StartQT5(QtWidgets.QMainWindow):
             #self.ui.editor_window.setPlainText("I tried my best to convert. Check if there had been any Output, and if"
             #                                   " so, please check the quality of the created output.")
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Error-Message',
@@ -287,7 +308,6 @@ class StartQT5(QtWidgets.QMainWindow):
         if text is not "":
             output_content = convert_md2epub(text)
             self.ui.editor_window.setPlainText(output_content)
-            self.ui.actionSave.setEnabled(False)
             text = output_content
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
@@ -296,13 +316,19 @@ class StartQT5(QtWidgets.QMainWindow):
     """Gui-Event Definitions"""
 
     def __init__(self, parent=None):
+        global path_dialog, text, text_undo
+
+        text = ''
+        text_undo = ''
+
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_notepad()
         self.ui.setupUi(self)
         self.ui.actionOpen.triggered.connect(self.file_dialog)
-        self.ui.actionSave.triggered.connect(self.file_save)
+        self.ui.actionSave.triggered.connect(self.buffer_save)
         self.ui.actionSave_AS.triggered.connect(self.file_save_as)
         self.ui.actionNew.triggered.connect(self.file_new)
+        self.ui.actionUndo.triggered.connect(self.undo)
         self.ui.actionMarkdown2Latex.triggered.connect(self.file_export_md2latex)
         self.ui.actionOpml2latex.triggered.connect(self.file_export_opml2latex)
         self.ui.actionLatex2Opml.triggered.connect(self.file_export_latex2opml)
@@ -316,14 +342,17 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionHtml2Latex.triggered.connect(self.file_export_html2latex)
         self.ui.actionLatex2html.triggered.connect(self.file_export_latex2html)
         self.ui.actionMarkdown2Lyx.triggered.connect(self.file_export_markdown2lyx)
+        self.ui.ButtonRevert.clicked.connect(self.undo)
         self.ui.ButtonConvert.clicked.connect(self.event_triggered)
         self.ui.actionPreferences.triggered.connect(self.event_dialog)
         self.ui.actionHelp.triggered.connect(self.help_dialog)
+        self.ui.actionPandoc_Docs.triggered.connect(self.pandocdocs_dialog)
         self.ui.actionSave.setEnabled(True)
 
 
         settings = QSettings('Pandoc', 'PanConvert')
 
+        path_dialog = settings.value('path_dialog')
         fromParameter = settings.value('fromParameter')
         toParameter = settings.value('toParameter')
         xtraParameter = settings.value('xtraParameter')
@@ -379,6 +408,10 @@ class StartQT5(QtWidgets.QMainWindow):
     def help_dialog(self):
         import webbrowser
         webbrowser.open_new_tab('http://panconvert.sourceforge.net/help')
+
+    def pandocdocs_dialog(self):
+        import webbrowser
+        webbrowser.open_new_tab('http://pandoc.org/README.html')
 
     def event_dialog(self):
         """ References to dialog_preferences.py"""

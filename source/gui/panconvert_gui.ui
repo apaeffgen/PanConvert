@@ -271,6 +271,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="ButtonRevert">
+        <property name="text">
+         <string>Revert</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="ButtonConvert">
         <property name="maximumSize">
          <size>
@@ -345,6 +352,7 @@
      <string>Help</string>
     </property>
     <addaction name="actionHelp"/>
+    <addaction name="actionPandoc_Docs"/>
    </widget>
    <widget class="QMenu" name="menuHtml">
     <property name="title">
@@ -359,6 +367,7 @@
      <string>Edit</string>
     </property>
     <addaction name="actionPreferences"/>
+    <addaction name="actionUndo"/>
    </widget>
    <widget class="QMenu" name="menuLyx">
     <property name="title">
@@ -409,7 +418,7 @@
      <normaloff>:/icons/save</normaloff>:/icons/save</iconset>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>Save Buffer</string>
    </property>
   </action>
   <action name="actionOpen">
@@ -436,7 +445,7 @@
      <normaloff>:/icons/save_as</normaloff>:/icons/save_as</iconset>
    </property>
    <property name="text">
-    <string>Save AS</string>
+    <string>Save File</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -537,6 +546,16 @@
   <action name="actionMarkdown2Lyx">
    <property name="text">
     <string>Markdown2Lyx</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionPandoc_Docs">
+   <property name="text">
+    <string>Pandoc Documentation</string>
    </property>
   </action>
  </widget>

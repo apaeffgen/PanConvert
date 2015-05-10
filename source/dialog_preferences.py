@@ -23,12 +23,12 @@ from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 from distutils.util import strtobool
 import platform
 
-global path_pandoc
+global path_pandoc, path_dialog
 
 
 class PreferenceDialog(QtWidgets.QDialog):
 
-    global path_pandoc
+    global path_pandoc, path_dialog
 
     def __init__(self, parent=None):
 
@@ -46,6 +46,8 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.Pandoc_Path.insert(path_pandoc)
         path_multimarkdown = settings.value('path_multimarkdown')
         self.ui.Markdown_Path.insert(path_multimarkdown)
+        path_dialog = settings.value('path_dialog')
+        self.ui.Dialog_Path.insert(path_dialog)
 
         fromParameter = settings.value('fromParameter')
         self.ui.FromParameter.insert(fromParameter)
@@ -109,6 +111,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
+        settings.setValue('path_dialog', self.ui.Dialog_Path.text())
 
 
         settings.setValue('fromParameter', self.ui.FromParameter.text())
