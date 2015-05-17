@@ -376,9 +376,14 @@ class StartQT5(QtWidgets.QMainWindow):
         global openfile, filelist
 
         batch_settings = QSettings('Pandoc', 'PanConvert')
-        batch_convert_files = batch_settings.value('batch_convert_files')
-        batch_convert_directory = batch_settings.value('batch_convert_directory')
-        batch_convert_recursive = batch_settings.value('batch_convert_recursive')
+        if platform.system() == 'Windows' or platform.system() == 'Linux':
+            batch_convert_files = bool(strtobool(batch_settings.value('batch_convert_files')))
+            batch_convert_directory = bool(strtobool(batch_settings.value('batch_convert_directory')))
+            batch_convert_recursive = bool(strtobool(batch_settings.value('batch_convert_recursive')))
+        else:
+            batch_convert_files = batch_settings.value('batch_convert_files')
+            batch_convert_directory = batch_settings.value('batch_convert_directory')
+            batch_convert_recursive = batch_settings.value('batch_convert_recursive')
         data = self.ui.editor_window.toPlainText()
 
 
@@ -416,7 +421,10 @@ class StartQT5(QtWidgets.QMainWindow):
 
         else:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                              'You have to open at least one file in file conversion mode')
+                                              'You have to open at least one file in file conversion mode.'
+                                              ' <br>Did you put in from / to - formats?'
+                                              ' <br>If you are in directory mode, did you specify a directory?'
+                                              ' <br> Check your settings.')
 
 
     """Gui-Event Definitions"""
@@ -583,7 +591,7 @@ class StartQT5(QtWidgets.QMainWindow):
             else:
                 QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                               'The from-Format and to-Format should not be identical.<br><br> '
-                                              'If you picket to-Lyx, only from-markdown is a valid option.<br><br>'
+                                              'If you picked to-Lyx, only from-markdown is a valid option.<br><br>'
                                               'Please make a different choice.')
 
         elif standard_conversion is False and batchConversion is False:# and extraParameter is not "":

@@ -48,9 +48,12 @@ class BatchDialog(QtWidgets.QDialog):
 
 
         #Parameter Settings
-        parameterBatchconvertDirectory = batch_settings.value('batch_convert_directory',True)
+
+        parameterBatchconvertDirectory = batch_settings.value('batch_convert_directory', True)
         parameterBatchconvertFiles = batch_settings.value('batch_convert_files', False)
         parameterBatchconvertRecursive = batch_settings.value('batch_convert_recursive', True)
+
+
 
         if platform.system() == 'Windows' or platform.system() == 'Linux':
             self.ui.ParameterBatchconvertDirectory.setChecked(strtobool(parameterBatchconvertDirectory))
