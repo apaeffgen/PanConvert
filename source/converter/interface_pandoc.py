@@ -185,6 +185,26 @@ def get_pandoc_formats():
                                           'Pandoc could not be found on your System. Is it installed?'
                                           'If so, please check the Pandoc Path in your Preferences.')
 
+def get_pandoc_options():
+    """
+    Dynamic preprocessor for Pandoc formats.
+    Return 2 lists. "from_formats" and "to_formats".
+    """
+    try:
+        path_pandoc = get_path_pandoc()
+        p = subprocess.Popen(
+                [path_pandoc, '-h'],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
+        help_text = p.communicate()[0].decode().splitlines(True)
+        aux = help_text[15:89]
+
+        return aux
+
+    except OSError:
+        QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                          'Pandoc could not be found on your System. Is it installed?'
+                                          'If so, please check the Pandoc Path in your Preferences.')
 
 
 

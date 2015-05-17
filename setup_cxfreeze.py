@@ -26,8 +26,10 @@ if sys.platform == 'win32':
 
 options = {
     'build_exe': {
-        'includes': 'atexit',
-        "include_msvcr": True
+        'includes': ['PyQt5.QtNetwork',
+                     'PyQt5.QtWebKit',
+                     'PyQT5.QtPrintSupport']
+
     }
 }
 
@@ -36,8 +38,8 @@ executables = [
 ]
 
 setup(name='PanConvert',
-      version='0.1.3',
-      description='Gui Wrapper for PanDocs',
+      version='0.1.5',
+      description='Gui Wrapper for PanDoc',
       options=options,
       executables=executables
       )

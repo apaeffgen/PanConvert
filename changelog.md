@@ -1,3 +1,10 @@
+## Version 0.1.5
+
+### New Features
+- Added Batch Converion Mode (Files, Directories, Recursive Directories)
+- Added OpenDirectory-Buttons for path input
+- Added Help-Buttons for from-formats, to-formats and options
+
 ## Version 0.1.4
 
 ### New Features

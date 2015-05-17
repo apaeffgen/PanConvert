@@ -19,6 +19,7 @@ __author__ = 'apaeffgen'
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
+from PyQt5 import QtCore
 from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 from distutils.util import strtobool
 import platform
@@ -37,6 +38,9 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.ui.ButtonSave.clicked.connect(self.settings)
         self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+        self.ui.ButtonPandocPath.clicked.connect(self.DirectoryPandoc)
+        self.ui.ButtonMarkdownPath.clicked.connect(self.DirectoryMarkdown)
+        self.ui.ButtonOpenSavePath.clicked.connect(self.DirectoryOpenSave)
 
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
@@ -59,10 +63,12 @@ class PreferenceDialog(QtWidgets.QDialog):
 
         #Checkboxes
         Standard_Conversion = settings.value('Standard_Conversion', False)
+        Batch_Conversion = settings.value('Batch_Conversion', False)
         From_Markdown = settings.value('From_Markdown', False)
         From_Html = settings.value('From_Html', False)
         From_Latex = settings.value('From_Latex', False)
         From_Opml = settings.value('From_Opml', False)
+
 
         To_Markdown = settings.value('To_Markdown', False)
         To_Html = settings.value('To_Html', False)
@@ -83,6 +89,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
                 self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
                 self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
+                self.ui.BatchConversion.setChecked(strtobool(Batch_Conversion))
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
@@ -95,18 +102,13 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToOpml.setChecked(To_Opml)
                 self.ui.ButtonToLyx.setChecked(To_Lyx)
                 self.ui.StandardConversion.setChecked(Standard_Conversion)
-
-
-
-
-
+                self.ui.BatchConversion.setChecked(Batch_Conversion)
 
 
     def cancel_dialog(self):
         PreferenceDialog.close(self)
 
     def settings(self):
-
 
         settings = QSettings('Pandoc', 'PanConvert')
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
@@ -119,6 +121,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('xtraParameter', self.ui.XtraParameter.text())
 
         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+        settings.setValue('Batch_Conversion', self.ui.BatchConversion.isChecked())
 
         settings.setValue('From_Markdown', self.ui.ButtonFromMarkdown.isChecked())
         settings.setValue('From_Html', self.ui.ButtonFromHtml.isChecked())
@@ -136,6 +139,25 @@ class PreferenceDialog(QtWidgets.QDialog):
 
 
         PreferenceDialog.close(self)
+
+    def DirectoryPandoc(self):
+        fd = QtWidgets.QFileDialog(self)
+        fd.setDirectory(QtCore.QDir.homePath())
+        PandocDirectory = fd.getExistingDirectory()
+        self.ui.Pandoc_Path.insert(PandocDirectory)
+
+    def DirectoryMarkdown(self):
+        fd = QtWidgets.QFileDialog(self)
+        fd.setDirectory(QtCore.QDir.homePath())
+        MarkdownDirectory = fd.getExistingDirectory()
+        self.ui.Markdown_Path.insert(MarkdownDirectory)
+
+    def DirectoryOpenSave(self):
+        fd = QtWidgets.QFileDialog(self)
+        fd.setDirectory(QtCore.QDir.homePath())
+        OpenSaveDirectory = fd.getExistingDirectory()
+        self.ui.Dialog_Path.insert(OpenSaveDirectory)
+
 
 
 

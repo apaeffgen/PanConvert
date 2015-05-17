@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_prefpane.ui'
 #
-# Created: Sun May 10 13:24:18 2015
+# Created: Sat May 16 18:12:29 2015
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,8 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DialogPreferences(object):
     def setupUi(self, DialogPreferences):
         DialogPreferences.setObjectName("DialogPreferences")
-        DialogPreferences.resize(655, 357)
-        DialogPreferences.setMinimumSize(QtCore.QSize(400, 100))
+        DialogPreferences.resize(630, 350)
+        DialogPreferences.setMinimumSize(QtCore.QSize(630, 350))
+        DialogPreferences.setMaximumSize(QtCore.QSize(630, 350))
         self.BoxFromFormat = QtWidgets.QGroupBox(DialogPreferences)
         self.BoxFromFormat.setGeometry(QtCore.QRect(40, 150, 131, 121))
         self.BoxFromFormat.setObjectName("BoxFromFormat")
@@ -48,7 +49,7 @@ class Ui_DialogPreferences(object):
         self.ButtonToLyx.setGeometry(QtCore.QRect(10, 110, 102, 20))
         self.ButtonToLyx.setObjectName("ButtonToLyx")
         self.groupBox = QtWidgets.QGroupBox(DialogPreferences)
-        self.groupBox.setGeometry(QtCore.QRect(370, 150, 231, 161))
+        self.groupBox.setGeometry(QtCore.QRect(370, 150, 231, 141))
         self.groupBox.setObjectName("groupBox")
         self.XtraParameter = QtWidgets.QLineEdit(self.groupBox)
         self.XtraParameter.setGeometry(QtCore.QRect(80, 100, 113, 21))
@@ -69,7 +70,7 @@ class Ui_DialogPreferences(object):
         self.label_Parameter.setGeometry(QtCore.QRect(10, 100, 62, 16))
         self.label_Parameter.setObjectName("label_Parameter")
         self.layoutWidget = QtWidgets.QWidget(DialogPreferences)
-        self.layoutWidget.setGeometry(QtCore.QRect(40, 300, 316, 32))
+        self.layoutWidget.setGeometry(QtCore.QRect(40, 300, 561, 32))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -84,6 +85,9 @@ class Ui_DialogPreferences(object):
         self.StandardConversion.setChecked(False)
         self.StandardConversion.setObjectName("StandardConversion")
         self.horizontalLayout.addWidget(self.StandardConversion)
+        self.BatchConversion = QtWidgets.QCheckBox(self.layoutWidget)
+        self.BatchConversion.setObjectName("BatchConversion")
+        self.horizontalLayout.addWidget(self.BatchConversion)
         self.layoutWidget1 = QtWidgets.QWidget(DialogPreferences)
         self.layoutWidget1.setGeometry(QtCore.QRect(220, 20, 381, 85))
         self.layoutWidget1.setObjectName("layoutWidget1")
@@ -102,7 +106,7 @@ class Ui_DialogPreferences(object):
         self.Dialog_Path.setObjectName("Dialog_Path")
         self.verticalLayout.addWidget(self.Dialog_Path)
         self.layoutWidget2 = QtWidgets.QWidget(DialogPreferences)
-        self.layoutWidget2.setGeometry(QtCore.QRect(50, 20, 159, 81))
+        self.layoutWidget2.setGeometry(QtCore.QRect(20, 20, 159, 81))
         self.layoutWidget2.setObjectName("layoutWidget2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -121,6 +125,15 @@ class Ui_DialogPreferences(object):
         self.label_Dialog_Path = QtWidgets.QLabel(self.layoutWidget2)
         self.label_Dialog_Path.setObjectName("label_Dialog_Path")
         self.verticalLayout_2.addWidget(self.label_Dialog_Path)
+        self.ButtonPandocPath = QtWidgets.QToolButton(DialogPreferences)
+        self.ButtonPandocPath.setGeometry(QtCore.QRect(190, 20, 27, 23))
+        self.ButtonPandocPath.setObjectName("ButtonPandocPath")
+        self.ButtonMarkdownPath = QtWidgets.QToolButton(DialogPreferences)
+        self.ButtonMarkdownPath.setGeometry(QtCore.QRect(190, 50, 27, 23))
+        self.ButtonMarkdownPath.setObjectName("ButtonMarkdownPath")
+        self.ButtonOpenSavePath = QtWidgets.QToolButton(DialogPreferences)
+        self.ButtonOpenSavePath.setGeometry(QtCore.QRect(190, 80, 27, 23))
+        self.ButtonOpenSavePath.setObjectName("ButtonOpenSavePath")
 
         self.retranslateUi(DialogPreferences)
         QtCore.QMetaObject.connectSlotsByName(DialogPreferences)
@@ -149,10 +162,14 @@ class Ui_DialogPreferences(object):
         self.ButtonSave.setText(_translate("DialogPreferences", "Save"))
         self.ButtonCancel.setText(_translate("DialogPreferences", "Cancel"))
         self.StandardConversion.setText(_translate("DialogPreferences", "Standard Conversion"))
+        self.BatchConversion.setText(_translate("DialogPreferences", "Batch Conversion"))
         self.Pandoc_Path.setPlaceholderText(_translate("DialogPreferences", "/usr/local/bin/pandoc"))
         self.Markdown_Path.setPlaceholderText(_translate("DialogPreferences", "/usr/local/bin/multimarkdown"))
         self.Dialog_Path.setPlaceholderText(_translate("DialogPreferences", "/Users"))
         self.label_Pandoc_Path.setText(_translate("DialogPreferences", "Path to Pandoc Binary"))
         self.label_Markdown_Path.setText(_translate("DialogPreferences", "Path to Markdown Binary"))
         self.label_Dialog_Path.setText(_translate("DialogPreferences", "Open / Save - Path"))
+        self.ButtonPandocPath.setText(_translate("DialogPreferences", "..."))
+        self.ButtonMarkdownPath.setText(_translate("DialogPreferences", "..."))
+        self.ButtonOpenSavePath.setText(_translate("DialogPreferences", "..."))
 
