@@ -28,7 +28,9 @@ options = {
     'build_exe': {
         'includes': ['PyQt5.QtNetwork',
                      'PyQt5.QtWebKit',
-                     'PyQT5.QtPrintSupport']
+                     'PyQt5.QtPrintSupport',
+                     'PyQt5.QtNetwork',
+                     'PyQt5.QtWidgets']
 
     }
 }
