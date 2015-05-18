@@ -393,9 +393,7 @@ class StartQT5(QtWidgets.QMainWindow):
             for openfiles in filelist:
                 if os.path.isfile(openfiles) is True:
                     self.ui.editor_window.setPlainText(data)
-                    message, error = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-
-                    self.ui.editor_window.appendPlainText(error)
+                    message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                     self.ui.editor_window.appendPlainText(message)
                 else:
                     errormessage = ('Einige Dateiangaben waren nicht korrekt:')
