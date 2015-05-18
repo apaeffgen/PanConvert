@@ -54,16 +54,16 @@ class BatchDialog(QtWidgets.QDialog):
         parameterBatchconvertRecursive = batch_settings.value('batch_convert_recursive', True)
 
 
+        if batch_settings.value('batch_convert_directory') is not None:
+            if platform.system() == 'Windows' or platform.system() == 'Linux':
+                self.ui.ParameterBatchconvertDirectory.setChecked(strtobool(parameterBatchconvertDirectory))
+                self.ui.ParameterBatchconvertFiles.setChecked(strtobool(parameterBatchconvertFiles))
+                self.ui.ParameterBatchconvertRecursive.setChecked(strtobool(parameterBatchconvertRecursive))
 
-        if platform.system() == 'Windows' or platform.system() == 'Linux':
-            self.ui.ParameterBatchconvertDirectory.setChecked(strtobool(parameterBatchconvertDirectory))
-            self.ui.ParameterBatchconvertFiles.setChecked(strtobool(parameterBatchconvertFiles))
-            self.ui.ParameterBatchconvertRecursive.setChecked(strtobool(parameterBatchconvertRecursive))
-
-        else:
-            self.ui.ParameterBatchconvertDirectory.setChecked(parameterBatchconvertDirectory)
-            self.ui.ParameterBatchconvertFiles.setChecked(parameterBatchconvertFiles)
-            self.ui.ParameterBatchconvertRecursive.setChecked(parameterBatchconvertRecursive)
+            else:
+                self.ui.ParameterBatchconvertDirectory.setChecked(parameterBatchconvertDirectory)
+                self.ui.ParameterBatchconvertFiles.setChecked(parameterBatchconvertFiles)
+                self.ui.ParameterBatchconvertRecursive.setChecked(parameterBatchconvertRecursive)
 
 
 
