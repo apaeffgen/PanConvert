@@ -1,4 +1,5 @@
 # Readme first (Version 0.1.3 and above)
+
 ## Update from previous versions
 If Panconvert 0.1.1 or above had been used, the previous settings have to be deleted, or Panconvert may crash: 
 
