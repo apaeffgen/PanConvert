@@ -2,6 +2,7 @@ site_name: Panconvert Documentation
 site_url: http://panconvert.readthedocs.org
 pages:
 - ['index.md', 'Introduction']
-- ['User-Guide/basic_info.md', 'User Guide', 'Basic Information']
-- ['User_Guide/basic_usage.md', 'User Guide', 'Basic Usage']
-- ['User_Guide/update.md', 'User Guide', 'Update']
+- ['User-Guide/Basic_Info.md', 'User Guide', 'Basic Information']
+- ['User_Guide/Basic_Usage.md', 'User Guide', 'Basic Usage']
+- ['User_Guide/U
+pdate.md', 'User Guide', 'Update']
