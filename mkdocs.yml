@@ -3,6 +3,6 @@ site_url: http://panconvert.readthedocs.org
 repository_url:
 pages:
 - ['index.md', 'Introduction']
-- ['User-Guide/basic_info.md', 'User Guide', 'Basic Information']
+- ['User_Guide/basic_info.md', 'User Guide', 'Basic Information']
 - ['User_Guide/Basic_Usage.md', 'User Guide', 'Basic Usage']
 - ['User_Guide/Update.md', 'User Guide', 'Update']
