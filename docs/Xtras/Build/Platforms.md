@@ -1,4 +1,4 @@
-## Platforms tested: (Source-Code)
+# Platforms tested: (Source-Code)
 
 *  Windows 7 (32bit)
 *  Mac OS: Lion (32bit), Mountain Lion (64bit), Mavericks (64bit)
