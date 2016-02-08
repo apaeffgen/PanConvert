@@ -1,11 +1,13 @@
-# Documentation Panconvert
+# Panconvert Documentation
+A GUI-Wrapper for the document converter pandoc
 
 ## Features
 
-* Convert markup formats into different markup formats
-* Markdown, Latex, OPML, ODT, EPUB …
+* Convert documents via a graphical user interface
+* Markdown, Latex, OPML, docx, EPUB …
 * All [Pandoc-Formats](http://johnmacfarlane.net/pandoc/) are supported
 * Cross-Platform: Linux, MacOS, Windows
+* Batch conversion is possible
 
 ## Requirements
 

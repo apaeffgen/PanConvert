@@ -374,30 +374,6 @@
     <addaction name="actionSave_AS"/>
     <addaction name="separator"/>
    </widget>
-   <widget class="QMenu" name="menuMarkdown">
-    <property name="title">
-     <string>Markdown</string>
-    </property>
-    <addaction name="actionOpml2Markdown"/>
-    <addaction name="actionLatex2Markdown"/>
-    <addaction name="actionHtml2Markdown"/>
-   </widget>
-   <widget class="QMenu" name="menuLatex">
-    <property name="title">
-     <string>Latex</string>
-    </property>
-    <addaction name="actionMarkdown2Latex"/>
-    <addaction name="actionOpml2latex"/>
-    <addaction name="actionHtml2Latex"/>
-   </widget>
-   <widget class="QMenu" name="menuOpml">
-    <property name="title">
-     <string>Opml</string>
-    </property>
-    <addaction name="actionMarkdown2opml"/>
-    <addaction name="actionLatex2Opml"/>
-    <addaction name="actionHtml2opml"/>
-   </widget>
    <widget class="QMenu" name="menuExtras">
     <property name="enabled">
      <bool>true</bool>
@@ -408,14 +384,6 @@
     <addaction name="actionHelp"/>
     <addaction name="actionPandoc_Docs"/>
    </widget>
-   <widget class="QMenu" name="menuHtml">
-    <property name="title">
-     <string>Html</string>
-    </property>
-    <addaction name="actionMarkdown2html"/>
-    <addaction name="actionOpml2html"/>
-    <addaction name="actionLatex2html"/>
-   </widget>
    <widget class="QMenu" name="menuEdit_2">
     <property name="title">
      <string>Edit</string>
@@ -424,19 +392,8 @@
     <addaction name="actionUndo"/>
     <addaction name="actionSearch"/>
    </widget>
-   <widget class="QMenu" name="menuLyx">
-    <property name="title">
-     <string>Lyx</string>
-    </property>
-    <addaction name="actionMarkdown2Lyx"/>
-   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit_2"/>
-   <addaction name="menuMarkdown"/>
-   <addaction name="menuLatex"/>
-   <addaction name="menuOpml"/>
-   <addaction name="menuHtml"/>
-   <addaction name="menuLyx"/>
    <addaction name="menuExtras"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -547,7 +504,8 @@
   <action name="actionPreferences">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/icons/freferences</normaloff>:/icons/freferences</iconset>
+     <normaloff>:/icons/freferences</normaloff>
+     <normalon>:/icons/freferences</normalon>:/icons/freferences</iconset>
    </property>
    <property name="text">
     <string>Preferences</string>

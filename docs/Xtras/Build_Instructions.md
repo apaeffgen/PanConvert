@@ -15,13 +15,16 @@
 
 ## MacOS Quirks
 
-Depending on your environment, you have to change some code in macdist.py on Line 186 from the first to the second line:
+Depending on your QT5 environment (where your qt5 files are installed, you have to change some code in macdist.py on Line 186 from the first to the second line:
 
 - if (name not in files and not path.startswith('/usr') 
 - if (name not in files and not path.startswith('/usr/lib') and not
 
 Move the folder platforms from /Contents/MacOS/lib/ to /Contents/MacOS/. This will give you a bigger, but running binary
  application on 64bit MacOS without PyQT and QT installed.
+
+ To run the build binary on your development machine, put an empty file with the name "qt.conf" in the Resources folder or your app.
+ PanConvert-x.x.x.app/Contents/Resources
 
 
 

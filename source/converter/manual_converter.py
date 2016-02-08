@@ -49,11 +49,11 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
 
         from_formats, to_formats = get_pandoc_formats()
 
-        if FromFormat not in from_formats:
+        if FromFormat == '':#not in from_formats:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'Invalid from format! Expected one of these: ' + ', '.join(from_formats))
 
-        if ToFormat not in to_formats:
+        if ToFormat == '':#not in to_formats:
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'Invalid to format! Expected one of these: ' + ', '.join(to_formats))
 

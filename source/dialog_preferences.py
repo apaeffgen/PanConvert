@@ -22,7 +22,7 @@ from PyQt5.QtCore import QSettings
 from PyQt5 import QtCore
 from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 from distutils.util import strtobool
-import platform
+import platform, os
 
 global path_pandoc, path_dialog
 
@@ -78,7 +78,20 @@ class PreferenceDialog(QtWidgets.QDialog):
 
 
         if settings.value('From_Markdown') is not None:
-            if platform.system() == 'Windows' or platform.system() == 'Linux':
+            if platform.system() == 'Darwin':
+                self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
+                self.ui.ButtonFromHtml.setChecked(From_Html)
+                self.ui.ButtonFromLatex.setChecked(From_Latex)
+                self.ui.ButtonFromOpml.setChecked(From_Opml)
+                self.ui.ButtonToMarkdown.setChecked(To_Markdown)
+                self.ui.ButtonToHtml.setChecked(To_Html)
+                self.ui.ButtonToLatex.setChecked(To_Latex)
+                self.ui.ButtonToOpml.setChecked(To_Opml)
+                self.ui.ButtonToLyx.setChecked(To_Lyx)
+                self.ui.StandardConversion.setChecked(Standard_Conversion)
+                self.ui.BatchConversion.setChecked(Batch_Conversion)
+
+            else:
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
                 self.ui.ButtonFromHtml.setChecked(strtobool(From_Html))
                 self.ui.ButtonFromLatex.setChecked(strtobool(From_Latex))
@@ -91,18 +104,8 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
                 self.ui.BatchConversion.setChecked(strtobool(Batch_Conversion))
 
-            else:
-                self.ui.ButtonFromMarkdown.setChecked(From_Markdown)
-                self.ui.ButtonFromHtml.setChecked(From_Html)
-                self.ui.ButtonFromLatex.setChecked(From_Latex)
-                self.ui.ButtonFromOpml.setChecked(From_Opml)
-                self.ui.ButtonToMarkdown.setChecked(To_Markdown)
-                self.ui.ButtonToHtml.setChecked(To_Html)
-                self.ui.ButtonToLatex.setChecked(To_Latex)
-                self.ui.ButtonToOpml.setChecked(To_Opml)
-                self.ui.ButtonToLyx.setChecked(To_Lyx)
-                self.ui.StandardConversion.setChecked(Standard_Conversion)
-                self.ui.BatchConversion.setChecked(Batch_Conversion)
+
+
 
 
     def cancel_dialog(self):

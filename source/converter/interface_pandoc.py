@@ -28,7 +28,7 @@ from __future__ import with_statement
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import subprocess
-import platform
+import platform, os
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 
@@ -39,7 +39,7 @@ def get_path_pandoc():
 
     if len(path_pandoc) == 0:
 
-        if platform.system() == 'Darwin' or platform.system() == 'Linux':
+        if platform.system() == 'Darwin' or os.name == 'posix':
             args = ['which', 'pandoc']
             p = subprocess.Popen(
                 args,
@@ -100,18 +100,20 @@ def _convert(reader, processor, source, to, format=None, extra_args=(), encoding
     format = formats.get(format, format)
     to = formats.get(to, to)
 
-    if not format:
-        raise RuntimeError('Missing format!')
+    # if not format:
+    #     raise RuntimeError('Missing format!')
 
     from_formats, to_formats = get_pandoc_formats()
 
-    if format not in from_formats:
+    if format == '': # not in from_formats:
         QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'Invalid from format! Expected one of these: ' + ', '.join(from_formats))
+                                          'Empty from format! Expected one of these: ' + ', '.join(from_formats))
+        raise RuntimeError('Missing format!')
 
-    if to not in to_formats:
+    if to == '': # not in to_formats:
         QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'Invalid to format! Expected one of these: ' + ', '.join(to_formats))
+                                          'Empty to format! Expected one of these: ' + ', '.join(to_formats))
+        raise RuntimeError('Missing format!')
 
     return processor(source, to, format, extra_args)
 

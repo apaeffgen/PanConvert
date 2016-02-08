@@ -31,7 +31,7 @@ def get_path_multimarkdown():
 
     if len(path_multimarkdown) == 0:
 
-        if platform.system() == 'Darwin' or platform.system() == 'Linux':
+        if platform.system() == 'Darwin' or os.name == 'posix':
             args = ['which', 'multimarkdown']
             p = subprocess.Popen(
                 args,

@@ -1,3 +1,10 @@
+## Version 0,1.6
+Code Cleanup
+Gui Cleanup (Deleted the menu functions for the converters)
+Fixed a bug for FreeBSD (Posix-System)
+
+
+
 ## Version 0.1.5
 
 ### New Features
