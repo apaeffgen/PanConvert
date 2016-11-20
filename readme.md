@@ -11,7 +11,7 @@ If Panconvert 0.1.1 or above had been used, the previous settings have to be del
 
 Running the program you must have installed the following additional software-packages:
 
-- pandoc
+- pandoc < 1.18
 - multimarkdown (optional for Lyx conversion)
 - python3
 - QT5
