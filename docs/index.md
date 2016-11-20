@@ -11,7 +11,7 @@ A GUI-Wrapper for the document converter pandoc
 
 ## Requirements
 
-* You need to have [pandoc](http://johnmacfarlane.net/pandoc/) installed.
+* You need to have [pandoc < 1.18](http://johnmacfarlane.net/pandoc/) installed.
 * (Optional: Multimarkdown: for markdown to Lyx-Support)
 
 ## Supported Formats:
