@@ -167,47 +167,110 @@ def get_pandoc_formats():
     Dynamic preprocessor for Pandoc formats.
     Return 2 lists. "from_formats" and "to_formats".
     """
-    try:
-        path_pandoc = get_path_pandoc()
-        p = subprocess.Popen(
+    path_pandoc = get_path_pandoc()
+    p = subprocess.Popen(
+        [path_pandoc, '-v'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE)
+    output = p.communicate()[0].decode().splitlines(False)
+    versionstr = output[0]
+    version = float(versionstr[6:11])
+
+    if version < 1.18:
+        try:
+            path_pandoc = get_path_pandoc()
+            p = subprocess.Popen(
                 [path_pandoc, '-h'],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
-        help_text = p.communicate()[0].decode().splitlines(False)
-        txt = ' '.join(help_text[1:help_text.index('Options:')])
+            help_text = p.communicate()[0].decode().splitlines(False)
+            txt = ' '.join(help_text[1:help_text.index('Options:')])
+            #txt = ' '.join(help_text)
 
-        aux = txt.split('Output formats: ')
-        in_ = aux[0].split('Input formats: ')[1].split(',')
-        out = aux[1].split(',')
+            aux = txt.split('Output formats: ')
+            in_ = aux[0].split('Input formats: ')[1].split(',')
+            out = aux[1].split(',')
 
-        return [f.strip() for f in in_], [f.strip() for f in out]
+            return [f.strip() for f in in_], [f.strip() for f in out]
 
-    except OSError:
-        QtWidgets.QMessageBox.warning(None, 'Error-Message',
+        except OSError:
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
                                           'Pandoc could not be found on your System. Is it installed?'
                                           'If so, please check the Pandoc Path in your Preferences.')
+    else:
+        try:
+            path_pandoc = get_path_pandoc()
+            p = subprocess.Popen(
+                [path_pandoc, '--list-input-formats'],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
+            inputformats = p.communicate()[0].decode().splitlines(False)
+
+
+            path_pandoc = get_path_pandoc()
+            p = subprocess.Popen(
+                [path_pandoc, '--list-output-formats'],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
+            outputformats = p.communicate()[0].decode().splitlines(False)
+
+            in_ = inputformats
+            out = outputformats
+
+            return [f.strip() for f in in_], [f.strip() for f in out]
+        except OSError:
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                          'Pandoc could not be found on your System. Is it installed?'
+                                          'If so, please check the Pandoc Path in your Preferences.')
+
 
 def get_pandoc_options():
     """
     Dynamic preprocessor for Pandoc formats.
     Return 2 lists. "from_formats" and "to_formats".
     """
-    try:
-        path_pandoc = get_path_pandoc()
-        p = subprocess.Popen(
-                [path_pandoc, '-h'],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
-        help_text = p.communicate()[0].decode().splitlines(True)
-        aux = help_text[15:89]
 
-        return aux
+    path_pandoc = get_path_pandoc()
+    p = subprocess.Popen(
+        [path_pandoc, '-v'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE)
+    output = p.communicate()[0].decode().splitlines(False)
+    versionstr = output[0]
+    version = float(versionstr[6:11])
 
-    except OSError:
-        QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Pandoc could not be found on your System. Is it installed?'
-                                          'If so, please check the Pandoc Path in your Preferences.')
+    if version < 1.18:
+        try:
+            path_pandoc = get_path_pandoc()
+            p = subprocess.Popen(
+                    [path_pandoc, '-h'],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE)
+            help_text = p.communicate()[0].decode().splitlines(True)
+            aux = help_text[15:89]
 
+            return aux
+
+        except OSError:
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                              'Pandoc could not be found on your System. Is it installed?'
+                                              'If so, please check the Pandoc Path in your Preferences.')
+    else:
+        try:
+            path_pandoc = get_path_pandoc()
+            p = subprocess.Popen(
+                    [path_pandoc, '-h'],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE)
+            help_text = p.communicate()[0].decode().splitlines(True)
+            aux = help_text
+
+            return aux
+
+        except OSError:
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                              'Pandoc could not be found on your System. Is it installed?'
+                                              'If so, please check the Pandoc Path in your Preferences.')
 
 
 
