@@ -1,4 +1,7 @@
-## Version 0,1.6
+## Version 0.1.7
+Support pandoc Versions greater 1.18
+
+## Version 0.1.6
 Code Cleanup
 Gui Cleanup (Deleted the menu functions for the converters)
 Fixed a bug for FreeBSD (Posix-System)
