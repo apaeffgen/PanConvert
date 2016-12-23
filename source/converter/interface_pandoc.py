@@ -174,7 +174,11 @@ def get_pandoc_formats():
         stdout=subprocess.PIPE)
     output = p.communicate()[0].decode().splitlines(False)
     versionstr = output[0]
-    version = float(versionstr[6:11])
+    
+    if platform.system() == 'Windows':
+        version = float(versionstr[10:15])
+    else:
+        version = float(versionstr[6:11])
 
     if version < 1.18:
         try:
