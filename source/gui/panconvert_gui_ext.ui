@@ -280,93 +280,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>710</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="acceptDrops">
-    <bool>false</bool>
-   </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionNew"/>
-    <addaction name="separator"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionSave_AS"/>
-    <addaction name="separator"/>
-   </widget>
-   <widget class="QMenu" name="menuMarkdown">
-    <property name="title">
-     <string>Markdown</string>
-    </property>
-    <addaction name="actionOpml2Markdown"/>
-    <addaction name="actionLatex2Markdown"/>
-    <addaction name="actionHtml2Markdown"/>
-   </widget>
-   <widget class="QMenu" name="menuLatex">
-    <property name="title">
-     <string>Latex</string>
-    </property>
-    <addaction name="actionMarkdown2Latex"/>
-    <addaction name="actionOpml2latex"/>
-    <addaction name="actionHtml2Latex"/>
-   </widget>
-   <widget class="QMenu" name="menuOpml">
-    <property name="title">
-     <string>Opml</string>
-    </property>
-    <addaction name="actionMarkdown2opml"/>
-    <addaction name="actionLatex2Opml"/>
-    <addaction name="actionHtml2opml"/>
-   </widget>
-   <widget class="QMenu" name="menuExtras">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionHelp"/>
-    <addaction name="actionPandoc_Docs"/>
-   </widget>
-   <widget class="QMenu" name="menuHtml">
-    <property name="title">
-     <string>Html</string>
-    </property>
-    <addaction name="actionMarkdown2html"/>
-    <addaction name="actionOpml2html"/>
-    <addaction name="actionLatex2html"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit_2">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <addaction name="actionPreferences"/>
-    <addaction name="actionUndo"/>
-   </widget>
-   <widget class="QMenu" name="menuLyx">
-    <property name="title">
-     <string>Lyx</string>
-    </property>
-    <addaction name="actionMarkdown2Lyx"/>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit_2"/>
-   <addaction name="menuMarkdown"/>
-   <addaction name="menuLatex"/>
-   <addaction name="menuOpml"/>
-   <addaction name="menuHtml"/>
-   <addaction name="menuLyx"/>
-   <addaction name="menuExtras"/>
-  </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -394,6 +307,50 @@
    <addaction name="actionSave_AS"/>
    <addaction name="separator"/>
    <addaction name="actionPreferences"/>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>710</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionNew"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_AS"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuExtras">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionPandoc_Docs"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit_2">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionPreferences"/>
+    <addaction name="actionUndo"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit_2"/>
+   <addaction name="menuExtras"/>
   </widget>
   <action name="actionSave">
    <property name="icon">

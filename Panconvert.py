@@ -288,14 +288,16 @@ class StartQT5(QtWidgets.QMainWindow):
         global openfile, filelist
 
         batch_settings = QSettings('Pandoc', 'PanConvert')
-        if platform.system() == 'Windows' or os.name == 'posix':
-            batch_convert_files = bool(strtobool(batch_settings.value('batch_convert_files')))
-            batch_convert_directory = bool(strtobool(batch_settings.value('batch_convert_directory')))
-            batch_convert_recursive = bool(strtobool(batch_settings.value('batch_convert_recursive')))
-        else:
+        if platform.system() == 'Darwin':
             batch_convert_files = batch_settings.value('batch_convert_files')
             batch_convert_directory = batch_settings.value('batch_convert_directory')
             batch_convert_recursive = batch_settings.value('batch_convert_recursive')
+
+        else:
+            batch_convert_files = bool(strtobool(batch_settings.value('batch_convert_files')))
+            batch_convert_directory = bool(strtobool(batch_settings.value('batch_convert_directory')))
+            batch_convert_recursive = bool(strtobool(batch_settings.value('batch_convert_recursive')))
+
         data = self.ui.editor_window.toPlainText()
 
 
