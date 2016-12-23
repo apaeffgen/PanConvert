@@ -295,7 +295,7 @@ class StartQT5(QtWidgets.QMainWindow):
             batch_convert_recursive = batch_settings.value('batch_convert_recursive')
 
         else:
-            
+
             batch_convert_files = bool(strtobool(batch_settings.value('batch_convert_files')))
             batch_convert_directory = bool(strtobool(batch_settings.value('batch_convert_directory')))
             batch_convert_recursive = bool(strtobool(batch_settings.value('batch_convert_recursive')))
