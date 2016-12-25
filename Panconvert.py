@@ -21,12 +21,14 @@ import codecs
 import platform
 import glob
 import os
+import markdown
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from source.dialog_preferences import *
 from source.dialog_batch import *
 from source.dialog_info import *
+from source.dialog_help import *
 from source.converter.markdown import *
 from source.converter.latex import *
 from source.converter.opml import *
@@ -374,7 +376,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''Help Menu Functions'''
         self.ui.actionHelp.triggered.connect(self.help_dialog)
-        self.ui.actionPandoc_Docs.triggered.connect(self.pandocdocs_dialog)
+        self.ui.actionAbout.triggered.connect(self.pandocdocs_dialog)
 
         '''Preference Functions'''
         self.ui.actionPreferences.triggered.connect(self.preference_dialog)
@@ -444,12 +446,25 @@ class StartQT5(QtWidgets.QMainWindow):
     """External Dialog Windows - Trigger Functions"""
 
     def help_dialog(self):
-        import webbrowser
-        webbrowser.open_new_tab('http://panconvert.sourceforge.net/help')
+        self.HelpDialog = HelpDialog(self)
+        self.HelpDialog.show()
+
+
 
     def pandocdocs_dialog(self):
-        import webbrowser
-        webbrowser.open_new_tab('http://pandoc.org/README.html')
+        with open ("version.md", "r") as actualversion:
+            version=actualversion.readlines()
+            versiontext = ''.join(version)
+        with open ("changelog.md", "r") as changes:
+            versionhistory=changes.readlines()
+            versiondetail = ''.join(versionhistory)
+        msg = QtWidgets.QMessageBox()
+        msg.setText(versiontext)
+        msg.setWindowTitle("About Dialog")
+        msg.setDetailedText(versiondetail)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        retval = msg.exec_()
+
 
     def preference_dialog(self):
         """ References to dialog_preferences.py"""

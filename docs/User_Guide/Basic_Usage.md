@@ -1,4 +1,12 @@
-## Usage of the manual converter 
+# Basic Usage
+
+## The preconfigured conversion sets
+
+* Make sure the Standard-Conversion Checkbox is marked. Otherwise you have to use the manual converter
+* Chose on From Format
+* Chose on to Format. The formats should not be the same
+*
+## Usage of the manual converter
 
 The Standard – Checkbox has to be unchecked.
 

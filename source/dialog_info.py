@@ -38,7 +38,6 @@ class InfoDialog(QtWidgets.QDialog):
         self.ui.textBrowser.setContent(data)
 
 
-
      def cancel_dialog(self):
          InfoDialog.close(self)
 

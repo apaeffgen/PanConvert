@@ -1,6 +1,7 @@
 <RCC>
   <qresource>
     <file>icons/freferences</file>
+    <file>icons/help.png</file>
     <file>icons/preferences</file>
     <file>icons/opml</file>
     <file>icons/save_as</file>

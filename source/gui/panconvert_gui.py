@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'panconvert_gui.ui'
+# Form implementation generated from reading ui file '/Users/apaeffgen/Programmierung/PanConvert/source/gui/panconvert_gui.ui'
 #
-# Created: Sun Nov 22 23:20:12 2015
+# Created: Sun Dec 25 12:31:00 2016
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -217,13 +217,17 @@ class Ui_notepad(object):
         self.actionLatex2html = QtWidgets.QAction(notepad)
         self.actionLatex2html.setObjectName("actionLatex2html")
         self.actionHelp = QtWidgets.QAction(notepad)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.actionHelp.setIcon(icon5)
         self.actionHelp.setObjectName("actionHelp")
         self.actionMarkdown2Lyx = QtWidgets.QAction(notepad)
         self.actionMarkdown2Lyx.setObjectName("actionMarkdown2Lyx")
         self.actionUndo = QtWidgets.QAction(notepad)
         self.actionUndo.setObjectName("actionUndo")
-        self.actionPandoc_Docs = QtWidgets.QAction(notepad)
-        self.actionPandoc_Docs.setObjectName("actionPandoc_Docs")
+        self.actionAbout = QtWidgets.QAction(notepad)
+        self.actionAbout.setObjectName("actionAbout")
         self.actionSearch = QtWidgets.QAction(notepad)
         self.actionSearch.setObjectName("actionSearch")
         self.menuFile.addAction(self.actionOpen)
@@ -233,7 +237,7 @@ class Ui_notepad(object):
         self.menuFile.addAction(self.actionSave_AS)
         self.menuFile.addSeparator()
         self.menuExtras.addAction(self.actionHelp)
-        self.menuExtras.addAction(self.actionPandoc_Docs)
+        self.menuExtras.addAction(self.actionAbout)
         self.menuEdit_2.addAction(self.actionPreferences)
         self.menuEdit_2.addAction(self.actionUndo)
         self.menuEdit_2.addAction(self.actionSearch)
@@ -247,6 +251,7 @@ class Ui_notepad(object):
         self.toolBar.addAction(self.actionSave_AS)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.actionPreferences)
+        self.toolBar.addAction(self.actionHelp)
 
         self.retranslateUi(notepad)
         QtCore.QMetaObject.connectSlotsByName(notepad)
@@ -305,7 +310,7 @@ class Ui_notepad(object):
         self.actionHelp.setText(_translate("notepad", "Help"))
         self.actionMarkdown2Lyx.setText(_translate("notepad", "Markdown2Lyx"))
         self.actionUndo.setText(_translate("notepad", "Undo"))
-        self.actionPandoc_Docs.setText(_translate("notepad", "Pandoc Documentation"))
+        self.actionAbout.setText(_translate("notepad", "About"))
         self.actionSearch.setText(_translate("notepad", "Search"))
 
 import source.gui.icons_rc
