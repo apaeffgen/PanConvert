@@ -21,7 +21,7 @@ import codecs
 import platform
 import glob
 import os
-import markdown
+#import markdown
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
