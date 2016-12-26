@@ -277,7 +277,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
     ''' Functions for the batch conversion. '''
 
-    def file_export_batch_conversion_standard(self, fromFormat,toFormat,extraParameter):
+    def file_export_batch_conversion_standard(self,fromFormat,toFormat,extraParameter):
 
         global openfile, filelist
 
@@ -582,7 +582,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         elif standard_conversion is True and batchConversion is True:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.file_export_batch_conversion_standard(self,"markdown","latex","--standalone")
+                self.file_export_batch_conversion_standard("markdown","latex","--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
                 self.file_export_batch_conversion_standard("markdown","opml","--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
