@@ -1,5 +1,14 @@
 # Installation instruction
 
+## Before you beginn
+
+* Either install a [binary version](https://sourceforge.net/projects/panconvert/files/Newest/) of PanConvert or
+* Install all required components. See  the Installation Checklist below.
+* You need to have [pandoc < 1.18](http://johnmacfarlane.net/pandoc/) installed.
+* The newest source code supports all pandoc versions
+* (Optional: Multimarkdown: for markdown to Lyx-Support)
+
+## Installation Checklist
 Check which packets are already installed on your system. Normally Python3 exists on many supported platforms. On Linux somethimes QT5 is preinstalled.
 
 * Install Python3
