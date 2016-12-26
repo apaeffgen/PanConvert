@@ -277,13 +277,67 @@ class StartQT5(QtWidgets.QMainWindow):
 
     ''' Functions for the batch conversion. '''
 
-    def file_export_batch_conversion_standard(self):
-        # global openfile
-        # output_content = batch_convert(openfile,toFormat,fromFormat)
-        # self.ui.editor_window.setPlainText(output_content)
-        QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'The batch conversion at the moment only works with the manual conversion.<br><br>'
-                                          ' Please uncheck the checkbox "Standard Conversion".')
+    def file_export_batch_conversion_standard(self, fromFormat,toFormat,extraParameter):
+
+        global openfile, filelist
+
+        batch_settings = QSettings('Pandoc', 'PanConvert')
+        if platform.system() == 'Darwin':
+
+            batch_convert_files = batch_settings.value('batch_convert_files')
+            batch_convert_directory = batch_settings.value('batch_convert_directory')
+            batch_convert_recursive = batch_settings.value('batch_convert_recursive')
+
+        else:
+
+            batch_convert_files = bool(strtobool(batch_settings.value('batch_convert_files')))
+            batch_convert_directory = bool(strtobool(batch_settings.value('batch_convert_directory')))
+            batch_convert_recursive = bool(strtobool(batch_settings.value('batch_convert_recursive')))
+
+        data = self.ui.editor_window.toPlainText()
+
+
+
+        if data is not '' and batch_convert_files is True:
+
+            for openfiles in filelist:
+                if os.path.isfile(openfiles) is True:
+                    self.ui.editor_window.setPlainText(data)
+                    message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
+                    self.ui.editor_window.appendPlainText(message)
+                else:
+                    errormessage = ('Einige Dateiangaben waren nicht korrekt:')
+                    self.ui.editor_window.appendPlainText(errormessage)
+
+        elif batch_convert_recursive is False and batch_convert_directory is True:
+            batch_open_path = batch_settings.value('batch_open_path')
+
+            filelist = glob.glob(batch_open_path + '/*')
+            for openfiles in filelist:
+                if os.path.isfile(openfiles):
+                    output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
+                    self.ui.editor_window.setPlainText(output_content)
+
+        elif batch_convert_recursive is True and batch_convert_directory is True:
+            batch_open_path = batch_settings.value('batch_open_path')
+
+            filelistrecursive = create_filelist(batch_open_path)
+
+            for openfiles in filelistrecursive:
+                output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
+                self.ui.editor_window.setPlainText(output_content)
+
+        else:
+            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                              'You have to open at least one file in file conversion mode.'
+                                              ' <br>Did you put in from / to - formats?'
+                                              ' <br>If you are in directory mode, did you specify a directory?'
+                                              ' <br> Check your settings.')
+
+
+        # QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+        #                                   'The batch conversion at the moment only works with the manual conversion.<br><br>'
+        #                                   ' Please uncheck the checkbox "Standard Conversion".')
 
 
     def file_export_batch_conversion_manual(self):
@@ -376,7 +430,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''Help Menu Functions'''
         self.ui.actionHelp.triggered.connect(self.help_dialog)
-        self.ui.actionAbout.triggered.connect(self.pandocdocs_dialog)
+        self.ui.actionAbout.triggered.connect(self.about_dialog)
 
         '''Preference Functions'''
         self.ui.actionPreferences.triggered.connect(self.preference_dialog)
@@ -451,7 +505,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
 
-    def pandocdocs_dialog(self):
+    def about_dialog(self):
         with open ("version.md", "r") as actualversion:
             version=actualversion.readlines()
             versiontext = ''.join(version)
@@ -500,7 +554,6 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.file_export_standardconverter("md","opml","--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
                 self.file_export_markdown2lyx()
-
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
                 self.file_export_standardconverter("opml","md","--atx-header")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
@@ -527,11 +580,43 @@ class StartQT5(QtWidgets.QMainWindow):
                                               'If you picked to-Lyx, only from-markdown is a valid option.<br><br>'
                                               'Please make a different choice.')
 
+        elif standard_conversion is True and batchConversion is True:
+            if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.file_export_batch_conversion_standard(self,"markdown","latex","--standalone")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.file_export_batch_conversion_standard("markdown","opml","--standalone")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
+                QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                              'The Lyx batch conversion is not supportet at the moment.')
+                #self.file_export_markdown2lyx()
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.file_export_batch_conversion_standard("opml","markdown","--atx-header")
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.file_export_batch_conversion_standard("opml","latex","--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.file_export_batch_conversion_standard("latex","markdown","--atx-header")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
+                self.file_export_batch_conversion_standard("latex","opml","--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.file_export_batch_conversion_standard("html","markdown","--atx-header")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.file_export_batch_conversion_standard("markdown","html","--standalone")
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.file_export_batch_conversion_standard("opml","html","--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.file_export_batch_conversion_standard("html","opml","--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.file_export_batch_conversion_standard("latex","html","--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.file_export_batch_conversion_standard("html","latex","--standalone")
+            else:
+                QtWidgets.QMessageBox.warning(None, 'Warning-Message',
+                                              'The from-Format and to-Format should not be identical.<br><br> '
+                                              'If you picked to-Lyx, only from-markdown is a valid option.<br><br>'
+                                              'Please make a different choice.')
+
         elif standard_conversion is False and batchConversion is False:# and extraParameter is not "":
             self.file_export_manualconverter()
-
-        elif standard_conversion is True and batchConversion is True:
-            self.file_export_batch_conversion_standard()
 
 
         elif standard_conversion is False and batchConversion is True:

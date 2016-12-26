@@ -42,6 +42,55 @@ def create_filelist(directory):
     return matches
 
 
+
+
+
+def batch_convert_lyx(openfile,FromFormat, ToFormat,extra_args):
+
+    try:
+        path_multimarkdown = get_path_multimarkdown()
+
+        if extra_args is '':
+            args = [path_multimarkdown, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + openfile + '.' + ToFormat]
+        else:
+            args = [path_multimarkdown, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + openfile + '.' + ToFormat, extra_args]
+
+        if extra_args is not '' :
+            extra_args = extra_args.split(';')
+            for arg in extra_args:
+                args.append(arg)
+
+        p = subprocess.Popen(
+            args,
+            stdin=subprocess.PIPE,
+            #stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
+
+        error1 = p.communicate(output.encode('utf-8'))
+
+        #error = error1.decode('utf-8')
+        message = '\n Converted files should have been written to the same place as the original files.' \
+                  ' \n There is no visual output. So please check your converted files at the filesystem level.' \
+                  '\n \n When in batch-file-mode, for a better experience, please clear the window before starting a new conversion'
+        error = ''
+
+
+        if p.returncode != 0:
+            result = ''
+            error = 'An Error occurred. <br><br>{}'.format(error1)
+            QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                          'An Error occurred. <br><br>{}'.format(error1))
+
+
+
+
+        return message
+    except OSError:
+        QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                          'Pandoc could not be found on your System. Is it installed?'
+                                          'If so, please check the Pandoc Path in your Preferences.')
+
+
 def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
 

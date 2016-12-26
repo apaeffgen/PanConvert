@@ -2,19 +2,29 @@
 
 ## The preconfigured conversion sets
 
+* These are the preconfigured standard converters. All documents are Standalone-Versions of the document.````
 * Make sure the Standard-Conversion Checkbox is marked. Otherwise you have to use the manual converter
+* The Batch-Conversion Checkbox has to be unchecked
 * Chose one From Format
 * Chose one To Format. The formats should not be the same
 
 ## Usage of the manual converter
 
 * The Standard – Checkbox has to be unchecked.
-* In the from field you have to fill in the supported pandoc formats of
-the source format.
-* In the to field you have to fill in the supported pandoc formats of the
-destination format
-* In the Parameter field, all known pandoc parameters, separated via semicolon ';' can be used.
+* The Batch-Conversion Checkbox has to be unchecked
+* In the From-field you have to fill in the supported pandoc formats of
+the source format. A list of all From-formats is available via the ... Button at the end of the input field.
+* In the To-field you have to fill in the supported pandoc formats of the
+destination format. A list of all To-formats is available via the ... Button at the end of the input field.
+* In the Parameter field, all known pandoc parameters, separated via semicolon ';' can be used. A list of all options is available via the ... Button at the end of the input field.
 * For some formats the Parameter field can be left blank, for others it
 has to be filled. 
 * To get a odt or epub file, you have to specify the name of the file. There is a working
 example for odt filled in already. The file will be saved in the same directory where the panconvert directory is saved, e.g. on MacOS it will be /Applications
+
+## Batch Conversion
+
+* Both the Manual and the standard conversion work in batchmode
+* First you have to decide if you want to convert a filelist or a directory
+* A directory can be converted recursivly
+* Files can be added from different locations. Only one format conversion at a time
