@@ -1,5 +1,5 @@
-# Panconvert Documentation
-A GUI-Wrapper for the document converter pandoc
+## What is Panconvert
+Panconvert is a GUI-Wrapper for the document converter [pandoc](http://pandoc.org)
 
 ## How to use Panconvert and Pandoc
 
