@@ -1,6 +1,6 @@
 # Pandoc Help
 
-Detailed help you will find at [pandoc Hilfe](‚http://pandoc.org/MANUAL.html)
+Detailed help you will find at [pandoc Hilfe](http://pandoc.org/MANUAL.html)
 
 
 ## Supported Formats:
