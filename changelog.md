@@ -1,3 +1,10 @@
+Version 0.1.9
+- Added Batch Conversion for Standard Converters
+- Added Batch Conversion for Lyx in Standard Conversion
+- Added Filefilter option for Batch Conversion
+- Code Cleanup
+- Cleaner Error handling
+
 Version 0.1.8
 - Added: Standard Batch Conversion support
 - Missing: Lyx Standard Batch Conversion support

@@ -18,54 +18,16 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from source.converter.interface_pandoc import *
 import subprocess
-import platform
-import os
+import platform, os, glob
+import fnmatch
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
+from distutils.util import strtobool
+from source.gui.panconvert_gui import *
 
-
-def get_path_multimarkdown():
-    settings = QSettings('Pandoc', 'PanConvert')
-    path_multimarkdown = settings.value('path_multimarkdown','')
-
-    if len(path_multimarkdown) == 0:
-
-        if platform.system() == 'Darwin' or os.name == 'posix':
-            args = ['which', 'multimarkdown']
-            p = subprocess.Popen(
-                args,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
-
-            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
-            settings.setValue('path_multimarkdown', path_multimarkdown)
-            settings.sync()
-            return path_multimarkdown
-
-        elif platform.system() == 'Windows':
-            args = ['where', 'multimarkdown']
-            p = subprocess.Popen(
-                args,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
-
-            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
-            settings.setValue('path_multimarkdown', path_multimarkdown)
-            settings.sync()
-            return path_multimarkdown
-        else:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Could not detect the actual operating system. Please fill in the Path'
-                                          ' to MultiMarkdown manually via Preferences.')
-
-    elif len(path_multimarkdown) != 0:
-        return path_multimarkdown
-
-    else:
-       QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'I tried automagically to detect MultiMarkdown. But it failed.'
-                                          'Please input the path of MultiMarkdown manually via preferences')
+#global openfile
 
 def convert_markdown2lyx(text):
     try:
@@ -80,6 +42,24 @@ def convert_markdown2lyx(text):
         return p.communicate(text.encode('utf-8'))[0].decode('utf-8')
 
     except OSError:
-        QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'MultiMarkdown could not be found on your System. Is it installed?'
-                                          'If so, please check the MultiMarkdown Path in your Preferences.')
+        error_converter_path()
+
+
+def batch_convert_markdown2lyx(openfile):
+
+        settings = QSettings('Pandoc', 'PanConvert')
+        path_multimarkdown = settings.value('path_multimarkdown','')
+
+        args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + openfile + '.' + 'lyx']
+
+        p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
+
+
+
+        return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')
+
+
+

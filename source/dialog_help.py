@@ -20,7 +20,7 @@ __author__ = 'apaeffgen'
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from source.gui.panconvert_diag_help import Ui_Information_Dialog
-from source.converter.interface_pandoc import get_pandoc_options
+#from source.converter.interface_pandoc import get_pandoc_options
 
 class HelpDialog(QtWidgets.QDialog):
 

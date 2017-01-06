@@ -46,6 +46,10 @@ class BatchDialog(QtWidgets.QDialog):
         batch_open_path = batch_settings.value('batch_open_path')
         self.ui.OpenPath.insert(batch_open_path)
 
+        # Filter Settings
+        batch_convert_filter = batch_settings.value('batch_convert_filter')
+        self.ui.Filter.insert(batch_convert_filter)
+
 
         #Parameter Settings
 
@@ -54,9 +58,11 @@ class BatchDialog(QtWidgets.QDialog):
         parameterBatchconvertRecursive = batch_settings.value('batch_convert_recursive', True)
 
 
+
         if batch_settings.value('batch_convert_directory') is not None:
             if platform.system() == 'Darwin':
                 self.ui.ParameterBatchconvertDirectory.setChecked(parameterBatchconvertDirectory)
+
                 self.ui.ParameterBatchconvertFiles.setChecked(parameterBatchconvertFiles)
                 self.ui.ParameterBatchconvertRecursive.setChecked(parameterBatchconvertRecursive)
             else:
@@ -81,6 +87,7 @@ class BatchDialog(QtWidgets.QDialog):
         batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
         batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
         batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
+        batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
         batch_settings.sync()
         batch_settings.status()
 

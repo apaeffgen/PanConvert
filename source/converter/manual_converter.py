@@ -19,17 +19,22 @@ __author__ = 'apaeffgen'
 
 from PyQt5 import QtWidgets
 import subprocess
+import sys
 from source.converter.interface_pandoc import convert
 from source.converter.interface_pandoc import get_path_pandoc
 from source.converter.interface_pandoc import get_pandoc_formats
 from source.converter.interface_pandoc import get_pandoc_options
+from source.converter.errors import *
 
 
 def convert_universal(text,ToFormat,FromFormat,arg):
-    # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
+    ##ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')##
     output = convert(text, ToFormat, FromFormat, arg)
 
     return output
+
+
+
 
 def convert_binary(openfile,ToFormat,FromFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
@@ -57,8 +62,7 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
             QtWidgets.QMessageBox.warning(None, 'Warning-Message',
                                           'Invalid to format! Expected one of these: ' + ', '.join(to_formats))
 
-        output = 'If you can read this message, something went wrong. Get some help at ' \
-                 'http://panconvert.sourceforge.net/help'
+        output = error_unknown()
 
         p = subprocess.Popen(
                 args,
@@ -67,25 +71,30 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
                 stderr=subprocess.PIPE)
 
         output1, error1 = p.communicate(output.encode('utf-8'))
-        output = output1.decode('utf-8')
-        error = error1.decode('utf-8')
 
-        if p.returncode != 0:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'An Error occurred. <br><br>{}'.format(error))
-        else:
-            if output != '':
-                return output
+        try:
+            output = output1.decode('utf-8')
+            error = error1.decode('utf-8')
+
+            if p.returncode != 0:
+                QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                              'An Error occurred. <br><br>{}'.format(error))
             else:
-                message = 'There was no visible output. Did you write output to the filesystem?' \
-                          ' Please look in the folder of PanConvert for some output-file'
-                return message
+                if output != '':
+                    return output
+                else:
+                    message = error_no_output()
+                    return message
+
+        except:
+            error_fatal()
+
+        return output
+
+
 
 
         #return p.communicate(output.encode('utf-8'))[0].decode('utf-8')
 
     except OSError:
-        QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Pandoc could not be found on your System. Is it installed?'
-                                          'If so, please check the Pandoc Path in your Preferences.')
-
+        error_converter_path()

@@ -1,5 +1,5 @@
-from __future__ import with_statement
 #!/usr/local/bin/python3
+__author__ = 'Juho Vepsäläinen, apaeffgen'
 # -*- coding: utf-8 -*-
 # The original file is modified from the following source:
 # https://github.com/bebraw/pypandoc
@@ -28,9 +28,15 @@ from __future__ import with_statement
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import subprocess
-import platform, os
+import platform, os, glob
+import fnmatch
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
+from source.converter.errors import *
+
+
+
+global fromFormat
 
 def get_path_pandoc():
 
@@ -46,10 +52,23 @@ def get_path_pandoc():
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
 
+
             path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-            settings.setValue('path_pandoc', path_pandoc)
-            settings.sync()
-            return path_pandoc
+
+            if len(path_pandoc) != 0:
+
+
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
+                return path_pandoc
+
+
+            else:
+                error_converter_path()
+
+
+
+
 
         elif platform.system() == 'Windows':
             args = ['where', 'pandoc']
@@ -63,105 +82,56 @@ def get_path_pandoc():
             settings.sync()
             return path_pandoc
         else:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Could not detect the actual operating system. Please fill in the Path'
-                                          ' to Pandoc manually via Preferences.')
+            error_os_detection()
 
     elif len(path_pandoc) != 0:
         return path_pandoc
 
     else:
-       QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'I tried automagically to detect pandoc. But it failed.'
-                                          'Please input the path of pandoc manually via preferences')
+        error_converter_path()
 
 
-def convert(source, to, format=None, extra_args=(), encoding='utf-8'):
-
-    """Converts given `source` from `format` `to` another. `source` may be either a file path or a string to be
-    converted. It's possible to pass `extra_args` if needed. In case `format` is not provided, it will try to invert
-    the format based on given `source`.
-    Raises OSError if pandoc is not found! Make sure it has been installed and is available at path.
-    """
-
-    return _convert(_read_file, _process_file, source, to, format, extra_args, encoding=encoding)
 
 
-def _convert(reader, processor, source, to, format=None, extra_args=(), encoding=None):
-    source, format = reader(source, format, encoding=encoding)
+def get_path_multimarkdown():
+    settings = QSettings('Pandoc', 'PanConvert')
+    path_multimarkdown = settings.value('path_multimarkdown','')
 
-    formats = {
-        'dbk': 'docbook',
-        'md': 'markdown_strict',
-        'rest': 'rst',
-        'tex': 'latex',
-    }
+    if len(path_multimarkdown) == 0:
 
-    format = formats.get(format, format)
-    to = formats.get(to, to)
-
-    # if not format:
-    #     raise RuntimeError('Missing format!')
-
-    from_formats, to_formats = get_pandoc_formats()
-
-    if format == '': # not in from_formats:
-        QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'Empty from format! Expected one of these: ' + ', '.join(from_formats))
-        raise RuntimeError('Missing format!')
-
-    if to == '': # not in to_formats:
-        QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'Empty to format! Expected one of these: ' + ', '.join(to_formats))
-        raise RuntimeError('Missing format!')
-
-    return processor(source, to, format, extra_args)
-
-
-def _read_file(source, format, encoding='utf-8'):
-
-    return source, format
-
-
-# noinspection PyPep8
-def _process_file(source, to, format, extra_args):
-    try:
-        path_pandoc = get_path_pandoc()
-        args = [path_pandoc, '--from=' + format, '--to=' + to]
-
-        if extra_args is not '' :
-            extra_args = extra_args.split(';')
-            for arg in extra_args:
-                args.append(arg)
-
-
-        p = subprocess.Popen(
+        if platform.system() == 'Darwin' or os.name == 'posix':
+            args = ['which', 'multimarkdown']
+            p = subprocess.Popen(
                 args,
                 stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE)
+                stdout=subprocess.PIPE)
 
-        #Original Code without error-handling
-        #output = p.communicate(source.encode('utf-8'))[0].decode('utf-8')
+            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+            settings.setValue('path_multimarkdown', path_multimarkdown)
+            settings.sync()
+            return path_multimarkdown
 
-        output1, error1 = p.communicate(source.encode('utf-8'))
-        output = output1.decode('utf-8')
-        error = error1.decode('utf-8')
+        elif platform.system() == 'Windows':
+            args = ['where', 'multimarkdown']
+            p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
 
-        if p.returncode != 0:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'An Error occurred. <br><br>{}'.format(error))
+            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+            settings.setValue('path_multimarkdown', path_multimarkdown)
+            settings.sync()
+            return path_multimarkdown
         else:
-            return output
+            error_os_detection()
+
+    elif len(path_multimarkdown) != 0:
+        return path_multimarkdown
+
+    else:
+       error_converter_path()
 
 
-
-    except OSError:
-        QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Pandoc could not be found on your System. Is it installed?'
-                                          'If so, please check the Pandoc Path in your Preferences.')
-
-# noinspection PyPep8
 def get_pandoc_formats():
     """
     Dynamic preprocessor for Pandoc formats.
@@ -198,9 +168,7 @@ def get_pandoc_formats():
             return [f.strip() for f in in_], [f.strip() for f in out]
 
         except OSError:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Pandoc could not be found on your System. Is it installed?'
-                                          'If so, please check the Pandoc Path in your Preferences.')
+            error_converter_path()
     else:
         try:
             path_pandoc = get_path_pandoc()
@@ -223,9 +191,7 @@ def get_pandoc_formats():
 
             return [f.strip() for f in in_], [f.strip() for f in out]
         except OSError:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                          'Pandoc could not be found on your System. Is it installed?'
-                                          'If so, please check the Pandoc Path in your Preferences.')
+            error_converter_path()
 
 
 def get_pandoc_options():
@@ -259,9 +225,7 @@ def get_pandoc_options():
             return aux
 
         except OSError:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                              'Pandoc could not be found on your System. Is it installed?'
-                                              'If so, please check the Pandoc Path in your Preferences.')
+            error_converter_path()
     else:
         try:
             path_pandoc = get_path_pandoc()
@@ -275,9 +239,137 @@ def get_pandoc_options():
             return aux
 
         except OSError:
-            QtWidgets.QMessageBox.warning(None, 'Error-Message',
-                                              'Pandoc could not be found on your System. Is it installed?'
-                                              'If so, please check the Pandoc Path in your Preferences.')
+            error_converter_path()
 
+
+
+
+
+def create_filelist(directory):
+
+    settings = QSettings('Pandoc', 'PanConvert')
+    filefilter = settings.value('batch_convert_filter','')
+
+    matches = []
+    for root, dirnames, filenames in os.walk(directory):
+        for filename in fnmatch.filter(filenames, '*.*'):
+            if filename != '.DS_Store':
+                matches.append(os.path.join(root, filename))
+
+    filter = filefilter.split(';')
+    matching = []
+
+    for filteritem in filter:
+
+        matching_filter = [s for s in matches if filteritem in s]
+        for i in matching_filter:
+            matching.append(i)
+
+    if len(matching) == 0:
+
+        error_file_selection()
+
+    return matching
+
+def create_simplefilelist():
+    settings = QSettings('Pandoc', 'PanConvert')
+    batch_settings = QSettings('Pandoc', 'PanConvert')
+    batch_open_path = batch_settings.value('batch_open_path')
+    filefilter = settings.value('batch_convert_filter','')
+
+    filelist = glob.glob(batch_open_path + '/*')
+    filter = filefilter.split(';')
+
+    matching = []
+
+    for filteritem in filter:
+
+        matching_filter = [s for s in filelist if filteritem in s]
+        for i in matching_filter:
+            matching.append(i)
+    if len(matching) == 0:
+
+        error_file_selection()
+
+    return matching
+
+
+def convert(source, to, format=None, extra_args=(), encoding='utf-8'):
+
+    """Converts given `source` from `format` `to` another. `source` may be either a file path or a string to be
+    converted. It's possible to pass `extra_args` if needed. In case `format` is not provided, it will try to invert
+    the format based on given `source`.
+    Raises OSError if pandoc is not found! Make sure it has been installed and is available at path.
+    """
+
+    return _convert(_read_file, _process_file, source, to, format, extra_args, encoding=encoding)
+
+
+def _convert(reader, processor, source, to, format=None, extra_args=(), encoding=None):
+    source, format = reader(source, format, encoding=encoding)
+
+    formats = {
+        'dbk': 'docbook',
+        'md': 'markdown_strict',
+        'rest': 'rst',
+        'tex': 'latex',
+    }
+
+    format = formats.get(format, format)
+    to = formats.get(to, to)
+
+
+
+    return processor(source, to, format, extra_args)
+
+
+def _read_file(source, format, encoding='utf-8'):
+
+    return source, format
+
+
+
+def _process_file(source, to, format, extra_args):
+    try:
+        path_pandoc = get_path_pandoc()
+        args = [path_pandoc, '--from=' + format, '--to=' + to]
+
+        output = ''
+        if extra_args is not '' :
+            extra_args = extra_args.split(';')
+            for arg in extra_args:
+                args.append(arg)
+
+
+        p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
+
+
+
+        output1, error1 = p.communicate(source.encode('utf-8'))
+
+        try:
+            output = output1.decode('utf-8')
+            error = error1.decode('utf-8')
+
+            if p.returncode != 0:
+                QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                              'An Error occurred. <br><br>{}'.format(error))
+            else:
+
+                if output == '':
+                    output = error_no_output()
+
+
+        except:
+            error_fatal()
+
+        return output
+
+    except OSError:
+        error_converter_path()
 
 

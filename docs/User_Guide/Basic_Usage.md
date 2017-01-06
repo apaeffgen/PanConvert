@@ -21,10 +21,14 @@ destination format. A list of all To-formats is available via the ... Button at 
 has to be filled. 
 * To get a odt or epub file, you have to specify the name of the file. There is a working
 example for odt filled in already. The file will be saved in the same directory where the panconvert directory is saved, e.g. on MacOS it will be /Applications
+* The last parameter should not be closed with a ;
+* If you get a pandoc error, the syntax of the Parameter field is wrong.
 
 ## Batch Conversion
 
-* Both the Manual and the standard conversion work in batchmode
+* Both the Manual and the standard conversion work in batchmode. See the help sections above.
 * First you have to decide if you want to convert a filelist or a directory
 * A directory can be converted recursivly
 * Files can be added from different locations. Only one format conversion at a time
+* A Filefilter can reduce the types of the processed files. E.g. markdown;md; for all types of Markdown files.
+
