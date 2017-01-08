@@ -1,6 +1,6 @@
 ### Version 0.2.0
--- Fixed About Dialog in Binary Versions
--- Fixed Error handling of Path detection in windows
+- Fixed About Dialog in Binary Versions
+- Fixed Error handling of Path detection in windows
 
 ### Version 0.1.9
 - Added Batch Conversion for Standard Converters
