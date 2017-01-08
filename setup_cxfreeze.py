@@ -17,6 +17,7 @@ __author__ = 'apaeffgen'
 
 import sys
 from cx_Freeze import setup, Executable
+from source.converter.messages import *
 
 
 
@@ -40,8 +41,8 @@ executables = [
 ]
 
 setup(name='PanConvert',
-      version='0.1.8',
-      description='Gui Wrapper for PanDoc',
+      version=versionnumber,
+      description=versionname,
       options=options,
       executables=executables
       )

@@ -24,7 +24,7 @@ from source.converter.interface_pandoc import convert
 from source.converter.interface_pandoc import get_path_pandoc
 from source.converter.interface_pandoc import get_pandoc_formats
 from source.converter.interface_pandoc import get_pandoc_options
-from source.converter.errors import *
+from source.converter.messages import *
 
 
 def convert_universal(text,ToFormat,FromFormat,arg):

@@ -32,7 +32,7 @@ import platform, os, glob
 import fnmatch
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
-from source.converter.errors import *
+from source.converter.messages import *
 
 
 
@@ -71,6 +71,9 @@ def get_path_pandoc():
 
 
         elif platform.system() == 'Windows':
+
+
+
             args = ['where', 'pandoc']
             p = subprocess.Popen(
                 args,
@@ -78,9 +81,17 @@ def get_path_pandoc():
                 stdout=subprocess.PIPE)
 
             path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-            settings.setValue('path_pandoc', path_pandoc)
-            settings.sync()
-            return path_pandoc
+
+            if len(path_pandoc) != 0:
+
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
+                return path_pandoc
+            else:
+                error_converter_path()
+
+
+
         else:
             error_os_detection()
 

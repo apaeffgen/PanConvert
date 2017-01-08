@@ -21,6 +21,12 @@ from PyQt5 import QtWidgets
 
     ## All Errormessages used in the Program##
 
+
+versionnumber = '0.2.0'
+versiondate = '01.2017'
+versionname = 'PanConvert - A Gui Wrapper for Pandoc'
+copyrightinfo = 'Copyright by APaeffgen'
+
 no_converter_detected = 'No Converter (Pandoc or Multimardown) could be found on your System. Are they installed?'+\
                          'If so, please check the Pandoc / Multimarkdown Path in your Preferences.';
 
@@ -77,6 +83,10 @@ unknown_error = 'If you can read this message, something went wrong. Get some he
                  'http://panconvert.sourceforge.net/help'
 
     ## All functions used to call the above declared error messages##
+
+def version():
+    versiontext = versionname + '<br>' + 'Version ' + versionnumber + ' on ' + versiondate + '<br>' + copyrightinfo
+    return versiontext
 
 def error_converter_path():
     QtWidgets.QMessageBox.warning(None, 'Error-Message', no_converter_detected)

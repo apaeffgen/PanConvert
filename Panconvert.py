@@ -25,11 +25,12 @@ import os
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
+from PyQt5 import QtWebKitWidgets
 from source.dialog_preferences import *
 from source.dialog_batch import *
 from source.dialog_info import *
 from source.dialog_help import *
-from source.converter.errors import *
+from source.converter.messages import *
 from source.converter.interface_pandoc import *
 from source.converter.lyx import *
 from source.converter.manual_converter import *
@@ -588,16 +589,10 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
     def about_dialog(self):
-        with open ("version.md", "r") as actualversion:
-            version=actualversion.readlines()
-            versiontext = ''.join(version)
-        with open ("changelog.md", "r") as changes:
-            versionhistory=changes.readlines()
-            versiondetail = ''.join(versionhistory)
+        ## About Dialog with some Version info##
         msg = QtWidgets.QMessageBox()
-        msg.setText(versiontext)
+        msg.setText(version())
         msg.setWindowTitle("About Dialog")
-        msg.setDetailedText(versiondetail)
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         retval = msg.exec_()
 
