@@ -1,6 +1,7 @@
 __author__ = 'apaeffgen'
-# _*_ coding: utf-8 _*_
- # This file is part of Panconvert.
+# -*- coding: utf-8 -*-
+
+    # This file is part of Panconvert.
     #
     # Panconvert is free software: you can redistribute it and/or modify
     # it under the terms of the GNU General Public License as published by
@@ -15,34 +16,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 
-from cx_Freeze import setup, Executable
-
-from source.language.messages import *
-
-base = None
-if sys.platform == 'win32':
-    base = 'Win32GUI'
-
-options = {
-    'build_exe': {
-        'includes': ['PyQt5.QtNetwork',
-                     'PyQt5.QtWebKit',
-                     'PyQt5.QtPrintSupport',
-                     'PyQt5.QtNetwork',
-                     'PyQt5.QtWidgets']
-
-    }
-}
-
-executables = [
-    Executable('Panconvert.py', base=base)
-]
-
-setup(name='PanConvert',
-      version=versionnumber,
-      description=versionname,
-      options=options,
-      executables=executables
-      )
+SOURCES = source/gui/panconvert_gui_ext.py source/gui/panconvert_diag_prefpane.py source/gui/panconvert_diag_info.py
+SOURCES += source/gui/panconvert_dialog_batch.py source/language/messages.py
+TRANSLATIONS += source/language/Panconvert_de.ts source/language/Panconvert_es.ts source/language/Panconvert_xx.ts

@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>710</width>
-    <height>579</height>
+    <width>1109</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>850</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>PanConvert</string>
@@ -42,123 +48,7 @@
     <bool>false</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="2">
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="ExtraParameter">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="labelParameter">
-        <property name="text">
-         <string>Parameter</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelFromBox">
-        <property name="text">
-         <string>From</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="comboBox_2"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelToBox">
-        <property name="text">
-         <string>To</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="1">
-     <widget class="QGroupBox" name="BoxToFormat">
-      <property name="minimumSize">
-       <size>
-        <width>140</width>
-        <height>135</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>140</width>
-        <height>135</height>
-       </size>
-      </property>
-      <property name="title">
-       <string>To Format</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>13</x>
-         <y>31</y>
-         <width>92</width>
-         <height>96</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="ButtonToLatex">
-          <property name="text">
-           <string>Latex</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="ButtonToOpml">
-          <property name="text">
-           <string>Opml</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QRadioButton" name="ButtonToMarkdown">
-          <property name="text">
-           <string>Markdown</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QRadioButton" name="ButtonToHtml">
-          <property name="text">
-           <string>Html</string>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QRadioButton" name="ButtonToLyx">
-          <property name="text">
-           <string>Lyx</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
-    <item row="0" column="0">
+    <item row="0" column="0" rowspan="2">
      <widget class="QGroupBox" name="BoxFromFormat">
       <property name="minimumSize">
        <size>
@@ -238,21 +128,169 @@
       </widget>
      </widget>
     </item>
-    <item row="3" column="0" colspan="4">
-     <widget class="QPlainTextEdit" name="editor_window"/>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QGroupBox" name="BoxToFormat">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>135</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>135</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>To Format</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>13</x>
+         <y>31</y>
+         <width>92</width>
+         <height>96</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="ButtonToLatex">
+          <property name="text">
+           <string>Latex</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="ButtonToOpml">
+          <property name="text">
+           <string>Opml</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="ButtonToMarkdown">
+          <property name="text">
+           <string>Markdown</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QRadioButton" name="ButtonToHtml">
+          <property name="text">
+           <string>Html</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QRadioButton" name="ButtonToLyx">
+          <property name="text">
+           <string>Lyx</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Options</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="ExtraParameter">
+        <property name="toolTip">
+         <string extracomment="Input extra Parameter"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="ButtonFromFormat">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QToolButton" name="ButtonToFormat">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QToolButton" name="ButtonOptions">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="FromParameter">
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelFromBox">
+        <property name="text">
+         <string>From</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="ToParameter">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelToBox">
+        <property name="text">
+         <string>To</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item row="0" column="3">
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QCheckBox" name="StandardConversion">
+       <widget class="QPushButton" name="ButtonBatch">
         <property name="text">
-         <string>Standard</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-        <property name="autoRepeat">
-         <bool>false</bool>
+         <string>Batch</string>
         </property>
        </widget>
       </item>
@@ -267,7 +305,7 @@
        <widget class="QPushButton" name="ButtonConvert">
         <property name="maximumSize">
          <size>
-          <width>100</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
@@ -278,7 +316,92 @@
       </item>
      </layout>
     </item>
+    <item row="1" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QCheckBox" name="StandardConversion">
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Standard Conversion</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="BatchConversion">
+        <property name="text">
+         <string>Batch Conversion</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0" colspan="4">
+     <widget class="QPlainTextEdit" name="editor_window"/>
+    </item>
    </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1109</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionNew"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_AS"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuExtras">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit_2">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionPreferences"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionSearch"/>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+    <addaction name="actionLogViewer"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit_2"/>
+   <addaction name="menuWindow"/>
+   <addaction name="menuExtras"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -307,50 +430,28 @@
    <addaction name="actionSave_AS"/>
    <addaction name="separator"/>
    <addaction name="actionPreferences"/>
+   <addaction name="actionHelp"/>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>710</width>
-     <height>22</height>
-    </rect>
+  <widget class="QDockWidget" name="dockLogWindow">
+   <property name="minimumSize">
+    <size>
+     <width>102</width>
+     <height>124</height>
+    </size>
    </property>
-   <property name="acceptDrops">
-    <bool>false</bool>
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionNew"/>
-    <addaction name="separator"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionSave_AS"/>
-    <addaction name="separator"/>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="logWindow">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <widget class="QPlainTextEdit" name="logBrowser"/>
+     </item>
+    </layout>
    </widget>
-   <widget class="QMenu" name="menuExtras">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionHelp"/>
-    <addaction name="actionPandoc_Docs"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit_2">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <addaction name="actionPreferences"/>
-    <addaction name="actionUndo"/>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit_2"/>
-   <addaction name="menuExtras"/>
   </widget>
   <action name="actionSave">
    <property name="icon">
@@ -432,7 +533,8 @@
   <action name="actionPreferences">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/icons/freferences</normaloff>:/icons/freferences</iconset>
+     <normaloff>:/icons/freferences</normaloff>
+     <normalon>:/icons/freferences</normalon>:/icons/freferences</iconset>
    </property>
    <property name="text">
     <string>Preferences</string>
@@ -479,6 +581,11 @@
    </property>
   </action>
   <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/help.png</normaloff>
+     <normalon>:/icons/help.png</normalon>:/icons/help.png</iconset>
+   </property>
    <property name="text">
     <string>Help</string>
    </property>
@@ -493,9 +600,19 @@
     <string>Undo</string>
    </property>
   </action>
-  <action name="actionPandoc_Docs">
+  <action name="actionAbout">
    <property name="text">
-    <string>Pandoc Documentation</string>
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="text">
+    <string>Search</string>
+   </property>
+  </action>
+  <action name="actionLogViewer">
+   <property name="text">
+    <string>LogViewer</string>
    </property>
   </action>
  </widget>

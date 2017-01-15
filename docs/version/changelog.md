@@ -1,3 +1,14 @@
+### Version 2.2.2
+- Added seperated Log-Viewer
+- Make the Windows Position + Size savable
+- Make the Log-Viewer Position + Size sabable
+
+### Version 0.2.1
+- Added Multilanguage Support
+- Supported languages: English, German, (Spanish: 40%)
+- Added Blank Translation File
+- Fixed Error when inserting a new Path in Preferences
+
 ### Version 0.2.0
 - Fixed About Dialog in Binary Versions
 - Fixed Error handling of Path detection in windows

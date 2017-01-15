@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/Users/apaeffgen/Programmierung/PanConvert/source/gui/panconvert_gui.ui'
 #
-# Created: Sun Dec 25 12:31:00 2016
+# Created: Fri Jan 13 11:46:06 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -131,7 +131,7 @@ class Ui_notepad(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.StandardConversion = QtWidgets.QCheckBox(self.centralwidget)
-        self.StandardConversion.setMaximumSize(QtCore.QSize(155, 16777215))
+        self.StandardConversion.setMaximumSize(QtCore.QSize(200, 16777215))
         self.StandardConversion.setChecked(False)
         self.StandardConversion.setAutoRepeat(False)
         self.StandardConversion.setObjectName("StandardConversion")
@@ -196,8 +196,8 @@ class Ui_notepad(object):
         self.actionMarkdown2opml.setObjectName("actionMarkdown2opml")
         self.actionPreferences = QtWidgets.QAction(notepad)
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         icon4.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon4.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionPreferences.setIcon(icon4)
         self.actionPreferences.setObjectName("actionPreferences")
         self.actionLatex2Opml = QtWidgets.QAction(notepad)
@@ -218,8 +218,8 @@ class Ui_notepad(object):
         self.actionLatex2html.setObjectName("actionLatex2html")
         self.actionHelp = QtWidgets.QAction(notepad)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         icon5.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionHelp.setIcon(icon5)
         self.actionHelp.setObjectName("actionHelp")
         self.actionMarkdown2Lyx = QtWidgets.QAction(notepad)

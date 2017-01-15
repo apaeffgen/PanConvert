@@ -27,14 +27,17 @@ __author__ = 'Juho Vepsäläinen, apaeffgen'
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import subprocess
-import platform, os, glob
 import fnmatch
-from PyQt5 import QtWidgets
+import glob
+import os
+import platform
+import subprocess
+
 from PyQt5.QtCore import QSettings
-from source.converter.messages import *
 
 
+
+from source.language.messages import *
 
 global fromFormat
 
@@ -94,6 +97,7 @@ def get_path_pandoc():
 
         else:
             error_os_detection()
+
 
     elif len(path_pandoc) != 0:
         return path_pandoc
@@ -279,6 +283,8 @@ def create_filelist(directory):
     if len(matching) == 0:
 
         error_file_selection()
+
+
 
     return matching
 

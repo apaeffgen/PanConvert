@@ -20,11 +20,14 @@ __author__ = 'apaeffgen'
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 from PyQt5 import QtCore
-from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
+from source.gui.panconvert_diag_prefpane_ext import Ui_DialogPreferences
 from distutils.util import strtobool
 import platform, os
 
-global path_pandoc, path_dialog
+global path_pandoc, path_dialog, actualLanguage
+
+
+
 
 
 class PreferenceDialog(QtWidgets.QDialog):
@@ -37,13 +40,30 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui = Ui_DialogPreferences()
         self.ui.setupUi(self)
         self.ui.ButtonSave.clicked.connect(self.settings)
+        self.ui.ButtonSave_2.clicked.connect(self.settings)
         self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+        self.ui.ButtonCancel_2.clicked.connect(self.cancel_dialog)
         self.ui.ButtonPandocPath.clicked.connect(self.DirectoryPandoc)
         self.ui.ButtonMarkdownPath.clicked.connect(self.DirectoryMarkdown)
         self.ui.ButtonOpenSavePath.clicked.connect(self.DirectoryOpenSave)
 
+
+
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
+
+        #Language Settings
+        default_language = settings.value('default_language')
+        self.ui.comboBoxLanguageSelector.addItem('')
+        self.ui.comboBoxLanguageSelector.addItem('English')
+        self.ui.comboBoxLanguageSelector.addItem('Deutsch')
+        self.ui.comboBoxLanguageSelector.addItem('Español')
+        self.ui.comboBoxLanguageSelector.currentIndexChanged.connect(self.SetLanguage)
+
+        #Size of Main Window and DockWindow
+        Window_Size = settings.value('Window_Size', True)
+        Dock_Size = settings.value('Dock_Size', True)
+
 
         #Paths and Parameters
         path_pandoc = settings.value('path_pandoc')
@@ -90,6 +110,8 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToLyx.setChecked(To_Lyx)
                 self.ui.StandardConversion.setChecked(Standard_Conversion)
                 self.ui.BatchConversion.setChecked(Batch_Conversion)
+                self.ui.Window_Size.setChecked(Window_Size)
+                self.ui.Dock_Size.setChecked(Dock_Size)
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
@@ -103,6 +125,8 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
                 self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
                 self.ui.BatchConversion.setChecked(strtobool(Batch_Conversion))
+                self.ui.Window_Size.setChecked(strtobool(Window_Size))
+                self.ui.Dock_Size.setChecked(strtobool(Dock_Size))
 
 
 
@@ -114,6 +138,10 @@ class PreferenceDialog(QtWidgets.QDialog):
     def settings(self):
 
         settings = QSettings('Pandoc', 'PanConvert')
+
+        settings.setValue('Window_Size', self.ui.Window_Size.isChecked())
+        settings.setValue('Dock_Size', self.ui.Dock_Size.isChecked())
+
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
         settings.setValue('path_dialog', self.ui.Dialog_Path.text())
@@ -140,28 +168,40 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.sync()
         settings.status()
 
+        WindowSize = self.ui.Window_Size.isChecked()
+
+
 
         PreferenceDialog.close(self)
 
     def DirectoryPandoc(self):
+        self.ui.Pandoc_Path.clear()
         fd = QtWidgets.QFileDialog(self)
         fd.setDirectory(QtCore.QDir.homePath())
         PandocDirectory = fd.getExistingDirectory()
         self.ui.Pandoc_Path.insert(PandocDirectory)
 
     def DirectoryMarkdown(self):
+        self.ui.Markdown_Path.clear()
         fd = QtWidgets.QFileDialog(self)
         fd.setDirectory(QtCore.QDir.homePath())
         MarkdownDirectory = fd.getExistingDirectory()
         self.ui.Markdown_Path.insert(MarkdownDirectory)
 
     def DirectoryOpenSave(self):
+        self.ui.Dialog_Path.clear()
         fd = QtWidgets.QFileDialog(self)
         fd.setDirectory(QtCore.QDir.homePath())
         OpenSaveDirectory = fd.getExistingDirectory()
         self.ui.Dialog_Path.insert(OpenSaveDirectory)
 
-
+    def SetLanguage(self):
+        global actualLanguage
+        settings = QSettings('Pandoc', 'PanConvert')
+        settings.setValue('default_language', str(self.ui.comboBoxLanguageSelector.currentText()))
+        actualLanguage = str(self.ui.comboBoxLanguageSelector.currentText())
+        settings.sync()
+        settings.status()
 
 
 if __name__ == "__main__":

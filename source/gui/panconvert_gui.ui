@@ -322,7 +322,7 @@
        <widget class="QCheckBox" name="StandardConversion">
         <property name="maximumSize">
          <size>
-          <width>155</width>
+          <width>200</width>
           <height>16777215</height>
          </size>
         </property>

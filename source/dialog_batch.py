@@ -96,7 +96,7 @@ class BatchDialog(QtWidgets.QDialog):
     def directory_dialog(self):
 
         global data, openfiles, batch_open_path
-
+        self.ui.OpenPath.clear()
 
         fd = QtWidgets.QFileDialog(self)
 

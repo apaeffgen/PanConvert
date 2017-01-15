@@ -17,14 +17,12 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5 import QtWidgets
 import subprocess
-import sys
+
 from source.converter.interface_pandoc import convert
-from source.converter.interface_pandoc import get_path_pandoc
 from source.converter.interface_pandoc import get_pandoc_formats
-from source.converter.interface_pandoc import get_pandoc_options
-from source.converter.messages import *
+from source.converter.interface_pandoc import get_path_pandoc
+from source.language.messages import *
 
 
 def convert_universal(text,ToFormat,FromFormat,arg):

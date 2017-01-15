@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'panconvert_diag_prefpane.ui'
+# Form implementation generated from reading ui file '/Users/apaeffgen/Programmierung/PanConvert/source/gui/panconvert_diag_prefpane.ui'
 #
-# Created: Sat May 16 18:12:29 2015
-#      by: PyQt5 UI code generator 5.3.1
+# Created: Fri Jan 13 12:48:28 2017
+#      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -134,8 +134,17 @@ class Ui_DialogPreferences(object):
         self.ButtonOpenSavePath = QtWidgets.QToolButton(DialogPreferences)
         self.ButtonOpenSavePath.setGeometry(QtCore.QRect(190, 80, 27, 23))
         self.ButtonOpenSavePath.setObjectName("ButtonOpenSavePath")
+        self.label_LanguageSelector = QtWidgets.QLabel(DialogPreferences)
+        self.label_LanguageSelector.setGeometry(QtCore.QRect(20, 120, 161, 21))
+        self.label_LanguageSelector.setObjectName("label_LanguageSelector")
+        self.comboBoxLanguageSelector = QtWidgets.QComboBox(DialogPreferences)
+        self.comboBoxLanguageSelector.setGeometry(QtCore.QRect(220, 120, 381, 26))
+        self.comboBoxLanguageSelector.setEditable(False)
+        self.comboBoxLanguageSelector.setCurrentText("")
+        self.comboBoxLanguageSelector.setObjectName("comboBoxLanguageSelector")
 
         self.retranslateUi(DialogPreferences)
+        self.comboBoxLanguageSelector.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(DialogPreferences)
 
     def retranslateUi(self, DialogPreferences):
@@ -172,4 +181,5 @@ class Ui_DialogPreferences(object):
         self.ButtonPandocPath.setText(_translate("DialogPreferences", "..."))
         self.ButtonMarkdownPath.setText(_translate("DialogPreferences", "..."))
         self.ButtonOpenSavePath.setText(_translate("DialogPreferences", "..."))
+        self.label_LanguageSelector.setText(_translate("DialogPreferences", "Language Selector"))
 

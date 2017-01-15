@@ -18,26 +18,19 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import codecs
-import platform
-import glob
-import os
 #import markdown
-
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
-from PyQt5 import QtWebKitWidgets
+from PyQt5.QtCore import QPoint, QSize
 from source.dialog_preferences import *
 from source.dialog_batch import *
 from source.dialog_info import *
 from source.dialog_help import *
-from source.converter.messages import *
-from source.converter.interface_pandoc import *
 from source.converter.lyx import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
-from source.gui.panconvert_gui import Ui_notepad
+from source.gui.panconvert_gui_ext import Ui_notepad
 
-global openfile, filelist
+
+global openfile, filelist, actualLanguage
 
 #TODO: Abstraction of Error Functions. Separate Error / Log Window
 
@@ -73,7 +66,8 @@ class StartQT5(QtWidgets.QMainWindow):
 
                 except:
                     text = error_no_preview()
-                    data = self.ui.editor_window.setPlainText(text)
+                    #data = self.ui.editor_window.setPlainText(text)
+                    data = self.ui.logBrowser.setPlainText(text)
 
 
         elif batchConversion is True:
@@ -124,10 +118,11 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def file_new(self):
         global text
-        from os.path import isfile
         text = ''
         self.ui.editor_window.setPlainText(text)
+        self.ui.logBrowser.setPlainText(text)
         self.ui.actionSave.setEnabled(True)
+
 
 
     def buffer_save(self):
@@ -139,6 +134,15 @@ class StartQT5(QtWidgets.QMainWindow):
         global text,text_undo
         text = text_undo
         self.ui.editor_window.setPlainText(text_undo)
+
+
+    def windows_log_open(self):
+        self.ui.dockLogWindow.show()
+
+    def print_error_messages(self, message):
+        message = self.ui.logBrowser.appendPlainText(message)
+
+
 
     def list_from_formats(self):
         from_formats, to_formats = get_pandoc_formats()
@@ -208,7 +212,8 @@ class StartQT5(QtWidgets.QMainWindow):
             self.ui.editor_window.setPlainText(output_content)
             text = output_content
         else:
-            error_no_input()
+            message = error_no_input()
+            self.ui.logBrowser.appendPlainText(message)
 
     def export_batch_convert_lyx(self):
         global error
@@ -244,11 +249,13 @@ class StartQT5(QtWidgets.QMainWindow):
 
                     else:
                         errormessage = ('Some file input was not correct:')
-                        self.ui.editor_window.appendPlainText(errormessage)
+                        #self.ui.editor_window.appendPlainText(errormessage)
+                        self.ui.logBrowser.appendPlainText(errormessage)
 
                 if message == '':
                     message = error_uncatched()
-                    self.ui.editor_window.appendPlainText(message)
+                    #self.ui.editor_window.appendPlainText(message)
+                    self.ui.logBrowser.appendPlainText(message)
 
             elif batch_convert_recursive is False and batch_convert_directory is True:
 
@@ -260,7 +267,8 @@ class StartQT5(QtWidgets.QMainWindow):
 
                 if message == '':
                     message = error_uncatched()
-                    self.ui.editor_window.appendPlainText(message)
+                    #self.ui.editor_window.appendPlainText(message)
+                    self.ui.logBrowser.appendPlainText(message)
 
 
             elif batch_convert_recursive is True and batch_convert_directory is True:
@@ -273,10 +281,12 @@ class StartQT5(QtWidgets.QMainWindow):
 
                 if message == '':
                     message = error_uncatched()
-                    self.ui.editor_window.appendPlainText(message)
+                    #self.ui.editor_window.appendPlainText(message)
+                    self.ui.logBrowser.appendPlainText(message)
 
             else:
-                error_no_file()
+                message = error_no_file()
+                self.ui.logBrowser.appendPlainText(message)
         else:
             error_converter_path()
 
@@ -297,7 +307,10 @@ class StartQT5(QtWidgets.QMainWindow):
             text = self.ui.editor_window.toPlainText()
             text_undo = text
             if text == '':
-                error_no_input()
+                message = error_no_input()
+                self.ui.logBrowser.appendPlainText(message)
+
+
             elif text != error_no_preview():
                 output_content = convert_universal(text,toFormat,fromFormat,extraParameter)
 
@@ -307,7 +320,8 @@ class StartQT5(QtWidgets.QMainWindow):
                     error_fatal()
 
             elif text == error_no_preview():
-                error_binary_file()
+                message = error_binary_file()
+                self.ui.logBrowser.appendPlainText(message)
             else:
                 error_fatal()
 
@@ -327,9 +341,11 @@ class StartQT5(QtWidgets.QMainWindow):
             text = self.ui.editor_window.toPlainText()
             text_undo = text
             if text == '':
-                error_no_input()
+                message = error_no_input()
+                self.ui.logBrowser.appendPlainText(message)
 
-            elif text != 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
+            elif text != error_no_preview():
+
                 error = self.check_format(fromFormat,toFormat)
 
                 if error < 1:
@@ -341,8 +357,8 @@ class StartQT5(QtWidgets.QMainWindow):
                         error_fatal()
 
 
+            elif text == error_no_preview():
 
-            elif text == 'No Preview of the File-Data possible. Try to manually convert. Good Luck.':
                 error = self.check_format(fromFormat,toFormat)
                 if error < 1:
                     output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
@@ -390,11 +406,14 @@ class StartQT5(QtWidgets.QMainWindow):
                     if os.path.isfile(openfiles) is True:
                         self.ui.editor_window.setPlainText(data)
                         message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                        self.ui.editor_window.appendPlainText(message)
+                        #self.ui.editor_window.appendPlainText(message)
+
+                        self.ui.logBrowser.appendPlainText(message)
                     else:
 
                         errormessage = error_filelist()
-                        self.ui.editor_window.appendPlainText(errormessage)
+                        #self.ui.editor_window.appendPlainText(errormessage)
+                        self.ui.logBrowser.appendPlainText(errormessage)
 
             elif batch_convert_recursive is False and batch_convert_directory is True:
 
@@ -403,7 +422,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 for openfiles in filelist:
                     if os.path.isfile(openfiles):
                         output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                        self.ui.editor_window.setPlainText(output_content)
+                        #self.ui.editor_window.setPlainText(output_content)
+                        self.ui.logBrowser.setPlainText(output_content)
 
             elif batch_convert_recursive is True and batch_convert_directory is True:
                 batch_open_path = batch_settings.value('batch_open_path')
@@ -412,10 +432,12 @@ class StartQT5(QtWidgets.QMainWindow):
 
                 for openfiles in filelistrecursive:
                     output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                    self.ui.editor_window.setPlainText(output_content)
+                    #self.ui.editor_window.setPlainText(output_content)
+                    self.ui.logBrowser.setPlainText(output_content)
 
             else:
-                error_missing_file()
+                message = error_no_file()
+                self.ui.logBrowser.appendPlainText(message)
 
 
 
@@ -455,17 +477,20 @@ class StartQT5(QtWidgets.QMainWindow):
                         if os.path.isfile(openfiles) is True:
                             self.ui.editor_window.setPlainText(data)
                             message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                            self.ui.editor_window.appendPlainText(message)
+                            #self.ui.editor_window.appendPlainText(message)
+                            self.ui.logBrowser.appendPlainText(message)
                         else:
                             errormessage = error_filelist()
-                            self.ui.editor_window.appendPlainText(errormessage)
+                            #self.ui.editor_window.appendPlainText(errormessage)
+                            self.ui.logBrowser.appendPlainText(errormessage)
 
                 elif batch_convert_recursive is False and batch_convert_directory is True:
                     filelist = create_simplefilelist()
                     for openfiles in filelist:
                         if os.path.isfile(openfiles):
                             output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                            self.ui.editor_window.setPlainText(output_content)
+                            #self.ui.editor_window.setPlainText(output_content)
+                            self.ui.logBrowser.setPlainText(output_content)
 
                 elif batch_convert_recursive is True and batch_convert_directory is True:
                     batch_open_path = batch_settings.value('batch_open_path')
@@ -474,16 +499,163 @@ class StartQT5(QtWidgets.QMainWindow):
 
                     for openfiles in filelistrecursive:
                         output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                        self.ui.editor_window.setPlainText(output_content)
+                        #self.ui.editor_window.setPlainText(output_content)
+                        self.ui.logBrowser.setPlainText(output_content)
 
                 else:
-                    error_no_file()
+                    message = error_no_file()
+                    self.ui.logBrowser.appendPlainText(message)
+
+
+
+
+    def print_error_message(self, message):
+        message = error_no_input
+        self.ui.logBrowser.setPlainText(message)
+        return message
+
+
+
+    """External Dialog Windows - Trigger Functions"""
+
+    def help_dialog(self):
+        self.HelpDialog = HelpDialog(self)
+        self.HelpDialog.show()
+
+
+
+    def about_dialog(self):
+        ## About Dialog with some Version info##
+        msg = QtWidgets.QMessageBox()
+        msg.setText(version())
+        msg.setWindowTitle("About Dialog")
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        retval = msg.exec_()
+
+
+    def preference_dialog(self):
+        """ References to dialog_preferences.py"""
+        self.PreferenceDialog = PreferenceDialog(self)
+        self.PreferenceDialog.show()
+
+    def batch_dialog(self):
+        """ References to dialog_batch.py"""
+        self.BatchDialog = BatchDialog(self)
+        self.BatchDialog.show()
+
+    def info_dialog(self):
+        """ References to dialog_info.py"""
+        self.InfoDialog = InfoDialog(self)
+        self.InfoDialog.show()
+
+    def closeEvent(self, event):
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        Dock_Size = settings.value('Dock_Size')
+        Window_Size = settings.value('Window_Size')
+        if Dock_Size is True:
+            settings.setValue("geometry", self.saveState())
+        if Window_Size is True:
+            #settings.setValue('size', self.geometry())
+            settings.setValue("size", self.size())
+            settings.setValue("pos", self.pos())
+
+
+
+    """Gui-Trigger-Function for RadioButtons"""
+
+    def event_triggered(self):
+        global fromFormat,toFormat,extraParameter
+        fromFormat = self.ui.FromParameter.text()
+        toFormat = self.ui.ToParameter.text()
+        standard_conversion = self.ui.StandardConversion.isChecked()
+        extraParameter = self.ui.ExtraParameter.text()
+        batchConversion = self.ui.BatchConversion.isChecked()
+
+        if standard_conversion is True and batchConversion is False:
+            if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.export_standardconverter("md", "latex", "--standalone")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.export_standardconverter("md", "opml", "--standalone")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
+                self.export_markdown2lyx()
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.export_standardconverter("opml", "md", "--atx-header")
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.export_standardconverter("opml", "latex", "--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.export_standardconverter("latex", "md", "--atx-header")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
+                self.export_standardconverter("latex", "opml", "--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.export_standardconverter("html", "md", "--atx-header")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.export_standardconverter("md", "html", "--standalone")
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.export_standardconverter("opml", "html", "--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.export_standardconverter("html", "opml", "--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.export_standardconverter("latex", "html", "--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.export_standardconverter("html", "latex", "--standalone")
+            else:
+                message = error_equal_formats()
+                self.ui.logBrowser.appendPlainText(message)
+
+        elif standard_conversion is True and batchConversion is True:
+            if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.export_batch_conversion_standard("markdown", "latex", "--standalone")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.export_batch_conversion_standard("markdown", "opml", "--standalone")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
+                self.export_batch_convert_lyx()
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.export_batch_conversion_standard("opml", "markdown", "--atx-header")
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.export_batch_conversion_standard("opml", "latex", "--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.export_batch_conversion_standard("latex", "markdown", "--atx-header")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
+                self.export_batch_conversion_standard("latex", "opml", "--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+                self.export_batch_conversion_standard("html", "markdown", "--atx-header")
+            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.export_batch_conversion_standard("markdown", "html", "--standalone")
+            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.export_batch_conversion_standard("opml", "html", "--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+                self.export_batch_conversion_standard("html", "opml", "--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+                self.export_batch_conversion_standard("latex", "html", "--standalone")
+            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+                self.export_batch_conversion_standard("html", "latex", "--standalone")
+            else:
+                message = error_equal_formats()
+                self.ui.logBrowser.appendPlainText(message)
+
+        elif standard_conversion is False and batchConversion is False:# and extraParameter is not "":
+            self.export_manualconverter()
+
+
+        elif standard_conversion is False and batchConversion is True:
+            self.export_batch_conversion_manual()
+
+        elif fromFormat is "" or toFormat is "":
+            message = error_empty_formats()
+            self.ui.logBrowser.appendPlainText(message)
+
+
+        else:
+            error_fatal()
+
 
 
     """Gui-Event Definitions"""
 
     def __init__(self, parent=None):
-        global path_dialog, text, text_undo, openfile
+        global path_dialog, text, text_undo, openfile, actualLanguage
+
 
         text = ''
         text_undo = ''
@@ -491,6 +663,9 @@ class StartQT5(QtWidgets.QMainWindow):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_notepad()
         self.ui.setupUi(self)
+        self.ui.closeEvent = self.closeEvent
+
+
 
         '''File-Dialog Functions'''
         self.ui.actionOpen.triggered.connect(self.file_dialog)
@@ -500,6 +675,10 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''File-Edit Menu Functions'''
         self.ui.actionUndo.triggered.connect(self.undo)
+
+        '''Window Functions'''
+        self.ui.actionLogViewer.triggered.connect(self.windows_log_open)
+
 
         '''Helper-Functions for manual conversion'''
         self.ui.ButtonFromFormat.clicked.connect(self.list_from_formats)
@@ -521,6 +700,18 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''Setting-Initialization and Default Settings for the first start'''
         settings = QSettings('Pandoc', 'PanConvert')
+        actualLanguage = settings.value('default_language')
+
+
+        Window_Size = settings.value('Window_Size')
+        Dock_Size = settings.value('Dock_Size')
+        if Dock_Size is True:
+            self.restoreState(settings.value('geometry'))
+        if Window_Size is True:
+            #self.restoreGeometry(settings.value('size'))
+            self.resize(settings.value("size", QSize(270, 225)))
+            self.move(settings.value("pos", QPoint(50, 50)))
+
 
         path_dialog = settings.value('path_dialog')
         fromParameter = settings.value('fromParameter')
@@ -580,129 +771,28 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
 
-    """External Dialog Windows - Trigger Functions"""
-
-    def help_dialog(self):
-        self.HelpDialog = HelpDialog(self)
-        self.HelpDialog.show()
-
-
-
-    def about_dialog(self):
-        ## About Dialog with some Version info##
-        msg = QtWidgets.QMessageBox()
-        msg.setText(version())
-        msg.setWindowTitle("About Dialog")
-        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        retval = msg.exec_()
-
-
-    def preference_dialog(self):
-        """ References to dialog_preferences.py"""
-        self.PreferenceDialog = PreferenceDialog(self)
-        self.PreferenceDialog.show()
-
-    def batch_dialog(self):
-        """ References to dialog_batch.py"""
-        self.BatchDialog = BatchDialog(self)
-        self.BatchDialog.show()
-
-    def info_dialog(self):
-        """ References to dialog_info.py"""
-        self.InfoDialog = InfoDialog(self)
-        self.InfoDialog.show()
-
-
-
-    """Gui-Trigger-Function for RadioButtons"""
-
-    def event_triggered(self):
-        global fromFormat,toFormat,extraParameter
-        fromFormat = self.ui.FromParameter.text()
-        toFormat = self.ui.ToParameter.text()
-        standard_conversion = self.ui.StandardConversion.isChecked()
-        extraParameter = self.ui.ExtraParameter.text()
-        batchConversion = self.ui.BatchConversion.isChecked()
-
-        if standard_conversion is True and batchConversion is False:
-            if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.export_standardconverter("md", "latex", "--standalone")
-            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-                self.export_standardconverter("md", "opml", "--standalone")
-            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
-                self.export_markdown2lyx()
-            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.export_standardconverter("opml", "md", "--atx-header")
-            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.export_standardconverter("opml", "latex", "--standalone")
-            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.export_standardconverter("latex", "md", "--atx-header")
-            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
-                self.export_standardconverter("latex", "opml", "--standalone")
-            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.export_standardconverter("html", "md", "--atx-header")
-            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.export_standardconverter("md", "html", "--standalone")
-            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.export_standardconverter("opml", "html", "--standalone")
-            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-                self.export_standardconverter("html", "opml", "--standalone")
-            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.export_standardconverter("latex", "html", "--standalone")
-            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.export_standardconverter("html", "latex", "--standalone")
-            else:
-                error_equal_formats()
-
-        elif standard_conversion is True and batchConversion is True:
-            if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.export_batch_conversion_standard("markdown", "latex", "--standalone")
-            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-                self.export_batch_conversion_standard("markdown", "opml", "--standalone")
-            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
-                self.export_batch_convert_lyx()
-            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.export_batch_conversion_standard("opml", "markdown", "--atx-header")
-            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.export_batch_conversion_standard("opml", "latex", "--standalone")
-            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.export_batch_conversion_standard("latex", "markdown", "--atx-header")
-            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
-                self.export_batch_conversion_standard("latex", "opml", "--standalone")
-            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.export_batch_conversion_standard("html", "markdown", "--atx-header")
-            elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.export_batch_conversion_standard("markdown", "html", "--standalone")
-            elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.export_batch_conversion_standard("opml", "html", "--standalone")
-            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-                self.export_batch_conversion_standard("html", "opml", "--standalone")
-            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.export_batch_conversion_standard("latex", "html", "--standalone")
-            elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.export_batch_conversion_standard("html", "latex", "--standalone")
-            else:
-                error_equal_formats()
-
-        elif standard_conversion is False and batchConversion is False:# and extraParameter is not "":
-            self.export_manualconverter()
-
-
-        elif standard_conversion is False and batchConversion is True:
-            self.export_batch_conversion_manual()
-
-        elif fromFormat is "" or toFormat is "":
-            error_empty_formats()
-
-
-        else:
-            error_fatal()
-
-
 if __name__ == "__main__":
     import sys
+    global actualLanguage
+
+
+    settings = QSettings('Pandoc', 'PanConvert')
+    actualLanguage = settings.value('default_language')
 
     app = QtWidgets.QApplication(sys.argv)
+
+    _translate = QtCore.QTranslator()
+    if actualLanguage == 'Deutsch':
+        _translate.load("source/language/Panconvert_de.qm") # ,"source/language/Panconvert_es.qm")
+    elif actualLanguage == 'Español': # English
+        _translate.load("source/language/Panconvert_es.qm")
+
+
+
+
+
+
+    app.installTranslator(_translate)
     myapp = StartQT5()
     myapp.show()
     sys.exit(app.exec_())

@@ -419,6 +419,38 @@
     <string>...</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_LanguageSelector">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Language Selector</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBoxLanguageSelector">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>120</y>
+     <width>381</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string notr="true"/>
+   </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
