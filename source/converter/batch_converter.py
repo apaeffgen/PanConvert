@@ -1,4 +1,11 @@
 #!/usr/local/bin/python3
+import fnmatch
+import glob
+
+from PyQt5.QtCore import QSettings
+
+from source.language.messages import error_file_selection
+
 __author__ = 'apaeffgen'
 # -*- coding: utf-8 -*-
 
@@ -59,7 +66,8 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
             message = 'An Error occurred. {}'.format(error1)
 
         else:
-            message = error_uncatched()
+            message_tmp = message_file_converted()
+            message = message_tmp + openfile + '\n'
 
         return message
 
@@ -68,4 +76,55 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
         error_converter_path()
 
 
+def create_filelist(directory):
 
+    settings = QSettings('Pandoc', 'PanConvert')
+    filefilter = settings.value('batch_convert_filter','')
+
+    matches = []
+    for root, dirnames, filenames in os.walk(directory):
+        for filename in fnmatch.filter(filenames, '*.*'):
+            if filename != '.DS_Store':
+                matches.append(os.path.join(root, filename))
+
+    filter = filefilter.split(';')
+    matching = []
+
+    for filteritem in filter:
+
+        matching_filter = [s for s in matches if filteritem in s]
+        for i in matching_filter:
+            matching.append(i)
+
+    if len(matching) == 0:
+
+        error_file_selection()
+
+
+
+
+
+    return matching
+
+
+def create_simplefilelist():
+    settings = QSettings('Pandoc', 'PanConvert')
+    batch_settings = QSettings('Pandoc', 'PanConvert')
+    batch_open_path = batch_settings.value('batch_open_path')
+    filefilter = settings.value('batch_convert_filter','')
+
+    filelist = glob.glob(batch_open_path + '/*')
+    filter = filefilter.split(';')
+
+    matching = []
+
+    for filteritem in filter:
+
+        matching_filter = [s for s in filelist if filteritem in s]
+        for i in matching_filter:
+            matching.append(i)
+    if len(matching) == 0:
+
+        error_file_selection()
+
+    return matching

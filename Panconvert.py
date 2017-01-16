@@ -23,6 +23,8 @@ from PyQt5.QtCore import QPoint, QSize
 from source.dialog_preferences import *
 from source.dialog_batch import *
 from source.dialog_info import *
+from source.dialog_fromformat import *
+from source.dialog_toformat import *
 from source.dialog_help import *
 from source.converter.lyx import *
 from source.converter.manual_converter import *
@@ -65,9 +67,10 @@ class StartQT5(QtWidgets.QMainWindow):
                     data = self.ui.editor_window.setPlainText(text)
 
                 except:
-                    text = error_no_preview()
-                    #data = self.ui.editor_window.setPlainText(text)
-                    data = self.ui.logBrowser.appendPlainText(text)
+                    logtext = error_no_preview()
+                    text = error_open_file()
+                    data = self.ui.editor_window.setPlainText(text)
+                    data = self.ui.logBrowser.appendPlainText(logtext)
 
 
         elif batchConversion is True:
@@ -269,13 +272,14 @@ class StartQT5(QtWidgets.QMainWindow):
 
                     else:
                         errormessage = ('Some file input was not correct:')
-                        #self.ui.editor_window.appendPlainText(errormessage)
                         self.ui.logBrowser.appendPlainText(errormessage)
 
-                if message == '':
-                    message = error_uncatched()
-                    #self.ui.editor_window.appendPlainText(message)
-                    self.ui.logBrowser.appendPlainText(message)
+                    if message == '':
+                        message_tmp = message_file_converted()
+                        message = message_tmp + openfiles + '\n'
+                        self.ui.logBrowser.appendPlainText(message)
+
+
 
             elif batch_convert_recursive is False and batch_convert_directory is True:
 
@@ -285,10 +289,10 @@ class StartQT5(QtWidgets.QMainWindow):
                     if os.path.isfile(openfiles):
                         message = batch_convert_markdown2lyx(openfiles)
 
-                if message == '':
-                    message = error_uncatched()
-                    #self.ui.editor_window.appendPlainText(message)
-                    self.ui.logBrowser.appendPlainText(message)
+                    if message == '':
+                        message_tmp = message_file_converted()
+                        message = message_tmp + openfiles + '\n'
+                        self.ui.logBrowser.appendPlainText(message)
 
 
             elif batch_convert_recursive is True and batch_convert_directory is True:
@@ -299,10 +303,10 @@ class StartQT5(QtWidgets.QMainWindow):
                 for openfiles in filelistrecursive:
                     message = batch_convert_markdown2lyx(openfiles)
 
-                if message == '':
-                    message = error_uncatched()
-                    #self.ui.editor_window.appendPlainText(message)
-                    self.ui.logBrowser.appendPlainText(message)
+                    if message == '':
+                        message_tmp = message_file_converted()
+                        message = message_tmp + openfiles + '\n'
+                        self.ui.logBrowser.appendPlainText(message)
 
             else:
                 message = error_no_file()
@@ -331,7 +335,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.logBrowser.appendPlainText(message)
 
 
-            elif text != error_no_preview():
+            elif text != error_open_file():
                 output_content = convert_universal(text,toFormat,fromFormat,extraParameter)
 
                 if output_content is not None:
@@ -339,7 +343,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 else:
                     error_fatal()
 
-            elif text == error_no_preview():
+            elif text == error_open_file():
                 message = error_binary_file()
                 self.ui.logBrowser.appendPlainText(message)
             else:
@@ -364,7 +368,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_no_input()
                 self.ui.logBrowser.appendPlainText(message)
 
-            elif text != error_no_preview():
+            elif text != error_open_file():
 
                 error = self.check_format(fromFormat,toFormat)
 
@@ -377,13 +381,14 @@ class StartQT5(QtWidgets.QMainWindow):
                         error_fatal()
 
 
-            elif text == error_no_preview():
+            elif text == error_open_file():
 
                 error = self.check_format(fromFormat,toFormat)
                 if error < 1:
                     output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
 
                     if output_content is not None:
+                        #self.ui.logBrowser.appendPlainText(output_content)
                         self.ui.editor_window.setPlainText(output_content)
                     else:
                         error_fatal()
@@ -443,7 +448,7 @@ class StartQT5(QtWidgets.QMainWindow):
                     if os.path.isfile(openfiles):
                         output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                         #self.ui.editor_window.setPlainText(output_content)
-                        self.ui.logBrowser.setPlainText(output_content)
+                        self.ui.logBrowser.appendPlainText(output_content)
 
             elif batch_convert_recursive is True and batch_convert_directory is True:
                 batch_open_path = batch_settings.value('batch_open_path')
@@ -453,7 +458,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 for openfiles in filelistrecursive:
                     output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                     #self.ui.editor_window.setPlainText(output_content)
-                    self.ui.logBrowser.setPlainText(output_content)
+                    self.ui.logBrowser.appendPlainText(output_content)
 
             else:
                 message = error_no_file()
@@ -510,7 +515,7 @@ class StartQT5(QtWidgets.QMainWindow):
                         if os.path.isfile(openfiles):
                             output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                             #self.ui.editor_window.setPlainText(output_content)
-                            self.ui.logBrowser.setPlainText(output_content)
+                            self.ui.logBrowser.appendPlainText(output_content)
 
                 elif batch_convert_recursive is True and batch_convert_directory is True:
                     batch_open_path = batch_settings.value('batch_open_path')
@@ -520,7 +525,7 @@ class StartQT5(QtWidgets.QMainWindow):
                     for openfiles in filelistrecursive:
                         output_content = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                         #self.ui.editor_window.setPlainText(output_content)
-                        self.ui.logBrowser.setPlainText(output_content)
+                        self.ui.logBrowser.appendPlainText(output_content)
 
                 else:
                     message = error_no_file()
@@ -531,7 +536,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def print_error_message(self, message):
         message = error_no_input
-        self.ui.logBrowser.setPlainText(message)
+        self.ui.logBrowser.appendPlainText(message)
         return message
 
 
@@ -568,6 +573,15 @@ class StartQT5(QtWidgets.QMainWindow):
         self.InfoDialog = InfoDialog(self)
         self.InfoDialog.show()
 
+    def fromformats_dialog(self):
+        self.FromFormatDialog = FromFormatDialog(self)
+        self.FromFormatDialog.show()
+
+    def toformats_dialog(self):
+        self.ToFormatsDialog = ToFormatDialog(self)
+        self.ToFormatsDialog.show()
+
+
     def closeEvent(self, event):
         settings = QSettings('Pandoc', 'PanConvert')
 
@@ -576,7 +590,6 @@ class StartQT5(QtWidgets.QMainWindow):
         if Dock_Size is True:
             settings.setValue("geometry", self.saveState())
         if Window_Size is True:
-            #settings.setValue('size', self.geometry())
             settings.setValue("size", self.size())
             settings.setValue("pos", self.pos())
 
@@ -705,8 +718,9 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
         '''Helper-Functions for manual conversion'''
-        self.ui.ButtonFromFormat.clicked.connect(self.list_from_formats)
-        self.ui.ButtonToFormat.clicked.connect(self.list_to_formats)
+        #self.ui.ButtonFromFormat.clicked.connect(self.list_from_formats)
+        self.ui.ButtonFromFormat.clicked.connect(self.fromformats_dialog)
+        self.ui.ButtonToFormat.clicked.connect(self.toformats_dialog)
         self.ui.ButtonOptions.clicked.connect(self.info_dialog)
 
         ''' Main Button Functions'''
@@ -820,3 +834,5 @@ if __name__ == "__main__":
     myapp = StartQT5()
     myapp.show()
     sys.exit(app.exec_())
+
+

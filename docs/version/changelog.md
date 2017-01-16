@@ -4,6 +4,7 @@
 - Added Make the Log-Viewer Position + Size savable
 - Added Date / Time of the Log-Messages
 - Added Adjust the LogViewer Position manually
+- Fixed From / To Formats Dialogs
 
 ### Version 0.2.1
 - Added Multilanguage Support

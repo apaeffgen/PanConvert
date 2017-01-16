@@ -69,6 +69,13 @@ def error_fatal():
 
 ''''Error Messages in the Log Viewer'''''
 
+def error_open_file():
+    open_file_error = _translate('message', 'No Preview of the File-Data possible. Try to manually convert. Good Luck.')
+    QString = open_file_error
+    message = open_file_error
+
+    return message
+
 def error_no_input():
     time = timestamp()
     no_input_error = (_translate('message', 'You have no Data to be converted. Please make an input'))
@@ -142,20 +149,17 @@ def error_no_preview():
     return message
 
 
-def error_uncatched():
-    time = timestamp()
-    no_uncatched_error = _translate('message', '\n If no uncatched Error occured, the batch conversion should have produced some files.' \
-                              '\n Converted files should have been written to the same place as the original files.' \
-                              ' \n There is no visual output. So please check your converted files at the filesystem level.' \
-                              '\n \n When in batch-file-mode, for a better experience, please clear the window before starting a new conversion')
-    QString = no_uncatched_error
-    message = time +  '\n' + no_uncatched_error +  '\n'
-    return message
-
 def error_filelist():
     time = timestamp()
     file_list_error = _translate('message', 'Some file input was not correct')
     QString = file_list_error
     message = time +  '\n' + file_list_error +  '\n'
+    return message
+
+def message_file_converted():
+    time = timestamp()
+    file_converted_message = _translate('message', 'The following file was convertet: ')
+    QString = file_converted_message
+    message = time +  '\n' + file_converted_message +  '\n'
     return message
 
