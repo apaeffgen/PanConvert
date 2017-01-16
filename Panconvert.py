@@ -139,6 +139,26 @@ class StartQT5(QtWidgets.QMainWindow):
     def windows_log_open(self):
         self.ui.dockLogWindow.show()
 
+    def logviewer_above(self):
+        self.ui.dockLogWindow.close()
+        self.addDockWidget(QtCore.Qt.TopDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.show()
+
+    def logviewer_bottom(self):
+        self.ui.dockLogWindow.close()
+        self.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.show()
+
+    def logviewer_left(self):
+        self.ui.dockLogWindow.close()
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.show()
+
+    def logviewer_right(self):
+        self.ui.dockLogWindow.close()
+        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.show()
+
     def print_error_messages(self, message):
         message = self.ui.logBrowser.appendPlainText(message)
 
@@ -678,6 +698,10 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''Window Functions'''
         self.ui.actionLogViewer.triggered.connect(self.windows_log_open)
+        self.ui.actionAbove.triggered.connect(self.logviewer_above)
+        self.ui.actionBelow.triggered.connect(self.logviewer_bottom)
+        self.ui.actionLeft.triggered.connect(self.logviewer_left)
+        self.ui.actionRight.triggered.connect(self.logviewer_right)
 
 
         '''Helper-Functions for manual conversion'''

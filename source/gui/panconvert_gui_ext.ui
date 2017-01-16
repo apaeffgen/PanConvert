@@ -397,6 +397,11 @@
      <string>Window</string>
     </property>
     <addaction name="actionLogViewer"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbove"/>
+    <addaction name="actionBelow"/>
+    <addaction name="actionLeft"/>
+    <addaction name="actionRight"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit_2"/>
@@ -619,6 +624,26 @@
    </property>
    <property name="text">
     <string>LogViewer</string>
+   </property>
+  </action>
+  <action name="actionAbove">
+   <property name="text">
+    <string>Position Above</string>
+   </property>
+  </action>
+  <action name="actionBelow">
+   <property name="text">
+    <string>Position Below</string>
+   </property>
+  </action>
+  <action name="actionLeft">
+   <property name="text">
+    <string>Position Left</string>
+   </property>
+  </action>
+  <action name="actionRight">
+   <property name="text">
+    <string>Position Right</string>
    </property>
   </action>
  </widget>
