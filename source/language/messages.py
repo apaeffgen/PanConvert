@@ -19,6 +19,7 @@ __author__ = 'apaeffgen'
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import datetime
 
 
 
@@ -34,6 +35,11 @@ copyrightinfo = 'Copyright by APaeffgen'
 def version():
     versiontext = versionname + '<br>' + 'Version ' + versionnumber + ' on ' + versiondate + '<br>' + copyrightinfo
     return versiontext
+
+def timestamp():
+    timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    return timestamp
+
 
 
 '''' All QMessageBox errors - 4 Messages'''
@@ -64,72 +70,92 @@ def error_fatal():
 ''''Error Messages in the Log Viewer'''''
 
 def error_no_input():
+    time = timestamp()
     no_input_error = (_translate('message', 'You have no Data to be converted. Please make an input'))
     QString = no_input_error
-    return no_input_error
+    message = time +  '\n' + no_input_error +  '\n'
+
+    return message
 
 def error_no_file():
+    time = timestamp()
     no_file_error = _translate('message', 'You have to open at least one file in file conversion mode.'\
                                               ' <br>Did you put in from / to - formats?'\
                                               ' <br>If you are in directory mode, did you specify a directory?'\
                                               ' <br> Check your settings.')
     QString = no_file_error
-    return no_file_error
+    message = time +  '\n' + no_file_error +  '\n'
+    return message
 
 
 
 def error_binary_file():
+    time = timestamp()
     binary_file_error = _translate('message', 'The Standard Converter can not handle binary files. If it is a docx-file, try the '\
                     'Manual Converter. ')
     QString = binary_file_error
-    return binary_file_error
+    message = time +  '\n' + binary_file_error +  '\n'
+    return message
 
 
 def error_equal_formats():
+    time = timestamp()
     equal_format_error = _translate('message', 'The from-Format and to-Format should not be identical.<br><br> '\
                                               'If you picked to-Lyx, only from-markdown is a valid option.<br><br>'\
                                               'Please make a different choice.')
     QString = equal_format_error
-    return equal_format_error
+    message = time +  '\n' + equal_format_error +  '\n'
+    return message
 
 def error_empty_formats():
+    time = timestamp()
     empty_format_error = _translate('message', 'If you fill in Arguments and uncheck the Box "Standard", you have to '\
                                           'provide at least the following Parameters: From, To. <br><br>'\
                                           '  Some Formats like odt, epub need an input '\
                                           'for "Parameter". Otherwise there will be no output at all')
     QString = empty_format_error
-    return empty_format_error
+    message = time +  '\n' + empty_format_error +  '\n'
+    return message
 
 def error_unknown():
+    time = timestamp()
     unknown_error = _translate('message', 'If you can read this message, something went wrong. Get some help at ' \
                  'http://panconvert.sourceforge.net/help')
     QString = unknown_error
+    message = time +  '\n' + unknown_error +  '\n'
     return unknown_error
 
 
 def error_no_output():
-
+    time = timestamp()
     output_error = (_translate('message', 'There had been no output. Did you use the --output option to write a file?' \
                          '\nIf so, check your filesystem in the folder where Pandoc is installed'))
     QString = output_error
-    return output_error
+    message = time +  '\n' + output_error +  '\n'
+    return message
 
 def error_no_preview():
+    time = timestamp()
     no_preview = _translate('message', 'No Preview of the File-Data possible. Try to manually convert. Good Luck.')
     Qstring = no_preview
-    return no_preview
+    message = time +  '\n' + no_preview +  '\n'
+    return message
 
 
 def error_uncatched():
+    time = timestamp()
     no_uncatched_error = _translate('message', '\n If no uncatched Error occured, the batch conversion should have produced some files.' \
                               '\n Converted files should have been written to the same place as the original files.' \
                               ' \n There is no visual output. So please check your converted files at the filesystem level.' \
                               '\n \n When in batch-file-mode, for a better experience, please clear the window before starting a new conversion')
     QString = no_uncatched_error
-    return no_uncatched_error
+    message = time +  '\n' + no_uncatched_error +  '\n'
+    return message
 
 def error_filelist():
+    time = timestamp()
     file_list_error = _translate('message', 'Some file input was not correct')
     QString = file_list_error
-    return file_list_error
+    message = time +  '\n' + file_list_error +  '\n'
+    return message
 

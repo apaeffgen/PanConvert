@@ -1,7 +1,8 @@
 ### Version 2.2.2
 - Added seperated Log-Viewer
 - Make the Windows Position + Size savable
-- Make the Log-Viewer Position + Size sabable
+- Make the Log-Viewer Position + Size savable
+- Date / Time of the Log-Messages
 
 ### Version 0.2.1
 - Added Multilanguage Support

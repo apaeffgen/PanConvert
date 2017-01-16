@@ -67,7 +67,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 except:
                     text = error_no_preview()
                     #data = self.ui.editor_window.setPlainText(text)
-                    data = self.ui.logBrowser.setPlainText(text)
+                    data = self.ui.logBrowser.appendPlainText(text)
 
 
         elif batchConversion is True:

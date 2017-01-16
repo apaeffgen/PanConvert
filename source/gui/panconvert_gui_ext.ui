@@ -430,6 +430,8 @@
    <addaction name="actionSave_AS"/>
    <addaction name="separator"/>
    <addaction name="actionPreferences"/>
+   <addaction name="actionLogViewer"/>
+   <addaction name="separator"/>
    <addaction name="actionHelp"/>
   </widget>
   <widget class="QDockWidget" name="dockLogWindow">
@@ -611,6 +613,10 @@
    </property>
   </action>
   <action name="actionLogViewer">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/opml</normaloff>:/icons/opml</iconset>
+   </property>
    <property name="text">
     <string>LogViewer</string>
    </property>

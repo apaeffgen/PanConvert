@@ -17,6 +17,6 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 
-SOURCES = source/gui/panconvert_gui_ext.py source/gui/panconvert_diag_prefpane.py source/gui/panconvert_diag_info.py
+SOURCES = source/gui/panconvert_gui_ext.py source/gui/panconvert_diag_prefpane_ext.py source/gui/panconvert_diag_info.py
 SOURCES += source/gui/panconvert_dialog_batch.py source/language/messages.py
 TRANSLATIONS += source/language/Panconvert_de.ts source/language/Panconvert_es.ts source/language/Panconvert_xx.ts
