@@ -51,7 +51,7 @@ def error_converter_path():
 
 
 def error_os_detection():
-    QtWidgets.QMessageBox.warning(None, 'Error-Message', _translate('message', 'Could not detect the actual operating system. Please fill in the Path'+\
+    QtWidgets.QMessageBox.warning(None, 'Error-Message', _translate('message', 'Could not detect a Converter. Please fill in the Path'+\
                      ' to Pandoc or Multimarkdown manually via Preferences.'))
 
 

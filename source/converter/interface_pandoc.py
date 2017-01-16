@@ -39,6 +39,7 @@ from PyQt5.QtCore import QSettings
 
 from source.language.messages import *
 
+
 global fromFormat
 
 def get_path_pandoc():
@@ -283,6 +284,7 @@ def create_filelist(directory):
     if len(matching) == 0:
 
         error_file_selection()
+
 
 
 
