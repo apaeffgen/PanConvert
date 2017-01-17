@@ -19,6 +19,8 @@ __author__ = 'apaeffgen'
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
+from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_info import Ui_Information_Dialog
 from source.converter.interface_pandoc import get_pandoc_options
 
@@ -30,16 +32,32 @@ class InfoDialog(QtWidgets.QDialog):
         self.ui = Ui_Information_Dialog()
         self.ui.setupUi(self)
         self.ui.ButtonInfo.clicked.connect(self.info)
-        self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
         self.ui.ButtonMoreInfo.clicked.connect(self.moreinfo)
+
+        #Initialize Settings
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        self.resize(settings.value("Option_size", QSize(270, 225)))
+        self.move(settings.value("Option_pos", QPoint(50, 50)))
 
         options =  get_pandoc_options()
         data = '\n'.join(options)
         self.ui.textBrowser.setContent(data)
 
 
-     def cancel_dialog(self):
-         InfoDialog.close(self)
+     def closeEvent(self, event):
+
+        settings = QSettings('Pandoc', 'PanConvert')
+        Dialog_Size = settings.value('Dialog_Size')
+        if Dialog_Size is True:
+            settings.setValue("Option_size", self.size())
+            settings.setValue("Option_pos", self.pos())
+
+
+        settings.sync()
+        settings.status()
+        InfoDialog.close(self)
 
      def info(self):
         options =  get_pandoc_options()

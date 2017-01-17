@@ -20,6 +20,7 @@ __author__ = 'apaeffgen'
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QPoint, QSize
 from source.gui.panconvert_dialog_batch import Ui_DialogBatch
 from distutils.util import strtobool
 import platform
@@ -36,11 +37,15 @@ class BatchDialog(QtWidgets.QDialog):
         self.ui = Ui_DialogBatch()
         self.ui.setupUi(self)
         self.ui.ButtonSave.clicked.connect(self.batch_settings)
-        self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
         self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
 
         #Initialize Settings
         batch_settings = QSettings('Pandoc', 'PanConvert')
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        self.resize(settings.value("Batch_size", QSize(270, 225)))
+        self.move(settings.value("Batch_pos", QPoint(50, 50)))
 
         # Path Settings
         batch_open_path = batch_settings.value('batch_open_path')
@@ -76,7 +81,17 @@ class BatchDialog(QtWidgets.QDialog):
 
 
 
-    def cancel_dialog(self):
+    def closeEvent(self, event):
+
+        settings = QSettings('Pandoc', 'PanConvert')
+        Dialog_Size = settings.value('Dialog_Size')
+        if Dialog_Size is True:
+            settings.setValue("Batch_size", self.size())
+            settings.setValue("Batch_pos", self.pos())
+
+
+        settings.sync()
+        settings.status()
         BatchDialog.close(self)
 
     def batch_settings(self):

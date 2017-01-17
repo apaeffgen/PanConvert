@@ -19,6 +19,8 @@ __author__ = 'apaeffgen'
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
+from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_help import Ui_Information_Dialog
 #from source.converter.interface_pandoc import get_pandoc_options
 
@@ -30,14 +32,32 @@ class HelpDialog(QtWidgets.QDialog):
         self.ui = Ui_Information_Dialog()
         self.ui.setupUi(self)
         self.ui.ButtonHelpPanconvert.clicked.connect(self.helpPanconvert)
-        self.ui.ButtonCancel.clicked.connect(self.cancel_dialog)
+        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
         self.ui.ButtonHelpPandoc.clicked.connect(self.helpPandoc)
 
         website = 'http://panconvert.readthedocs.io/en/latest/'
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
-     def cancel_dialog(self):
-         HelpDialog.close(self)
+        #Initialize Settings
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        self.resize(settings.value("Help_size", QSize(270, 225)))
+        self.move(settings.value("Help_pos", QPoint(50, 50)))
+
+     def closeEvent(self, event):
+
+
+        settings = QSettings('Pandoc', 'PanConvert')
+        Dialog_Size = settings.value('Dialog_Size')
+        if Dialog_Size is True:
+            settings.setValue("Help_size", self.size())
+            settings.setValue("Help_pos", self.pos())
+
+
+        settings.sync()
+        settings.status()
+
+        HelpDialog.close(self)
 
      def helpPanconvert(self):
         website = 'http://panconvert.readthedocs.io/en/latest/'

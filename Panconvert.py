@@ -162,10 +162,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
-    def print_error_messages(self, message):
-        message = self.ui.logBrowser.appendPlainText(message)
-
-
 
     def list_from_formats(self):
         from_formats, to_formats = get_pandoc_formats()
@@ -746,7 +742,6 @@ class StartQT5(QtWidgets.QMainWindow):
         if Dock_Size is True:
             self.restoreState(settings.value('geometry'))
         if Window_Size is True:
-            #self.restoreGeometry(settings.value('size'))
             self.resize(settings.value("size", QSize(270, 225)))
             self.move(settings.value("pos", QPoint(50, 50)))
 
@@ -824,10 +819,6 @@ if __name__ == "__main__":
         _translate.load("source/language/Panconvert_de.qm") # ,"source/language/Panconvert_es.qm")
     elif actualLanguage == 'Español': # English
         _translate.load("source/language/Panconvert_es.qm")
-
-
-
-
 
 
     app.installTranslator(_translate)

@@ -20,6 +20,7 @@ __author__ = 'apaeffgen'
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 from PyQt5 import QtCore
+from PyQt5.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_prefpane_ext import Ui_DialogPreferences
 from distutils.util import strtobool
 import platform, os
@@ -60,9 +61,14 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.comboBoxLanguageSelector.addItem('Español')
         self.ui.comboBoxLanguageSelector.currentIndexChanged.connect(self.SetLanguage)
 
-        #Size of Main Window and DockWindow
+        #Checkbox Size of Main Window and DockWindow
         Window_Size = settings.value('Window_Size', True)
         Dock_Size = settings.value('Dock_Size', True)
+        Dialog_Size = settings.value('Dialog_Size', True)
+
+        #Size of Dialog Windows
+        self.resize(settings.value("Dialog_size", QSize(270, 225)))
+        self.move(settings.value("Dialog_pos", QPoint(50, 50)))
 
 
         #Paths and Parameters
@@ -112,6 +118,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.BatchConversion.setChecked(Batch_Conversion)
                 self.ui.Window_Size.setChecked(Window_Size)
                 self.ui.Dock_Size.setChecked(Dock_Size)
+                self.ui.Dialog_Size.setChecked(Dialog_Size)
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
@@ -127,6 +134,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.BatchConversion.setChecked(strtobool(Batch_Conversion))
                 self.ui.Window_Size.setChecked(strtobool(Window_Size))
                 self.ui.Dock_Size.setChecked(strtobool(Dock_Size))
+                self.ui.Dialog_Size.setChecked(strtobool(Dialog_Size))
 
 
 
@@ -141,6 +149,7 @@ class PreferenceDialog(QtWidgets.QDialog):
 
         settings.setValue('Window_Size', self.ui.Window_Size.isChecked())
         settings.setValue('Dock_Size', self.ui.Dock_Size.isChecked())
+        settings.setValue('Dialog_Size', self.ui.Dialog_Size.isChecked())
 
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
@@ -165,10 +174,17 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('To_Opml', self.ui.ButtonToOpml.isChecked())
         settings.setValue('To_Lyx', self.ui.ButtonToLyx.isChecked())
 
+        Dialog_Size = settings.value('Dialog_Size')
+        if Dialog_Size is True:
+            settings.setValue("Dialog_size", self.size())
+            settings.setValue("Dialog_pos", self.pos())
+
+
         settings.sync()
         settings.status()
 
-        WindowSize = self.ui.Window_Size.isChecked()
+
+
 
 
 

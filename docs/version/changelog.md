@@ -2,9 +2,11 @@
 - Added seperated Log-Viewer
 - Added Make the Windows Position + Size savable
 - Added Make the Log-Viewer Position + Size savable
+- Added Make the Dialogs Position + Size sabable
 - Added Date / Time of the Log-Messages
 - Added Adjust the LogViewer Position manually
 - Fixed From / To Formats Dialogs
+
 
 ### Version 0.2.1
 - Added Multilanguage Support
