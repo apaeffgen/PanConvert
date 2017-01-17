@@ -20,12 +20,12 @@ __author__ = 'apaeffgen'
 import codecs
 #import markdown
 from PyQt5.QtCore import QPoint, QSize
-from source.dialog_preferences import *
-from source.dialog_batch import *
-from source.dialog_info import *
-from source.dialog_fromformat import *
-from source.dialog_toformat import *
-from source.dialog_help import *
+from source.dialogs.dialog_preferences import *
+from source.dialogs.dialog_batch import *
+from source.dialogs.dialog_info import *
+from source.dialogs.dialog_fromformat import *
+from source.dialogs.dialog_toformat import *
+from source.dialogs.dialog_help import *
 from source.converter.lyx import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
