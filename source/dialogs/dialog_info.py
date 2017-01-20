@@ -50,7 +50,7 @@ class InfoDialog(QtWidgets.QDialog):
 
         settings = QSettings('Pandoc', 'PanConvert')
         Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True:
+        if Dialog_Size is True or Dialog_Size == 'true':
             settings.setValue("Option_size", self.size())
             settings.setValue("Option_pos", self.pos())
 

@@ -583,9 +583,9 @@ class StartQT5(QtWidgets.QMainWindow):
 
         Dock_Size = settings.value('Dock_Size')
         Window_Size = settings.value('Window_Size')
-        if Dock_Size is True:
+        if Dock_Size is True or Dock_Size == 'true':
             settings.setValue("geometry", self.saveState())
-        if Window_Size is True:
+        if Window_Size is True or Window_Size == 'true':
             settings.setValue("size", self.size())
             settings.setValue("pos", self.pos())
 
@@ -739,9 +739,10 @@ class StartQT5(QtWidgets.QMainWindow):
 
         Window_Size = settings.value('Window_Size')
         Dock_Size = settings.value('Dock_Size')
-        if Dock_Size is True:
+        if Dock_Size is True or Dock_Size == 'true':
+
             self.restoreState(settings.value('geometry'))
-        if Window_Size is True:
+        if Window_Size is True or Window_Size == 'true':
             self.resize(settings.value("size", QSize(270, 225)))
             self.move(settings.value("pos", QPoint(50, 50)))
 

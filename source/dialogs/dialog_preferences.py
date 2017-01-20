@@ -67,8 +67,8 @@ class PreferenceDialog(QtWidgets.QDialog):
         Dialog_Size = settings.value('Dialog_Size', True)
 
         #Size of Dialog Windows
-        self.resize(settings.value("Dialog_size", QSize(270, 225)))
-        self.move(settings.value("Dialog_pos", QPoint(50, 50)))
+        self.resize(settings.value("Preference_size", QSize(270, 225)))
+        self.move(settings.value("Preference_pos", QPoint(50, 50)))
 
 
         #Paths and Parameters
@@ -175,9 +175,9 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('To_Lyx', self.ui.ButtonToLyx.isChecked())
 
         Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True:
-            settings.setValue("Dialog_size", self.size())
-            settings.setValue("Dialog_pos", self.pos())
+        if Dialog_Size is True or Dialog_Size == 'true':
+            settings.setValue("Preference_size", self.size())
+            settings.setValue("Preference_pos", self.pos())
 
 
         settings.sync()
