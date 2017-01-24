@@ -27,7 +27,8 @@ if sys.platform == 'win32':
 
 options = {
     'build_exe': {
-        'includes': ['PyQt5.QtNetwork',
+        'includes': ['codecs',
+                     'PyQt5.QtNetwork',
                      'PyQt5.QtWebKit',
                      'PyQt5.QtPrintSupport',
                      'PyQt5.QtNetwork',
