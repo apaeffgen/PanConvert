@@ -25,7 +25,16 @@ base = None
 if sys.platform == 'win32':
     base = 'Win32GUI'
 
+def find_data_file(filename):
+    if getattr(sys, 'frozen', False):
+        # The application is frozen
+        datadir = os.path.dirname(sys.executable)
+    else:
+        # The application is not frozen
+        # Change this bit to match where you store your data files:
+        datadir = os.path.dirname('source/language')
 
+    return os.path.join(datadir, filename)
 
 options = {
     'build_exe': {
@@ -39,16 +48,7 @@ options = {
     }
 }
 
-def find_data_file(filename):
-    if getattr(sys, 'frozen', False):
-        # The application is frozen
-        datadir = os.path.dirname(sys.executable)
-    else:
-        # The application is not frozen
-        # Change this bit to match where you store your data files:
-        datadir = os.path.dirname(__file__)
 
-    return os.path.join(datadir, filename)
 
 executables = [
     Executable('Panconvert.py', base=base)
