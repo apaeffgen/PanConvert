@@ -15,7 +15,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
+import sys, os
 
 from cx_Freeze import setup, Executable
 
@@ -25,10 +25,11 @@ base = None
 if sys.platform == 'win32':
     base = 'Win32GUI'
 
-includefiles = ['source/language/Panconvert_de.qm, source/language/Panconvert_es.qm']
+
 
 options = {
     'build_exe': {
+        'include_files' : ['source/language/Panconvert_de.qm', 'source/language/Panconvert_es.qm'],
         'includes': ['PyQt5.QtNetwork',
                      'PyQt5.QtWebKit',
                      'PyQt5.QtPrintSupport',
@@ -37,6 +38,17 @@ options = {
 
     }
 }
+
+def find_data_file(filename):
+    if getattr(sys, 'frozen', False):
+        # The application is frozen
+        datadir = os.path.dirname(sys.executable)
+    else:
+        # The application is not frozen
+        # Change this bit to match where you store your data files:
+        datadir = os.path.dirname(__file__)
+
+    return os.path.join(datadir, filename)
 
 executables = [
     Executable('Panconvert.py', base=base)
