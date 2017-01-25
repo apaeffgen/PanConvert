@@ -817,7 +817,7 @@ if __name__ == "__main__":
 
     _translate = QtCore.QTranslator()
     if actualLanguage == 'Deutsch':
-        _translate.load("source/language/Panconvert_de.qm") # ,"source/language/Panconvert_es.qm")
+        _translate.load("source/language/Panconvert_de.qm")
     elif actualLanguage == 'Español': # English
         _translate.load("source/language/Panconvert_es.qm")
 

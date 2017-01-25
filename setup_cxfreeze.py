@@ -25,10 +25,11 @@ base = None
 if sys.platform == 'win32':
     base = 'Win32GUI'
 
+includefiles = ['source/language/Panconvert_de.qm, source/language/Panconvert_es.qm']
+
 options = {
     'build_exe': {
-        'includes': ['codecs',
-                     'PyQt5.QtNetwork',
+        'includes': ['PyQt5.QtNetwork',
                      'PyQt5.QtWebKit',
                      'PyQt5.QtPrintSupport',
                      'PyQt5.QtNetwork',
