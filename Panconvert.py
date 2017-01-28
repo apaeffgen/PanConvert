@@ -18,7 +18,7 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import codecs
-#import markdown
+import os
 from PyQt5.QtCore import QPoint, QSize
 from source.dialogs.dialog_preferences import *
 from source.dialogs.dialog_batch import *
@@ -816,10 +816,23 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
     _translate = QtCore.QTranslator()
+    script_dir = os.path.dirname(sys.argv[0])
+
+
     if actualLanguage == 'Deutsch':
-        _translate.load("source/language/Panconvert_de.qm")
-    elif actualLanguage == 'Español': # English
-        _translate.load("source/language/Panconvert_es.qm")
+        german_language = script_dir + "/Panconvert_de.qm"
+        if os.path.isfile(german_language):
+            _translate.load(german_language)
+        else:
+            _translate.load("source/language/Panconvert_de.qm")
+
+    elif actualLanguage == 'Español':
+        spanish_language = script_dir + "/Panconvert_es.qm"
+        if os.path.isfile(spanish_language):
+            _translate.load(spanish_language)
+        else:
+            _translate.load("source/language/Panconvert_es.qm")
+
 
 
     app.installTranslator(_translate)
