@@ -4,6 +4,7 @@ repository_url:
 pages:
 - ['index.md', 'Introduction']
 - ['User_Guide/Basic_Usage.md', 'User Guide', 'Basic Usage']
+- ['User_Guide/Customizing_Panconvert.md', 'User Guide', 'Customizing']
 - ['User_Guide/Known_Problems.md', 'User Guide', 'Known Problems']
 - ['User_Guide/Pandoc_Help.md', 'User Guide', 'Pandoc Help']
 - ['User_Guide/Update.md', 'User Guide', 'Update']
