@@ -17,10 +17,12 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from PyQt5.QtCore import QSettings
 from PyQt5.QtCore import QPoint, QSize
+from source.language.messages import *
 from source.gui.panconvert_diag_fromformat import Ui_From_Format_Dialog
 from source.converter.interface_pandoc import get_pandoc_formats
 
@@ -37,15 +39,19 @@ class FromFormatDialog(QtWidgets.QDialog):
 
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
+        path_pandoc = settings.value('path_pandoc','')
 
         self.resize(settings.value("FromFormat_size", QSize(270, 225)))
         self.move(settings.value("FromFormat_pos", QPoint(50, 50)))
 
-        formats =  get_pandoc_formats()
-        fromformats = formats[0]
-        data = '<br>'.join(fromformats)
-        self.ui.textBrowser.setContent(data)
-
+        if os.path.isfile(path_pandoc):
+            formats =  get_pandoc_formats()
+            fromformats = formats[0]
+            data = '<br>'.join(fromformats)
+            self.ui.textBrowser.setContent(data)
+        else:
+            message = error_converter_path()
+            self.ui.textBrowser.setContent(message)
 
      def closeEvent(self, event):
 

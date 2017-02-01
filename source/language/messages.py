@@ -17,7 +17,6 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import datetime
 
@@ -25,7 +24,7 @@ import datetime
 
 _translate = QtCore.QCoreApplication.translate
 
-versionnumber = '0.2.2'
+versionnumber = '0.2.3'
 versiondate = '01.2017'
 versionname = 'PanConvert - A Gui Wrapper for Pandoc'
 copyrightinfo = 'Copyright by APaeffgen'
@@ -42,32 +41,43 @@ def timestamp():
 
 
 
-'''' All QMessageBox errors - 4 Messages'''
+
+'''' Messages in the Log Viewer'''''
+
+def message_file_selection():
+    time = timestamp()
+    file_selection_message = _translate('message', 'The following file selection was made: ')
+    message = time + '\n' + file_selection_message + '\n'
+    return message
+
+def error_formats():
+    warning_fromFormat = _translate('message', 'Invalid from format! Expected one of these: ')
+    warning_toFormat = _translate('message', 'Invalid to format! Expected one of these: ')
+
+    return warning_fromFormat, warning_toFormat
+
+def error_file_selection():
+    time = timestamp()
+    file_selection_error = _translate('message', 'No file has been selected. Check your Filters and settings.'\
+                                               'Check your files.')
+    message = time + '\n' + file_selection_error + '\n'
+    return message
 
 
 def error_converter_path():
-    QtWidgets.QMessageBox.warning(None, 'Error-Message', _translate('message', 'No Converter (Pandoc or Multimardown) could be found on your System. Are they installed?'+\
-                         'If so, please check the Pandoc / Multimarkdown Path in your Preferences.'))
-
+    time = timestamp()
+    converter_error = _translate('message', 'No Converter (Pandoc or Multimardown) could be found on your System. Are they installed?' \
+                      'If so, please check the Pandoc / Multimarkdown Path in your Preferences.')
+    QString = converter_error
+    message = time +  '\n' +  converter_error + '\n'
+    return message
 
 def error_os_detection():
-    QtWidgets.QMessageBox.warning(None, 'Error-Message', _translate('message', 'Could not detect a Converter. Please fill in the Path'+\
-                     ' to Pandoc or Multimarkdown manually via Preferences.'))
-
-
-def error_file_selection():
-    QtWidgets.QMessageBox.warning(None, 'Warning-Message', _translate('message', 'No file has been selected. Check your Filters and settings.'+\
-                                                  'Check your files.'))
-
-def error_fatal():
-    QtWidgets.QMessageBox.warning(None, 'Warning-Message', _translate('message', 'Somthing went terribly wrong. '\
-                ' Hopefully only your Options are incorrect!' \
-                '\n\nOr get some help from Panconvert / Pandoc!'))
-
-
-
-
-''''Error Messages in the Log Viewer'''''
+    time = timestamp()
+    os_detection_error = _translate('message', 'Could not detect a Converter. Please fill in the Path' \
+                     ' to Pandoc or Multimarkdown manually via Preferences.')
+    message = time + '\n' + os_detection_error + '\n'
+    return message
 
 def error_open_file():
     open_file_error = _translate('message', 'No Preview of the File-Data possible. Try to manually convert. Good Luck.')
@@ -162,4 +172,13 @@ def message_file_converted():
     QString = file_converted_message
     message = time +  '\n' + file_converted_message +  '\n'
     return message
+
+
+'''' Important QMessageBox errors - 1 Messages'''
+
+def error_fatal():
+    QtWidgets.QMessageBox.warning(None, 'Warning-Message', _translate('message', 'Somthing went terribly wrong. '\
+                ' Hopefully only your Options are incorrect!' \
+                '\n\nOr get some help from Panconvert / Pandoc!'))
+
 

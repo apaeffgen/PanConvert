@@ -19,20 +19,56 @@ __author__ = 'apaeffgen'
 
 import subprocess
 
-from source.converter.interface_pandoc import convert
 from source.converter.interface_pandoc import get_pandoc_formats
 from source.converter.interface_pandoc import get_path_pandoc
 from source.language.messages import *
 
 
-def convert_universal(text,ToFormat,FromFormat,arg):
-    ##ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')##
-    output = convert(text, ToFormat, FromFormat, arg)
-
-    return output
 
 
 
+def convert_universal(text, ToFormat, FromFormat, extra_args):
+    try:
+        path_pandoc = get_path_pandoc()
+        args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat]
+
+        output = ''
+        if extra_args is not '' :
+            extra_args = extra_args.split(';')
+            for arg in extra_args:
+                args.append(arg)
+
+
+        p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
+
+
+
+        output1, error1 = p.communicate(text.encode('utf-8'))
+
+        try:
+            output = output1.decode('utf-8')
+            error = error1.decode('utf-8')
+
+            if p.returncode != 0:
+                QtWidgets.QMessageBox.warning(None, 'Error-Message',
+                                              'An Error occurred. <br><br>{}'.format(error))
+            else:
+
+                if output == '':
+                    output = error_no_output()
+
+
+        except:
+            error_fatal()
+
+        return output
+
+    except OSError:
+        error_converter_path()
 
 def convert_binary(openfile,ToFormat,FromFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
@@ -48,17 +84,6 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
             for arg in extra_args:
                 args.append(arg)
 
-        get_pandoc_formats()
-
-        from_formats, to_formats = get_pandoc_formats()
-
-        if FromFormat == '':#not in from_formats:
-            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'Invalid from format! Expected one of these: ' + ', '.join(from_formats))
-
-        if ToFormat == '':#not in to_formats:
-            QtWidgets.QMessageBox.warning(None, 'Warning-Message',
-                                          'Invalid to format! Expected one of these: ' + ', '.join(to_formats))
 
         output = error_unknown()
 

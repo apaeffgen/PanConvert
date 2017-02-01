@@ -4,7 +4,7 @@ import glob
 
 from PyQt5.QtCore import QSettings
 
-from source.language.messages import error_file_selection
+from source.language.messages import *
 
 __author__ = 'apaeffgen'
 # -*- coding: utf-8 -*-
@@ -73,7 +73,8 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
 
 
     except OSError:
-        error_converter_path()
+        message = error_converter_path()
+        return message
 
 
 def create_filelist(directory):
@@ -98,13 +99,13 @@ def create_filelist(directory):
 
     if len(matching) == 0:
 
-        error_file_selection()
+        message = error_file_selection()
+    else:
+        message_tmp = message_file_selection()
+        message = message_tmp + filefilter
 
 
-
-
-
-    return matching
+    return matching, message
 
 
 def create_simplefilelist():
@@ -112,6 +113,7 @@ def create_simplefilelist():
     batch_settings = QSettings('Pandoc', 'PanConvert')
     batch_open_path = batch_settings.value('batch_open_path')
     filefilter = settings.value('batch_convert_filter','')
+    message = ''
 
     filelist = glob.glob(batch_open_path + '/*')
     filter = filefilter.split(';')
@@ -119,12 +121,11 @@ def create_simplefilelist():
     matching = []
 
     for filteritem in filter:
-
         matching_filter = [s for s in filelist if filteritem in s]
         for i in matching_filter:
             matching.append(i)
+
     if len(matching) == 0:
+        message = error_file_selection()
 
-        error_file_selection()
-
-    return matching
+    return matching, message

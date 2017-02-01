@@ -1,4 +1,11 @@
-### Version 2.2.2
+### Version 0.2.3
+- Added Counter for written log messages
+- Code Cleanup of converters
+- Code Cleanup of Functions for Check of Converters
+- All errors are written to the log viewer, except a fatal error message
+
+
+### Version 0.2.2
 - Added seperated Log-Viewer
 - Added Make the Windows Position + Size savable
 - Added Make the Log-Viewer Position + Size savable

@@ -1,5 +1,13 @@
 # Basic Usage
 
+## Errors and Information
+* All Errors are written to a log window
+* A Counter of messages can be read in the main gui. If no error, occurred, there is no message
+* If you hide the log completely and nothing goes wrong, you don`t need the log viewer
+* If you are in batch-mode, a list of all the converted files is written to the log viewer
+* Look at the log viewer, if something unexpected had happend. If you need more information,
+go to the Discussion Forum on Sourceforge
+
 ## The preconfigured conversion sets
 
 * These are the preconfigured standard converters. All documents are Standalone-Versions of the document.````

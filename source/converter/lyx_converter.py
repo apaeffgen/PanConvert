@@ -25,13 +25,13 @@ import fnmatch
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 from distutils.util import strtobool
-from source.gui.panconvert_gui import *
 
 #global openfile
 
 def convert_markdown2lyx(text):
-    try:
         path_multimarkdown = get_path_multimarkdown()
+
+
         args = [path_multimarkdown, '--to=lyx']
 
         p = subprocess.Popen(
@@ -41,8 +41,6 @@ def convert_markdown2lyx(text):
 
         return p.communicate(text.encode('utf-8'))[0].decode('utf-8')
 
-    except OSError:
-        error_converter_path()
 
 
 def batch_convert_markdown2lyx(openfile):
