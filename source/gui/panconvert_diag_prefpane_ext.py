@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_prefpane_ext.ui'
 #
-# Created: Tue Jan 17 09:04:24 2017
+# Created: Thu Feb  2 13:15:18 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -159,7 +159,7 @@ class Ui_DialogPreferences(object):
         self.ButtonCancel_2.setGeometry(QtCore.QRect(140, 300, 130, 32))
         self.ButtonCancel_2.setObjectName("ButtonCancel_2")
         self.BoxSaveSize = QtWidgets.QGroupBox(self.tab_size_pref)
-        self.BoxSaveSize.setGeometry(QtCore.QRect(10, 20, 221, 141))
+        self.BoxSaveSize.setGeometry(QtCore.QRect(370, 20, 221, 141))
         self.BoxSaveSize.setObjectName("BoxSaveSize")
         self.Window_Size = QtWidgets.QCheckBox(self.BoxSaveSize)
         self.Window_Size.setGeometry(QtCore.QRect(10, 40, 191, 20))
@@ -171,6 +171,27 @@ class Ui_DialogPreferences(object):
         self.Dialog_Size = QtWidgets.QCheckBox(self.BoxSaveSize)
         self.Dialog_Size.setGeometry(QtCore.QRect(10, 100, 181, 20))
         self.Dialog_Size.setObjectName("Dialog_Size")
+        self.GuiSelection = QtWidgets.QGroupBox(self.tab_size_pref)
+        self.GuiSelection.setGeometry(QtCore.QRect(10, 30, 201, 91))
+        self.GuiSelection.setObjectName("GuiSelection")
+        self.Button_NewGui = QtWidgets.QRadioButton(self.GuiSelection)
+        self.Button_NewGui.setGeometry(QtCore.QRect(10, 60, 181, 20))
+        self.Button_NewGui.setObjectName("Button_NewGui")
+        self.Button_OldGui = QtWidgets.QRadioButton(self.GuiSelection)
+        self.Button_OldGui.setGeometry(QtCore.QRect(10, 30, 171, 20))
+        self.Button_OldGui.setObjectName("Button_OldGui")
+        self.Tab_Selection = QtWidgets.QGroupBox(self.tab_size_pref)
+        self.Tab_Selection.setGeometry(QtCore.QRect(10, 140, 201, 131))
+        self.Tab_Selection.setObjectName("Tab_Selection")
+        self.Tab_StandardConverter = QtWidgets.QRadioButton(self.Tab_Selection)
+        self.Tab_StandardConverter.setGeometry(QtCore.QRect(10, 30, 181, 20))
+        self.Tab_StandardConverter.setObjectName("Tab_StandardConverter")
+        self.Tab_ManualConverter = QtWidgets.QRadioButton(self.Tab_Selection)
+        self.Tab_ManualConverter.setGeometry(QtCore.QRect(10, 60, 171, 20))
+        self.Tab_ManualConverter.setObjectName("Tab_ManualConverter")
+        self.Tab_BatchConverter = QtWidgets.QRadioButton(self.Tab_Selection)
+        self.Tab_BatchConverter.setGeometry(QtCore.QRect(10, 90, 171, 20))
+        self.Tab_BatchConverter.setObjectName("Tab_BatchConverter")
         self.tabWidget.addTab(self.tab_size_pref, "")
 
         self.retranslateUi(DialogPreferences)
@@ -221,5 +242,12 @@ class Ui_DialogPreferences(object):
         self.Window_Size.setText(_translate("DialogPreferences", "Size of Main Window"))
         self.Dock_Size.setText(_translate("DialogPreferences", "Size of Dock Window"))
         self.Dialog_Size.setText(_translate("DialogPreferences", "Size of Dialog Window"))
+        self.GuiSelection.setTitle(_translate("DialogPreferences", "Gui Selection"))
+        self.Button_NewGui.setText(_translate("DialogPreferences", "New Style Gui"))
+        self.Button_OldGui.setText(_translate("DialogPreferences", "Old Style Gui"))
+        self.Tab_Selection.setTitle(_translate("DialogPreferences", "Tab Selection"))
+        self.Tab_StandardConverter.setText(_translate("DialogPreferences", "Standard Converter"))
+        self.Tab_ManualConverter.setText(_translate("DialogPreferences", "Manual Converter"))
+        self.Tab_BatchConverter.setText(_translate("DialogPreferences", "Batch Converter"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_size_pref), _translate("DialogPreferences", "Size Preferences"))
 

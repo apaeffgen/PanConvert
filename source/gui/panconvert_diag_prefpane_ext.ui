@@ -510,7 +510,7 @@
     <widget class="QGroupBox" name="BoxSaveSize">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>370</x>
        <y>20</y>
        <width>221</width>
        <height>141</height>
@@ -559,6 +559,97 @@
       </property>
       <property name="text">
        <string>Size of Dialog Window</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="GuiSelection">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>201</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Gui Selection</string>
+     </property>
+     <widget class="QRadioButton" name="Button_NewGui">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>181</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>New Style Gui</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="Button_OldGui">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Old Style Gui</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="Tab_Selection">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>201</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Tab Selection</string>
+     </property>
+     <widget class="QRadioButton" name="Tab_StandardConverter">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>181</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Standard Converter</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="Tab_ManualConverter">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Manual Converter</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="Tab_BatchConverter">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Batch Converter</string>
       </property>
      </widget>
     </widget>

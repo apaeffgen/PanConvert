@@ -40,6 +40,7 @@ class BatchDialog(QtWidgets.QDialog):
         self.ui.ButtonCancel.clicked.connect(self.closeEvent)
         self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
 
+
         #Initialize Settings
         batch_settings = QSettings('Pandoc', 'PanConvert')
         settings = QSettings('Pandoc', 'PanConvert')
@@ -67,7 +68,6 @@ class BatchDialog(QtWidgets.QDialog):
         if batch_settings.value('batch_convert_directory') is not None:
             if platform.system() == 'Darwin':
                 self.ui.ParameterBatchconvertDirectory.setChecked(parameterBatchconvertDirectory)
-
                 self.ui.ParameterBatchconvertFiles.setChecked(parameterBatchconvertFiles)
                 self.ui.ParameterBatchconvertRecursive.setChecked(parameterBatchconvertRecursive)
             else:

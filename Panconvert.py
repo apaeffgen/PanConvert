@@ -30,6 +30,8 @@ from source.dialogs.dialog_help import *
 from source.converter.lyx_converter import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
+
+from source.gui.panconvert_gui import Ui_notepad_New
 from source.gui.panconvert_gui_ext import Ui_notepad
 
 
@@ -50,6 +52,8 @@ class StartQT5(QtWidgets.QMainWindow):
 
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
+
+
         batchConversion = self.ui.BatchConversion.isChecked()
 
         if batchConversion is False:
@@ -523,9 +527,59 @@ class StartQT5(QtWidgets.QMainWindow):
     """Gui-Trigger-Function for RadioButtons"""
 
     def event_triggered(self):
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        Button_OldGui = settings.value('Button_OldGui', True)
+        Button_NewGui = settings.value('Button_NewGui', False)
+
         global fromFormat,toFormat,extraParameter
         fromFormat = self.ui.FromParameter.text()
         toFormat = self.ui.ToParameter.text()
+
+
+        # ''' New Gui Events '''
+        #
+        # if Button_NewGui is True or Button_NewGui is 'True':
+        #     if fromFormat and toFormat != '':
+        #         extraParameter = self.ui.ExtraParameter.text()
+        #         self.export_manualconverter(fromFormat, toFormat, extraParameter)
+        #     else:
+        #         if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+        #             self.export_manualconverter("markdown", "latex", "--standalone")
+        #         elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+        #             self.export_manualconverter("markdown", "opml", "--standalone")
+        #         elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
+        #             self.export_markdown2lyx()
+        #         elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+        #             self.export_manualconverter("opml", "markdown", "--atx-header")
+        #         elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+        #             self.export_manualconverter("opml", "latex", "--standalone")
+        #         elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+        #             self.export_manualconverter("latex", "markdown", "--atx-header")
+        #         elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
+        #             self.export_manualconverter("latex", "opml", "--standalone")
+        #         elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
+        #             self.export_manualconverter("html", "markdown", "--atx-header")
+        #         elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+        #             self.export_manualconverter("markdown", "html", "--standalone")
+        #         elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+        #             self.export_manualconverter("opml", "html", "--standalone")
+        #         elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
+        #             self.export_manualconverter("html", "opml", "--standalone")
+        #         elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
+        #             self.export_manualconverter("latex", "html", "--standalone")
+        #         elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
+        #             self.export_manualconverter("html", "latex", "--standalone")
+        #         else:
+        #             message = error_equal_formats()
+        #             self.print_log_messages(message)
+        #
+
+
+
+
+        ''' Old Gui Events '''
+        #if Button_OldGui is True or Button_OldGui is 'True':
         standard_conversion = self.ui.StandardConversion.isChecked()
         extraParameter = self.ui.ExtraParameter.text()
         batchConversion = self.ui.BatchConversion.isChecked()
@@ -618,11 +672,32 @@ class StartQT5(QtWidgets.QMainWindow):
         number = 0
         text = ''
         text_undo = ''
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        Button_OldGui = settings.value('Button_OldGui', True)
+        Button_NewGui = settings.value('Button_NewGui', False)
+
+
 
         QtWidgets.QWidget.__init__(self, parent)
-        self.ui = Ui_notepad()
+        if Button_OldGui is True or Button_OldGui is 'True':
+            self.ui = Ui_notepad()
+        else:
+            self.ui = Ui_notepad_New()
+
+
         self.ui.setupUi(self)
         self.ui.closeEvent = self.closeEvent
+        if Button_NewGui is True or Button_NewGui is 'True':
+            Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
+            Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
+            Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
+            if Tab_StandardConverter is True or Tab_StandardConverter is 'True':
+                self.ui.Converter_Type.setCurrentIndex(0)
+            if Tab_ManualConverter is True or Tab_ManualConverter is 'True':
+                self.ui.Converter_Type.setCurrentIndex(1)
+            if Tab_BatchConverter is True or Tab_BatchConverter is 'True':
+                self.ui.Converter_Type.setCurrentIndex(2)
 
 
 
@@ -644,13 +719,12 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
         '''Helper-Functions for manual conversion'''
-        #self.ui.ButtonFromFormat.clicked.connect(self.list_from_formats)
         self.ui.ButtonFromFormat.clicked.connect(self.fromformats_dialog)
         self.ui.ButtonToFormat.clicked.connect(self.toformats_dialog)
         self.ui.ButtonOptions.clicked.connect(self.info_dialog)
 
         ''' Main Button Functions'''
-        self.ui.ButtonBatch.clicked.connect(self.batch_dialog)
+
         self.ui.ButtonRevert.clicked.connect(self.undo)
         self.ui.ButtonConvert.clicked.connect(self.event_triggered)
 
@@ -662,9 +736,18 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionPreferences.triggered.connect(self.preference_dialog)
         self.ui.actionSave.setEnabled(True)
 
+        '''Old Gui Functions '''''
+
+        if Button_OldGui is True or Button_OldGui is 'True':
+            self.ui.ButtonBatch.clicked.connect(self.batch_dialog)
+
+
         '''Setting-Initialization and Default Settings for the first start'''
-        settings = QSettings('Pandoc', 'PanConvert')
-        actualLanguage = settings.value('default_language')
+        # settings = QSettings('Pandoc', 'PanConvert')
+        # actualLanguage = settings.value('default_language')
+        #
+        # Button_OldGui = settings.value('Button_OldGui', True)
+        # Button_NewGui = settings.value('Button_NewGui', False)
 
 
         Window_Size = settings.value('Window_Size')
@@ -682,8 +765,7 @@ class StartQT5(QtWidgets.QMainWindow):
         toParameter = settings.value('toParameter')
         xtraParameter = settings.value('xtraParameter')
 
-        Standard_Conversion = settings.value('Standard_Conversion', False)
-        Batch_Conversion = settings.value('Batch_Conversion', False)
+
         From_Markdown = settings.value('From_Markdown', False)
         From_Html = settings.value('From_Html', False)
         From_Latex = settings.value('From_Latex', False)
@@ -695,6 +777,9 @@ class StartQT5(QtWidgets.QMainWindow):
         To_Opml = settings.value('To_Opml', False)
         To_Lyx = settings.value('To_Lyx', False)
 
+
+        Standard_Conversion = settings.value('Standard_Conversion', False)
+        Batch_Conversion = settings.value('Batch_Conversion', False)
 
         if settings.value('From_Markdown') is not None:
             if platform.system() == 'Darwin':

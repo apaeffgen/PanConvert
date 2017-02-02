@@ -66,6 +66,16 @@ class PreferenceDialog(QtWidgets.QDialog):
         Dock_Size = settings.value('Dock_Size', True)
         Dialog_Size = settings.value('Dialog_Size', True)
 
+        #Checkbox Gui Old / New
+        Button_OldGui = settings.value('Button_OldGui', False)
+        Button_NewGui = settings.value('Button_NewGui', True)
+
+        #Standard Tab of the New Gui
+        Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
+        Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
+        Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
+
+
         #Size of Dialog Windows
         self.resize(settings.value("Preference_size", QSize(270, 225)))
         self.move(settings.value("Preference_pos", QPoint(50, 50)))
@@ -119,6 +129,11 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Window_Size.setChecked(Window_Size)
                 self.ui.Dock_Size.setChecked(Dock_Size)
                 self.ui.Dialog_Size.setChecked(Dialog_Size)
+                self.ui.Button_OldGui.setChecked(Button_OldGui)
+                self.ui.Button_NewGui.setChecked(Button_NewGui)
+                self.ui.Tab_StandardConverter.setChecked(Tab_StandardConverter)
+                self.ui.Tab_ManualConverter.setChecked(Tab_ManualConverter)
+                self.ui.Tab_BatchConverter.setChecked(Tab_BatchConverter)
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
@@ -135,6 +150,11 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Window_Size.setChecked(strtobool(Window_Size))
                 self.ui.Dock_Size.setChecked(strtobool(Dock_Size))
                 self.ui.Dialog_Size.setChecked(strtobool(Dialog_Size))
+                self.ui.Button_OldGui.setChecked(strtobool(Button_OldGui))
+                self.ui.Button_NewGui.setChecked(strtobool(Button_NewGui))
+                self.ui.Tab_StandardConverter.setChecked(strtobool(Tab_StandardConverter))
+                self.ui.Tab_ManualConverter.setChecked(strtobool(Tab_ManualConverter))
+                self.ui.Tab_BatchConverter.setChecked(strtobool(Tab_BatchConverter))
 
 
 
@@ -150,6 +170,12 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('Window_Size', self.ui.Window_Size.isChecked())
         settings.setValue('Dock_Size', self.ui.Dock_Size.isChecked())
         settings.setValue('Dialog_Size', self.ui.Dialog_Size.isChecked())
+
+        settings.setValue('Button_OldGui', self.ui.Button_OldGui.isChecked())
+        settings.setValue('Button_NewGui', self.ui.Button_NewGui.isChecked())
+        settings.setValue('Tab_StandardConverter', self.ui.Tab_StandardConverter.isChecked())
+        settings.setValue('Tab_ManualConverter', self.ui.Tab_ManualConverter.isChecked())
+        settings.setValue('Tab_BatchConverter', self.ui.Tab_BatchConverter.isChecked())
 
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
@@ -178,6 +204,9 @@ class PreferenceDialog(QtWidgets.QDialog):
         if Dialog_Size is True or Dialog_Size == 'true':
             settings.setValue("Preference_size", self.size())
             settings.setValue("Preference_pos", self.pos())
+
+
+
 
 
         settings.sync()

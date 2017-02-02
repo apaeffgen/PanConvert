@@ -24,8 +24,8 @@ import datetime
 
 _translate = QtCore.QCoreApplication.translate
 
-versionnumber = '0.2.3'
-versiondate = '01.2017'
+versionnumber = '0.2.5'
+versiondate = '02.2017'
 versionname = 'PanConvert - A Gui Wrapper for Pandoc'
 copyrightinfo = 'Copyright by APaeffgen'
 
