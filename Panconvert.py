@@ -99,6 +99,25 @@ class StartQT5(QtWidgets.QMainWindow):
             files = self.ui.editor_window.toPlainText()
             filelist = files.split('\n')
 
+    def directory_dialog(self):
+        global data, openfiles, batch_open_path
+
+        batch_settings = QSettings('Pandoc', 'PanConvert')
+        batch_open_path = batch_settings.value('batch_open_path')
+
+
+        self.ui.OpenPath.clear()
+
+        fd = QtWidgets.QFileDialog(self)
+
+        if batch_open_path == '':
+            fd.setDirectory(QtCore.QDir.homePath())
+        else:
+            fd.setDirectory(batch_open_path)
+
+        batch_directory = fd.getExistingDirectory()
+        self.ui.OpenPath.insert(batch_directory)
+
 
     def file_save(self):
         from os.path import isfile
@@ -251,6 +270,16 @@ class StartQT5(QtWidgets.QMainWindow):
             self.print_log_messages(message)
 
         return error
+
+    def batch_settings(self):
+        batch_settings = QSettings('Pandoc', 'PanConvert')
+        batch_settings.setValue('batch_convert_directory', self.ui.ParameterBatchconvertDirectory.isChecked())
+        batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
+        batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
+        batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
+        batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
+        batch_settings.sync()
+        batch_settings.status()
 
 
 
@@ -655,6 +684,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.closeEvent = self.closeEvent
 
         if Button_NewGui is True or Button_NewGui is 'True' or Button_NewGui == 'true':
+
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
             Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
@@ -666,6 +696,25 @@ class StartQT5(QtWidgets.QMainWindow):
             if Tab_BatchConverter is True or Tab_BatchConverter is 'True' or Tab_BatchConverter == 'true':
                 self.ui.Converter_Type.setCurrentIndex(2)
 
+            ## Batch Settings##
+            batch_settings = QSettings('Pandoc', 'PanConvert')
+            settings = QSettings('Pandoc', 'PanConvert')
+
+            parameterBatchconvertDirectory = batch_settings.value('batch_convert_directory', True)
+            parameterBatchconvertFiles = batch_settings.value('batch_convert_files', False)
+            parameterBatchconvertRecursive = batch_settings.value('batch_convert_recursive', True)
+
+            # Path Settings
+            batch_open_path = batch_settings.value('batch_open_path')
+            self.ui.OpenPath.insert(batch_open_path)
+
+            # Filter Settings
+            batch_convert_filter = batch_settings.value('batch_convert_filter')
+            self.ui.Filter.insert(batch_convert_filter)
+
+            self.ui.Button_SetBatchConverter.clicked.connect(self.batch_settings)
+            self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
+
 
 
         '''File-Dialog Functions'''
@@ -673,6 +722,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionSave.triggered.connect(self.buffer_save)
         self.ui.actionSave_AS.triggered.connect(self.file_save_as)
         self.ui.actionNew.triggered.connect(self.file_new)
+
 
         '''File-Edit Menu Functions'''
         self.ui.actionUndo.triggered.connect(self.undo)
