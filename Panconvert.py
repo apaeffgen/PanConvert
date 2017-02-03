@@ -653,15 +653,17 @@ class StartQT5(QtWidgets.QMainWindow):
 
         self.ui.setupUi(self)
         self.ui.closeEvent = self.closeEvent
-        if Button_NewGui is True or Button_NewGui is 'True':
+
+        if Button_NewGui is True or Button_NewGui is 'True' or Button_NewGui == 'true':
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
             Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
-            if Tab_StandardConverter is True or Tab_StandardConverter is 'True':
+
+            if Tab_StandardConverter is True or Tab_StandardConverter is 'True' or Tab_StandardConverter == 'true':
                 self.ui.Converter_Type.setCurrentIndex(0)
-            if Tab_ManualConverter is True or Tab_ManualConverter is 'True':
+            if Tab_ManualConverter is True or Tab_ManualConverter is 'True' or Tab_ManualConverter == 'true':
                 self.ui.Converter_Type.setCurrentIndex(1)
-            if Tab_BatchConverter is True or Tab_BatchConverter is 'True':
+            if Tab_BatchConverter is True or Tab_BatchConverter is 'True' or Tab_BatchConverter == 'true':
                 self.ui.Converter_Type.setCurrentIndex(2)
 
 
