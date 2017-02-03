@@ -148,6 +148,17 @@ class StartQT5(QtWidgets.QMainWindow):
         text = text_undo
         self.ui.editor_window.setPlainText(text_undo)
 
+    def closeEvent(self, event):
+        settings = QSettings('Pandoc', 'PanConvert')
+
+        Dock_Size = settings.value('Dock_Size')
+        Window_Size = settings.value('Window_Size')
+        if Dock_Size is True or Dock_Size == 'true':
+            settings.setValue("geometry", self.saveState())
+        if Window_Size is True or Window_Size == 'true':
+            settings.setValue("size", self.size())
+            settings.setValue("pos", self.pos())
+
     def print_log_messages(self, message):
         global number
         self.ui.logBrowser.appendPlainText(message)
@@ -510,16 +521,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ToFormatsDialog.show()
 
 
-    def closeEvent(self, event):
-        settings = QSettings('Pandoc', 'PanConvert')
 
-        Dock_Size = settings.value('Dock_Size')
-        Window_Size = settings.value('Window_Size')
-        if Dock_Size is True or Dock_Size == 'true':
-            settings.setValue("geometry", self.saveState())
-        if Window_Size is True or Window_Size == 'true':
-            settings.setValue("size", self.size())
-            settings.setValue("pos", self.pos())
 
 
 
@@ -537,49 +539,12 @@ class StartQT5(QtWidgets.QMainWindow):
         toFormat = self.ui.ToParameter.text()
 
 
-        # ''' New Gui Events '''
-        #
-        # if Button_NewGui is True or Button_NewGui is 'True':
-        #     if fromFormat and toFormat != '':
-        #         extraParameter = self.ui.ExtraParameter.text()
-        #         self.export_manualconverter(fromFormat, toFormat, extraParameter)
-        #     else:
-        #         if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-        #             self.export_manualconverter("markdown", "latex", "--standalone")
-        #         elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-        #             self.export_manualconverter("markdown", "opml", "--standalone")
-        #         elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
-        #             self.export_markdown2lyx()
-        #         elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-        #             self.export_manualconverter("opml", "markdown", "--atx-header")
-        #         elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-        #             self.export_manualconverter("opml", "latex", "--standalone")
-        #         elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-        #             self.export_manualconverter("latex", "markdown", "--atx-header")
-        #         elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
-        #             self.export_manualconverter("latex", "opml", "--standalone")
-        #         elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-        #             self.export_manualconverter("html", "markdown", "--atx-header")
-        #         elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-        #             self.export_manualconverter("markdown", "html", "--standalone")
-        #         elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-        #             self.export_manualconverter("opml", "html", "--standalone")
-        #         elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-        #             self.export_manualconverter("html", "opml", "--standalone")
-        #         elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-        #             self.export_manualconverter("latex", "html", "--standalone")
-        #         elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-        #             self.export_manualconverter("html", "latex", "--standalone")
-        #         else:
-        #             message = error_equal_formats()
-        #             self.print_log_messages(message)
-        #
 
 
 
 
         ''' Old Gui Events '''
-        #if Button_OldGui is True or Button_OldGui is 'True':
+
         standard_conversion = self.ui.StandardConversion.isChecked()
         extraParameter = self.ui.ExtraParameter.text()
         batchConversion = self.ui.BatchConversion.isChecked()
