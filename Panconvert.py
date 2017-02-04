@@ -674,7 +674,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
         QtWidgets.QWidget.__init__(self, parent)
-        if Button_OldGui is True or Button_OldGui is 'True':
+        if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
             self.ui = Ui_notepad()
         else:
             self.ui = Ui_notepad_New()
@@ -683,7 +683,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.closeEvent = self.closeEvent
 
-        if Button_NewGui is True or Button_NewGui is 'True' or Button_NewGui == 'true':
+        if Button_NewGui is True or Button_NewGui is 'true' or Button_NewGui == 'true':
 
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
@@ -755,7 +755,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''Old Gui Functions '''''
 
-        if Button_OldGui is True or Button_OldGui is 'True':
+        if Button_OldGui is True or Button_OldGui == 'true':
             self.ui.ButtonBatch.clicked.connect(self.batch_dialog)
 
 
