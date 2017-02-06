@@ -15,7 +15,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys, os
+import sys, os, os.path
 
 from cx_Freeze import setup, Executable
 
@@ -29,6 +29,7 @@ if sys.platform == 'win32':
 
 options = {
     'build_exe': {
+        'packages': ['os'],
         'include_files' : ['source/language/Panconvert_de.qm', 'source/language/Panconvert_es.qm'],
         'includes': ['PyQt5.QtNetwork',
                      'PyQt5.QtWebKit',

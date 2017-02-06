@@ -39,7 +39,7 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
 
     try:
-        path_pandoc = get_path_pandoc()
+        os.path.isfile(path_pandoc)
 
 
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + openfile + '.' + ToFormat]

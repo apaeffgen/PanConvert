@@ -29,7 +29,8 @@ from source.language.messages import *
 
 def convert_universal(text, ToFormat, FromFormat, extra_args):
     try:
-        path_pandoc = get_path_pandoc()
+        os.path.isfile(path_pandoc)
+
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat]
 
         output = ''

@@ -18,6 +18,7 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from os import path
 import platform
 import subprocess
 from PyQt5.QtCore import QSettings
@@ -33,47 +34,52 @@ def get_path_pandoc():
     settings = QSettings('Pandoc', 'PanConvert')
     path_pandoc = settings.value('path_pandoc','')
 
+    if not os.path.isfile(path_pandoc):
 
-    if platform.system() == 'Darwin' or os.name == 'posix':
-        args = ['which', 'pandoc']
-        p = subprocess.Popen(
-            args,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
+        if platform.system() == 'Darwin' or os.name == 'posix':
+            args = ['which', 'pandoc']
 
-        path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+            print(path_pandoc)
+            p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
 
-        if len(path_pandoc) != 0:
+            path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
 
-            settings.setValue('path_pandoc', path_pandoc)
-            settings.sync()
-            return path_pandoc
+
+            if os.path.isfile(path_pandoc):
+
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
+                return path_pandoc
+
+            else:
+                message = error_converter_path()
+                return message
+
+
+        elif platform.system() == 'Windows':
+
+            args = ['where', 'pandoc']
+            p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
+
+            path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+
+            if os.path.isfile(path_pandoc):
+
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
+                return path_pandoc
+            else:
+                error_converter_path()
 
         else:
-            message = error_converter_path()
-            return message
+            error_os_detection()
 
-
-    elif platform.system() == 'Windows':
-
-        args = ['where', 'pandoc']
-        p = subprocess.Popen(
-            args,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
-
-        path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-
-        if len(path_pandoc) != 0:
-
-            settings.setValue('path_pandoc', path_pandoc)
-            settings.sync()
-            return path_pandoc
-        else:
-            error_converter_path()
-
-    else:
-        error_os_detection()
 
 
 def get_path_multimarkdown():
@@ -118,9 +124,8 @@ def get_pandoc_formats():
     """
     settings = QSettings('Pandoc', 'PanConvert')
     path_pandoc = settings.value('path_pandoc','')
-    if os.path.isfile(path_pandoc):
 
-        path_pandoc = get_path_pandoc()
+    if os.path.isfile(path_pandoc):
 
         p = subprocess.Popen(
             [path_pandoc, '-v'],
@@ -129,6 +134,7 @@ def get_pandoc_formats():
         output = p.communicate()[0].decode().splitlines(False)
         versionstr = output[0]
 
+
         if platform.system() == 'Windows':
             version = float(versionstr[10:15])
         else:
@@ -136,14 +142,13 @@ def get_pandoc_formats():
 
         if version < 1.18:
 
-                path_pandoc = get_path_pandoc()
                 p = subprocess.Popen(
                     [path_pandoc, '-h'],
                     stdin=subprocess.PIPE,
                     stdout=subprocess.PIPE)
                 help_text = p.communicate()[0].decode().splitlines(False)
                 txt = ' '.join(help_text[1:help_text.index('Options:')])
-                #txt = ' '.join(help_text)
+
 
                 aux = txt.split('Output formats: ')
                 in_ = aux[0].split('Input formats: ')[1].split(',')
@@ -154,7 +159,6 @@ def get_pandoc_formats():
 
         else:
 
-            path_pandoc = get_path_pandoc()
             p = subprocess.Popen(
                 [path_pandoc, '--list-input-formats'],
                 stdin=subprocess.PIPE,
@@ -162,7 +166,6 @@ def get_pandoc_formats():
             inputformats = p.communicate()[0].decode().splitlines(False)
 
 
-            path_pandoc = get_path_pandoc()
             p = subprocess.Popen(
                 [path_pandoc, '--list-output-formats'],
                 stdin=subprocess.PIPE,

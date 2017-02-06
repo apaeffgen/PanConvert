@@ -29,17 +29,19 @@ from distutils.util import strtobool
 #global openfile
 
 def convert_markdown2lyx(text):
-        path_multimarkdown = get_path_multimarkdown()
+        settings = QSettings('Pandoc', 'PanConvert')
+        path_multimarkdown = settings.value('path_multimarkdown','')
 
+        if os.path.isfile(path_multimarkdown):
 
-        args = [path_multimarkdown, '--to=lyx']
+                args = [path_multimarkdown, '--to=lyx']
 
-        p = subprocess.Popen(
-                args,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
+                p = subprocess.Popen(
+                        args,
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE)
 
-        return p.communicate(text.encode('utf-8'))[0].decode('utf-8')
+                return p.communicate(text.encode('utf-8'))[0].decode('utf-8')
 
 
 
@@ -48,16 +50,22 @@ def batch_convert_markdown2lyx(openfile):
         settings = QSettings('Pandoc', 'PanConvert')
         path_multimarkdown = settings.value('path_multimarkdown','')
 
-        args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + openfile + '.' + 'lyx']
-
-        p = subprocess.Popen(
-                args,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
+        if os.path.isfile(path_multimarkdown):
 
 
+            args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + openfile + '.' + 'lyx']
 
-        return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')
+            p = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE)
+
+
+
+            return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')
+
+
 
 
 

@@ -19,8 +19,11 @@ __author__ = 'apaeffgen'
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import datetime
+from source.dialogs.dialog_preferences import *
+import os
 
-
+settings = QSettings('Pandoc', 'PanConvert')
+path_pandoc = settings.value('path_pandoc','')
 
 _translate = QtCore.QCoreApplication.translate
 
@@ -181,4 +184,6 @@ def error_fatal():
                 ' Hopefully only your Options are incorrect!' \
                 '\n\nOr get some help from Panconvert / Pandoc!'))
 
+def debug_message():
+    QtWidgets.QMessageBox.warning(None, 'Warning-Message', 'If you can read this message, the code had been executed')
 

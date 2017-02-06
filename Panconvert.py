@@ -19,6 +19,7 @@ __author__ = 'apaeffgen'
 
 import codecs
 import os
+from os import path
 from PyQt5 import QtCore
 from PyQt5.QtCore import QPoint, QSize
 from source.dialogs.dialog_preferences import *
@@ -216,9 +217,11 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if len(path_pandoc) == 0:
             get_path_pandoc()
+            path_pandoc = settings.value('path_pandoc')
+
         elif not os.path.isfile(path_pandoc):
             get_path_pandoc()
-            path_pandoc = settings.value('path_pandoc','')
+            path_pandoc = settings.value('path_pandoc')
 
             if not os.path.isfile(path_pandoc):
 
@@ -233,16 +236,15 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if len(path_multimarkdown) == 0:
             get_path_multimarkdown()
-        else:
+            path_multimarkdown = settings.value('path_multimarkdown','')
+        elif not os.path.isfile(path_multimarkdown):
+            get_path_multimarkdown()
+            path_multimarkdown = settings.value('path_multimarkdown','')
+
             if not os.path.isfile(path_multimarkdown):
                 message = error_converter_path()
                 self.print_log_messages(message)
 
-        message = get_path_multimarkdown()
-
-        if message == '':
-            message = error_converter_path()
-            self.print_log_messages(message)
 
     def check_format(self,FromFormat,ToFormat):
         _translate = QtCore.QCoreApplication.translate
@@ -269,6 +271,8 @@ class StartQT5(QtWidgets.QMainWindow):
             message = _translate('extra_message', time + '\n' + ToFormats + '\n')
             self.print_log_messages(message)
 
+
+
         return error
 
     def batch_settings(self):
@@ -288,9 +292,11 @@ class StartQT5(QtWidgets.QMainWindow):
     ''' Function for the seperate multimarkdown to lyx converter. Only works, when multimarkdown is installed '''
 
     def export_markdown2lyx(self):
-        self.check_path_markdown()
         settings = QSettings('Pandoc', 'PanConvert')
         path_multimarkdown = settings.value('path_multimarkdown','')
+
+        if not os.path.isfile(path_multimarkdown):
+            self.check_path_markdown()
 
         global text, text_undo
 
@@ -310,12 +316,16 @@ class StartQT5(QtWidgets.QMainWindow):
     def export_batch_convert_lyx(self):
         global error
         error = 0
-        self.check_path_markdown()
+
         settings = QSettings('Pandoc', 'PanConvert')
         path_multimarkdown = settings.value('path_multimarkdown','')
+
+        if not os.path.isfile(path_multimarkdown):
+            self.check_path_markdown()
+            path_multimarkdown = settings.value('path_multimarkdown','')
+
+
         if os.path.isfile(path_multimarkdown):
-
-
             global openfile, filelist
 
             batch_settings = QSettings('Pandoc', 'PanConvert')
@@ -352,25 +362,28 @@ class StartQT5(QtWidgets.QMainWindow):
 
             elif batch_convert_recursive is False and batch_convert_directory is True:
                 message = ''
-                filelist = create_simplefilelist()
+                filelist, message = create_simplefilelist()
                 for openfiles in filelist:
                     if os.path.isfile(openfiles):
-                        message = batch_convert_markdown2lyx(openfiles)
+                        files = batch_convert_markdown2lyx(openfiles)
+                        if files == '':
+                            message_tmp = message_file_converted()
+                            message = message_tmp + openfiles + '\n'
+                            self.print_log_messages(message)
 
-                    if message == '':
-                        message_tmp = message_file_converted()
-                        message = message_tmp + openfiles + '\n'
-                        self.print_log_messages(message)
+                    else:
+                        errormessage = error_filelist()
+                        self.print_log_messages(errormessage)
 
 
             elif batch_convert_recursive is True and batch_convert_directory is True:
                 batch_open_path = batch_settings.value('batch_open_path')
 
-                filelistrecursive = create_filelist(batch_open_path)
+                filelistrecursive, message = create_filelist(batch_open_path)
                 for openfiles in filelistrecursive:
-                    message = batch_convert_markdown2lyx(openfiles)
+                    files = batch_convert_markdown2lyx(openfiles)
 
-                    if message == '':
+                    if files == '':
                         message_tmp = message_file_converted()
                         message = message_tmp + openfiles + '\n'
                         self.print_log_messages(message)
@@ -419,6 +432,7 @@ class StartQT5(QtWidgets.QMainWindow):
                         error_fatal()
 
 
+
             elif text == error_open_file():
 
                 error = self.check_format(fromFormat,toFormat)
@@ -426,7 +440,6 @@ class StartQT5(QtWidgets.QMainWindow):
                     output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
 
                     if output_content is not None:
-                        #self.ui.logBrowser.appendPlainText(output_content)
                         self.ui.editor_window.setPlainText(output_content)
                     else:
                         error_fatal()
@@ -434,6 +447,8 @@ class StartQT5(QtWidgets.QMainWindow):
                     text = output_content
             else:
                 error_fatal()
+        else:
+            error_fatal()
 
     ''' Functions for the batch conversion. '''
 
@@ -443,9 +458,15 @@ class StartQT5(QtWidgets.QMainWindow):
     def export_batch_conversion_manual(self, fromFormat, toFormat, extraParameter):
         global error
         error = 0
-        self.check_path()
+
         settings = QSettings('Pandoc', 'PanConvert')
         path_pandoc = settings.value('path_pandoc','')
+
+        if not os.path.isfile(path_pandoc):
+            self.check_path()
+            path_pandoc = settings.value('path_pandoc','')
+
+
         if os.path.isfile(path_pandoc):
 
             global openfile, filelist
@@ -708,9 +729,11 @@ class StartQT5(QtWidgets.QMainWindow):
             batch_open_path = batch_settings.value('batch_open_path')
             self.ui.OpenPath.insert(batch_open_path)
 
-            # Filter Settings
+            # Option Settings
             batch_convert_filter = batch_settings.value('batch_convert_filter')
             self.ui.Filter.insert(batch_convert_filter)
+
+
 
             self.ui.Button_SetBatchConverter.clicked.connect(self.batch_settings)
             self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
