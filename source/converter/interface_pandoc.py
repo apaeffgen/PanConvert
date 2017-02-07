@@ -191,14 +191,13 @@ def get_pandoc_options():
     path_pandoc = settings.value('path_pandoc','')
     if os.path.isfile(path_pandoc):
 
-        path_pandoc = get_path_pandoc()
-
         p = subprocess.Popen(
             [path_pandoc, '-v'],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE)
         output = p.communicate()[0].decode().splitlines(False)
         versionstr = output[0]
+
         if platform.system() == 'Windows':
             version = float(versionstr[10:15])
         else:
@@ -206,12 +205,13 @@ def get_pandoc_options():
 
         if version < 1.18:
 
-            path_pandoc = get_path_pandoc()
             p = subprocess.Popen(
                     [path_pandoc, '-h'],
                     stdin=subprocess.PIPE,
                     stdout=subprocess.PIPE)
             help_text = p.communicate()[0].decode().splitlines(True)
+
+
             aux = help_text[15:89]
 
             return aux
