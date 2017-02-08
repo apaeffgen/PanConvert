@@ -215,7 +215,7 @@ def get_pandoc_options():
 
 
         else:
-            path_pandoc = get_path_pandoc()
+
             p = subprocess.Popen(
                     [path_pandoc, '-h'],
                     stdin=subprocess.PIPE,
