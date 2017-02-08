@@ -38,8 +38,6 @@ def get_path_pandoc():
 
         if platform.system() == 'Darwin' or os.name == 'posix':
             args = ['which', 'pandoc']
-
-            print(path_pandoc)
             p = subprocess.Popen(
                 args,
                 stdin=subprocess.PIPE,

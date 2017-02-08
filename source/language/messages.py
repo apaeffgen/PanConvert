@@ -184,6 +184,6 @@ def error_fatal():
                 ' Hopefully only your Options are incorrect!' \
                 '\n\nOr get some help from Panconvert / Pandoc!'))
 
-def debug_message():
-    QtWidgets.QMessageBox.warning(None, 'Warning-Message', 'If you can read this message, the code had been executed')
+def debug_message(message):
+    QtWidgets.QMessageBox.warning(None, 'Warning-Message', message)
 
