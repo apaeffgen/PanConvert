@@ -1,3 +1,7 @@
+### Version 0.2.5
+- Code Cleanup
+- Bug Fix for the MacBinary Version
+
 ### Version 0.2.4
 - Added new Interface
 - Added possibility to use the old Interface instead

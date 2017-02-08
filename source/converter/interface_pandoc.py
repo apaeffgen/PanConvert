@@ -113,15 +113,8 @@ def get_path_multimarkdown():
         message = error_os_detection()
         return message
 
+def get_pandoc_version():
 
-
-
-
-def get_pandoc_formats():
-    """
-    Dynamic preprocessor for Pandoc formats.
-    Return 2 lists. "from_formats" and "to_formats".
-    """
     settings = QSettings('Pandoc', 'PanConvert')
     path_pandoc = settings.value('path_pandoc','')
 
@@ -139,6 +132,22 @@ def get_pandoc_formats():
             version = float(versionstr[10:15])
         else:
             version = float(versionstr[6:11])
+
+    return version
+
+
+
+def get_pandoc_formats():
+    """
+    Dynamic preprocessor for Pandoc formats.
+    Return 2 lists. "from_formats" and "to_formats".
+    """
+    settings = QSettings('Pandoc', 'PanConvert')
+    path_pandoc = settings.value('path_pandoc','')
+
+    if os.path.isfile(path_pandoc):
+
+        version = get_pandoc_version()
 
         if version < 1.18:
 
@@ -191,17 +200,7 @@ def get_pandoc_options():
     path_pandoc = settings.value('path_pandoc','')
     if os.path.isfile(path_pandoc):
 
-        p = subprocess.Popen(
-            [path_pandoc, '-v'],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
-        output = p.communicate()[0].decode().splitlines(False)
-        versionstr = output[0]
-
-        if platform.system() == 'Windows':
-            version = float(versionstr[10:15])
-        else:
-            version = float(versionstr[6:11])
+        version = get_pandoc_version()
 
         if version < 1.18:
 

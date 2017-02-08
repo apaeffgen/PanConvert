@@ -10,7 +10,7 @@ go to the Discussion Forum on Sourceforge
 
 ## The preconfigured conversion sets
 
-* These are the preconfigured standard converters. All documents are Standalone-Versions of the document.````
+* These are the preconfigured standard converters. All documents are Standalone-Versions of the document.
 * Make sure the Standard-Conversion Checkbox is marked. Otherwise you have to use the manual converter
 * The Batch-Conversion Checkbox has to be unchecked
 * Chose one From Format
