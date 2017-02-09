@@ -297,6 +297,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if not os.path.isfile(path_multimarkdown):
             self.check_path_markdown()
+            path_multimarkdown = settings.value('path_multimarkdown','')
 
         global text, text_undo
 
@@ -312,6 +313,10 @@ class StartQT5(QtWidgets.QMainWindow):
             else:
                 message = error_no_input()
                 self.print_log_messages(message)
+
+        else:
+            error = error_converter_path()
+            self.print_log_messages(error)
 
     def export_batch_convert_lyx(self):
         global error
@@ -392,7 +397,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_no_file()
                 self.print_log_messages(message)
         else:
-            error_converter_path()
+            error = error_converter_path()
+            self.print_log_messages(error)
 
 
 
@@ -407,12 +413,19 @@ class StartQT5(QtWidgets.QMainWindow):
     def export_manualconverter(self, fromFormat, toFormat, extraParameter):
         global error
         error = 0
-        self.check_path()
+
         settings = QSettings('Pandoc', 'PanConvert')
         path_pandoc = settings.value('path_pandoc','')
 
+        if not os.path.isfile(path_pandoc):
+            self.check_path()
+            path_pandoc = settings.value('path_pandoc','')
+
         if os.path.isfile(path_pandoc):
             global text, text_undo, openfil
+
+            path_pandoc = settings.value('path_pandoc','')
+
             text = self.ui.editor_window.toPlainText()
             text_undo = text
             if text == '':
@@ -448,7 +461,9 @@ class StartQT5(QtWidgets.QMainWindow):
             else:
                 error_fatal()
         else:
-            error_fatal()
+            error = error_converter_path()
+            self.print_log_messages(error)
+
 
     ''' Functions for the batch conversion. '''
 
@@ -527,6 +542,10 @@ class StartQT5(QtWidgets.QMainWindow):
                 else:
                     message = error_no_file()
                     self.print_log_messages(message)
+
+        else:
+            error = error_converter_path()
+            self.print_log_messages(error)
 
 
 

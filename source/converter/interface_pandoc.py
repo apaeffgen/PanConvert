@@ -40,8 +40,12 @@ def get_path_pandoc():
             args = ['which', 'pandoc']
             p = subprocess.Popen(
                 args,
-                stdin=subprocess.PIPE,
+                stdin=subprocess.DEVNULL,
                 stdout=subprocess.PIPE)
+            error = p.returncode
+
+            if error != None:
+                debug_message(error)
 
             path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
 
@@ -52,9 +56,6 @@ def get_path_pandoc():
                 settings.sync()
                 return path_pandoc
 
-            else:
-                message = error_converter_path()
-                return message
 
 
         elif platform.system() == 'Windows':
@@ -72,11 +73,7 @@ def get_path_pandoc():
                 settings.setValue('path_pandoc', path_pandoc)
                 settings.sync()
                 return path_pandoc
-            else:
-                error_converter_path()
 
-        else:
-            error_os_detection()
 
 
 
@@ -107,9 +104,7 @@ def get_path_multimarkdown():
         settings.setValue('path_multimarkdown', path_multimarkdown)
         settings.sync()
         return path_multimarkdown
-    else:
-        message = error_os_detection()
-        return message
+
 
 def get_pandoc_version():
 
