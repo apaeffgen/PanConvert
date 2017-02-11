@@ -467,7 +467,7 @@ class StartQT5(QtWidgets.QMainWindow):
     ''' Functions for the batch conversion. '''
 
 
-
+    ''' The main export batch function just decides which option of conversion '''
 
     def export_batch_conversion_manual(self, fromFormat, toFormat, extraParameter):
         global error
@@ -479,7 +479,6 @@ class StartQT5(QtWidgets.QMainWindow):
         if not os.path.isfile(path_pandoc):
             self.check_path()
             path_pandoc = settings.value('path_pandoc','')
-
 
         if os.path.isfile(path_pandoc):
 
@@ -505,47 +504,57 @@ class StartQT5(QtWidgets.QMainWindow):
             if error < 1:
 
                 if data is not '' and batch_convert_files is True:
-
-                    for openfiles in filelist:
-                        if os.path.isfile(openfiles) is True:
-                            self.ui.editor_window.setPlainText(data)
-                            message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                            self.print_log_messages(message)
-                        else:
-                            errormessage = error_filelist()
-                            self.print_log_messages(message)
+                    self.convert_batch_singlefile(fromFormat, toFormat, extraParameter)
 
                 elif batch_convert_recursive is False and batch_convert_directory is True:
-                    message = ''
-                    filelist, message = create_simplefilelist()
-                    for openfiles in filelist:
-                        if os.path.isfile(openfiles):
-                            files = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                            self.print_log_messages(files)
-                        else:
-                            errormessage = error_filelist()
-                            self.print_log_messages(errormessage)
-                    if message != '':
-                        self.print_log_messages(message)
+                    self.convert_batch_directory(fromFormat, toFormat, extraParameter)
 
                 elif batch_convert_recursive is True and batch_convert_directory is True:
-                    batch_open_path = batch_settings.value('batch_open_path')
-                    message = ''
-                    filelistrecursive, message = create_filelist(batch_open_path)
-                    for openfiles in filelistrecursive:
-                        files = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
-                        self.print_log_messages(files)
-                    if message != '':
-                        self.print_log_messages(message)
+                    self.convert_batch_drectory_recursive(fromFormat, toFormat, extraParameter)
 
                 else:
                     message = error_no_file()
                     self.print_log_messages(message)
-
         else:
             error = error_converter_path()
             self.print_log_messages(error)
 
+
+    def convert_batch_singlefile(self, fromFormat, toFormat, extraParameter):
+
+        for openfiles in filelist:
+            if os.path.isfile(openfiles) is True:
+                self.ui.editor_window.setPlainText(data)
+                message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
+                self.print_log_messages(message)
+            else:
+                errormessage = error_filelist()
+                self.print_log_messages(message)
+
+    def convert_batch_directory(self, fromFormat, toFormat, extraParameter):
+        message = ''
+        filelist, message = create_simplefilelist()
+        for openfiles in filelist:
+            if os.path.isfile(openfiles):
+                files = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
+                self.print_log_messages(files)
+            else:
+                errormessage = error_filelist()
+                self.print_log_messages(errormessage)
+        if message != '':
+            self.print_log_messages(message)
+
+    def convert_batch_drectory_recursive(self, fromFormat, toFormat, extraParameter):
+        batch_settings = QSettings('Pandoc', 'PanConvert')
+        batch_open_path = batch_settings.value('batch_open_path')
+
+        message = ''
+        filelistrecursive, message = create_filelist(batch_open_path)
+        for openfiles in filelistrecursive:
+            files = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
+            self.print_log_messages(files)
+        if message != '':
+            self.print_log_messages(message)
 
 
     """External Dialog Windows - Trigger Functions"""

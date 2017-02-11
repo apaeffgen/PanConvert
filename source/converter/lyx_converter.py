@@ -56,18 +56,19 @@ def batch_convert_markdown2lyx(openfile):
 
         if os.path.isfile(path_multimarkdown):
 
+                filename, file_extension = os.path.splitext(openfile)
 
-            args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + openfile + '.' + 'lyx']
+                args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + filename + '.' + 'lyx']
 
-            p = subprocess.Popen(
-                    args,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE)
+                p = subprocess.Popen(
+                        args,
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE)
 
 
 
-            return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')
+                return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')
 
 
 
