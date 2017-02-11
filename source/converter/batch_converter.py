@@ -31,6 +31,8 @@ import subprocess
 import os
 from source.converter.interface_pandoc import *
 
+settings = QSettings('Pandoc', 'PanConvert')
+path_pandoc = settings.value('path_pandoc')
 
 global openfiles
 

@@ -23,13 +23,17 @@ from source.converter.interface_pandoc import get_pandoc_formats
 from source.converter.interface_pandoc import get_path_pandoc
 from source.language.messages import *
 
-
+settings = QSettings('Pandoc', 'PanConvert')
+path_pandoc = settings.value('path_pandoc')
 
 
 
 def convert_universal(text, ToFormat, FromFormat, extra_args):
     try:
         os.path.isfile(path_pandoc)
+
+
+
 
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat]
 

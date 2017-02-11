@@ -26,6 +26,10 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 from distutils.util import strtobool
 
+
+settings = QSettings('Pandoc', 'PanConvert')
+path_pandoc = settings.value('path_pandoc')
+
 #global openfile
 
 def convert_markdown2lyx(text):

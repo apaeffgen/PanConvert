@@ -419,12 +419,11 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if not os.path.isfile(path_pandoc):
             self.check_path()
-            path_pandoc = settings.value('path_pandoc','')
+            path_pandoc = settings.value('path_pandoc')
 
         if os.path.isfile(path_pandoc):
             global text, text_undo, openfil
 
-            path_pandoc = settings.value('path_pandoc','')
 
             text = self.ui.editor_window.toPlainText()
             text_undo = text

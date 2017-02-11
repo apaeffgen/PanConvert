@@ -17,7 +17,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
+import os, shutil, io
 from os import path
 import platform
 import subprocess
@@ -29,6 +29,7 @@ global fromFormat
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc','')
 
+
 def get_path_pandoc():
 
     settings = QSettings('Pandoc', 'PanConvert')
@@ -37,18 +38,15 @@ def get_path_pandoc():
     if not os.path.isfile(path_pandoc):
 
         if platform.system() == 'Darwin' or os.name == 'posix':
+
             args = ['which', 'pandoc']
             p = subprocess.Popen(
                 args,
                 stdin=subprocess.DEVNULL,
-                stdout=subprocess.PIPE)
-            error = p.returncode
-
-            if error != None:
-                debug_message(error)
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
 
             path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-
 
             if os.path.isfile(path_pandoc):
 
