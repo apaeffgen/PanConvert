@@ -18,8 +18,8 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import codecs
-import os
-from os import path
+from os import *
+from os.path import isfile
 from PyQt5 import QtCore
 from PyQt5.QtCore import QPoint, QSize
 from source.dialogs.dialog_preferences import *
@@ -31,44 +31,44 @@ from source.dialogs.dialog_help import *
 from source.converter.lyx_converter import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
-
 from source.gui.panconvert_gui import Ui_notepad_New
 from source.gui.panconvert_gui_ext import Ui_notepad
 
-
 global openfile, filelist, actualLanguage, number
 
-
-
-
-# noinspection PyStatementEffect,PyAttributeOutsideInit,PyAttributeOutsideInit,PyAttributeOutsideInit
 class StartQT5(QtWidgets.QMainWindow):
     global openfile, filelist
 
-
     """File Dialog Functions"""
 
-    def file_dialog(self):
+    def file_new(self):
+        global text, number
+        number = 0
+        text = ''
+        self.ui.editor_window.setPlainText(text)
+        self.ui.logBrowser.setPlainText(text)
+        self.ui.actionSave.setEnabled(True)
+        self.ui.MessageNumber.display(number)
+
+    def file_open(self):
         global text, data, openfile, filelist, path_dialog
 
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
 
-
         batchConversion = self.ui.BatchConversion.isChecked()
 
         if batchConversion is False:
-
             fd = QtWidgets.QFileDialog(self)
+
             if path_dialog == '':
                 fd.setDirectory(QtCore.QDir.homePath())
             else:
                 fd.setDirectory(path_dialog)
 
-
             self.filename = fd.getOpenFileName()
             openfile = self.filename[0]
-            from os.path import isfile
+
             if isfile(self.filename[0]):
                 try:
                     text = codecs.open(self.filename[0], 'r', 'utf-8').read()
@@ -80,7 +80,6 @@ class StartQT5(QtWidgets.QMainWindow):
                     data = self.ui.editor_window.setPlainText(text)
                     self.print_log_messages(logtext)
 
-
         elif batchConversion is True:
 
             fd = QtWidgets.QFileDialog(self)
@@ -89,7 +88,6 @@ class StartQT5(QtWidgets.QMainWindow):
                 fd.setDirectory(QtCore.QDir.homePath())
             else:
                 fd.setDirectory(batch_open_path)
-
 
             self.filename = fd.getOpenFileNames()
             openfile = self.filename[0]
@@ -100,12 +98,11 @@ class StartQT5(QtWidgets.QMainWindow):
             files = self.ui.editor_window.toPlainText()
             filelist = files.split('\n')
 
-    def directory_dialog(self):
+    def file_batch_input_directory(self):
         global data, openfiles, batch_open_path
 
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
-
 
         self.ui.OpenPath.clear()
 
@@ -119,9 +116,26 @@ class StartQT5(QtWidgets.QMainWindow):
         batch_directory = fd.getExistingDirectory()
         self.ui.OpenPath.insert(batch_directory)
 
+    def file_batch_output_directory(self):
+        global data, openfiles, batch_open_path_output
+
+        batch_settings = QSettings('Pandoc', 'PanConvert')
+        batch_open_path_output = batch_settings.value('batch_open_path_output')
+
+        self.ui.OpenPathOutput.clear()
+
+        fd = QtWidgets.QFileDialog(self)
+
+        if batch_open_path_output == '':
+            fd.setDirectory(QtCore.QDir.homePath())
+        else:
+            fd.setDirectory(batch_open_path_output)
+
+        batch_directory = fd.getExistingDirectory()
+        self.ui.OpenPathOutput.insert(batch_directory)
+
 
     def file_save(self):
-        from os.path import isfile
         try:
             isfile(self.filename[0])
             file = codecs.open(self.filename[0], 'w', 'utf-8')
@@ -146,22 +160,29 @@ class StartQT5(QtWidgets.QMainWindow):
         file.write(filedata)
         file.close()
 
-    def file_new(self):
-        global text, number
-        number = 0
-        text = ''
-        self.ui.editor_window.setPlainText(text)
-        self.ui.logBrowser.setPlainText(text)
-        self.ui.actionSave.setEnabled(True)
-        self.ui.MessageNumber.display(number)
-
-
-
-
     def buffer_save(self):
         global text, text_undo
         text_undo = text
-        text = self.ui.editor_window.toPlainText()
+
+        path_dialog = settings.value('path_dialog')
+
+        try:
+            os.path.exists(self.filename[0])
+            file_exists = 1
+        except:
+            file_exists = 0
+
+        if file_exists == 1:
+            file, file_extension = os.path.splitext(self.filename[0])
+            buffer = io.open(file + '_tmp.txt', "w")
+            buffer.write(self.ui.editor_window.toPlainText())
+            buffer.close()
+        else:
+            #todo# make the buffer name changable in the preference dialog
+            file_tmp = path_dialog + '/' +  'buffer.txt'
+            buffer = io.open(file_tmp, "w")
+            buffer.write(self.ui.editor_window.toPlainText())
+            buffer.close()
 
     def undo(self):
         global text,text_undo
@@ -184,7 +205,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.logBrowser.appendPlainText(message)
         number = number + 1
         self.ui.MessageNumber.display(number)
-
 
     def windows_log_open(self):
         self.ui.dockLogWindow.show()
@@ -209,7 +229,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
-
     def check_path(self):
         global error
         settings = QSettings('Pandoc', 'PanConvert')
@@ -224,10 +243,8 @@ class StartQT5(QtWidgets.QMainWindow):
             path_pandoc = settings.value('path_pandoc')
 
             if not os.path.isfile(path_pandoc):
-
                 message = get_path_pandoc()
                 self.print_log_messages(message)
-
 
     def check_path_markdown(self):
         global error
@@ -244,7 +261,6 @@ class StartQT5(QtWidgets.QMainWindow):
             if not os.path.isfile(path_multimarkdown):
                 message = error_converter_path()
                 self.print_log_messages(message)
-
 
     def check_format(self,FromFormat,ToFormat):
         _translate = QtCore.QCoreApplication.translate
@@ -263,15 +279,12 @@ class StartQT5(QtWidgets.QMainWindow):
             message = time + '\n' + FromFormats + '\n'
             self.print_log_messages(message)
 
-
         if ToFormat not in to_formats:
             error =2
             ToFormats = warning_toFormat + '\n' + ', '.join(to_formats)
             time = timestamp()
             message = _translate('extra_message', time + '\n' + ToFormats + '\n')
             self.print_log_messages(message)
-
-
 
         return error
 
@@ -281,14 +294,12 @@ class StartQT5(QtWidgets.QMainWindow):
         batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
         batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
         batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
+        batch_settings.setValue('batch_open_path_output', self.ui.OpenPathOutput.text())
         batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
         batch_settings.sync()
         batch_settings.status()
 
-
-
     '''Export Functions'''
-
     ''' Function for the seperate multimarkdown to lyx converter. Only works, when multimarkdown is installed '''
 
     def export_markdown2lyx(self):
@@ -323,12 +334,11 @@ class StartQT5(QtWidgets.QMainWindow):
         error = 0
 
         settings = QSettings('Pandoc', 'PanConvert')
-        path_multimarkdown = settings.value('path_multimarkdown','')
+        path_multimarkdown = settings.value('path_multimarkdown', '')
 
         if not os.path.isfile(path_multimarkdown):
             self.check_path_markdown()
-            path_multimarkdown = settings.value('path_multimarkdown','')
-
+            path_multimarkdown = settings.value('path_multimarkdown', '')
 
         if os.path.isfile(path_multimarkdown):
             global openfile, filelist
@@ -423,8 +433,6 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if os.path.isfile(path_pandoc):
             global text, text_undo, openfil
-
-
             text = self.ui.editor_window.toPlainText()
             text_undo = text
             if text == '':
@@ -443,11 +451,9 @@ class StartQT5(QtWidgets.QMainWindow):
                     else:
                         error_fatal()
 
-
-
             elif text == error_open_file():
-
                 error = self.check_format(fromFormat,toFormat)
+
                 if error < 1:
                     output_content = convert_binary(openfile,toFormat,fromFormat,extraParameter)
 
@@ -463,10 +469,7 @@ class StartQT5(QtWidgets.QMainWindow):
             error = error_converter_path()
             self.print_log_messages(error)
 
-
     ''' Functions for the batch conversion. '''
-
-
     ''' The main export batch function just decides which option of conversion '''
 
     def export_batch_conversion_manual(self, fromFormat, toFormat, extraParameter):
@@ -481,28 +484,24 @@ class StartQT5(QtWidgets.QMainWindow):
             path_pandoc = settings.value('path_pandoc','')
 
         if os.path.isfile(path_pandoc):
-
             global openfile, filelist
 
             batch_settings = QSettings('Pandoc', 'PanConvert')
-            if platform.system() == 'Darwin':
 
+            if platform.system() == 'Darwin':
                 batch_convert_files = batch_settings.value('batch_convert_files')
                 batch_convert_directory = batch_settings.value('batch_convert_directory')
                 batch_convert_recursive = batch_settings.value('batch_convert_recursive')
 
             else:
-
                 batch_convert_files = bool(strtobool(batch_settings.value('batch_convert_files')))
                 batch_convert_directory = bool(strtobool(batch_settings.value('batch_convert_directory')))
                 batch_convert_recursive = bool(strtobool(batch_settings.value('batch_convert_recursive')))
 
             data = self.ui.editor_window.toPlainText()
-
             error = self.check_format(fromFormat,toFormat)
 
             if error < 1:
-
                 if data is not '' and batch_convert_files is True:
                     self.convert_batch_singlefile(fromFormat, toFormat, extraParameter)
 
@@ -519,14 +518,15 @@ class StartQT5(QtWidgets.QMainWindow):
             error = error_converter_path()
             self.print_log_messages(error)
 
-
     def convert_batch_singlefile(self, fromFormat, toFormat, extraParameter):
 
         for openfiles in filelist:
+
             if os.path.isfile(openfiles) is True:
                 self.ui.editor_window.setPlainText(data)
                 message = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                 self.print_log_messages(message)
+
             else:
                 errormessage = error_filelist()
                 self.print_log_messages(message)
@@ -534,10 +534,13 @@ class StartQT5(QtWidgets.QMainWindow):
     def convert_batch_directory(self, fromFormat, toFormat, extraParameter):
         message = ''
         filelist, message = create_simplefilelist()
+
         for openfiles in filelist:
+
             if os.path.isfile(openfiles):
                 files = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
                 self.print_log_messages(files)
+
             else:
                 errormessage = error_filelist()
                 self.print_log_messages(errormessage)
@@ -547,9 +550,10 @@ class StartQT5(QtWidgets.QMainWindow):
     def convert_batch_drectory_recursive(self, fromFormat, toFormat, extraParameter):
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
-
         message = ''
+
         filelistrecursive, message = create_filelist(batch_open_path)
+
         for openfiles in filelistrecursive:
             files = batch_convert_manual(openfiles,fromFormat,toFormat,extraParameter)
             self.print_log_messages(files)
@@ -571,7 +575,7 @@ class StartQT5(QtWidgets.QMainWindow):
         msg.setText(version())
         msg.setWindowTitle("About Dialog")
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        retval = msg.exec_()
+        msg.exec_()
 
 
     def preference_dialog(self):
@@ -752,27 +756,24 @@ class StartQT5(QtWidgets.QMainWindow):
             parameterBatchconvertFiles = batch_settings.value('batch_convert_files', False)
             parameterBatchconvertRecursive = batch_settings.value('batch_convert_recursive', True)
 
-            # Path Settings
+            # Batch Path Settings
             batch_open_path = batch_settings.value('batch_open_path')
             self.ui.OpenPath.insert(batch_open_path)
+            batch_open_path_output = batch_settings.value('batch_open_path_output')
+            self.ui.OpenPathOutput.insert(batch_open_path_output)
 
-            # Option Settings
+            # Batch Option Settings
             batch_convert_filter = batch_settings.value('batch_convert_filter')
             self.ui.Filter.insert(batch_convert_filter)
-
-
-
             self.ui.Button_SetBatchConverter.clicked.connect(self.batch_settings)
-            self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
-
-
+            self.ui.Button_Open_Path.clicked.connect(self.file_batch_input_directory)
+            self.ui.Button_Open_Path_Output.clicked.connect(self.file_batch_output_directory)
 
         '''File-Dialog Functions'''
-        self.ui.actionOpen.triggered.connect(self.file_dialog)
+        self.ui.actionOpen.triggered.connect(self.file_open)
         self.ui.actionSave.triggered.connect(self.buffer_save)
         self.ui.actionSave_AS.triggered.connect(self.file_save_as)
         self.ui.actionNew.triggered.connect(self.file_new)
-
 
         '''File-Edit Menu Functions'''
         self.ui.actionUndo.triggered.connect(self.undo)
@@ -783,7 +784,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionBelow.triggered.connect(self.logviewer_bottom)
         self.ui.actionLeft.triggered.connect(self.logviewer_left)
         self.ui.actionRight.triggered.connect(self.logviewer_right)
-
 
         '''Helper-Functions for manual conversion'''
         self.ui.ButtonFromFormat.clicked.connect(self.fromformats_dialog)
@@ -808,14 +808,7 @@ class StartQT5(QtWidgets.QMainWindow):
         if Button_OldGui is True or Button_OldGui == 'true':
             self.ui.ButtonBatch.clicked.connect(self.batch_dialog)
 
-
         '''Setting-Initialization and Default Settings for the first start'''
-        # settings = QSettings('Pandoc', 'PanConvert')
-        # actualLanguage = settings.value('default_language')
-        #
-        # Button_OldGui = settings.value('Button_OldGui', True)
-        # Button_NewGui = settings.value('Button_NewGui', False)
-
 
         Window_Size = settings.value('Window_Size')
         Dock_Size = settings.value('Dock_Size')
@@ -826,12 +819,10 @@ class StartQT5(QtWidgets.QMainWindow):
             self.resize(settings.value("size", QSize(270, 225)))
             self.move(settings.value("pos", QPoint(50, 50)))
 
-
         path_dialog = settings.value('path_dialog')
         fromParameter = settings.value('fromParameter')
         toParameter = settings.value('toParameter')
         xtraParameter = settings.value('xtraParameter')
-
 
         From_Markdown = settings.value('From_Markdown', False)
         From_Html = settings.value('From_Html', False)
@@ -843,7 +834,6 @@ class StartQT5(QtWidgets.QMainWindow):
         To_Latex = settings.value('To_Latex', False)
         To_Opml = settings.value('To_Opml', False)
         To_Lyx = settings.value('To_Lyx', False)
-
 
         Standard_Conversion = settings.value('Standard_Conversion', False)
         Batch_Conversion = settings.value('Batch_Conversion', False)
@@ -865,7 +855,6 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.ToParameter.setText(toParameter)
                 self.ui.ExtraParameter.setText(xtraParameter)
 
-
             else:
                 self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
                 self.ui.BatchConversion.setChecked(strtobool(Batch_Conversion))
@@ -882,11 +871,9 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.ToParameter.setText(toParameter)
                 self.ui.ExtraParameter.setText(xtraParameter)
 
-
 if __name__ == "__main__":
     import sys
     global actualLanguage
-
 
     settings = QSettings('Pandoc', 'PanConvert')
     actualLanguage = settings.value('default_language')
@@ -895,7 +882,6 @@ if __name__ == "__main__":
 
     _translate = QtCore.QTranslator()
     script_dir = os.path.dirname(sys.argv[0])
-
 
     if actualLanguage == 'Deutsch':
         german_language = script_dir + "/Panconvert_de.qm"
@@ -911,15 +897,7 @@ if __name__ == "__main__":
         else:
             _translate.load("source/language/Panconvert_es.qm")
 
-
-
-
-
-
-
     app.installTranslator(_translate)
     myapp = StartQT5()
     myapp.show()
     sys.exit(app.exec_())
-
-

@@ -33,8 +33,10 @@ from source.converter.interface_pandoc import *
 
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')
+batch_settings = QSettings('Pandoc', 'PanConvert')
+batch_open_path_output = batch_settings.value('batch_open_path_output')
 
-global openfiles
+global openfiles, filelist
 
 
 def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
@@ -44,8 +46,11 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
         os.path.isfile(path_pandoc)
 
         filename, file_extension = os.path.splitext(openfile)
-        args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + filename + '.' + ToFormat]
-
+        if batch_open_path_output == '':
+            args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + filename + '.' + ToFormat]
+        else:
+            outputfile = os.path.basename(filename)
+            args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + batch_open_path_output + '/' + outputfile + '.' + ToFormat]
         if extra_args is not '' :
             extra_args = extra_args.split(';')
             for arg in extra_args:

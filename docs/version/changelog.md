@@ -1,3 +1,10 @@
+### Version 0.2.6
+- Batch Converter save file without the original extension
+- Added seperat Batch Ouptut directory
+- Added support for sphinx documentation tool
+- Switched binary creation tool to pyinstaller
+- Code Cleanup
+
 ### Version 0.2.5
 - Code Cleanup
 - Bug Fix for the MacBinary Version

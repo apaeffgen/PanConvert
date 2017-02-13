@@ -48,8 +48,6 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.ButtonMarkdownPath.clicked.connect(self.DirectoryMarkdown)
         self.ui.ButtonOpenSavePath.clicked.connect(self.DirectoryOpenSave)
 
-
-
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
 
@@ -75,11 +73,9 @@ class PreferenceDialog(QtWidgets.QDialog):
         Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
         Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
 
-
         #Size of Dialog Windows
         self.resize(settings.value("Preference_size", QSize(270, 225)))
         self.move(settings.value("Preference_pos", QPoint(50, 50)))
-
 
         #Paths and Parameters
         path_pandoc = settings.value('path_pandoc')
@@ -133,7 +129,6 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Button_NewGui.setChecked(Button_NewGui)
                 self.ui.Tab_StandardConverter.setChecked(Tab_StandardConverter)
                 self.ui.Tab_ManualConverter.setChecked(Tab_ManualConverter)
-                self.ui.Tab_BatchConverter.setChecked(Tab_BatchConverter)
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
@@ -154,11 +149,6 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Button_NewGui.setChecked(strtobool(Button_NewGui))
                 self.ui.Tab_StandardConverter.setChecked(strtobool(Tab_StandardConverter))
                 self.ui.Tab_ManualConverter.setChecked(strtobool(Tab_ManualConverter))
-                self.ui.Tab_BatchConverter.setChecked(strtobool(Tab_BatchConverter))
-
-
-
-
 
     def cancel_dialog(self):
         PreferenceDialog.close(self)
@@ -175,7 +165,6 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('Button_NewGui', self.ui.Button_NewGui.isChecked())
         settings.setValue('Tab_StandardConverter', self.ui.Tab_StandardConverter.isChecked())
         settings.setValue('Tab_ManualConverter', self.ui.Tab_ManualConverter.isChecked())
-        settings.setValue('Tab_BatchConverter', self.ui.Tab_BatchConverter.isChecked())
 
         settings.setValue('path_pandoc', self.ui.Pandoc_Path.text())
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
