@@ -21,7 +21,7 @@ exe = EXE(pyz,
           options,
           exclude_binaries=True,
           name='Panconvert',
-          debug=True,
+          debug=False,
           strip=False,
           upx=True,
           console=False )
