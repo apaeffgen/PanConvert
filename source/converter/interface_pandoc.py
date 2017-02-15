@@ -42,7 +42,19 @@ def get_path_pandoc():
             if platform.system() == 'Darwin' or os.name == 'posix':
                 which("pandoc")
             else:
-                search_pandoc()
+                args = ['where', 'pandoc']
+                p = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE)
+
+                path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+
+                if os.path.isfile(path_pandoc):
+
+                    settings.setValue('path_pandoc', path_pandoc)
+                    settings.sync()
+                    return path_pandoc
         else:
             if platform.system() == 'Darwin' or os.name == 'posix':
 
