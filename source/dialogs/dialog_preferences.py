@@ -92,6 +92,11 @@ class PreferenceDialog(QtWidgets.QDialog):
         xtraParameter = settings.value('xtraParameter')
         self.ui.XtraParameter.insert(xtraParameter)
 
+        #Buffer Save Parameters
+        BufferSaveSuffix = settings.value('BufferSaveSuffix')
+        self.ui.BufferSaveSuffix.insert(BufferSaveSuffix)
+        BufferSaveName = settings.value('BufferSaveName')
+        self.ui.BufferSaveName.insert(BufferSaveName)
 
         #Checkboxes
         Standard_Conversion = settings.value('Standard_Conversion', False)
@@ -170,6 +175,8 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('path_multimarkdown', self.ui.Markdown_Path.text())
         settings.setValue('path_dialog', self.ui.Dialog_Path.text())
 
+        settings.setValue('BufferSaveSuffix', self.ui.BufferSaveSuffix.text())
+        settings.setValue('BufferSaveName', self.ui.BufferSaveName.text())
 
         settings.setValue('fromParameter', self.ui.FromParameter.text())
         settings.setValue('toParameter', self.ui.ToParameter.text())

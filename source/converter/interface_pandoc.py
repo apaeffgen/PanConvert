@@ -17,12 +17,13 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, shutil, io
+import os, shutil, io, sys
 from os import path
 import platform
 import subprocess
 from PyQt5.QtCore import QSettings
 from source.language.messages import *
+from source.converter.search_converter import *
 
 global fromFormat
 
@@ -37,43 +38,44 @@ def get_path_pandoc():
 
     if not os.path.isfile(path_pandoc):
 
-        if platform.system() == 'Darwin' or os.name == 'posix':
+        if getattr( sys, 'frozen', False ):
+            if platform.system() == 'Darwin' or os.name == 'posix':
+                which("pandoc")
+            else:
+                search_pandoc()
+        else:
+            if platform.system() == 'Darwin' or os.name == 'posix':
 
-            args = ['which', 'pandoc']
-            p = subprocess.Popen(
-                args,
-                stdin=subprocess.DEVNULL,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE)
+                args = ['which', 'pandoc']
+                p = subprocess.Popen(
+                    args,
+                    stdin=subprocess.DEVNULL,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE)
 
-            path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+                path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
 
-            if os.path.isfile(path_pandoc):
+                if os.path.isfile(path_pandoc):
 
-                settings.setValue('path_pandoc', path_pandoc)
-                settings.sync()
-                return path_pandoc
+                    settings.setValue('path_pandoc', path_pandoc)
+                    settings.sync()
+                    return path_pandoc
 
+            elif platform.system() == 'Windows':
 
+                args = ['where', 'pandoc']
+                p = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE)
 
-        elif platform.system() == 'Windows':
+                path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
 
-            args = ['where', 'pandoc']
-            p = subprocess.Popen(
-                args,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE)
+                if os.path.isfile(path_pandoc):
 
-            path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-
-            if os.path.isfile(path_pandoc):
-
-                settings.setValue('path_pandoc', path_pandoc)
-                settings.sync()
-                return path_pandoc
-
-
-
+                    settings.setValue('path_pandoc', path_pandoc)
+                    settings.sync()
+                    return path_pandoc
 
 def get_path_multimarkdown():
     settings = QSettings('Pandoc', 'PanConvert')
@@ -221,6 +223,17 @@ def get_pandoc_options():
     else:
         message = error_converter_path()
         return message
+
+def which(target):
+    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin'
+    pathlist = pathlist_tmp.split(":")
+    for p in pathlist:
+        fullpath = p + "/" + target
+        if os.path.isfile(fullpath) and os.access(fullpath, os.X_OK):
+            path_pandoc = fullpath
+            settings.setValue('path_pandoc', path_pandoc)
+            settings.sync()
+            return path_pandoc
 
 
 

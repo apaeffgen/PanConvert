@@ -17,7 +17,6 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-
 from source.converter.interface_pandoc import *
 import subprocess
 import platform, os, glob
@@ -26,51 +25,46 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 from distutils.util import strtobool
 
-
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')
 
-#global openfile
-
 def convert_markdown2lyx(text):
-        settings = QSettings('Pandoc', 'PanConvert')
-        path_multimarkdown = settings.value('path_multimarkdown','')
+    settings = QSettings('Pandoc', 'PanConvert')
+    path_multimarkdown = settings.value('path_multimarkdown','')
 
-        if os.path.isfile(path_multimarkdown):
+    if os.path.isfile(path_multimarkdown):
 
-                args = [path_multimarkdown, '--to=lyx']
+            args = [path_multimarkdown, '--to=lyx']
 
-                p = subprocess.Popen(
-                        args,
-                        stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE)
+            p = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE)
 
-                return p.communicate(text.encode('utf-8'))[0].decode('utf-8')
-
-
+            return p.communicate(text.encode('utf-8'))[0].decode('utf-8')
 
 def batch_convert_markdown2lyx(openfile):
 
-        settings = QSettings('Pandoc', 'PanConvert')
-        path_multimarkdown = settings.value('path_multimarkdown','')
+    settings = QSettings('Pandoc', 'PanConvert')
+    path_multimarkdown = settings.value('path_multimarkdown','')
+    batch_settings = QSettings('Pandoc', 'PanConvert')
+    batch_open_path_output = batch_settings.value('batch_open_path_output')
 
-        if os.path.isfile(path_multimarkdown):
+    if os.path.isfile(path_multimarkdown):
 
-                filename, file_extension = os.path.splitext(openfile)
+        filename, file_extension = os.path.splitext(openfile)
 
-                args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + filename + '.' + 'lyx']
+        if batch_open_path_output == '':
+            args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + filename + '.' + 'lyx']
 
-                p = subprocess.Popen(
-                        args,
-                        stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE)
+        else:
+            outputfile = os.path.basename(filename)
+            args = [path_multimarkdown, openfile, '--to=' + 'lyx',  '--output=' + batch_open_path_output + '/' + outputfile + '.' + 'lyx']
 
-
-
-                return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')
-
-
-
-
-
+        p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
+#TODO# WRITE ERROR RETURN CODES
+        return p.communicate(openfile.encode('utf-8'))[0].decode('utf-8')

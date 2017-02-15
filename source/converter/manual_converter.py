@@ -24,11 +24,9 @@ from source.converter.interface_pandoc import get_path_pandoc
 from source.language.messages import *
 
 settings = QSettings('Pandoc', 'PanConvert')
-path_pandoc = settings.value('path_pandoc')
-
-
 
 def convert_universal(text, ToFormat, FromFormat, extra_args):
+    path_pandoc = settings.value('path_pandoc')
     try:
         os.path.isfile(path_pandoc)
 
@@ -76,11 +74,9 @@ def convert_universal(text, ToFormat, FromFormat, extra_args):
         error_converter_path()
 
 def convert_binary(openfile,ToFormat,FromFormat,extra_args):
-    # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
-
+    path_pandoc = settings.value('path_pandoc')
     try:
-        path_pandoc = get_path_pandoc()
-
+        os.path.isfile(path_pandoc)
 
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile]
 
@@ -88,7 +84,6 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
             extra_args = extra_args.split(';')
             for arg in extra_args:
                 args.append(arg)
-
 
         output = error_unknown()
 
@@ -118,11 +113,6 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
             error_fatal()
 
         return output
-
-
-
-
-        #return p.communicate(output.encode('utf-8'))[0].decode('utf-8')
 
     except OSError:
         error_converter_path()

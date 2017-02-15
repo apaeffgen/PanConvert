@@ -34,14 +34,14 @@ from source.converter.interface_pandoc import *
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')
 batch_settings = QSettings('Pandoc', 'PanConvert')
-batch_open_path_output = batch_settings.value('batch_open_path_output')
+
 
 global openfiles, filelist
 
 
 def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
-
+    batch_open_path_output = batch_settings.value('batch_open_path_output')
     try:
         os.path.isfile(path_pandoc)
 
@@ -56,7 +56,6 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
             for arg in extra_args:
                 args.append(arg)
 
-
         output = error_unknown()
 
         p = subprocess.Popen(
@@ -67,7 +66,6 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
 
         error1 = p.communicate(output.encode('utf-8'))
 
-
         if p.returncode != 0:
             result = ''
             message = 'An Error occurred. {}'.format(error1)
@@ -77,7 +75,6 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
             message = message_tmp + openfile + '\n'
 
         return message
-
 
     except OSError:
         message = error_converter_path()

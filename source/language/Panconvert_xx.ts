@@ -56,198 +56,208 @@
 <context>
     <name>DialogPreferences</name>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="201"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="219"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="220"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="238"/>
         <source>Default From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="221"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="239"/>
         <source>HTML</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="222"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="240"/>
         <source>Latex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="223"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="241"/>
         <source>Markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="224"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="242"/>
         <source>Opml</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="210"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="228"/>
         <source>Default To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="215"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="233"/>
         <source>Lyx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="203"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="221"/>
         <source>Manual Converter Defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="204"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="222"/>
         <source>-o filename.odt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="205"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="223"/>
         <source>markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="206"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="224"/>
         <source>odt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="207"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="225"/>
         <source>From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="208"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="226"/>
         <source>To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="209"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="227"/>
         <source>Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="236"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="254"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="237"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="255"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="227"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="245"/>
         <source>Standard Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="228"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="246"/>
         <source>Batch Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="217"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="235"/>
         <source>/usr/local/bin/pandoc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="218"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="236"/>
         <source>/usr/local/bin/multimarkdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="219"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="237"/>
         <source>/Users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="232"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="250"/>
         <source>Path to Pandoc Binary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="233"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="251"/>
         <source>Path to Markdown Binary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="234"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="252"/>
         <source>Open / Save - Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="231"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="249"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="229"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="247"/>
         <source>Language Selector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="235"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="253"/>
         <source>General Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="238"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="256"/>
         <source>Save Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="239"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="257"/>
         <source>Size of Main Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="240"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="258"/>
         <source>Size of Dock Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="241"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="259"/>
         <source>Size of Dialog Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="242"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="260"/>
         <source>Gui Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="243"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="261"/>
         <source>New Style Gui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="244"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="262"/>
         <source>Old Style Gui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="245"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="263"/>
         <source>Tab Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="246"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="264"/>
         <source>Standard Converter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="247"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="265"/>
         <source>Manual Converter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="248"/>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="268"/>
         <source>Extra Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="266"/>
+        <source>Buffer Save Suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="267"/>
+        <source>Buffer Save Name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -338,91 +348,96 @@
 <context>
     <name>message</name>
     <message>
-        <location filename="source/language/messages.py" line="73"/>
+        <location filename="source/language/messages.py" line="80"/>
         <source>No Converter (Pandoc or Multimardown) could be found on your System. Are they installed?If so, please check the Pandoc / Multimarkdown Path in your Preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="65"/>
+        <location filename="source/language/messages.py" line="72"/>
         <source>No file has been selected. Check your Filters and settings.Check your files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="95"/>
+        <location filename="source/language/messages.py" line="102"/>
         <source>You have no Data to be converted. Please make an input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="103"/>
+        <location filename="source/language/messages.py" line="110"/>
         <source>You have to open at least one file in file conversion mode. &lt;br&gt;Did you put in from / to - formats? &lt;br&gt;If you are in directory mode, did you specify a directory? &lt;br&gt; Check your settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="184"/>
+        <location filename="source/language/messages.py" line="191"/>
         <source>Somthing went terribly wrong.  Hopefully only your Options are incorrect!
 
 Or get some help from Panconvert / Pandoc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="115"/>
+        <location filename="source/language/messages.py" line="122"/>
         <source>The Standard Converter can not handle binary files. If it is a docx-file, try the Manual Converter. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="124"/>
+        <location filename="source/language/messages.py" line="131"/>
         <source>The from-Format and to-Format should not be identical.&lt;br&gt;&lt;br&gt; If you picked to-Lyx, only from-markdown is a valid option.&lt;br&gt;&lt;br&gt;Please make a different choice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="133"/>
+        <location filename="source/language/messages.py" line="140"/>
         <source>If you fill in Arguments and uncheck the Box &quot;Standard&quot;, you have to provide at least the following Parameters: From, To. &lt;br&gt;&lt;br&gt;  Some Formats like odt, epub need an input for &quot;Parameter&quot;. Otherwise there will be no output at all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="143"/>
+        <location filename="source/language/messages.py" line="150"/>
         <source>If you can read this message, something went wrong. Get some help at http://panconvert.sourceforge.net/help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="152"/>
+        <location filename="source/language/messages.py" line="159"/>
         <source>There had been no output. Did you use the --output option to write a file?
 If so, check your filesystem in the folder where Pandoc is installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="160"/>
+        <location filename="source/language/messages.py" line="167"/>
         <source>No Preview of the File-Data possible. Try to manually convert. Good Luck.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="168"/>
+        <location filename="source/language/messages.py" line="175"/>
         <source>Some file input was not correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="81"/>
+        <location filename="source/language/messages.py" line="88"/>
         <source>Could not detect a Converter. Please fill in the Path to Pandoc or Multimarkdown manually via Preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="175"/>
+        <location filename="source/language/messages.py" line="182"/>
         <source>The following file was convertet: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="58"/>
+        <location filename="source/language/messages.py" line="65"/>
         <source>Invalid from format! Expected one of these: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/language/messages.py" line="59"/>
+        <location filename="source/language/messages.py" line="66"/>
         <source>Invalid to format! Expected one of these: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="source/language/messages.py" line="53"/>
         <source>The following file selection was made: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/language/messages.py" line="59"/>
+        <source>To use this function, you have to fill in BufferSaveName and BufferSaveSuffix in the Preference Dialog.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

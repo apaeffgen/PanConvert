@@ -53,6 +53,13 @@ def message_file_selection():
     message = time + '\n' + file_selection_message + '\n'
     return message
 
+def error_buffer_name():
+    time = timestamp()
+    buffer_name_error = _translate('message', 'To use this function, you have to fill in '\
+                        'BufferSaveName and BufferSaveSuffix in the Preference Dialog.')
+    message = time + '\n' + buffer_name_error + '\n'
+    return message
+
 def error_formats():
     warning_fromFormat = _translate('message', 'Invalid from format! Expected one of these: ')
     warning_toFormat = _translate('message', 'Invalid to format! Expected one of these: ')

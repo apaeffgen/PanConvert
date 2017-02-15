@@ -1,7 +1,8 @@
 ### Version 0.2.6
 - Batch Converter save file without the original extension
 - Added seperat Batch Ouptut directory
-- Added support for sphinx documentation tool
+- Added Buffer SaveToFile Option
+- Added BufferSaveSuffix and BufferSaveName fields
 - Switched binary creation tool to pyinstaller
 - Code Cleanup
 

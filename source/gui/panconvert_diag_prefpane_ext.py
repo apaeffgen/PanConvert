@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_prefpane_ext.ui'
 #
-# Created: Mon Feb 13 11:18:18 2017
+# Created: Tue Feb 14 10:43:32 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -189,6 +189,24 @@ class Ui_DialogPreferences(object):
         self.Tab_ManualConverter = QtWidgets.QRadioButton(self.Tab_Selection)
         self.Tab_ManualConverter.setGeometry(QtCore.QRect(10, 60, 171, 20))
         self.Tab_ManualConverter.setObjectName("Tab_ManualConverter")
+        self.widget = QtWidgets.QWidget(self.tab_size_pref)
+        self.widget.setGeometry(QtCore.QRect(10, 10, 262, 54))
+        self.widget.setObjectName("widget")
+        self.gridLayout = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setObjectName("gridLayout")
+        self.label = QtWidgets.QLabel(self.widget)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.BufferSaveSuffix = QtWidgets.QLineEdit(self.widget)
+        self.BufferSaveSuffix.setObjectName("BufferSaveSuffix")
+        self.gridLayout.addWidget(self.BufferSaveSuffix, 0, 1, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.widget)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+        self.BufferSaveName = QtWidgets.QLineEdit(self.widget)
+        self.BufferSaveName.setObjectName("BufferSaveName")
+        self.gridLayout.addWidget(self.BufferSaveName, 1, 1, 1, 1)
         self.tabWidget.addTab(self.tab_size_pref, "")
 
         self.retranslateUi(DialogPreferences)
@@ -245,5 +263,7 @@ class Ui_DialogPreferences(object):
         self.Tab_Selection.setTitle(_translate("DialogPreferences", "Tab Selection"))
         self.Tab_StandardConverter.setText(_translate("DialogPreferences", "Standard Converter"))
         self.Tab_ManualConverter.setText(_translate("DialogPreferences", "Manual Converter"))
+        self.label.setText(_translate("DialogPreferences", "Buffer Save Suffix"))
+        self.label_2.setText(_translate("DialogPreferences", "Buffer Save Name"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_size_pref), _translate("DialogPreferences", "Extra Preferences"))
 

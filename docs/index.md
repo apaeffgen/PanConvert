@@ -3,8 +3,8 @@ Panconvert is a GUI-Wrapper for the document converter [pandoc](http://pandoc.or
 
 ## How to use Panconvert and Pandoc
 
-- For detailed help see [the User_Guide Section](http://panconvert.readthedocs.io/en/latest/User_Guide/Basic_Usage/)
-- A [detailled installation Instruction](http://panconvert.readthedocs.io/en/latest/Xtras/Install_Instructions/)
+- For detailed help see [the User_Guide Section](http://panconvert.readthedocs.io/User_Guide/Basic_Usage/)
+- A [detailled installation Instruction](http://panconvert.readthedocs.io/Xtras/Install_Instructions/)
 
 ## Features
 
