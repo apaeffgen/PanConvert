@@ -40,7 +40,9 @@ def get_path_pandoc():
 
         if getattr( sys, 'frozen', False ):
             if platform.system() == 'Darwin' or os.name == 'posix':
-                which("pandoc")
+                path_pandoc = which("pandoc")
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
             else:
                 args = ['where', 'pandoc']
                 p = subprocess.Popen(
@@ -93,29 +95,47 @@ def get_path_multimarkdown():
     settings = QSettings('Pandoc', 'PanConvert')
     path_multimarkdown = settings.value('path_multimarkdown','')
 
-    if platform.system() == 'Darwin' or os.name == 'posix':
-        args = ['which', 'multimarkdown']
-        p = subprocess.Popen(
-            args,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
+    if getattr( sys, 'frozen', False ):
+            if platform.system() == 'Darwin' or os.name == 'posix':
+                path_multimarkdown = which("multimarkdown")
+                settings.setValue('path_multimarkdown', path_multimarkdown)
+                settings.sync()
+            else:
+                args = ['where', 'multimarkdown']
+                p = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE)
 
-        path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
-        settings.setValue('path_multimarkdown', path_multimarkdown)
-        settings.sync()
-        return path_multimarkdown
+                path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+                settings.setValue('path_multimarkdown', path_multimarkdown)
+                settings.sync()
+                return path_multimarkdown
+    else:
 
-    elif platform.system() == 'Windows':
-        args = ['where', 'multimarkdown']
-        p = subprocess.Popen(
-            args,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
+        if platform.system() == 'Darwin' or os.name == 'posix':
+            args = ['which', 'multimarkdown']
+            p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
 
-        path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
-        settings.setValue('path_multimarkdown', path_multimarkdown)
-        settings.sync()
-        return path_multimarkdown
+            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+            settings.setValue('path_multimarkdown', path_multimarkdown)
+            settings.sync()
+            return path_multimarkdown
+
+        elif platform.system() == 'Windows':
+            args = ['where', 'multimarkdown']
+            p = subprocess.Popen(
+                args,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE)
+
+            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+            settings.setValue('path_multimarkdown', path_multimarkdown)
+            settings.sync()
+            return path_multimarkdown
 
 
 def get_pandoc_version():
@@ -243,8 +263,7 @@ def which(target):
         fullpath = p + "/" + target
         if os.path.isfile(fullpath) and os.access(fullpath, os.X_OK):
             path_pandoc = fullpath
-            settings.setValue('path_pandoc', path_pandoc)
-            settings.sync()
+
             return path_pandoc
 
 
