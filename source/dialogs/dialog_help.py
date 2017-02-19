@@ -34,6 +34,8 @@ class HelpDialog(QtWidgets.QDialog):
         self.ui.ButtonHelpPanconvert.clicked.connect(self.helpPanconvert)
         self.ui.ButtonCancel.clicked.connect(self.closeEvent)
         self.ui.ButtonHelpPandoc.clicked.connect(self.helpPandoc)
+        self.ui.ButtonBackward.clicked.connect(self.back)
+        self.ui.ButtonForward.clicked.connect(self.forward)
 
         website = 'http://panconvert.readthedocs.io'
         self.ui.textBrowser.load(QtCore.QUrl(website))
@@ -68,5 +70,12 @@ class HelpDialog(QtWidgets.QDialog):
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
      def back(self):
-         back = 'href="javascript:history.go(-1)'
-         self.ui.textBrowser.load(QtCore.QUrl(back))
+         page = self.ui.textBrowser.page()
+         history = page.history()
+         history.back()
+
+
+     def forward(self):
+         page = self.ui.textBrowser.page()
+         history = page.history()
+         history.forward()

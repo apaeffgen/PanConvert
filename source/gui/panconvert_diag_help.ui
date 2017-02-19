@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
+    <width>492</width>
     <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Help</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QWebView" name="textBrowser">
      <property name="url">
@@ -24,25 +24,39 @@
     </widget>
    </item>
    <item row="1" column="0">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <widget class="QPushButton" name="ButtonCancel">
        <property name="text">
         <string>Cancel</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
+     <item>
+      <widget class="QPushButton" name="ButtonHelpPanconvert">
+       <property name="text">
+        <string>Panconvert-Help</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="ButtonHelpPandoc">
        <property name="text">
         <string>Pandoc-Help</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="ButtonHelpPanconvert">
+     <item>
+      <widget class="QPushButton" name="ButtonBackward">
        <property name="text">
-        <string>Panconvert-Help</string>
+        <string>&lt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonForward">
+       <property name="text">
+        <string>&gt;</string>
        </property>
       </widget>
      </item>
