@@ -1,3 +1,6 @@
+### Version 0.2.7
+- Maximized the Option filed for more input
+
 ### Version 0.2.6
 - Batch Converter save file without the original extension
 - Added seperat Batch Ouptut directory

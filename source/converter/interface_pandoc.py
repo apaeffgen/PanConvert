@@ -23,7 +23,7 @@ import platform
 import subprocess
 from PyQt5.QtCore import QSettings
 from source.language.messages import *
-from source.converter.search_converter import *
+
 
 global fromFormat
 

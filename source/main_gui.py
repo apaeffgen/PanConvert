@@ -630,16 +630,14 @@ class StartQT5(QtWidgets.QMainWindow):
         toFormat = self.ui.ToParameter.text()
 
 
-
-
-
-
         ''' Old Gui Events '''
+        if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
+            extraParameter = self.ui.ExtraParameter.text()
+        else:
+            extraParameter = self.ui.ExtraParameter.toPlainText()
 
         standard_conversion = self.ui.StandardConversion.isChecked()
-        extraParameter = self.ui.ExtraParameter.text()
         batchConversion = self.ui.BatchConversion.isChecked()
-
 
         if standard_conversion is True and batchConversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
