@@ -33,9 +33,9 @@ class ToFormatDialog(QtWidgets.QDialog):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_To_Format_Dialog()
         self.ui.setupUi(self)
-        self.ui.ButtonInfo.clicked.connect(self.info)
+        #self.ui.ButtonInfo.clicked.connect(self.info)
         self.ui.ButtonCancel.clicked.connect(self.closeEvent)
-        self.ui.ButtonMoreInfo.clicked.connect(self.moreinfo)
+        #self.ui.ButtonMoreInfo.clicked.connect(self.moreinfo)
 
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')

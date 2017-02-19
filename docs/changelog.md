@@ -1,5 +1,6 @@
 ### Version 0.2.7
 - Maximized the Option filed for more input
+- Simplified the from / to format dialogs
 
 ### Version 0.2.6
 - Batch Converter save file without the original extension
