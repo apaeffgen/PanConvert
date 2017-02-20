@@ -4,6 +4,7 @@
 - Made the batch Widget hidable
 - Fixed find pandoc in from / to dialog
 
+
 ### Version 0.2.6
 - Batch Converter save file without the original extension
 - Added seperat Batch Ouptut directory
