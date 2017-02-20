@@ -108,13 +108,13 @@
       <property name="minimumSize">
        <size>
         <width>270</width>
-        <height>200</height>
+        <height>175</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>270</width>
-        <height>200</height>
+        <height>175</height>
        </size>
       </property>
       <property name="tabPosition">
@@ -129,7 +129,7 @@
       <property name="tabsClosable">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="Converter_TypePage1">
+      <widget class="QWidget" name="WidgetConvertStandard">
        <attribute name="title">
         <string>Standard</string>
        </attribute>
@@ -291,10 +291,10 @@
        <widget class="QCheckBox" name="StandardConversion">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>140</y>
+          <x>20</x>
+          <y>160</y>
           <width>175</width>
-          <height>20</height>
+          <height>16</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -326,7 +326,7 @@
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="Converter_TypePage2">
+      <widget class="QWidget" name="WidgetConvertManual">
        <attribute name="title">
         <string>Manual</string>
        </attribute>

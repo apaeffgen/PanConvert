@@ -614,12 +614,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ToFormatsDialog = ToFormatDialog(self)
         self.ToFormatsDialog.show()
 
-
-
-
-
-
-
     """Gui-Trigger-Function for RadioButtons"""
 
     def event_triggered(self):
@@ -638,6 +632,23 @@ class StartQT5(QtWidgets.QMainWindow):
             extraParameter = self.ui.ExtraParameter.text()
         else:
             extraParameter = self.ui.ExtraParameter.toPlainText()
+
+            currentIndex = self.ui.WidgetConvert.currentIndex()
+            if currentIndex == 0:
+                self.ui.WidgetConvert.setCurrentIndex(0)
+                Standard_Conversion = settings.value('Standard_Conversion')
+                if Standard_Conversion is False:
+                    self.ui.StandardConversion.setChecked(True)
+                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                    Standard_Conversion = settings.value('Standard_Conversion')
+
+            if currentIndex == 1:
+                self.ui.WidgetConvert.setCurrentIndex(1)
+                Standard_Conversion = settings.value('Standard_Conversion', False)
+                if Standard_Conversion is True:
+                    self.ui.StandardConversion.setChecked(False)
+                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                    Standard_Conversion = settings.value('Standard_Conversion')
 
         standard_conversion = self.ui.StandardConversion.isChecked()
         batchConversion = self.ui.BatchConversion.isChecked()
@@ -745,15 +756,24 @@ class StartQT5(QtWidgets.QMainWindow):
 
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
-            Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
             Hide_Batch = settings.value('Hide_Batch', False)
 
             if Tab_StandardConverter is True or Tab_StandardConverter is 'True' or Tab_StandardConverter == 'true':
                 self.ui.WidgetConvert.setCurrentIndex(0)
+                Standard_Conversion = settings.value('Standard_Conversion')
+                if Standard_Conversion is False:
+                    self.ui.StandardConversion.setChecked(True)
+                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                    Standard_Conversion = settings.value('Standard_Conversion')
+
             if Tab_ManualConverter is True or Tab_ManualConverter is 'True' or Tab_ManualConverter == 'true':
                 self.ui.WidgetConvert.setCurrentIndex(1)
-            if Tab_BatchConverter is True or Tab_BatchConverter is 'True' or Tab_BatchConverter == 'true':
-                self.ui.WidgetConvert.setCurrentIndex(2)
+                Standard_Conversion = settings.value('Standard_Conversion', False)
+                if Standard_Conversion is True:
+                    self.ui.StandardConversion.setChecked(False)
+                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                    Standard_Conversion = settings.value('Standard_Conversion')
+
             if Hide_Batch is True or Hide_Batch is 'True' or Hide_Batch == 'true':
                 self.ui.WidgetBatch.setHidden(True)
 
@@ -820,6 +840,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if Button_OldGui is True or Button_OldGui == 'true':
             self.ui.ButtonBatch.clicked.connect(self.batch_dialog)
+            Standard_Conversion = settings.value('Standard_Conversion', False)
 
         '''Setting-Initialization and Default Settings for the first start'''
 
@@ -848,7 +869,7 @@ class StartQT5(QtWidgets.QMainWindow):
         To_Opml = settings.value('To_Opml', False)
         To_Lyx = settings.value('To_Lyx', False)
 
-        Standard_Conversion = settings.value('Standard_Conversion', False)
+
         Batch_Conversion = settings.value('Batch_Conversion', False)
 
         if settings.value('From_Markdown') is not None:
