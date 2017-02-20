@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui.ui'
 #
-# Created: Mon Feb 20 09:30:30 2017
+# Created: Mon Feb 20 14:44:00 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,9 +19,9 @@ class Ui_notepad_New(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(notepad_New.sizePolicy().hasHeightForWidth())
         notepad_New.setSizePolicy(sizePolicy)
-        notepad_New.setMinimumSize(QtCore.QSize(820, 600))
+        notepad_New.setMinimumSize(QtCore.QSize(650, 380))
         notepad_New.setSizeIncrement(QtCore.QSize(0, 0))
-        notepad_New.setBaseSize(QtCore.QSize(760, 550))
+        notepad_New.setBaseSize(QtCore.QSize(760, 600))
         self.centralwidget = QtWidgets.QWidget(notepad_New)
         self.centralwidget.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -29,7 +29,7 @@ class Ui_notepad_New(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.centralwidget.setMinimumSize(QtCore.QSize(710, 500))
+        self.centralwidget.setMinimumSize(QtCore.QSize(650, 300))
         self.centralwidget.setBaseSize(QtCore.QSize(710, 700))
         self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
         self.centralwidget.setMouseTracking(False)
@@ -42,7 +42,7 @@ class Ui_notepad_New(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.editor_window.sizePolicy().hasHeightForWidth())
         self.editor_window.setSizePolicy(sizePolicy)
-        self.editor_window.setMinimumSize(QtCore.QSize(0, 120))
+        self.editor_window.setMinimumSize(QtCore.QSize(0, 80))
         self.editor_window.setBaseSize(QtCore.QSize(0, 266))
         self.editor_window.setAutoFillBackground(True)
         self.editor_window.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -54,7 +54,7 @@ class Ui_notepad_New(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.WidgetConvert.sizePolicy().hasHeightForWidth())
         self.WidgetConvert.setSizePolicy(sizePolicy)
-        self.WidgetConvert.setMinimumSize(QtCore.QSize(270, 175))
+        self.WidgetConvert.setMinimumSize(QtCore.QSize(270, 200))
         self.WidgetConvert.setMaximumSize(QtCore.QSize(270, 200))
         self.WidgetConvert.setTabPosition(QtWidgets.QTabWidget.North)
         self.WidgetConvert.setTabShape(QtWidgets.QTabWidget.Triangular)
@@ -170,16 +170,13 @@ class Ui_notepad_New(object):
         self.WidgetConvert.addTab(self.Converter_TypePage2, "")
         self.gridLayout_2.addWidget(self.WidgetConvert, 0, 1, 1, 1)
         self.WidgetBatch = QtWidgets.QWidget(self.centralwidget)
+        self.WidgetBatch.setMinimumSize(QtCore.QSize(270, 0))
+        self.WidgetBatch.setBaseSize(QtCore.QSize(270, 230))
         self.WidgetBatch.setObjectName("WidgetBatch")
         self.groupBox_2 = QtWidgets.QGroupBox(self.WidgetBatch)
         self.groupBox_2.setGeometry(QtCore.QRect(0, 0, 270, 230))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.groupBox_2.sizePolicy().hasHeightForWidth())
-        self.groupBox_2.setSizePolicy(sizePolicy)
-        self.groupBox_2.setMinimumSize(QtCore.QSize(270, 230))
-        self.groupBox_2.setMaximumSize(QtCore.QSize(270, 16666666))
+        self.groupBox_2.setMinimumSize(QtCore.QSize(270, 0))
+        self.groupBox_2.setMaximumSize(QtCore.QSize(270, 230))
         self.groupBox_2.setObjectName("groupBox_2")
         self.groupBox = QtWidgets.QGroupBox(self.groupBox_2)
         self.groupBox.setGeometry(QtCore.QRect(10, 110, 140, 81))

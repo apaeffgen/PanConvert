@@ -215,7 +215,7 @@ class StartQT5(QtWidgets.QMainWindow):
         number = number + 1
         self.ui.MessageNumber.display(number)
 
-    def windows_log_open(self):
+    def logviewer_open(self):
         self.ui.dockLogWindow.show()
 
     def logviewer_above(self):
@@ -792,7 +792,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionUndo.triggered.connect(self.undo)
 
         '''Window Functions'''
-        self.ui.actionLogViewer.triggered.connect(self.windows_log_open)
+        self.ui.actionLogViewer.triggered.connect(self.logviewer_open)
         self.ui.actionAbove.triggered.connect(self.logviewer_above)
         self.ui.actionBelow.triggered.connect(self.logviewer_bottom)
         self.ui.actionLeft.triggered.connect(self.logviewer_left)

@@ -21,8 +21,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>820</width>
-    <height>600</height>
+    <width>650</width>
+    <height>380</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -34,7 +34,7 @@
   <property name="baseSize">
    <size>
     <width>760</width>
-    <height>550</height>
+    <height>600</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -52,8 +52,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>710</width>
-     <height>500</height>
+     <width>650</width>
+     <height>300</height>
     </size>
    </property>
    <property name="baseSize">
@@ -80,7 +80,7 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>120</height>
+        <height>80</height>
        </size>
       </property>
       <property name="baseSize">
@@ -108,7 +108,7 @@
       <property name="minimumSize">
        <size>
         <width>270</width>
-        <height>175</height>
+        <height>200</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -471,6 +471,18 @@
     </item>
     <item row="2" column="1">
      <widget class="QWidget" name="WidgetBatch" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>270</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>270</width>
+        <height>230</height>
+       </size>
+      </property>
       <widget class="QGroupBox" name="groupBox_2">
        <property name="geometry">
         <rect>
@@ -480,22 +492,16 @@
          <height>230</height>
         </rect>
        </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <property name="minimumSize">
         <size>
          <width>270</width>
-         <height>230</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>270</width>
-         <height>16666666</height>
+         <height>230</height>
         </size>
        </property>
        <property name="title">
@@ -814,7 +820,7 @@
        <string>...</string>
       </property>
       <property name="icon">
-       <iconset resource="gui/icons.qrc">
+       <iconset resource="icons.qrc">
         <normaloff>:/icons/arrow-right.png</normaloff>:/icons/arrow-right.png</iconset>
       </property>
      </widget>
@@ -937,7 +943,7 @@
   </widget>
   <action name="actionSave">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/save</normaloff>:/icons/save</iconset>
    </property>
    <property name="text">
@@ -946,7 +952,7 @@
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/open</normaloff>:/icons/open</iconset>
    </property>
    <property name="text">
@@ -964,7 +970,7 @@
   </action>
   <action name="actionSave_AS">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/save_as</normaloff>:/icons/save_as</iconset>
    </property>
    <property name="text">
@@ -976,7 +982,7 @@
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/new</normaloff>:/icons/new</iconset>
    </property>
    <property name="text">
@@ -1014,7 +1020,7 @@
   </action>
   <action name="actionPreferences">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/freferences</normaloff>
      <normalon>:/icons/freferences</normalon>:/icons/freferences</iconset>
    </property>
@@ -1064,7 +1070,7 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/help.png</normaloff>
      <normalon>:/icons/help.png</normalon>:/icons/help.png</iconset>
    </property>
@@ -1094,7 +1100,7 @@
   </action>
   <action name="actionLogViewer">
    <property name="icon">
-    <iconset resource="gui/icons.qrc">
+    <iconset resource="icons.qrc">
      <normaloff>:/icons/opml</normaloff>:/icons/opml</iconset>
    </property>
    <property name="text">
@@ -1128,7 +1134,7 @@
   </action>
  </widget>
  <resources>
-  <include location="gui/icons.qrc"/>
+  <include location="icons.qrc"/>
  </resources>
  <connections/>
 </ui>
