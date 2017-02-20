@@ -56,231 +56,231 @@
 <context>
     <name>DialogPreferences</name>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="219"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="219"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="238"/>
-        <source>Default From</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="239"/>
-        <source>HTML</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="240"/>
-        <source>Latex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="241"/>
-        <source>Markdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="242"/>
-        <source>Opml</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="228"/>
-        <source>Default To</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="233"/>
-        <source>Lyx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="221"/>
-        <source>Manual Converter Defaults</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="222"/>
-        <source>-o filename.odt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="223"/>
-        <source>markdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="224"/>
-        <source>odt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="225"/>
-        <source>From</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="226"/>
-        <source>To</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="227"/>
-        <source>Parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="254"/>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="255"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="245"/>
-        <source>Standard Conversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="246"/>
-        <source>Batch Conversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="235"/>
-        <source>/usr/local/bin/pandoc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="236"/>
-        <source>/usr/local/bin/multimarkdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="237"/>
-        <source>/Users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="250"/>
-        <source>Path to Pandoc Binary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="251"/>
-        <source>Path to Markdown Binary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="252"/>
-        <source>Open / Save - Path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="249"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="247"/>
-        <source>Language Selector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="253"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="253"/>
         <source>General Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="256"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="221"/>
+        <source>Manual Converter Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="222"/>
+        <source>-o filename.odt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="223"/>
+        <source>markdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="224"/>
+        <source>odt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="225"/>
+        <source>From</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="226"/>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="227"/>
+        <source>Parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="228"/>
+        <source>Default To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="239"/>
+        <source>HTML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="240"/>
+        <source>Latex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="241"/>
+        <source>Markdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="242"/>
+        <source>Opml</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="233"/>
+        <source>Lyx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="249"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="235"/>
+        <source>/usr/local/bin/pandoc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="236"/>
+        <source>/usr/local/bin/multimarkdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="237"/>
+        <source>/Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="238"/>
+        <source>Default From</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="254"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="255"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="245"/>
+        <source>Standard Conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="246"/>
+        <source>Batch Conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="247"/>
+        <source>Language Selector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="250"/>
+        <source>Path to Pandoc Binary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="251"/>
+        <source>Path to Markdown Binary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="252"/>
+        <source>Open / Save - Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="256"/>
         <source>Save Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="257"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="257"/>
         <source>Size of Main Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="258"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="258"/>
         <source>Size of Dock Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="259"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="259"/>
         <source>Size of Dialog Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="260"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="260"/>
         <source>Gui Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="261"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="261"/>
         <source>New Style Gui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="262"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="262"/>
         <source>Old Style Gui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="263"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="263"/>
         <source>Tab Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="264"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="264"/>
         <source>Standard Converter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="265"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="265"/>
         <source>Manual Converter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="268"/>
-        <source>Extra Preferences</source>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="266"/>
+        <source>Batch Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="266"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="267"/>
+        <source>Hide Batch Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="268"/>
         <source>Buffer Save Suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_prefpane_ext.py" line="267"/>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="269"/>
         <source>Buffer Save Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_prefpane.py" line="270"/>
+        <source>Extra Preferences</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>From_Format_Dialog</name>
     <message>
-        <location filename="source/gui/panconvert_diag_fromformat.py" line="40"/>
+        <location filename="source/gui/panconvert_diag_fromformat.py" line="35"/>
         <source>Pandoc From Formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_fromformat.py" line="41"/>
+        <location filename="source/gui/panconvert_diag_fromformat.py" line="36"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_fromformat.py" line="42"/>
-        <source>Formats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_fromformat.py" line="43"/>
-        <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -307,41 +307,41 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_help.py" line="40"/>
+        <location filename="source/gui/panconvert_diag_help.py" line="46"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_help.py" line="42"/>
+        <location filename="source/gui/panconvert_diag_help.py" line="49"/>
         <source>Pandoc-Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_help.py" line="43"/>
+        <location filename="source/gui/panconvert_diag_help.py" line="48"/>
         <source>Panconvert-Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_help.py" line="50"/>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_diag_help.py" line="51"/>
+        <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>To_Format_Dialog</name>
     <message>
-        <location filename="source/gui/panconvert_diag_toformat.py" line="40"/>
+        <location filename="source/gui/panconvert_diag_toformat.py" line="35"/>
         <source>Pandoc To Formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_diag_toformat.py" line="41"/>
+        <location filename="source/gui/panconvert_diag_toformat.py" line="36"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_toformat.py" line="42"/>
-        <source>Formats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_diag_toformat.py" line="43"/>
-        <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -444,591 +444,596 @@ If so, check your filesystem in the folder where Pandoc is installed</source>
 <context>
     <name>notepad</name>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="333"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="333"/>
         <source>PanConvert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="334"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="334"/>
         <source>From Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="340"/>
-        <source>Html</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="344"/>
-        <source>Latex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="341"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="341"/>
         <source>Markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="342"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="342"/>
         <source>Opml</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="339"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="340"/>
+        <source>Html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="344"/>
+        <source>Latex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="339"/>
         <source>To Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="343"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="343"/>
         <source>Lyx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="352"/>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="353"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="345"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="345"/>
         <source>From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="350"/>
-        <source>To</source>
+        <location filename="source/gui/panconvert_gui_old.py" line="353"/>
+        <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="347"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="347"/>
         <source>Batch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="348"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="348"/>
         <source>Revert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="349"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="349"/>
         <source>Convert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="354"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="350"/>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="352"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="354"/>
         <source>Standard Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="355"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="355"/>
         <source>Batch Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="357"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="356"/>
+        <source>New Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="357"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="384"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="384"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="359"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="359"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="361"/>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="362"/>
-        <source>Save Buffer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="363"/>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="364"/>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="365"/>
-        <source>Save File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="366"/>
-        <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="368"/>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="369"/>
-        <source>Markdown2Latex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="370"/>
-        <source>opml2latex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="371"/>
-        <source>Opml2Latex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="372"/>
-        <source>Opml2Markdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="373"/>
-        <source>Opml2Markdown(Pandoc)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="374"/>
-        <source>Markdown2opml</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="375"/>
-        <source>Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="376"/>
-        <source>Latex2Opml</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="377"/>
-        <source>Latex2Markdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="378"/>
-        <source>Html2Markdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="379"/>
-        <source>Html2Latex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="380"/>
-        <source>html2opml</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="381"/>
-        <source>opml2html</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="382"/>
-        <source>markdown2html</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="383"/>
-        <source>latex2html</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="385"/>
-        <source>Markdown2Lyx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="386"/>
-        <source>Undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="387"/>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="388"/>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="360"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="360"/>
         <source>Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="389"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="361"/>
+        <source>toolBar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="362"/>
+        <source>Save Buffer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="363"/>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="364"/>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="365"/>
+        <source>Save File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="366"/>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="368"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="369"/>
+        <source>Markdown2Latex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="370"/>
+        <source>opml2latex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="371"/>
+        <source>Opml2Latex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="372"/>
+        <source>Opml2Markdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="373"/>
+        <source>Opml2Markdown(Pandoc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="374"/>
+        <source>Markdown2opml</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="375"/>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="376"/>
+        <source>Latex2Opml</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="377"/>
+        <source>Latex2Markdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="378"/>
+        <source>Html2Markdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="379"/>
+        <source>Html2Latex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="380"/>
+        <source>html2opml</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="381"/>
+        <source>opml2html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="382"/>
+        <source>markdown2html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="383"/>
+        <source>latex2html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="385"/>
+        <source>Markdown2Lyx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="386"/>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="387"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="388"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui_old.py" line="389"/>
         <source>LogViewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="390"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="390"/>
         <source>Position Above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="391"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="391"/>
         <source>Position Below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="392"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="392"/>
         <source>Position Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="393"/>
+        <location filename="source/gui/panconvert_gui_old.py" line="393"/>
         <source>Position Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui_ext.py" line="356"/>
-        <source>New Messages</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>notepad_New</name>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="419"/>
+        <location filename="source/gui/panconvert_gui.py" line="441"/>
         <source>PanConvert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="425"/>
+        <location filename="source/gui/panconvert_gui.py" line="447"/>
         <source>To Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="426"/>
+        <location filename="source/gui/panconvert_gui.py" line="448"/>
         <source>Html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="427"/>
+        <location filename="source/gui/panconvert_gui.py" line="449"/>
         <source>Markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="428"/>
+        <location filename="source/gui/panconvert_gui.py" line="450"/>
         <source>Opml</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="429"/>
+        <location filename="source/gui/panconvert_gui.py" line="451"/>
         <source>Lyx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="430"/>
+        <location filename="source/gui/panconvert_gui.py" line="452"/>
         <source>Latex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="420"/>
+        <location filename="source/gui/panconvert_gui.py" line="442"/>
         <source>From Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="431"/>
+        <location filename="source/gui/panconvert_gui.py" line="454"/>
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="438"/>
+        <location filename="source/gui/panconvert_gui.py" line="461"/>
         <source>Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="432"/>
+        <location filename="source/gui/panconvert_gui.py" line="455"/>
         <source>From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="450"/>
+        <location filename="source/gui/panconvert_gui.py" line="478"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="434"/>
+        <location filename="source/gui/panconvert_gui.py" line="457"/>
         <source>To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="436"/>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="source/gui/panconvert_gui.py" line="447"/>
+        <location filename="source/gui/panconvert_gui.py" line="470"/>
         <source>Optional Directory Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="440"/>
+        <location filename="source/gui/panconvert_gui.py" line="463"/>
         <source>Conversion Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="441"/>
+        <location filename="source/gui/panconvert_gui.py" line="464"/>
         <source>Recursive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="442"/>
+        <location filename="source/gui/panconvert_gui.py" line="465"/>
         <source>Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="443"/>
+        <location filename="source/gui/panconvert_gui.py" line="466"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="445"/>
+        <location filename="source/gui/panconvert_gui.py" line="468"/>
         <source>optional File Extension Filter (separate with ;)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="439"/>
+        <location filename="source/gui/panconvert_gui.py" line="462"/>
         <source>Batch Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="451"/>
+        <location filename="source/gui/panconvert_gui.py" line="453"/>
         <source>Standard Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="452"/>
+        <location filename="source/gui/panconvert_gui.py" line="474"/>
         <source>Batch Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="453"/>
+        <location filename="source/gui/panconvert_gui.py" line="475"/>
         <source>New Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="454"/>
+        <location filename="source/gui/panconvert_gui.py" line="476"/>
         <source>Revert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="455"/>
+        <location filename="source/gui/panconvert_gui.py" line="477"/>
         <source>Convert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="456"/>
+        <location filename="source/gui/panconvert_gui.py" line="479"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="483"/>
+        <location filename="source/gui/panconvert_gui.py" line="506"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="458"/>
+        <location filename="source/gui/panconvert_gui.py" line="481"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="459"/>
+        <location filename="source/gui/panconvert_gui.py" line="482"/>
         <source>Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="460"/>
+        <location filename="source/gui/panconvert_gui.py" line="483"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="461"/>
+        <location filename="source/gui/panconvert_gui.py" line="484"/>
         <source>Save Buffer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="462"/>
+        <location filename="source/gui/panconvert_gui.py" line="485"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="463"/>
+        <location filename="source/gui/panconvert_gui.py" line="486"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="464"/>
+        <location filename="source/gui/panconvert_gui.py" line="487"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="465"/>
+        <location filename="source/gui/panconvert_gui.py" line="488"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="467"/>
+        <location filename="source/gui/panconvert_gui.py" line="490"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="468"/>
+        <location filename="source/gui/panconvert_gui.py" line="491"/>
         <source>Markdown2Latex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="469"/>
+        <location filename="source/gui/panconvert_gui.py" line="492"/>
         <source>opml2latex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="470"/>
+        <location filename="source/gui/panconvert_gui.py" line="493"/>
         <source>Opml2Latex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="471"/>
+        <location filename="source/gui/panconvert_gui.py" line="494"/>
         <source>Opml2Markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="472"/>
+        <location filename="source/gui/panconvert_gui.py" line="495"/>
         <source>Opml2Markdown(Pandoc)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="473"/>
+        <location filename="source/gui/panconvert_gui.py" line="496"/>
         <source>Markdown2opml</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="474"/>
+        <location filename="source/gui/panconvert_gui.py" line="497"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="475"/>
+        <location filename="source/gui/panconvert_gui.py" line="498"/>
         <source>Latex2Opml</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="476"/>
+        <location filename="source/gui/panconvert_gui.py" line="499"/>
         <source>Latex2Markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="477"/>
+        <location filename="source/gui/panconvert_gui.py" line="500"/>
         <source>Html2Markdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="478"/>
+        <location filename="source/gui/panconvert_gui.py" line="501"/>
         <source>Html2Latex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="479"/>
+        <location filename="source/gui/panconvert_gui.py" line="502"/>
         <source>html2opml</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="480"/>
+        <location filename="source/gui/panconvert_gui.py" line="503"/>
         <source>opml2html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="481"/>
+        <location filename="source/gui/panconvert_gui.py" line="504"/>
         <source>markdown2html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="482"/>
+        <location filename="source/gui/panconvert_gui.py" line="505"/>
         <source>latex2html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="484"/>
+        <location filename="source/gui/panconvert_gui.py" line="507"/>
         <source>Markdown2Lyx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="485"/>
+        <location filename="source/gui/panconvert_gui.py" line="508"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="486"/>
+        <location filename="source/gui/panconvert_gui.py" line="509"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="487"/>
+        <location filename="source/gui/panconvert_gui.py" line="510"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="488"/>
+        <location filename="source/gui/panconvert_gui.py" line="511"/>
         <source>LogViewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="489"/>
+        <location filename="source/gui/panconvert_gui.py" line="512"/>
         <source>Position Above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="490"/>
+        <location filename="source/gui/panconvert_gui.py" line="513"/>
         <source>Position Below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="491"/>
+        <location filename="source/gui/panconvert_gui.py" line="514"/>
         <source>Position Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="492"/>
+        <location filename="source/gui/panconvert_gui.py" line="515"/>
         <source>Position Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="446"/>
+        <location filename="source/gui/panconvert_gui.py" line="469"/>
         <source>Set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="444"/>
+        <location filename="source/gui/panconvert_gui.py" line="467"/>
         <source>File Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="source/gui/panconvert_gui.py" line="448"/>
+        <location filename="source/gui/panconvert_gui.py" line="471"/>
         <source>Optional Output Directory Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui.py" line="460"/>
+        <source>Xtra Pandoc Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="source/gui/panconvert_gui.py" line="516"/>
+        <source>Batch Mode Toggle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

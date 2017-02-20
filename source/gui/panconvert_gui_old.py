@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'panconvert_gui_ext.ui'
+# Form implementation generated from reading ui file 'panconvert_gui_old.ui'
 #
 # Created: Wed Feb  1 13:30:19 2017
 #      by: PyQt5 UI code generator 5.3.2

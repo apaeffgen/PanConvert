@@ -24,7 +24,7 @@ from PyQt5.QtCore import QSettings
 from PyQt5.QtCore import QPoint, QSize
 from source.language.messages import *
 from source.gui.panconvert_diag_fromformat import Ui_From_Format_Dialog
-from source.converter.interface_pandoc import get_pandoc_formats
+from source.converter.interface_pandoc import get_pandoc_formats, get_path_pandoc
 
 class FromFormatDialog(QtWidgets.QDialog):
 
@@ -44,14 +44,18 @@ class FromFormatDialog(QtWidgets.QDialog):
         self.resize(settings.value("FromFormat_size", QSize(270, 225)))
         self.move(settings.value("FromFormat_pos", QPoint(50, 50)))
 
+        if not os.path.isfile(path_pandoc):
+            path_pandoc = get_path_pandoc()
+            path_pandoc = settings.value('path_pandoc')
+
         if os.path.isfile(path_pandoc):
             formats =  get_pandoc_formats()
             fromformats = formats[0]
             data = '<br>'.join(fromformats)
             self.ui.textBrowser.setContent(data)
         else:
-            message = error_converter_path()
-            self.ui.textBrowser.setContent(message)
+                message = error_converter_path()
+                return message
 
      def closeEvent(self, event):
 

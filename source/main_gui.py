@@ -24,7 +24,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QPoint, QSize
 from source.dialogs.dialog_preferences import *
 from source.dialogs.dialog_batch import *
-from source.dialogs.dialog_info import *
+from source.dialogs.dialog_options import *
 from source.dialogs.dialog_fromformat import *
 from source.dialogs.dialog_toformat import *
 from source.dialogs.dialog_help import *
@@ -32,7 +32,7 @@ from source.converter.lyx_converter import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
 from source.gui.panconvert_gui import Ui_notepad_New
-from source.gui.panconvert_gui_ext import Ui_notepad
+from source.gui.panconvert_gui_old import Ui_notepad
 
 global openfile, filelist, actualLanguage, number
 
@@ -237,6 +237,9 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.dockLogWindow.close()
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
+
+    def batch_mode_toggle(self):
+        self.ui.WidgetBatch.setHidden(not self.ui.WidgetBatch.isHidden())
 
     def check_path(self):
         global error
@@ -599,7 +602,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.BatchDialog.show()
 
     def info_dialog(self):
-        """ References to dialog_info.py"""
+        """ References to dialog_options.py"""
         self.InfoDialog = InfoDialog(self)
         self.InfoDialog.show()
 
@@ -743,13 +746,16 @@ class StartQT5(QtWidgets.QMainWindow):
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
             Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
+            Hide_Batch = settings.value('Hide_Batch', False)
 
             if Tab_StandardConverter is True or Tab_StandardConverter is 'True' or Tab_StandardConverter == 'true':
-                self.ui.Converter_Type.setCurrentIndex(0)
+                self.ui.WidgetConvert.setCurrentIndex(0)
             if Tab_ManualConverter is True or Tab_ManualConverter is 'True' or Tab_ManualConverter == 'true':
-                self.ui.Converter_Type.setCurrentIndex(1)
+                self.ui.WidgetConvert.setCurrentIndex(1)
             if Tab_BatchConverter is True or Tab_BatchConverter is 'True' or Tab_BatchConverter == 'true':
-                self.ui.Converter_Type.setCurrentIndex(2)
+                self.ui.WidgetConvert.setCurrentIndex(2)
+            if Hide_Batch is True or Hide_Batch is 'True' or Hide_Batch == 'true':
+                self.ui.WidgetBatch.setHidden(True)
 
             ## Batch Settings##
             batch_settings = QSettings('Pandoc', 'PanConvert')
@@ -771,6 +777,10 @@ class StartQT5(QtWidgets.QMainWindow):
             self.ui.Button_SetBatchConverter.clicked.connect(self.batch_settings)
             self.ui.Button_Open_Path.clicked.connect(self.file_batch_input_directory)
             self.ui.Button_Open_Path_Output.clicked.connect(self.file_batch_output_directory)
+
+            # Hide BatchMode Widget
+            self.ui.actionBatchModeToggle.triggered.connect(self.batch_mode_toggle)
+            self.ui.ButtonToggleBatch.clicked.connect(self.batch_mode_toggle)
 
         '''File-Dialog Functions'''
         self.ui.actionOpen.triggered.connect(self.file_open)

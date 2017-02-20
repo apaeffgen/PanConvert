@@ -1,6 +1,8 @@
 ### Version 0.2.7
 - Maximized the Option filed for more input
 - Simplified the from / to format dialogs
+- Made the batch Widget hidable
+- Fixed find pandoc in from / to dialog
 
 ### Version 0.2.6
 - Batch Converter save file without the original extension

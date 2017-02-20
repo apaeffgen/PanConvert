@@ -640,37 +640,77 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QGroupBox" name="BatchMode">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>262</width>
-       <height>54</height>
+       <x>210</x>
+       <y>0</y>
+       <width>181</width>
+       <height>91</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Buffer Save Suffix</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="BufferSaveSuffix"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Buffer Save Name</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="BufferSaveName"/>
-      </item>
-     </layout>
+     <property name="title">
+      <string>Batch Mode</string>
+     </property>
+     <widget class="QCheckBox" name="Hide_Batch">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>191</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hide Batch Mode</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLineEdit" name="BufferSaveName">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>240</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>209</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Buffer Save Suffix</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>240</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Buffer Save Name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="BufferSaveSuffix">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>209</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
     </widget>
    </widget>
   </widget>

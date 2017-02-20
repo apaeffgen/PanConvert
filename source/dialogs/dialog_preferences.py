@@ -21,7 +21,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSettings
 from PyQt5 import QtCore
 from PyQt5.QtCore import QPoint, QSize
-from source.gui.panconvert_diag_prefpane_ext import Ui_DialogPreferences
+from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 from distutils.util import strtobool
 import platform, os
 
@@ -63,10 +63,12 @@ class PreferenceDialog(QtWidgets.QDialog):
         Window_Size = settings.value('Window_Size', True)
         Dock_Size = settings.value('Dock_Size', True)
         Dialog_Size = settings.value('Dialog_Size', True)
+        Hide_Batch = settings.value('Hide_Batch', True)
 
-        #Checkbox Gui Old / New
+        #Checkbox Gui Old / New / BatchMode
         Button_OldGui = settings.value('Button_OldGui', False)
         Button_NewGui = settings.value('Button_NewGui', True)
+
 
         #Standard Tab of the New Gui
         Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
@@ -134,6 +136,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Button_NewGui.setChecked(Button_NewGui)
                 self.ui.Tab_StandardConverter.setChecked(Tab_StandardConverter)
                 self.ui.Tab_ManualConverter.setChecked(Tab_ManualConverter)
+                self.ui.Hide_Batch.setChecked(Hide_Batch)
 
             else:
                 self.ui.ButtonFromMarkdown.setChecked(strtobool(From_Markdown))
@@ -154,6 +157,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Button_NewGui.setChecked(strtobool(Button_NewGui))
                 self.ui.Tab_StandardConverter.setChecked(strtobool(Tab_StandardConverter))
                 self.ui.Tab_ManualConverter.setChecked(strtobool(Tab_ManualConverter))
+                self.ui.Hide_Batch.setChecked(strtobool(Hide_Batch))
 
     def cancel_dialog(self):
         PreferenceDialog.close(self)
@@ -165,6 +169,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('Window_Size', self.ui.Window_Size.isChecked())
         settings.setValue('Dock_Size', self.ui.Dock_Size.isChecked())
         settings.setValue('Dialog_Size', self.ui.Dialog_Size.isChecked())
+        settings.setValue('Hide_Batch', self.ui.Hide_Batch.isChecked())
 
         settings.setValue('Button_OldGui', self.ui.Button_OldGui.isChecked())
         settings.setValue('Button_NewGui', self.ui.Button_NewGui.isChecked())
@@ -185,6 +190,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
         settings.setValue('Batch_Conversion', self.ui.BatchConversion.isChecked())
 
+
         settings.setValue('From_Markdown', self.ui.ButtonFromMarkdown.isChecked())
         settings.setValue('From_Html', self.ui.ButtonFromHtml.isChecked())
         settings.setValue('From_Latex', self.ui.ButtonFromLatex.isChecked())
@@ -201,17 +207,8 @@ class PreferenceDialog(QtWidgets.QDialog):
             settings.setValue("Preference_size", self.size())
             settings.setValue("Preference_pos", self.pos())
 
-
-
-
-
         settings.sync()
         settings.status()
-
-
-
-
-
 
         PreferenceDialog.close(self)
 

@@ -213,8 +213,11 @@ def get_pandoc_formats():
 
 
     else:
-        message = error_converter_path()
-        return message
+        path_pandoc = get_path_pandoc()
+        path_pandoc = settings.value('path_pandoc','')
+        if not os.path.isfile(path_pandoc):
+            message = error_converter_path()
+            return message
 
 
 def get_pandoc_options():
@@ -253,8 +256,11 @@ def get_pandoc_options():
             return aux
 
     else:
-        message = error_converter_path()
-        return message
+        path_pandoc = get_path_pandoc()
+        path_pandoc = settings.value('path_pandoc','')
+        if not os.path.isfile(path_pandoc):
+            message = error_converter_path()
+            return message
 
 def which(target):
     pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin'

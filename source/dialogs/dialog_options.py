@@ -24,7 +24,7 @@ from PyQt5.QtCore import QSettings
 from PyQt5.QtCore import QPoint, QSize
 from source.language.messages import *
 from source.gui.panconvert_diag_info import Ui_Information_Dialog
-from source.converter.interface_pandoc import get_pandoc_options
+from source.converter.interface_pandoc import get_pandoc_options, get_path_pandoc
 
 class InfoDialog(QtWidgets.QDialog):
 
@@ -43,6 +43,10 @@ class InfoDialog(QtWidgets.QDialog):
 
         self.resize(settings.value("Option_size", QSize(270, 225)))
         self.move(settings.value("Option_pos", QPoint(50, 50)))
+
+        if not os.path.isfile(path_pandoc):
+            path_pandoc = get_path_pandoc()
+            path_pandoc = settings.value('path_pandoc')
 
         if os.path.isfile(path_pandoc):
             options =  get_pandoc_options()
