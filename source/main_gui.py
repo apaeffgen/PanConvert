@@ -637,7 +637,7 @@ class StartQT5(QtWidgets.QMainWindow):
             if currentIndex == 0:
                 self.ui.WidgetConvert.setCurrentIndex(0)
                 Standard_Conversion = settings.value('Standard_Conversion')
-                if Standard_Conversion is False:
+                if Standard_Conversion is False or Standard_Conversion == 'false':
                     self.ui.StandardConversion.setChecked(True)
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
                     Standard_Conversion = settings.value('Standard_Conversion')
@@ -645,7 +645,7 @@ class StartQT5(QtWidgets.QMainWindow):
             if currentIndex == 1:
                 self.ui.WidgetConvert.setCurrentIndex(1)
                 Standard_Conversion = settings.value('Standard_Conversion', False)
-                if Standard_Conversion is True:
+                if Standard_Conversion is True or Standard_Conversion == 'true':
                     self.ui.StandardConversion.setChecked(False)
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
                     Standard_Conversion = settings.value('Standard_Conversion')
