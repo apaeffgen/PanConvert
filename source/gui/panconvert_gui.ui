@@ -609,19 +609,6 @@
          <string>optional File Extension Filter (separate with ;)</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="Button_SetBatchConverter">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>160</y>
-          <width>91</width>
-          <height>32</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Set</string>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>

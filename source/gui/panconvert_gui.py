@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui.ui'
 #
-# Created: Mon Feb 20 16:29:43 2017
+# Created: Tue Feb 21 08:55:09 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -205,9 +205,6 @@ class Ui_notepad_New(object):
         self.Filter = QtWidgets.QLineEdit(self.groupBox_2)
         self.Filter.setGeometry(QtCore.QRect(10, 90, 171, 21))
         self.Filter.setObjectName("Filter")
-        self.Button_SetBatchConverter = QtWidgets.QPushButton(self.groupBox_2)
-        self.Button_SetBatchConverter.setGeometry(QtCore.QRect(160, 160, 91, 32))
-        self.Button_SetBatchConverter.setObjectName("Button_SetBatchConverter")
         self.layoutWidget2 = QtWidgets.QWidget(self.groupBox_2)
         self.layoutWidget2.setGeometry(QtCore.QRect(10, 29, 211, 54))
         self.layoutWidget2.setObjectName("layoutWidget2")
@@ -346,8 +343,8 @@ class Ui_notepad_New(object):
         self.actionMarkdown2opml.setObjectName("actionMarkdown2opml")
         self.actionPreferences = QtWidgets.QAction(notepad_New)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.actionPreferences.setIcon(icon5)
         self.actionPreferences.setObjectName("actionPreferences")
         self.actionLatex2Opml = QtWidgets.QAction(notepad_New)
@@ -368,8 +365,8 @@ class Ui_notepad_New(object):
         self.actionLatex2html.setObjectName("actionLatex2html")
         self.actionHelp = QtWidgets.QAction(notepad_New)
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.actionHelp.setIcon(icon6)
         self.actionHelp.setObjectName("actionHelp")
         self.actionMarkdown2Lyx = QtWidgets.QAction(notepad_New)
@@ -463,7 +460,6 @@ class Ui_notepad_New(object):
         self.ParameterBatchconvertFiles.setText(_translate("notepad_New", "Files"))
         self.label_4.setText(_translate("notepad_New", "File Filter"))
         self.Filter.setPlaceholderText(_translate("notepad_New", "optional File Extension Filter (separate with ;)"))
-        self.Button_SetBatchConverter.setText(_translate("notepad_New", "Set"))
         self.OpenPath.setPlaceholderText(_translate("notepad_New", "Optional Directory Path"))
         self.OpenPathOutput.setPlaceholderText(_translate("notepad_New", "Optional Output Directory Path"))
         self.Button_Open_Path.setText(_translate("notepad_New", "..."))

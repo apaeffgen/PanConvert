@@ -500,6 +500,7 @@ class StartQT5(QtWidgets.QMainWindow):
             global openfile, filelist
 
             batch_settings = QSettings('Pandoc', 'PanConvert')
+            Standard_Conversion = settings.value('Standard_Conversion')
 
             if platform.system() == 'Darwin':
                 batch_convert_files = batch_settings.value('batch_convert_files')
@@ -622,6 +623,9 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_OldGui = settings.value('Button_OldGui', True)
         Button_NewGui = settings.value('Button_NewGui', False)
 
+        standard_conversion = self.ui.StandardConversion.isChecked()
+        batchConversion = self.ui.BatchConversion.isChecked()
+
         global fromFormat,toFormat,extraParameter
         fromFormat = self.ui.FromParameter.text()
         toFormat = self.ui.ToParameter.text()
@@ -636,22 +640,25 @@ class StartQT5(QtWidgets.QMainWindow):
             currentIndex = self.ui.WidgetConvert.currentIndex()
             if currentIndex == 0:
                 self.ui.WidgetConvert.setCurrentIndex(0)
-                Standard_Conversion = settings.value('Standard_Conversion')
-                if Standard_Conversion is False or Standard_Conversion == 'false':
+                standard_conversion = settings.value('Standard_Conversion')
+                if standard_conversion is False or standard_conversion == 'false':
                     self.ui.StandardConversion.setChecked(True)
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    Standard_Conversion = settings.value('Standard_Conversion')
+                    standard_conversion = settings.value('Standard_Conversion')
 
-            if currentIndex == 1:
+            elif currentIndex == 1:
                 self.ui.WidgetConvert.setCurrentIndex(1)
-                Standard_Conversion = settings.value('Standard_Conversion', False)
-                if Standard_Conversion is True or Standard_Conversion == 'true':
+                standard_conversion = settings.value('Standard_Conversion', False)
+                if standard_conversion is True or standard_conversion == 'true':
                     self.ui.StandardConversion.setChecked(False)
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    Standard_Conversion = settings.value('Standard_Conversion')
+                    standard_conversion = settings.value('Standard_Conversion')
 
-        standard_conversion = self.ui.StandardConversion.isChecked()
-        batchConversion = self.ui.BatchConversion.isChecked()
+            if batchConversion is True or batchConversion == 'true':
+                standard_conversion = settings.value('Standard_Conversion')
+                self.batch_settings()
+
+
 
         if standard_conversion is True and batchConversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
@@ -794,7 +801,6 @@ class StartQT5(QtWidgets.QMainWindow):
             # Batch Option Settings
             batch_convert_filter = batch_settings.value('batch_convert_filter')
             self.ui.Filter.insert(batch_convert_filter)
-            self.ui.Button_SetBatchConverter.clicked.connect(self.batch_settings)
             self.ui.Button_Open_Path.clicked.connect(self.file_batch_input_directory)
             self.ui.Button_Open_Path_Output.clicked.connect(self.file_batch_output_directory)
 
