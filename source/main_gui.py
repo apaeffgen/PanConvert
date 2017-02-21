@@ -501,6 +501,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
             batch_settings = QSettings('Pandoc', 'PanConvert')
             Standard_Conversion = settings.value('Standard_Conversion')
+            Batch_Conversion = settings.value('Batch_Conversion')
 
             if platform.system() == 'Darwin':
                 batch_convert_files = batch_settings.value('batch_convert_files')

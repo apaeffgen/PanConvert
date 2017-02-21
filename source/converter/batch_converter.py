@@ -42,6 +42,7 @@ global openfiles, filelist
 def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
     batch_open_path_output = batch_settings.value('batch_open_path_output')
+    path_pandoc = settings.value('path_pandoc', '')
     try:
         os.path.isfile(path_pandoc)
 
