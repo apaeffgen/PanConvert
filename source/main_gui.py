@@ -533,7 +533,7 @@ class StartQT5(QtWidgets.QMainWindow):
             self.print_log_messages(error)
 
     def convert_batch_singlefile(self, fromFormat, toFormat, extraParameter):
-
+        path_pandoc = settings.value('path_pandoc', '')
         for openfiles in filelist:
 
             if os.path.isfile(openfiles) is True:
@@ -546,6 +546,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.print_log_messages(message)
 
     def convert_batch_directory(self, fromFormat, toFormat, extraParameter):
+        path_pandoc = settings.value('path_pandoc', '')
         message = ''
         filelist, message = create_simplefilelist()
 
@@ -564,6 +565,7 @@ class StartQT5(QtWidgets.QMainWindow):
     def convert_batch_drectory_recursive(self, fromFormat, toFormat, extraParameter):
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
+        path_pandoc = settings.value('path_pandoc', '')
         message = ''
 
         filelistrecursive, message = create_filelist(batch_open_path)
@@ -660,7 +662,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
 
-        if standard_conversion is True and batchConversion is False:
+        if standard_conversion is True or standard_conversion == 'true' and batchConversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.export_manualconverter("markdown", "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
@@ -691,7 +693,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_equal_formats()
                 self.print_log_messages(message)
 
-        elif standard_conversion is True and batchConversion is True:
+        elif standard_conversion is True or standard_conversion == 'true' and batchConversion is True:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.export_batch_conversion_manual("markdown", "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
@@ -722,11 +724,11 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_equal_formats()
                 self.print_log_messages(message)
 
-        elif standard_conversion is False and batchConversion is False:# and extraParameter is not "":
+        elif standard_conversion is False or standard_conversion == 'false' and batchConversion is False:# and extraParameter is not "":
             self.export_manualconverter(fromFormat, toFormat, extraParameter)
 
 
-        elif standard_conversion is False and batchConversion is True:
+        elif standard_conversion is False or standard_conversion == 'false' and batchConversion is True:
             self.export_batch_conversion_manual(fromFormat, toFormat, extraParameter)
 
         elif fromFormat is "" or toFormat is "":
