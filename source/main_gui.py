@@ -626,8 +626,8 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_OldGui = settings.value('Button_OldGui', True)
         Button_NewGui = settings.value('Button_NewGui', False)
 
-        standard_conversion = self.ui.StandardConversion.isChecked()
-        batch_Conversion = self.ui.BatchConversion.isChecked()
+        Standard_Conversion = self.ui.StandardConversion.isChecked()
+        Batch_Conversion = self.ui.BatchConversion.isChecked()
 
         global fromFormat,toFormat,extraParameter
         fromFormat = self.ui.FromParameter.text()
@@ -643,27 +643,27 @@ class StartQT5(QtWidgets.QMainWindow):
             currentIndex = self.ui.WidgetConvert.currentIndex()
             if currentIndex == 0:
                 self.ui.WidgetConvert.setCurrentIndex(0)
-                standard_conversion = settings.value('Standard_Conversion')
-                if standard_conversion is False or standard_conversion == 'false':
+                Standard_Conversion = settings.value('Standard_Conversion')
+                if Standard_Conversion is False or Standard_Conversion == 'false':
                     self.ui.StandardConversion.setChecked(True)
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    standard_conversion = settings.value('Standard_Conversion')
+                    Standard_Conversion = settings.value('Standard_Conversion')
 
             elif currentIndex == 1:
                 self.ui.WidgetConvert.setCurrentIndex(1)
-                standard_conversion = settings.value('Standard_Conversion', False)
-                if standard_conversion is True or standard_conversion == 'true':
+                Standard_Conversion = settings.value('Standard_Conversion', False)
+                if Standard_Conversion is True or Standard_Conversion == 'true':
                     self.ui.StandardConversion.setChecked(False)
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    standard_conversion = settings.value('Standard_Conversion')
+                    Standard_Conversion = settings.value('Standard_Conversion')
 
-            if batch_Conversion is True or batch_Conversion == 'true':
-                standard_conversion = settings.value('Standard_Conversion')
+            if Batch_Conversion is True or Batch_Conversion == 'true':
+                Standard_Conversion = settings.value('Standard_Conversion')
                 self.batch_settings()
 
 
 
-        if standard_conversion is True and batch_Conversion is False:
+        if Standard_Conversion is True and Batch_Conversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.export_manualconverter("markdown", "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
@@ -694,7 +694,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_equal_formats()
                 self.print_log_messages(message)
 
-        elif standard_conversion is True and batch_Conversion is True:
+        elif Standard_Conversion is True and Batch_Conversion is True:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.export_batch_conversion_manual("markdown", "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
@@ -725,11 +725,11 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_equal_formats()
                 self.print_log_messages(message)
 
-        elif standard_conversion is False and batch_Conversion is False:
+        elif Standard_Conversion is False and Batch_Conversion is False:
             self.export_manualconverter(fromFormat, toFormat, extraParameter)
 
 
-        elif standard_conversion is False and batch_Conversion is True:
+        elif Standard_Conversion is False and Batch_Conversion is True:
             self.export_batch_conversion_manual(fromFormat, toFormat, extraParameter)
 
         elif fromFormat is "" or toFormat is "":
