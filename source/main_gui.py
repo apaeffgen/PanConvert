@@ -684,7 +684,6 @@ class StartQT5(QtWidgets.QMainWindow):
                         Standard_Conversion = settings.value('Standard_Conversion')
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
-                    Standard_Conversion = settings.value('Standard_Conversion')
                     self.batch_settings()
 
                 Standard_Conversion = bool(Standard_Conversion)
