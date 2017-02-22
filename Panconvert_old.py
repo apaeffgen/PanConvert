@@ -24,7 +24,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QPoint, QSize
 from source.dialogs.dialog_preferences import *
 from source.dialogs.dialog_batch import *
-from source.dialogs.dialog_options import *
+from source.dialogs.dialog_info import *
 from source.dialogs.dialog_fromformat import *
 from source.dialogs.dialog_toformat import *
 from source.dialogs.dialog_help import *
@@ -32,7 +32,7 @@ from source.converter.lyx_converter import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
 from source.gui.panconvert_gui import Ui_notepad_New
-from source.gui.panconvert_gui_old import Ui_notepad
+from source.gui.panconvert_gui_ext import Ui_notepad
 
 global openfile, filelist, actualLanguage, number
 
@@ -215,7 +215,7 @@ class StartQT5(QtWidgets.QMainWindow):
         number = number + 1
         self.ui.MessageNumber.display(number)
 
-    def logviewer_open(self):
+    def windows_log_open(self):
         self.ui.dockLogWindow.show()
 
     def logviewer_above(self):
@@ -237,9 +237,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.dockLogWindow.close()
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
-
-    def batch_mode_toggle(self):
-        self.ui.WidgetBatch.setHidden(not self.ui.WidgetBatch.isHidden())
 
     def check_path(self):
         global error
@@ -279,9 +276,7 @@ class StartQT5(QtWidgets.QMainWindow):
         global error
         error = 0
 
-        if not os.path.isfile(path_pandoc):
-            get_pandoc_formats()
-
+        get_pandoc_formats()
 
         from_formats, to_formats = get_pandoc_formats()
         warning_fromFormat, warning_toFormat = error_formats()
@@ -387,6 +382,8 @@ class StartQT5(QtWidgets.QMainWindow):
                         message = message_tmp + openfiles + '\n'
                         self.print_log_messages(message)
 
+
+
             elif batch_convert_recursive is False and batch_convert_directory is True:
                 message = ''
                 filelist, message = create_simplefilelist()
@@ -444,8 +441,7 @@ class StartQT5(QtWidgets.QMainWindow):
             path_pandoc = settings.value('path_pandoc')
 
         if os.path.isfile(path_pandoc):
-            global text, text_undo, openfile
-
+            global text, text_undo, openfil
             text = self.ui.editor_window.toPlainText()
             text_undo = text
             if text == '':
@@ -500,8 +496,6 @@ class StartQT5(QtWidgets.QMainWindow):
             global openfile, filelist
 
             batch_settings = QSettings('Pandoc', 'PanConvert')
-            Standard_Conversion = settings.value('Standard_Conversion')
-            Batch_Conversion = settings.value('Batch_Conversion')
 
             if platform.system() == 'Darwin':
                 batch_convert_files = batch_settings.value('batch_convert_files')
@@ -534,7 +528,7 @@ class StartQT5(QtWidgets.QMainWindow):
             self.print_log_messages(error)
 
     def convert_batch_singlefile(self, fromFormat, toFormat, extraParameter):
-        path_pandoc = settings.value('path_pandoc', '')
+
         for openfiles in filelist:
 
             if os.path.isfile(openfiles) is True:
@@ -547,7 +541,6 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.print_log_messages(message)
 
     def convert_batch_directory(self, fromFormat, toFormat, extraParameter):
-        path_pandoc = settings.value('path_pandoc', '')
         message = ''
         filelist, message = create_simplefilelist()
 
@@ -566,7 +559,6 @@ class StartQT5(QtWidgets.QMainWindow):
     def convert_batch_drectory_recursive(self, fromFormat, toFormat, extraParameter):
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
-        path_pandoc = settings.value('path_pandoc', '')
         message = ''
 
         filelistrecursive, message = create_filelist(batch_open_path)
@@ -606,7 +598,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.BatchDialog.show()
 
     def info_dialog(self):
-        """ References to dialog_options.py"""
+        """ References to dialog_info.py"""
         self.InfoDialog = InfoDialog(self)
         self.InfoDialog.show()
 
@@ -618,6 +610,12 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ToFormatsDialog = ToFormatDialog(self)
         self.ToFormatsDialog.show()
 
+
+
+
+
+
+
     """Gui-Trigger-Function for RadioButtons"""
 
     def event_triggered(self):
@@ -626,44 +624,23 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_OldGui = settings.value('Button_OldGui', True)
         Button_NewGui = settings.value('Button_NewGui', False)
 
-        standard_conversion = self.ui.StandardConversion.isChecked()
-        batch_Conversion = self.ui.BatchConversion.isChecked()
-
         global fromFormat,toFormat,extraParameter
         fromFormat = self.ui.FromParameter.text()
         toFormat = self.ui.ToParameter.text()
 
 
+
+
+
+
         ''' Old Gui Events '''
-        if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
-            extraParameter = self.ui.ExtraParameter.text()
-        else:
-            extraParameter = self.ui.ExtraParameter.toPlainText()
 
-            currentIndex = self.ui.WidgetConvert.currentIndex()
-            if currentIndex == 0:
-                self.ui.WidgetConvert.setCurrentIndex(0)
-                standard_conversion = settings.value('Standard_Conversion')
-                if standard_conversion is False or standard_conversion == 'false':
-                    self.ui.StandardConversion.setChecked(True)
-                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    standard_conversion = settings.value('Standard_Conversion')
-
-            elif currentIndex == 1:
-                self.ui.WidgetConvert.setCurrentIndex(1)
-                standard_conversion = settings.value('Standard_Conversion', False)
-                if standard_conversion is True or standard_conversion == 'true':
-                    self.ui.StandardConversion.setChecked(False)
-                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    standard_conversion = settings.value('Standard_Conversion')
-
-            if batch_Conversion is True or batch_Conversion == 'true':
-                standard_conversion = settings.value('Standard_Conversion')
-                self.batch_settings()
+        standard_conversion = self.ui.StandardConversion.isChecked()
+        extraParameter = self.ui.ExtraParameter.text()
+        batchConversion = self.ui.BatchConversion.isChecked()
 
 
-
-        if standard_conversion is True and batch_Conversion is False:
+        if standard_conversion is True and batchConversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.export_manualconverter("markdown", "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
@@ -694,7 +671,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_equal_formats()
                 self.print_log_messages(message)
 
-        elif standard_conversion is True and batch_Conversion is True:
+        elif standard_conversion is True and batchConversion is True:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.export_batch_conversion_manual("markdown", "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
@@ -725,19 +702,21 @@ class StartQT5(QtWidgets.QMainWindow):
                 message = error_equal_formats()
                 self.print_log_messages(message)
 
-        elif standard_conversion is False and batch_Conversion is False:
+        elif standard_conversion is False and batchConversion is False:# and extraParameter is not "":
             self.export_manualconverter(fromFormat, toFormat, extraParameter)
 
 
-        elif standard_conversion is False and batch_Conversion is True:
+        elif standard_conversion is False and batchConversion is True:
             self.export_batch_conversion_manual(fromFormat, toFormat, extraParameter)
 
         elif fromFormat is "" or toFormat is "":
             message = error_empty_formats()
             self.print_log_messages(message)
 
+
         else:
             error_fatal()
+
 
 
     """Gui-Event Definitions"""
@@ -753,11 +732,14 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_OldGui = settings.value('Button_OldGui', True)
         Button_NewGui = settings.value('Button_NewGui', False)
 
+
+
         QtWidgets.QWidget.__init__(self, parent)
         if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
             self.ui = Ui_notepad()
         else:
             self.ui = Ui_notepad_New()
+
 
         self.ui.setupUi(self)
         self.ui.closeEvent = self.closeEvent
@@ -766,26 +748,14 @@ class StartQT5(QtWidgets.QMainWindow):
 
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
-            Hide_Batch = settings.value('Hide_Batch', False)
+            Tab_BatchConverter = settings.value('Tab_BatchConverter', False)
 
             if Tab_StandardConverter is True or Tab_StandardConverter is 'True' or Tab_StandardConverter == 'true':
-                self.ui.WidgetConvert.setCurrentIndex(0)
-                Standard_Conversion = settings.value('Standard_Conversion')
-                if Standard_Conversion is False:
-                    self.ui.StandardConversion.setChecked(True)
-                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    Standard_Conversion = settings.value('Standard_Conversion')
-
+                self.ui.Converter_Type.setCurrentIndex(0)
             if Tab_ManualConverter is True or Tab_ManualConverter is 'True' or Tab_ManualConverter == 'true':
-                self.ui.WidgetConvert.setCurrentIndex(1)
-                Standard_Conversion = settings.value('Standard_Conversion', False)
-                if Standard_Conversion is True:
-                    self.ui.StandardConversion.setChecked(False)
-                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                    Standard_Conversion = settings.value('Standard_Conversion')
-
-            if Hide_Batch is True or Hide_Batch is 'True' or Hide_Batch == 'true':
-                self.ui.WidgetBatch.setHidden(True)
+                self.ui.Converter_Type.setCurrentIndex(1)
+            if Tab_BatchConverter is True or Tab_BatchConverter is 'True' or Tab_BatchConverter == 'true':
+                self.ui.Converter_Type.setCurrentIndex(2)
 
             ## Batch Settings##
             batch_settings = QSettings('Pandoc', 'PanConvert')
@@ -804,12 +774,9 @@ class StartQT5(QtWidgets.QMainWindow):
             # Batch Option Settings
             batch_convert_filter = batch_settings.value('batch_convert_filter')
             self.ui.Filter.insert(batch_convert_filter)
+            self.ui.Button_SetBatchConverter.clicked.connect(self.batch_settings)
             self.ui.Button_Open_Path.clicked.connect(self.file_batch_input_directory)
             self.ui.Button_Open_Path_Output.clicked.connect(self.file_batch_output_directory)
-
-            # Hide BatchMode Widget
-            self.ui.actionBatchModeToggle.triggered.connect(self.batch_mode_toggle)
-            self.ui.ButtonToggleBatch.clicked.connect(self.batch_mode_toggle)
 
         '''File-Dialog Functions'''
         self.ui.actionOpen.triggered.connect(self.file_open)
@@ -821,7 +788,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionUndo.triggered.connect(self.undo)
 
         '''Window Functions'''
-        self.ui.actionLogViewer.triggered.connect(self.logviewer_open)
+        self.ui.actionLogViewer.triggered.connect(self.windows_log_open)
         self.ui.actionAbove.triggered.connect(self.logviewer_above)
         self.ui.actionBelow.triggered.connect(self.logviewer_bottom)
         self.ui.actionLeft.triggered.connect(self.logviewer_left)
@@ -849,7 +816,6 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if Button_OldGui is True or Button_OldGui == 'true':
             self.ui.ButtonBatch.clicked.connect(self.batch_dialog)
-            Standard_Conversion = settings.value('Standard_Conversion', False)
 
         '''Setting-Initialization and Default Settings for the first start'''
 
@@ -878,7 +844,7 @@ class StartQT5(QtWidgets.QMainWindow):
         To_Opml = settings.value('To_Opml', False)
         To_Lyx = settings.value('To_Lyx', False)
 
-
+        Standard_Conversion = settings.value('Standard_Conversion', False)
         Batch_Conversion = settings.value('Batch_Conversion', False)
 
         if settings.value('From_Markdown') is not None:
@@ -915,5 +881,32 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.ExtraParameter.setText(xtraParameter)
 
 if __name__ == "__main__":
+    import sys
+    global actualLanguage
+
+    settings = QSettings('Pandoc', 'PanConvert')
+    actualLanguage = settings.value('default_language')
+
+    app = QtWidgets.QApplication(sys.argv)
+
+    _translate = QtCore.QTranslator()
+    script_dir = os.path.dirname(sys.argv[0])
+
+    if actualLanguage == 'Deutsch':
+        german_language = script_dir + "/Panconvert_de.qm"
+        if os.path.isfile(german_language):
+            _translate.load(german_language)
+        else:
+            _translate.load("source/language/Panconvert_de.qm")
+
+    elif actualLanguage == 'Español':
+        spanish_language = script_dir + "/Panconvert_es.qm"
+        if os.path.isfile(spanish_language):
+            _translate.load(spanish_language)
+        else:
+            _translate.load("source/language/Panconvert_es.qm")
+
+    app.installTranslator(_translate)
     myapp = StartQT5()
     myapp.show()
+    sys.exit(app.exec_())
