@@ -670,21 +670,21 @@ class StartQT5(QtWidgets.QMainWindow):
                 if currentIndex == 0:
                     self.ui.WidgetConvert.setCurrentIndex(0)
                     Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
-                    if Standard_Conversion is False or Standard_Conversion == 'false':
+                    if Standard_Conversion == 0:
                         self.ui.StandardConversion.setChecked(True)
                         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                        Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
+                        Standard_Conversion = settings.value('Standard_Conversion')
 
                 elif currentIndex == 1:
                     self.ui.WidgetConvert.setCurrentIndex(1)
                     Standard_Conversion = strtobool(settings.value('Standard_Conversion', False))
-                    if Standard_Conversion is True or Standard_Conversion == 'true':
+                    if Standard_Conversion == 1:
                         self.ui.StandardConversion.setChecked(False)
                         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                        Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
+                        Standard_Conversion = settings.value('Standard_Conversion')
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
-                    Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
+                    Standard_Conversion = settings.value('Standard_Conversion')
                     self.batch_settings()
 
                 Standard_Conversion = bool(Standard_Conversion)
