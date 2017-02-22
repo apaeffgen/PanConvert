@@ -627,6 +627,8 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_NewGui = settings.value('Button_NewGui', False)
 
         Standard_Conversion = self.ui.StandardConversion.isChecked()
+
+
         Batch_Conversion = self.ui.BatchConversion.isChecked()
 
         global fromFormat,toFormat,extraParameter
@@ -640,28 +642,52 @@ class StartQT5(QtWidgets.QMainWindow):
         else:
             extraParameter = self.ui.ExtraParameter.toPlainText()
 
-            currentIndex = self.ui.WidgetConvert.currentIndex()
-            if currentIndex == 0:
-                self.ui.WidgetConvert.setCurrentIndex(0)
-                Standard_Conversion = settings.value('Standard_Conversion')
-                if Standard_Conversion is False or Standard_Conversion == 'false':
-                    self.ui.StandardConversion.setChecked(True)
-                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+            if platform.system() == 'Darwin':
+
+                currentIndex = self.ui.WidgetConvert.currentIndex()
+                if currentIndex == 0:
+                    self.ui.WidgetConvert.setCurrentIndex(0)
                     Standard_Conversion = settings.value('Standard_Conversion')
+                    if Standard_Conversion is False or Standard_Conversion == 'false':
+                        self.ui.StandardConversion.setChecked(True)
+                        settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                        Standard_Conversion = settings.value('Standard_Conversion')
 
-            elif currentIndex == 1:
-                self.ui.WidgetConvert.setCurrentIndex(1)
-                Standard_Conversion = settings.value('Standard_Conversion', False)
-                if Standard_Conversion is True or Standard_Conversion == 'true':
-                    self.ui.StandardConversion.setChecked(False)
-                    settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                elif currentIndex == 1:
+                    self.ui.WidgetConvert.setCurrentIndex(1)
+                    Standard_Conversion = settings.value('Standard_Conversion', False)
+                    if Standard_Conversion is True or Standard_Conversion == 'true':
+                        self.ui.StandardConversion.setChecked(False)
+                        settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                        Standard_Conversion = settings.value('Standard_Conversion')
+
+                if Batch_Conversion is True or Batch_Conversion == 'true':
                     Standard_Conversion = settings.value('Standard_Conversion')
+                    self.batch_settings()
 
-            if Batch_Conversion is True or Batch_Conversion == 'true':
-                Standard_Conversion = settings.value('Standard_Conversion')
-                self.batch_settings()
+            else:
+                currentIndex = self.ui.WidgetConvert.currentIndex()
+                if currentIndex == 0:
+                    self.ui.WidgetConvert.setCurrentIndex(0)
+                    Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
+                    if Standard_Conversion is False or Standard_Conversion == 'false':
+                        self.ui.StandardConversion.setChecked(True)
+                        settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                        Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
 
+                elif currentIndex == 1:
+                    self.ui.WidgetConvert.setCurrentIndex(1)
+                    Standard_Conversion = strtobool(settings.value('Standard_Conversion', False))
+                    if Standard_Conversion is True or Standard_Conversion == 'true':
+                        self.ui.StandardConversion.setChecked(False)
+                        settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
+                        Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
 
+                if Batch_Conversion is True or Batch_Conversion == 'true':
+                    Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
+                    self.batch_settings()
+
+                Standard_Conversion = bool(Standard_Conversion)
 
         if Standard_Conversion is True and Batch_Conversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
