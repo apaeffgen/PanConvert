@@ -2,7 +2,6 @@
 
 block_cipher = None
 
-options = [ ('v', None, 'OPTION'), ('W ignore', None, 'OPTION') ]
 a = Analysis(['Panconvert.py'],
              pathex=['/Users/apaeffgen/Programmierung/PanConvert'],
              binaries=[],
@@ -18,7 +17,6 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
-          options,
           exclude_binaries=True,
           name='Panconvert',
           debug=False,
