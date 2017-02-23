@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>220</height>
+    <height>250</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,55 +19,23 @@
   <property name="minimumSize">
    <size>
     <width>386</width>
-    <height>220</height>
+    <height>250</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>386</width>
-    <height>220</height>
+    <height>250</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Batch Preferences</string>
   </property>
-  <widget class="QLineEdit" name="OpenPath">
-   <property name="geometry">
-    <rect>
-     <x>47</x>
-     <y>12</y>
-     <width>311</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Optional Directory Path</string>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="Button_Open_Path">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>12</y>
-     <width>25</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>23</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>...</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="ButtonSave">
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>160</y>
+     <y>200</y>
      <width>114</width>
      <height>32</height>
     </rect>
@@ -80,7 +48,7 @@
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>120</y>
+     <y>160</y>
      <width>114</width>
      <height>32</height>
     </rect>
@@ -117,7 +85,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>50</y>
+     <y>100</y>
      <width>350</width>
      <height>21</height>
     </rect>
@@ -126,67 +94,121 @@
     <string>optional File Extension Filter (separate with ;)</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>200</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>200</width>
+     <height>100</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>200</width>
+     <height>100</height>
+    </size>
+   </property>
+   <property name="title">
+    <string>Conversion Mode</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="3" column="0">
+     <widget class="QCheckBox" name="ParameterBatchconvertRecursive">
+      <property name="text">
+       <string>Recursive</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QRadioButton" name="ParameterBatchconvertDirectory">
+      <property name="text">
+       <string>Directory</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QRadioButton" name="ParameterBatchconvertFiles">
+      <property name="text">
+       <string>Files</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
-     <width>204</width>
-     <height>102</height>
+     <y>12</y>
+     <width>27</width>
+     <height>54</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>200</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Conversion Mode</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="ParameterBatchconvertRecursive">
-           <property name="text">
-            <string>Recursive</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QRadioButton" name="ParameterBatchconvertDirectory">
-           <property name="text">
-            <string>Directory</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QRadioButton" name="ParameterBatchconvertFiles">
-           <property name="text">
-            <string>Files</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QToolButton" name="Button_Open_Path">
+      <property name="maximumSize">
+       <size>
+        <width>25</width>
+        <height>23</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="Button_Open_Path_Output">
+      <property name="maximumSize">
+       <size>
+        <width>25</width>
+        <height>23</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>47</x>
+     <y>12</y>
+     <width>311</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLineEdit" name="OpenPath">
+      <property name="placeholderText">
+       <string>Optional Directory Path</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="OpenPath_Output">
+      <property name="placeholderText">
+       <string>Optional Directory Path</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

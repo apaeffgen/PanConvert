@@ -31,7 +31,7 @@ class BatchDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None):
 
-        global batch_open_path, openfile
+        global batch_open_path, openfile, batch_open_path_output
 
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_DialogBatch()
@@ -39,6 +39,7 @@ class BatchDialog(QtWidgets.QDialog):
         self.ui.ButtonSave.clicked.connect(self.batch_settings)
         self.ui.ButtonCancel.clicked.connect(self.closeEvent)
         self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
+        self.ui.Button_Open_Path_Output.clicked.connect(self.directory_dialog_Output)
 
 
         #Initialize Settings
@@ -51,6 +52,8 @@ class BatchDialog(QtWidgets.QDialog):
         # Path Settings
         batch_open_path = batch_settings.value('batch_open_path')
         self.ui.OpenPath.insert(batch_open_path)
+        batch_open_path_output = batch_settings.value('batch_open_path_output')
+        self.ui.OpenPath_Output.insert(batch_open_path_output)
 
         # Filter Settings
         batch_convert_filter = batch_settings.value('batch_convert_filter')
@@ -95,13 +98,14 @@ class BatchDialog(QtWidgets.QDialog):
         BatchDialog.close(self)
 
     def batch_settings(self):
-        global batch_open_path, openfiles
+        global batch_open_path, openfiles, batch_open_path_output
 
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_settings.setValue('batch_convert_directory', self.ui.ParameterBatchconvertDirectory.isChecked())
         batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
         batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
         batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
+        batch_settings.setValue('batch_open_path_output', self.ui.OpenPath_Output.text())
         batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
         batch_settings.sync()
         batch_settings.status()
@@ -122,6 +126,21 @@ class BatchDialog(QtWidgets.QDialog):
 
         batch_directory = fd.getExistingDirectory()
         self.ui.OpenPath.insert(batch_directory)
+
+    def directory_dialog_Output(self):
+
+        global data, openfiles, batch_open_path_output
+        self.ui.OpenPath_Output.clear()
+
+        fd = QtWidgets.QFileDialog(self)
+
+        if batch_open_path_output == '':
+            fd.setDirectory(QtCore.QDir.homePath())
+        else:
+            fd.setDirectory(batch_open_path_output)
+
+        batch_directory = fd.getExistingDirectory()
+        self.ui.OpenPath_Output.insert(batch_directory)
 
 
 

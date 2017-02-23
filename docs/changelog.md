@@ -3,6 +3,7 @@
 - Simplified the from / to format dialogs
 - Made the batch Widget hidable
 - Fixed find pandoc in from / to dialog
+- Extended Old-Gui Batch Dialog with Output-directory
 
 
 ### Version 0.2.6
