@@ -1,5 +1,12 @@
 # Basic Usage
 
+## Two Versions of the GUI
+
+* You can select the Gui-Style in the Preferences
+* The Gui`s have a standard, manual and batch conversion mode
+* By switching the standard / manual mode in the new Gui-Style, you do not need to check / uncheck
+the standard checkbox
+
 ## Errors and Information
 * All Errors are written to a log window
 * A Counter of messages can be read in the main gui. If no error, occurred, there is no message
