@@ -1,7 +1,7 @@
 <project>
     <shortName>Panconvert</shortName>
     <fullName>Panconvert</fullName>
-    <version>0.2.6</version>
+    <version>0.2.7</version>
     <readmeFile>/Panconvert_Binaries/dist/Docs/readme.txt</readmeFile>
     <licenseFile>/Panconvert_Binaries/dist/Docs/license.txt</licenseFile>
     <allowLanguageSelection>1</allowLanguageSelection>
