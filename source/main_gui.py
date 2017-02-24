@@ -661,6 +661,9 @@ class StartQT5(QtWidgets.QMainWindow):
                         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
                         Standard_Conversion = settings.value('Standard_Conversion')
 
+                settings.sync()
+                settings.status()
+
                 if Batch_Conversion is True or Batch_Conversion == 'true':
                     Standard_Conversion = settings.value('Standard_Conversion')
                     self.batch_settings()
@@ -682,6 +685,9 @@ class StartQT5(QtWidgets.QMainWindow):
                         self.ui.StandardConversion.setChecked(False)
                         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
                         Standard_Conversion = settings.value('Standard_Conversion')
+
+                settings.sync()
+                settings.status()
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
                     self.batch_settings()
