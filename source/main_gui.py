@@ -31,6 +31,7 @@ from source.dialogs.dialog_help import *
 from source.converter.lyx_converter import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
+from source.helpers.helper_functions import *
 from source.gui.panconvert_gui import Ui_notepad_New
 from source.gui.panconvert_gui_old import Ui_notepad
 
@@ -626,9 +627,6 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_OldGui = settings.value('Button_OldGui', True)
         Button_NewGui = settings.value('Button_NewGui', False)
 
-        Standard_Conversion = self.ui.StandardConversion.isChecked()
-
-
         Batch_Conversion = self.ui.BatchConversion.isChecked()
 
         global fromFormat,toFormat,extraParameter
@@ -639,6 +637,7 @@ class StartQT5(QtWidgets.QMainWindow):
         ''' Old Gui Events '''
         if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
             extraParameter = self.ui.ExtraParameter.text()
+            Standard_Conversion = self.ui.StandardConversion.isChecked()
         else:
             extraParameter = self.ui.ExtraParameter.toPlainText()
 
@@ -672,27 +671,28 @@ class StartQT5(QtWidgets.QMainWindow):
                 currentIndex = self.ui.WidgetConvert.currentIndex()
                 if currentIndex == 0:
                     self.ui.WidgetConvert.setCurrentIndex(0)
-                    Standard_Conversion = strtobool(settings.value('Standard_Conversion'))
-                    if Standard_Conversion == 0:
+                    Standard_Conversion = settings.value('Standard_Conversion')
+                    if Standard_Conversion == 0 or Standard_Conversion == 'false' or Standard_Conversion is False:
                         self.ui.StandardConversion.setChecked(True)
                         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                        Standard_Conversion = settings.value('Standard_Conversion')
+                        Standard_Conversion = bool(settings.value('Standard_Conversion'))
 
                 elif currentIndex == 1:
                     self.ui.WidgetConvert.setCurrentIndex(1)
-                    Standard_Conversion = strtobool(settings.value('Standard_Conversion', False))
-                    if Standard_Conversion == 1:
+                    Standard_Conversion = settings.value('Standard_Conversion', False)
+                    if Standard_Conversion == 1 or Standard_Conversion == 'true' or Standard_Conversion is True:
                         self.ui.StandardConversion.setChecked(False)
                         settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
-                        Standard_Conversion = settings.value('Standard_Conversion')
+                        Standard_Conversion = bool(settings.value('Standard_Conversion'))
 
                 settings.sync()
                 settings.status()
+                Standard_Conversion = settings.value('Standard_Conversion')
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
                     self.batch_settings()
 
-                Standard_Conversion = bool(Standard_Conversion)
+                Standard_Conversion = convert_boolean(Standard_Conversion)
 
         if Standard_Conversion is True and Batch_Conversion is False:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
