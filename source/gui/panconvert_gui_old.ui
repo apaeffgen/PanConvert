@@ -442,6 +442,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSave_AS"/>
     <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuExtras">
     <property name="enabled">
@@ -716,6 +717,11 @@
   <action name="actionRight">
    <property name="text">
     <string>Position Right</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>

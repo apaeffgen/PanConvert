@@ -17,13 +17,12 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from source.converter.interface_pandoc import *
+import os
 import subprocess
-import platform, os, glob
-import fnmatch
-from PyQt5 import QtWidgets
+
 from PyQt5.QtCore import QSettings
-from distutils.util import strtobool
+
+from helpers.interface_pandoc import *
 
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')

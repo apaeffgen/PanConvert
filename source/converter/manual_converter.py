@@ -19,8 +19,6 @@ __author__ = 'apaeffgen'
 
 import subprocess
 
-from source.converter.interface_pandoc import get_pandoc_formats
-from source.converter.interface_pandoc import get_path_pandoc
 from source.language.messages import *
 
 settings = QSettings('Pandoc', 'PanConvert')

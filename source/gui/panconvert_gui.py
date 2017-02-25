@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui.ui'
 #
-# Created: Tue Feb 21 08:55:09 2017
+# Created: Sat Feb 25 08:51:31 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -343,8 +343,8 @@ class Ui_notepad_New(object):
         self.actionMarkdown2opml.setObjectName("actionMarkdown2opml")
         self.actionPreferences = QtWidgets.QAction(notepad_New)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionPreferences.setIcon(icon5)
         self.actionPreferences.setObjectName("actionPreferences")
         self.actionLatex2Opml = QtWidgets.QAction(notepad_New)
@@ -365,8 +365,8 @@ class Ui_notepad_New(object):
         self.actionLatex2html.setObjectName("actionLatex2html")
         self.actionHelp = QtWidgets.QAction(notepad_New)
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionHelp.setIcon(icon6)
         self.actionHelp.setObjectName("actionHelp")
         self.actionMarkdown2Lyx = QtWidgets.QAction(notepad_New)
@@ -392,12 +392,15 @@ class Ui_notepad_New(object):
         self.actionRight.setObjectName("actionRight")
         self.actionBatchModeToggle = QtWidgets.QAction(notepad_New)
         self.actionBatchModeToggle.setObjectName("actionBatchModeToggle")
+        self.actionQuit = QtWidgets.QAction(notepad_New)
+        self.actionQuit.setObjectName("actionQuit")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionSave_AS)
         self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionQuit)
         self.menuExtras.addAction(self.actionHelp)
         self.menuExtras.addAction(self.actionAbout)
         self.menuEdit_2.addAction(self.actionPreferences)
@@ -507,5 +510,6 @@ class Ui_notepad_New(object):
         self.actionLeft.setText(_translate("notepad_New", "Position Left"))
         self.actionRight.setText(_translate("notepad_New", "Position Right"))
         self.actionBatchModeToggle.setText(_translate("notepad_New", "Batch Mode Toggle"))
+        self.actionQuit.setText(_translate("notepad_New", "Quit"))
 
 import source.gui.icons_rc

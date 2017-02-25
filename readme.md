@@ -4,7 +4,7 @@
 
 Running the program you must have installed the following additional software-packages:
 
-- pandoc < 1.18
+- pandoc (all versions are supported)
 - multimarkdown (optional for Lyx conversion)
 - python3
 - QT5

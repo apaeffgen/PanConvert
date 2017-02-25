@@ -17,14 +17,10 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
-from PyQt5.QtCore import QSettings
-from PyQt5.QtCore import QPoint, QSize
-from source.language.messages import *
+from helpers.interface_pandoc import get_pandoc_options, get_path_pandoc
 from source.gui.panconvert_diag_info import Ui_Information_Dialog
-from source.converter.interface_pandoc import get_pandoc_options, get_path_pandoc
+from source.language.messages import *
+
 
 class InfoDialog(QtWidgets.QDialog):
 

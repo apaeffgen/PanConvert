@@ -2,10 +2,6 @@
 import fnmatch
 import glob
 
-from PyQt5.QtCore import QSettings
-
-from source.language.messages import *
-
 __author__ = 'apaeffgen'
 # -*- coding: utf-8 -*-
 
@@ -25,11 +21,7 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from PyQt5 import QtWidgets
-import subprocess
-
-import os
-from source.converter.interface_pandoc import *
+from helpers.interface_pandoc import *
 
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')
