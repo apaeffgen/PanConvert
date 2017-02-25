@@ -22,7 +22,7 @@ import subprocess
 
 from PyQt5.QtCore import QSettings
 
-from helpers.interface_pandoc import *
+from source.helpers.interface_pandoc import *
 
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')

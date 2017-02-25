@@ -1,6 +1,5 @@
 #!/usr/local/bin/python3
-import fnmatch
-import glob
+
 
 __author__ = 'apaeffgen'
 # -*- coding: utf-8 -*-
@@ -20,8 +19,8 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-
-from helpers.interface_pandoc import *
+import fnmatch, glob
+from source.helpers.interface_pandoc import *
 
 settings = QSettings('Pandoc', 'PanConvert')
 path_pandoc = settings.value('path_pandoc')

@@ -17,7 +17,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from helpers.interface_pandoc import get_pandoc_formats, get_path_pandoc
+from source.helpers.interface_pandoc import get_pandoc_formats, get_path_pandoc
 from source.gui.panconvert_diag_fromformat import Ui_From_Format_Dialog
 from source.language.messages import *
 
