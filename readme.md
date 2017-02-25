@@ -19,8 +19,8 @@ If Panconvert 0.1.1 or above had been used, the previous settings have to be del
 
 ## Known Problems
 
-Not working is python2, QT4 and pyqt4. There can be some issues with older versions of QT5 and pyqt5. QT5.3.0 is
-initially used.
+Not working is python2, QT4 and pyqt4. There can be some issues with older or newer versions of QT5 and pyqt5. QT5.3.0 is
+initially used. PyQT5.5 and above do not work.
 
 ## Extended installation instructions
 
@@ -54,6 +54,5 @@ The help can be used also inside the started Gui.
 ## License
 
 The software is licensed under the GNU General Public License.
-Thanks Juho Vepsäläinen, at https://github.com/bebraw/pypandoc, interface_pandoc.py is licensed under MIT license
 
 
