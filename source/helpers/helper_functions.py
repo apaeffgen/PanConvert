@@ -19,21 +19,27 @@ __author__ = 'apaeffgen'
 
 
 from PyQt5.QtCore import QSettings
+from main_gui import StartQT5
 
 
 def convert_boolean(value):
     if str(value).lower() in ("yes", "y", "true", "t", "1"): return True
     if str(value).lower() in ("no", "n", "false", "f", "0", "0.0", "", "none", "[]", "{}"): return False
 
-def batch_settings(self):
-    batch_settings = QSettings('Pandoc', 'PanConvert')
-    batch_settings.setValue('batch_convert_directory', self.ui.ParameterBatchconvertDirectory.isChecked())
-    batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
-    batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
-    batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
-    batch_settings.setValue('batch_open_path_output', self.ui.OpenPathOutput.text())
-    batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
-    batch_settings.sync()
-    batch_settings.status()
+
+class Helper(StartQT5):
+    def __init__(self):
+        StartQT5.__init__(self)
+
+    def batch_settings(self):
+        batch_settings = QSettings('Pandoc', 'PanConvert')
+        batch_settings.setValue('batch_convert_directory', self.ui.ParameterBatchconvertDirectory.isChecked())
+        batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
+        batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
+        batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
+        batch_settings.setValue('batch_open_path_output', self.ui.OpenPathOutput.text())
+        batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
+        batch_settings.sync()
+        batch_settings.status()
 
 

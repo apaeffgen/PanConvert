@@ -305,17 +305,6 @@ class StartQT5(QtWidgets.QMainWindow):
 
         return error
 
-    def batch_settings(self):
-        batch_settings = QSettings('Pandoc', 'PanConvert')
-        batch_settings.setValue('batch_convert_directory', self.ui.ParameterBatchconvertDirectory.isChecked())
-        batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
-        batch_settings.setValue('batch_convert_recursive', self.ui.ParameterBatchconvertRecursive.isChecked())
-        batch_settings.setValue('batch_open_path', self.ui.OpenPath.text())
-        batch_settings.setValue('batch_open_path_output', self.ui.OpenPathOutput.text())
-        batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
-        batch_settings.sync()
-        batch_settings.status()
-
     '''Export Functions'''
     ''' Function for the seperate multimarkdown to lyx converter. Only works, when multimarkdown is installed '''
 
@@ -671,8 +660,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 settings.status()
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
-                    self.batch_settings()
-                    #batch_settings()
+                    Helper.batch_settings(self)
 
             else:
                 currentIndex = self.ui.WidgetConvert.currentIndex()
@@ -697,8 +685,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 Standard_Conversion = settings.value('Standard_Conversion')
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
-                    self.batch_settings()
-                    #batch_settings()
+                    Helper.batch_settings(self)
 
                 Standard_Conversion = convert_boolean(Standard_Conversion)
 
