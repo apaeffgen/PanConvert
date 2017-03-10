@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui.ui'
 #
-# Created: Sat Feb 25 08:51:31 2017
+# Created: Fri Mar 10 17:39:45 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -298,7 +298,7 @@ class Ui_notepad_New(object):
         self.toolBar.setObjectName("toolBar")
         notepad_New.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.dockLogWindow = QtWidgets.QDockWidget(notepad_New)
-        self.dockLogWindow.setMinimumSize(QtCore.QSize(102, 124))
+        self.dockLogWindow.setMinimumSize(QtCore.QSize(103, 125))
         self.dockLogWindow.setFloating(True)
         self.dockLogWindow.setAllowedAreas(QtCore.Qt.AllDockWidgetAreas)
         self.dockLogWindow.setObjectName("dockLogWindow")
@@ -343,8 +343,8 @@ class Ui_notepad_New(object):
         self.actionMarkdown2opml.setObjectName("actionMarkdown2opml")
         self.actionPreferences = QtWidgets.QAction(notepad_New)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/freferences"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.actionPreferences.setIcon(icon5)
         self.actionPreferences.setObjectName("actionPreferences")
         self.actionLatex2Opml = QtWidgets.QAction(notepad_New)
@@ -365,8 +365,8 @@ class Ui_notepad_New(object):
         self.actionLatex2html.setObjectName("actionLatex2html")
         self.actionHelp = QtWidgets.QAction(notepad_New)
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap(":/icons/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.actionHelp.setIcon(icon6)
         self.actionHelp.setObjectName("actionHelp")
         self.actionMarkdown2Lyx = QtWidgets.QAction(notepad_New)
@@ -394,7 +394,13 @@ class Ui_notepad_New(object):
         self.actionBatchModeToggle.setObjectName("actionBatchModeToggle")
         self.actionQuit = QtWidgets.QAction(notepad_New)
         self.actionQuit.setObjectName("actionQuit")
+        self.actionOpen_URI = QtWidgets.QAction(notepad_New)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/icons/open_uri.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionOpen_URI.setIcon(icon8)
+        self.actionOpen_URI.setObjectName("actionOpen_URI")
         self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionOpen_URI)
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave)
@@ -419,6 +425,7 @@ class Ui_notepad_New(object):
         self.menubar.addAction(self.menuWindow.menuAction())
         self.menubar.addAction(self.menuExtras.menuAction())
         self.toolBar.addAction(self.actionOpen)
+        self.toolBar.addAction(self.actionOpen_URI)
         self.toolBar.addAction(self.actionNew)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.actionSave)
@@ -511,5 +518,6 @@ class Ui_notepad_New(object):
         self.actionRight.setText(_translate("notepad_New", "Position Right"))
         self.actionBatchModeToggle.setText(_translate("notepad_New", "Batch Mode Toggle"))
         self.actionQuit.setText(_translate("notepad_New", "Quit"))
+        self.actionOpen_URI.setText(_translate("notepad_New", "Open URI"))
 
 import source.gui.icons_rc

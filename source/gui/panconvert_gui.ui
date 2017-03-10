@@ -807,7 +807,7 @@
        <string>...</string>
       </property>
       <property name="icon">
-       <iconset resource="icons.qrc">
+       <iconset>
         <normaloff>:/icons/arrow-right.png</normaloff>:/icons/arrow-right.png</iconset>
       </property>
      </widget>
@@ -831,6 +831,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_URI"/>
     <addaction name="actionNew"/>
     <addaction name="separator"/>
     <addaction name="actionSave"/>
@@ -895,6 +896,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionOpen"/>
+   <addaction name="actionOpen_URI"/>
    <addaction name="actionNew"/>
    <addaction name="separator"/>
    <addaction name="actionSave"/>
@@ -908,8 +910,8 @@
   <widget class="QDockWidget" name="dockLogWindow">
    <property name="minimumSize">
     <size>
-     <width>102</width>
-     <height>124</height>
+     <width>103</width>
+     <height>125</height>
     </size>
    </property>
    <property name="floating">
@@ -1123,6 +1125,15 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionOpen_URI">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/open_uri.png</normaloff>:/icons/open_uri.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open URI</string>
    </property>
   </action>
  </widget>

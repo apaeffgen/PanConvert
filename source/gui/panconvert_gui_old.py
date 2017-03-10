@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_gui_old.ui'
 #
-# Created: Sat Feb 25 09:10:56 2017
+# Created: Fri Mar 10 19:30:30 2017
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -201,7 +201,7 @@ class Ui_notepad(object):
         self.toolBar.setObjectName("toolBar")
         notepad.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.dockLogWindow = QtWidgets.QDockWidget(notepad)
-        self.dockLogWindow.setMinimumSize(QtCore.QSize(102, 124))
+        self.dockLogWindow.setMinimumSize(QtCore.QSize(103, 125))
         self.dockLogWindow.setFloating(True)
         self.dockLogWindow.setAllowedAreas(QtCore.Qt.AllDockWidgetAreas)
         self.dockLogWindow.setObjectName("dockLogWindow")
@@ -295,7 +295,13 @@ class Ui_notepad(object):
         self.actionRight.setObjectName("actionRight")
         self.actionQuit = QtWidgets.QAction(notepad)
         self.actionQuit.setObjectName("actionQuit")
+        self.actionOpen_URI = QtWidgets.QAction(notepad)
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap(":/icons/open_uri.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionOpen_URI.setIcon(icon7)
+        self.actionOpen_URI.setObjectName("actionOpen_URI")
         self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionOpen_URI)
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave)
@@ -395,5 +401,6 @@ class Ui_notepad(object):
         self.actionLeft.setText(_translate("notepad", "Position Left"))
         self.actionRight.setText(_translate("notepad", "Position Right"))
         self.actionQuit.setText(_translate("notepad", "Quit"))
+        self.actionOpen_URI.setText(_translate("notepad", "Open Uri"))
 
 import source.gui.icons_rc

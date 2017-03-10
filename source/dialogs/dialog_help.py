@@ -48,7 +48,6 @@ class HelpDialog(QtWidgets.QDialog):
 
      def closeEvent(self, event):
 
-
         settings = QSettings('Pandoc', 'PanConvert')
         Dialog_Size = settings.value('Dialog_Size')
         if Dialog_Size is True or Dialog_Size == 'true':

@@ -20,14 +20,16 @@ __author__ = 'apaeffgen'
 import codecs
 from os import *
 from os.path import isfile
+import urllib.request
 from PyQt5 import QtCore
-from PyQt5.QtCore import QPoint, QSize
+from PyQt5.QtCore import QPoint, QSize, QUrl
 from source.dialogs.dialog_preferences import *
 from source.dialogs.dialog_batch import *
 from source.dialogs.dialog_options import *
 from source.dialogs.dialog_fromformat import *
 from source.dialogs.dialog_toformat import *
 from source.dialogs.dialog_help import *
+from source.dialogs.dialog_openuri import OpenURIDialog
 from source.converter.lyx_converter import *
 from source.converter.manual_converter import *
 from source.converter.batch_converter import *
@@ -35,10 +37,11 @@ from source.helpers.helper_functions import *
 from source.gui.panconvert_gui import Ui_notepad_New
 from source.gui.panconvert_gui_old import Ui_notepad
 
-global openfile, filelist, actualLanguage, number
+
+global openfile, filelist, actualLanguage, number, uri
 
 class StartQT5(QtWidgets.QMainWindow):
-    global openfile, filelist
+    global openfile, filelist, uri
 
     """File Dialog Functions"""
 
@@ -50,6 +53,35 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.logBrowser.setPlainText(text)
         self.ui.actionSave.setEnabled(True)
         self.ui.MessageNumber.display(number)
+
+    def file_open_uri(self):
+        global uri
+        self.OpenURIDialog = OpenURIDialog(self)
+        self.OpenURIDialog.exec_()
+
+        weburi = check_uri()
+        if weburi is False:
+            file = parse_uri()
+            if isfile(file):
+                data = codecs.open(file, 'r', 'utf-8').read()
+                self.ui.editor_window.setPlainText(data)
+            else:
+                logtext = error_file_selection()
+                self.print_log_messages(logtext)
+
+        elif weburi is True:
+            normalized_uri = normalize_uri()
+            try:
+                with urllib.request.urlopen(normalized_uri) as response:
+                    html = response.read()
+                self.ui.editor_window.setPlainText(str(html))
+            except:
+                logtext = error_file_selection()
+                self.print_log_messages(logtext)
+
+        else:
+            logtext = error_file_selection()
+            self.print_log_messages(logtext)
 
     def file_open(self):
         global text, data, openfile, filelist, path_dialog
@@ -98,6 +130,7 @@ class StartQT5(QtWidgets.QMainWindow):
             self.ui.editor_window.appendPlainText(data)
             files = self.ui.editor_window.toPlainText()
             filelist = files.split('\n')
+
 
     def file_batch_input_directory(self):
         global data, openfiles, batch_open_path
@@ -209,7 +242,6 @@ class StartQT5(QtWidgets.QMainWindow):
         if Window_Size is True or Window_Size == 'true':
             settings.setValue("size", self.size())
             settings.setValue("pos", self.pos())
-
         self.close()
 
     def print_log_messages(self, message):
@@ -592,8 +624,6 @@ class StartQT5(QtWidgets.QMainWindow):
         self.HelpDialog = HelpDialog(self)
         self.HelpDialog.show()
 
-
-
     def about_dialog(self):
         ## About Dialog with some Version info##
         msg = QtWidgets.QMessageBox()
@@ -850,6 +880,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         '''File-Dialog Functions'''
         self.ui.actionOpen.triggered.connect(self.file_open)
+        self.ui.actionOpen_URI.triggered.connect(self.file_open_uri)
         self.ui.actionSave.triggered.connect(self.buffer_save)
         self.ui.actionSave_AS.triggered.connect(self.file_save_as)
         self.ui.actionNew.triggered.connect(self.file_new)

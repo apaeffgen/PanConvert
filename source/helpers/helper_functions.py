@@ -19,12 +19,40 @@ __author__ = 'apaeffgen'
 
 
 from PyQt5.QtCore import QSettings
+from urllib.parse import urlparse, unquote
 #from source.main_gui import StartQT5
+
+global uri
 
 
 def convert_boolean(value):
     if str(value).lower() in ("yes", "y", "true", "t", "1"): return True
     if str(value).lower() in ("no", "n", "false", "f", "0", "0.0", "", "none", "[]", "{}"): return False
+
+def check_uri():
+    weburi = False
+    try:
+        if 'http://' in uri:
+            weburi = True
+        if 'www' in uri:
+            weburi = True
+        return weburi
+    except:
+        return
+
+def parse_uri():
+    if 'file://' in uri:
+        file = unquote(uri)[7:]
+    else:
+        file = uri
+    return file
+
+def normalize_uri():
+    global uri
+    if 'http://' not in uri:
+        normalized_uri = 'http://' + uri
+    return normalized_uri
+
 
 
 # class Helper(StartQT5):
