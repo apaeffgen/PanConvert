@@ -14,21 +14,6 @@
    <string>Pandoc To Formats</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QWebView" name="textBrowser">
-     <property name="minimumSize">
-      <size>
-       <width>200</width>
-       <height>100</height>
-      </size>
-     </property>
-     <property name="url">
-      <url>
-       <string>about:blank</string>
-      </url>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -40,13 +25,24 @@
      </item>
     </layout>
    </item>
+   <item row="0" column="0">
+    <widget class="QWebEngineView" name="textBrowser" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>100</height>
+      </size>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
+   <class>QWebEngineView</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header>qwebengineview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -48,7 +48,7 @@ class FromFormatDialog(QtWidgets.QDialog):
             formats =  get_pandoc_formats()
             fromformats = formats[0]
             data = '<br>'.join(fromformats)
-            self.ui.textBrowser.setContent(data)
+            self.ui.textBrowser.setHtml(data)
         else:
                 message = error_converter_path()
                 return message
@@ -70,7 +70,7 @@ class FromFormatDialog(QtWidgets.QDialog):
         formats =  get_pandoc_formats()
         fromformats = formats[0]
         data = '<br>'.join(fromformats)
-        self.ui.textBrowser.setContent(data)
+        self.ui.textBrowser.setHtml(data)
 
      def moreinfo(self):
         website = 'http://pandoc.org/README.html'

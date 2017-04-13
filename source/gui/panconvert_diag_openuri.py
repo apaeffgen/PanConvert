@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_openuri.ui'
 #
-# Created: Fri Mar 10 14:06:45 2017
-#      by: PyQt5 UI code generator 5.3.2
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -23,16 +22,17 @@ class Ui_DialogOpenURI(object):
         self.URI = QtWidgets.QPlainTextEdit(DialogOpenURI)
         self.URI.setGeometry(QtCore.QRect(10, 10, 371, 41))
         self.URI.setObjectName("URI")
-        self.widget = QtWidgets.QWidget(DialogOpenURI)
-        self.widget.setGeometry(QtCore.QRect(7, 60, 371, 32))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
+        self.layoutWidget = QtWidgets.QWidget(DialogOpenURI)
+        self.layoutWidget.setGeometry(QtCore.QRect(7, 60, 371, 32))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.CheckBoxStayOnTop = QtWidgets.QCheckBox(self.widget)
+        self.CheckBoxStayOnTop = QtWidgets.QCheckBox(self.layoutWidget)
+        self.CheckBoxStayOnTop.setEnabled(False)
         self.CheckBoxStayOnTop.setObjectName("CheckBoxStayOnTop")
         self.horizontalLayout.addWidget(self.CheckBoxStayOnTop)
-        self.ButtonCancel = QtWidgets.QPushButton(self.widget)
+        self.ButtonCancel = QtWidgets.QPushButton(self.layoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -43,7 +43,7 @@ class Ui_DialogOpenURI(object):
         self.ButtonCancel.setBaseSize(QtCore.QSize(114, 32))
         self.ButtonCancel.setObjectName("ButtonCancel")
         self.horizontalLayout.addWidget(self.ButtonCancel)
-        self.ButtonOpenURI = QtWidgets.QPushButton(self.widget)
+        self.ButtonOpenURI = QtWidgets.QPushButton(self.layoutWidget)
         self.ButtonOpenURI.setObjectName("ButtonOpenURI")
         self.horizontalLayout.addWidget(self.ButtonOpenURI)
 

@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_info.ui'
 #
-# Created: Sat May 16 19:57:46 2015
-#      by: PyQt5 UI code generator 5.3.1
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -15,10 +14,6 @@ class Ui_Information_Dialog(object):
         Information_Dialog.resize(707, 575)
         self.gridLayout_2 = QtWidgets.QGridLayout(Information_Dialog)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.textBrowser = QtWebKitWidgets.QWebView(Information_Dialog)
-        self.textBrowser.setUrl(QtCore.QUrl("about:blank"))
-        self.textBrowser.setObjectName("textBrowser")
-        self.gridLayout_2.addWidget(self.textBrowser, 0, 0, 1, 1)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
         self.ButtonCancel = QtWidgets.QPushButton(Information_Dialog)
@@ -31,6 +26,9 @@ class Ui_Information_Dialog(object):
         self.ButtonMoreInfo.setObjectName("ButtonMoreInfo")
         self.gridLayout.addWidget(self.ButtonMoreInfo, 0, 1, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout, 1, 0, 1, 1)
+        self.textBrowser = QtWebEngineWidgets.QWebEngineView(Information_Dialog)
+        self.textBrowser.setObjectName("textBrowser")
+        self.gridLayout_2.addWidget(self.textBrowser, 0, 0, 1, 1)
 
         self.retranslateUi(Information_Dialog)
         QtCore.QMetaObject.connectSlotsByName(Information_Dialog)
@@ -42,4 +40,4 @@ class Ui_Information_Dialog(object):
         self.ButtonInfo.setText(_translate("Information_Dialog", "Pandoc-Options"))
         self.ButtonMoreInfo.setText(_translate("Information_Dialog", "More Information"))
 
-from PyQt5 import QtWebKitWidgets
+from PyQt5 import QtWebEngineWidgets

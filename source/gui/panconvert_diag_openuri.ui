@@ -41,7 +41,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>7</x>
@@ -53,6 +53,9 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QCheckBox" name="CheckBoxStayOnTop">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>Stay on Top</string>
       </property>
