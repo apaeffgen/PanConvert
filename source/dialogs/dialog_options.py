@@ -47,10 +47,10 @@ class InfoDialog(QtWidgets.QDialog):
         if os.path.isfile(path_pandoc):
             options =  get_pandoc_options()
             data = '\n'.join(options)
-            self.ui.textBrowser.setContent(data)
+            self.ui.textBrowser.setHtml(data)
         else:
             message = error_converter_path()
-            self.ui.textBrowser.setContent(message)
+            self.ui.textBrowser.setHtml(message)
 
 
      def closeEvent(self, event):
@@ -69,7 +69,7 @@ class InfoDialog(QtWidgets.QDialog):
      def info(self):
         options =  get_pandoc_options()
         data = '\n'.join(options)
-        self.ui.textBrowser.setContent(data)
+        self.ui.textBrowser.setHtml(data)
 
      def moreinfo(self):
         website = 'http://pandoc.org/README.html'

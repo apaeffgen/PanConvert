@@ -3,7 +3,7 @@
 block_cipher = None
 
 a = Analysis(['Panconvert.py'],
-             pathex=['/Users/apaeffgen/Programmierung/PanConvert'],
+             pathex=['/Users/apaeffgen/Programmierung/PyCharm/PanConvert'],
              binaries=[],
              datas=[('source/language/Panconvert_de.qm', '.'),('source/language/Panconvert_es.qm', '.')],
              hiddenimports=[],

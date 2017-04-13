@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'panconvert_diag_help.ui'
 #
-# Created: Sun Feb 19 16:29:28 2017
-#      by: PyQt5 UI code generator 5.3.2
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -15,10 +14,6 @@ class Ui_Information_Dialog(object):
         Information_Dialog.resize(492, 575)
         self.gridLayout = QtWidgets.QGridLayout(Information_Dialog)
         self.gridLayout.setObjectName("gridLayout")
-        self.textBrowser = QtWebKitWidgets.QWebView(Information_Dialog)
-        self.textBrowser.setUrl(QtCore.QUrl("about:blank"))
-        self.textBrowser.setObjectName("textBrowser")
-        self.gridLayout.addWidget(self.textBrowser, 0, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.ButtonCancel = QtWidgets.QPushButton(Information_Dialog)
@@ -37,6 +32,9 @@ class Ui_Information_Dialog(object):
         self.ButtonForward.setObjectName("ButtonForward")
         self.horizontalLayout.addWidget(self.ButtonForward)
         self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
+        self.textBrowser = QtWebEngineWidgets.QWebEngineView(Information_Dialog)
+        self.textBrowser.setObjectName("textBrowser")
+        self.gridLayout.addWidget(self.textBrowser, 0, 0, 1, 1)
 
         self.retranslateUi(Information_Dialog)
         QtCore.QMetaObject.connectSlotsByName(Information_Dialog)
@@ -50,4 +48,4 @@ class Ui_Information_Dialog(object):
         self.ButtonBackward.setText(_translate("Information_Dialog", "<"))
         self.ButtonForward.setText(_translate("Information_Dialog", ">"))
 
-from PyQt5 import QtWebKitWidgets
+from PyQt5 import QtWebEngineWidgets
