@@ -17,6 +17,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import codecs
 from os import *
 from os.path import isfile

@@ -28,9 +28,6 @@ def convert_universal(text, ToFormat, FromFormat, extra_args):
     try:
         os.path.isfile(path_pandoc)
 
-
-
-
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat]
 
         output = ''
@@ -39,14 +36,11 @@ def convert_universal(text, ToFormat, FromFormat, extra_args):
             for arg in extra_args:
                 args.append(arg)
 
-
         p = subprocess.Popen(
                 args,
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE)
-
-
 
         output1, error1 = p.communicate(text.encode('utf-8'))
 

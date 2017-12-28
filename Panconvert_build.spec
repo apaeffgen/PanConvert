@@ -19,18 +19,18 @@ exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
           name='Panconvert',
-          debug=False,
+          debug=True,
           strip=False,
-          upx=True,
+          upx=False,
           console=False )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
-               upx=True,
+               upx=False,
                name='Panconvert')
 app = BUNDLE(coll,
              name='Panconvert.app',
              icon=None,
-             bundle_identifier=None)
+             bundle_identifier='org.qt-project.Qt.QtWebEngineCore')

@@ -20,6 +20,7 @@ __author__ = 'apaeffgen'
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5.QtCore import QPoint, QSize
+from PyQt5.QtCore import QT_VERSION_STR
 from source.main_gui import *
 import sys
 
