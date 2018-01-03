@@ -154,9 +154,11 @@ def get_pandoc_version():
 
 
         if platform.system() == 'Windows':
-            version = float(versionstr[10:15])
+            version_tmp = versionstr.replace(".","")
+            version = int(version_tmp[10:15])
         else:
-            version = float(versionstr[6:11])
+            version_tmp = versionstr.replace(".","")
+            version = int(version_tmp[7:10])
 
     return version
 
@@ -174,7 +176,7 @@ def get_pandoc_formats():
 
         version = get_pandoc_version()
 
-        if version < 1.18:
+        if version < 118:
 
                 p = subprocess.Popen(
                     [path_pandoc, '-h'],

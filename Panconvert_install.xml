@@ -1,7 +1,7 @@
 <project>
     <shortName>Panconvert</shortName>
     <fullName>Panconvert</fullName>
-    <version>0.2.7</version>
+    <version>0.2.8</version>
     <readmeFile>/Panconvert_Binaries/dist/Docs/readme.txt</readmeFile>
     <licenseFile>/Panconvert_Binaries/dist/Docs/license.txt</licenseFile>
     <allowLanguageSelection>1</allowLanguageSelection>
@@ -111,7 +111,7 @@
                 </startMenuShortcut>
                 <startMenuShortcut>
                     <comment></comment>
-                    <name>Panconvert_0.2.6</name>
+                    <name>Panconvert_0.2.8</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/Panconvert_Win32/${product_fullname}.exe</windowsExec>
