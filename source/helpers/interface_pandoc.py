@@ -59,15 +59,9 @@ def get_path_pandoc():
                     return path_pandoc
         else:
             if platform.system() == 'Darwin' or os.name == 'posix':
-
-                args = ['which', 'pandoc']
-                p = subprocess.Popen(
-                    args,
-                    stdin=subprocess.DEVNULL,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE)
-
-                path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
+                path_pandoc = which("pandoc")
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
 
                 if os.path.isfile(path_pandoc):
 
@@ -265,7 +259,7 @@ def get_pandoc_options():
             return message
 
 def which(target):
-    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin'
+    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Panconvert'
     pathlist = pathlist_tmp.split(":")
     for p in pathlist:
         fullpath = p + "/" + target

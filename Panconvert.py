@@ -40,6 +40,7 @@ if __name__ == '__main__':
     settings = QSettings('Pandoc', 'PanConvert')
     actualLanguage = settings.value('default_language')
 
+
     _translate = QtCore.QTranslator()
     script_dir = os.path.dirname(sys.argv[0])
 
@@ -56,5 +57,8 @@ if __name__ == '__main__':
             _translate.load(spanish_language)
         else:
             _translate.load(script_dir + "source/language/Panconvert_es.qm")
+
+    if not os.path.isfile(path_pandoc):
+        get_path_pandoc()
 
     main()
