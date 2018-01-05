@@ -2,8 +2,8 @@
     <shortName>Panconvert</shortName>
     <fullName>Panconvert</fullName>
     <version>0.2.8</version>
-    <readmeFile>/Panconvert_Binaries/dist/Docs/readme.txt</readmeFile>
-    <licenseFile>/Panconvert_Binaries/dist/Docs/license.txt</licenseFile>
+    <readmeFile>C:/Panconvert_Binaries/dist/Docs/readme.txt</readmeFile>
+    <licenseFile>C:/Panconvert_Binaries/dist/Docs/license.txt</licenseFile>
     <allowLanguageSelection>1</allowLanguageSelection>
     <componentList>
         <component>
@@ -59,7 +59,7 @@
                     <platforms>linux-x64</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>/Panconvert_Binaries/dist/Panconvert_Linux64bit</origin>
+                            <origin>C:/Panconvert_Binaries/dist/Panconvert_Linux64bit</origin>
                             <onPackingFilterList>
                                 <fileNameFilter>
                                     <logic>matches</logic>
@@ -76,7 +76,7 @@
                     <platforms>windows</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>/Panconvert_Binaries/dist/Panconvert_Win32</origin>
+                            <origin>C:/Panconvert_Binaries/dist/Panconvert_Win32</origin>
                             <onPackingFilterList>
                                 <fileNameFilter>
                                     <logic>matches</logic>
@@ -84,6 +84,9 @@
                                 </fileNameFilter>
                             </onPackingFilterList>
                         </distributionDirectory>
+                        <distributionFile>
+                            <origin>C:/Program Files/Pandoc/pandoc.exe</origin>
+                        </distributionFile>
                     </distributionFileList>
                 </folder>
                 <folder>
@@ -93,10 +96,10 @@
                     <platforms>osx</platforms>
                     <distributionFileList>
                         <distributionFile>
-                            <origin>/Panconvert_Binaries/dist/Panconvert.app</origin>
+                            <origin>C:/Panconvert_Binaries/dist/Panconvert.app</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>/Users/apaeffgen/Library/Haskell/bin/pandoc</origin>
+                            <origin>C:/Users/apaeffgen/Library/Haskell/bin/pandoc</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
