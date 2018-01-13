@@ -38,52 +38,15 @@ def get_path_pandoc():
 
     if not os.path.isfile(path_pandoc):
 
-        if getattr( sys, 'frozen', False ):
-            if platform.system() == 'Darwin' or os.name == 'posix':
-                path_pandoc = which("pandoc")
-                settings.setValue('path_pandoc', path_pandoc)
-                settings.sync()
-            else:
-                args = ['where', 'pandoc']
-                p = subprocess.Popen(
-                    args,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE)
-
-                path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-
-                if os.path.isfile(path_pandoc):
-
-                    settings.setValue('path_pandoc', path_pandoc)
-                    settings.sync()
-                    return path_pandoc
+        if platform.system() == 'Darwin' or os.name == 'posix':
+            path_pandoc = which("pandoc")
+            settings.setValue('path_pandoc', path_pandoc)
+            settings.sync()
         else:
-            if platform.system() == 'Darwin' or os.name == 'posix':
-                path_pandoc = which("pandoc")
-                settings.setValue('path_pandoc', path_pandoc)
-                settings.sync()
+            path_pandoc = where("pandoc")
+            settings.setValue('path_pandoc', path_pandoc)
+            settings.sync()
 
-                if os.path.isfile(path_pandoc):
-
-                    settings.setValue('path_pandoc', path_pandoc)
-                    settings.sync()
-                    return path_pandoc
-
-            elif platform.system() == 'Windows':
-
-                args = ['where', 'pandoc']
-                p = subprocess.Popen(
-                    args,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE)
-
-                path_pandoc = str.rstrip(p.communicate(path_pandoc.encode('utf-8'))[0].decode('utf-8'))
-
-                if os.path.isfile(path_pandoc):
-
-                    settings.setValue('path_pandoc', path_pandoc)
-                    settings.sync()
-                    return path_pandoc
 
 def get_path_multimarkdown():
     settings = QSettings('Pandoc', 'PanConvert')
@@ -259,7 +222,7 @@ def get_pandoc_options():
             return message
 
 def which(target):
-    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Panconvert'
+    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Panconvert:~/Panconvert:/opt/Panconvert'
     pathlist = pathlist_tmp.split(":")
     for p in pathlist:
         fullpath = p + "/" + target
@@ -268,6 +231,15 @@ def which(target):
 
             return path_pandoc
 
+def where(target):
+    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Panconvert:~/Panconvert:/opt/Panconvert'
+    pathlist = pathlist_tmp.split(":")
+    for p in pathlist:
+        fullpath = p + "/" + target
+        if os.path.isfile(fullpath) and os.access(fullpath, os.X_OK):
+            path_pandoc = fullpath
+
+            return path_pandoc
 
 
 
