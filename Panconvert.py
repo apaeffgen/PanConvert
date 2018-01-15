@@ -39,8 +39,8 @@ if __name__ == '__main__':
 
     settings = QSettings('Pandoc', 'PanConvert')
     actualLanguage = settings.value('default_language')
-    path_pandoc = settings.value('path_pandoc','')
-
+    path_pandoc_tmp = settings.value('path_pandoc','')
+    path_pandoc = str(path_pandoc_tmp)
 
     _translate = QtCore.QTranslator()
     script_dir = os.path.dirname(sys.argv[0])

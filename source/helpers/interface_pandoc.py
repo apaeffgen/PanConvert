@@ -28,13 +28,14 @@ from source.language.messages import *
 global fromFormat
 
 settings = QSettings('Pandoc', 'PanConvert')
-path_pandoc = settings.value('path_pandoc','')
-
+path_pandoc_tmp = settings.value('path_pandoc','')
+path_pandoc = str(path_pandoc_tmp)
 
 def get_path_pandoc():
 
     settings = QSettings('Pandoc', 'PanConvert')
-    path_pandoc = settings.value('path_pandoc','')
+    path_pandoc_tmp = settings.value('path_pandoc','')
+    path_pandoc = str(path_pandoc_tmp)
 
     if not os.path.isfile(path_pandoc):
 
@@ -43,7 +44,7 @@ def get_path_pandoc():
             settings.setValue('path_pandoc', path_pandoc)
             settings.sync()
         else:
-            path_pandoc = where("pandoc")
+            path_pandoc = where("pandoc.exe")
             settings.setValue('path_pandoc', path_pandoc)
             settings.sync()
 
@@ -232,10 +233,10 @@ def which(target):
             return path_pandoc
 
 def where(target):
-    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Panconvert:~/Panconvert:/opt/Panconvert'
+    pathlist_tmp = 'C:\Program Files\Pandoc\:'
     pathlist = pathlist_tmp.split(":")
     for p in pathlist:
-        fullpath = p + "/" + target
+        fullpath = p + "\\" + target
         if os.path.isfile(fullpath) and os.access(fullpath, os.X_OK):
             path_pandoc = fullpath
 
