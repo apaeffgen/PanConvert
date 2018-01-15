@@ -222,7 +222,7 @@ def get_pandoc_options():
             return message
 
 def which(target):
-    pathlist_tmp = '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Panconvert:~/Panconvert:/opt/Panconvert'
+    pathlist_tmp = '/Applications/Panconvert:~/Panconvert:/opt/Panconvert:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:'
     pathlist = pathlist_tmp.split(":")
     for p in pathlist:
         fullpath = p + "/" + target

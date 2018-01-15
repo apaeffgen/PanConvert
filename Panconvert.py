@@ -59,7 +59,7 @@ if __name__ == '__main__':
         else:
             _translate.load(script_dir + "source/language/Panconvert_es.qm")
 
-    if not os.path.isfile(path_pandoc):
+    if not os.path.isfile(str(path_pandoc)):
         get_path_pandoc()
 
     main()
