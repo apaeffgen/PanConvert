@@ -232,6 +232,7 @@ class StartQT5(QtWidgets.QMainWindow):
         global text,text_undo
         text = text_undo
         self.ui.editor_window.setPlainText(text_undo)
+        self.repaint()
 
     def closeEvent(self, event):
         settings = QSettings('Pandoc', 'PanConvert')
@@ -276,6 +277,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def batch_mode_toggle(self):
         self.ui.WidgetBatch.setHidden(not self.ui.WidgetBatch.isHidden())
+        self.repaint()
 
     def batch_settings(self):
         batch_settings = QSettings('Pandoc', 'PanConvert')
@@ -502,6 +504,8 @@ class StartQT5(QtWidgets.QMainWindow):
 
                     if output_content is not None:
                         self.ui.editor_window.setPlainText(output_content)
+                        self.repaint()
+
                     else:
                         error_fatal()
 

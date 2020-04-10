@@ -1,10 +1,12 @@
+### Version 0.2.8
+- Fixed some Binary Build bugs
+
 ### Version 0.2.7
 - Maximized the Option filed for more input
 - Simplified the from / to format dialogs
 - Made the batch Widget hidable
 - Fixed find pandoc in from / to dialog
 - Extended Old-Gui Batch Dialog with Output-directory
-
 
 ### Version 0.2.6
 - Batch Converter save file without the original extension
