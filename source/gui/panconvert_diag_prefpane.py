@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'panconvert_diag_prefpane.ui'
+# Form implementation generated from reading ui file 'source/gui/panconvert_diag_prefpane.ui'
 #
-# Created: Mon Feb 20 10:09:12 2017
-#      by: PyQt5 UI code generator 5.3.2
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -48,6 +47,7 @@ class Ui_DialogPreferences(object):
         self.BoxToFormat.setObjectName("BoxToFormat")
         self.ButtonToHtml = QtWidgets.QRadioButton(self.BoxToFormat)
         self.ButtonToHtml.setGeometry(QtCore.QRect(10, 30, 102, 20))
+        self.ButtonToHtml.setChecked(True)
         self.ButtonToHtml.setObjectName("ButtonToHtml")
         self.ButtonToLatex = QtWidgets.QRadioButton(self.BoxToFormat)
         self.ButtonToLatex.setGeometry(QtCore.QRect(10, 50, 102, 20))
@@ -92,6 +92,7 @@ class Ui_DialogPreferences(object):
         self.ButtonFromLatex.setObjectName("ButtonFromLatex")
         self.ButtonFromMarkdown = QtWidgets.QRadioButton(self.BoxFromFormat)
         self.ButtonFromMarkdown.setGeometry(QtCore.QRect(20, 70, 102, 20))
+        self.ButtonFromMarkdown.setChecked(True)
         self.ButtonFromMarkdown.setObjectName("ButtonFromMarkdown")
         self.ButtonFromOpml = QtWidgets.QRadioButton(self.BoxFromFormat)
         self.ButtonFromOpml.setGeometry(QtCore.QRect(20, 90, 102, 20))
@@ -109,7 +110,7 @@ class Ui_DialogPreferences(object):
         self.ButtonCancel.setObjectName("ButtonCancel")
         self.horizontalLayout.addWidget(self.ButtonCancel)
         self.StandardConversion = QtWidgets.QCheckBox(self.layoutWidget_2)
-        self.StandardConversion.setChecked(False)
+        self.StandardConversion.setChecked(True)
         self.StandardConversion.setObjectName("StandardConversion")
         self.horizontalLayout.addWidget(self.StandardConversion)
         self.BatchConversion = QtWidgets.QCheckBox(self.layoutWidget_2)
@@ -176,6 +177,7 @@ class Ui_DialogPreferences(object):
         self.GuiSelection.setObjectName("GuiSelection")
         self.Button_NewGui = QtWidgets.QRadioButton(self.GuiSelection)
         self.Button_NewGui.setGeometry(QtCore.QRect(10, 60, 181, 20))
+        self.Button_NewGui.setChecked(True)
         self.Button_NewGui.setObjectName("Button_NewGui")
         self.Button_OldGui = QtWidgets.QRadioButton(self.GuiSelection)
         self.Button_OldGui.setGeometry(QtCore.QRect(10, 30, 171, 20))
@@ -185,6 +187,7 @@ class Ui_DialogPreferences(object):
         self.Tab_Selection.setObjectName("Tab_Selection")
         self.Tab_StandardConverter = QtWidgets.QRadioButton(self.Tab_Selection)
         self.Tab_StandardConverter.setGeometry(QtCore.QRect(10, 30, 181, 20))
+        self.Tab_StandardConverter.setChecked(True)
         self.Tab_StandardConverter.setObjectName("Tab_StandardConverter")
         self.Tab_ManualConverter = QtWidgets.QRadioButton(self.Tab_Selection)
         self.Tab_ManualConverter.setGeometry(QtCore.QRect(10, 60, 171, 20))

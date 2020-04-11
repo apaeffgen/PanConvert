@@ -165,6 +165,9 @@
       <property name="text">
        <string>HTML</string>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QRadioButton" name="ButtonToLatex">
       <property name="geometry">
@@ -321,6 +324,9 @@
       <property name="text">
        <string>Markdown</string>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QRadioButton" name="ButtonFromOpml">
       <property name="geometry">
@@ -366,7 +372,7 @@
          <string>Standard Conversion</string>
         </property>
         <property name="checked">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -586,6 +592,9 @@
       <property name="text">
        <string>New Style Gui</string>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QRadioButton" name="Button_OldGui">
       <property name="geometry">
@@ -624,6 +633,9 @@
       </property>
       <property name="text">
        <string>Standard Converter</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QRadioButton" name="Tab_ManualConverter">
