@@ -1,4 +1,4 @@
-# Readme first (Version 0.1.3 and above)
+# Readme first
 
 ## Installation
 
@@ -11,7 +11,7 @@ Running the program you must have installed the following additional software-pa
 - pyqt5
 
 ## Update from previous versions
-If Panconvert 0.1.1 or above had been used, the previous settings have to be deleted, or Panconvert may crash:
+If Panconvert previously had been used, the previous settings have to be deleted, or Panconvert may crash:
 
 - On Windows, open registry editor go to HKEY_CURRENT_USER/Software and delete the folder Pandoc
 - On MacOS delete /Users/<USERNAME>/Library/Preferences/com.apaeffgen.PanConvert.plist
@@ -19,8 +19,8 @@ If Panconvert 0.1.1 or above had been used, the previous settings have to be del
 
 ## Known Problems
 
-Not working is python2, QT4 and pyqt4. There can be some issues with older or newer versions of QT5 and pyqt5. QT5.3.0 is
-initially used. PyQT5.5 and above do not work.
+Not working is python2, QT4 and pyqt4. There can be some issues with older or newer versions of QT5 and pyqt5. QT5.11.0 is
+used for the actual source code.
 
 ## Extended installation instructions
 

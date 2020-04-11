@@ -1,5 +1,7 @@
 ### Version 0.2.8
 - Fixed some Binary Build bugs
+- Fixed some Preference bugs
+- Support of newer pandoc versions
 
 ### Version 0.2.7
 - Maximized the Option filed for more input
