@@ -42,7 +42,7 @@ def strtobool(input):
 
 class PreferenceDialog(QtWidgets.QDialog):
 
-    global path_pandoc, path_dialog
+    global path_pandoc, path_dialog, actualLanguage
 
     def __init__(self, parent=None):
 
@@ -62,11 +62,12 @@ class PreferenceDialog(QtWidgets.QDialog):
 
         #Language Settings
         default_language = settings.value('default_language')
-        self.ui.comboBoxLanguageSelector.addItem('')
+        # self.ui.comboBoxLanguageSelector.addItem('')
         self.ui.comboBoxLanguageSelector.addItem('English')
         self.ui.comboBoxLanguageSelector.addItem('Deutsch')
         self.ui.comboBoxLanguageSelector.addItem('Español')
         self.ui.comboBoxLanguageSelector.addItem('Français')
+        self.ui.comboBoxLanguageSelector.setCurrentText(default_language)
         self.ui.comboBoxLanguageSelector.currentIndexChanged.connect(self.SetLanguage)
 
         #Checkbox Size of Main Window and DockWindow
