@@ -22,13 +22,22 @@ from PyQt5.QtCore import QSettings
 from PyQt5 import QtCore
 from PyQt5.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
-from distutils.util import strtobool
+from distutils.util import strtobool as str2bool
 import platform, os
 
 global path_pandoc, path_dialog, actualLanguage
 
-
-
+def strtobool(input):
+    """
+        safe strtobool : if input is a boolean
+        it return the input
+    """
+    if isinstance(input,bool):
+        return input
+    try:
+        return str2bool(input)
+    except:
+        print("Dear, we are in trouble ! ;)")
 
 
 class PreferenceDialog(QtWidgets.QDialog):

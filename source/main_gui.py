@@ -369,7 +369,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
         if os.path.isfile(path_multimarkdown):
 
-            if text is not "":
+            if text != "":
                 output_content = convert_markdown2lyx(text)
                 self.ui.editor_window.setPlainText(output_content)
                 text = output_content
@@ -410,7 +410,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
             data = self.ui.editor_window.toPlainText()
 
-            if data is not '' and batch_convert_files is True:
+            if data != '' and batch_convert_files is True:
                 self.convert_batch_singlefile_lyx()
 
             elif batch_convert_recursive is False and batch_convert_directory is True:
@@ -562,7 +562,7 @@ class StartQT5(QtWidgets.QMainWindow):
             error = self.check_format(fromFormat,toFormat)
 
             if error < 1:
-                if data is not '' and batch_convert_files is True:
+                if data != '' and batch_convert_files is True:
                     self.convert_batch_singlefile(fromFormat, toFormat, extraParameter)
 
                 elif batch_convert_recursive is False and batch_convert_directory is True:
@@ -677,7 +677,7 @@ class StartQT5(QtWidgets.QMainWindow):
 
 
         ''' Old Gui Events '''
-        if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
+        if Button_OldGui is True or Button_OldGui == 'True' or Button_OldGui == 'true':
             extraParameter = self.ui.ExtraParameter.text()
             Standard_Conversion = self.ui.StandardConversion.isChecked()
         else:
@@ -804,7 +804,7 @@ class StartQT5(QtWidgets.QMainWindow):
         elif Standard_Conversion is False and Batch_Conversion is True:
             self.select_batch_conversion_manual(fromFormat, toFormat, extraParameter)
 
-        elif fromFormat is "" or toFormat is "":
+        elif fromFormat == "" or toFormat == "":
             message = error_empty_formats()
             self.print_log_messages(message)
 
@@ -826,7 +826,7 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_NewGui = settings.value('Button_NewGui', False)
 
         QtWidgets.QWidget.__init__(self, parent)
-        if Button_OldGui is True or Button_OldGui is 'True' or Button_OldGui == 'true':
+        if Button_OldGui is True or Button_OldGui == 'True' or Button_OldGui == 'true':
             self.ui = Ui_notepad()
         else:
             self.ui = Ui_notepad_New()
@@ -834,13 +834,13 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.closeEvent = self.closeEvent
 
-        if Button_NewGui is True or Button_NewGui is 'true' or Button_NewGui == 'true':
+        if Button_NewGui is True or Button_NewGui == 'true' or Button_NewGui == 'true':
 
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
             Hide_Batch = settings.value('Hide_Batch', False)
 
-            if Tab_StandardConverter is True or Tab_StandardConverter is 'True' or Tab_StandardConverter == 'true':
+            if Tab_StandardConverter is True or Tab_StandardConverter == 'True' or Tab_StandardConverter == 'true':
                 self.ui.WidgetConvert.setCurrentIndex(0)
                 Standard_Conversion = settings.value('Standard_Conversion')
                 if Standard_Conversion is False:
@@ -848,7 +848,7 @@ class StartQT5(QtWidgets.QMainWindow):
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
                     Standard_Conversion = settings.value('Standard_Conversion')
 
-            if Tab_ManualConverter is True or Tab_ManualConverter is 'True' or Tab_ManualConverter == 'true':
+            if Tab_ManualConverter is True or Tab_ManualConverter == 'True' or Tab_ManualConverter == 'true':
                 self.ui.WidgetConvert.setCurrentIndex(1)
                 Standard_Conversion = settings.value('Standard_Conversion', False)
                 if Standard_Conversion is True:
@@ -856,7 +856,7 @@ class StartQT5(QtWidgets.QMainWindow):
                     settings.setValue('Standard_Conversion', self.ui.StandardConversion.isChecked())
                     Standard_Conversion = settings.value('Standard_Conversion')
 
-            if Hide_Batch is True or Hide_Batch is 'True' or Hide_Batch == 'true':
+            if Hide_Batch is True or Hide_Batch == 'True' or Hide_Batch == 'true':
                 self.ui.WidgetBatch.setHidden(True)
 
             ## Batch Settings##
