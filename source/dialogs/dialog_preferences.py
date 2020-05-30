@@ -25,7 +25,7 @@ from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 from distutils.util import strtobool as str2bool
 import platform, os
 
-global path_pandoc, path_dialog, actualLanguage
+global path_pandoc, path_dialog
 
 def strtobool(input):
     """
@@ -34,15 +34,19 @@ def strtobool(input):
     """
     if isinstance(input,bool):
         return input
-    try:
-        return str2bool(input)
-    except:
-        print("Dear, we are in trouble ! ;)")
+    return str2bool(input)
+
+# dictionary for all the languages that have translations
+lang = {}
+lang['en'] = 'English'
+lang['de'] = 'Deutsch'
+lang['es'] = 'Español'
+lang['fr'] = 'Français'
 
 
 class PreferenceDialog(QtWidgets.QDialog):
 
-    global path_pandoc, path_dialog, actualLanguage
+    global path_pandoc, path_dialog
 
     def __init__(self, parent=None):
 
@@ -61,13 +65,10 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
 
         #Language Settings
+        for longLang in lang.values():
+            self.ui.comboBoxLanguageSelector.addItem(longLang)
         default_language = settings.value('default_language')
-        # self.ui.comboBoxLanguageSelector.addItem('')
-        self.ui.comboBoxLanguageSelector.addItem('English')
-        self.ui.comboBoxLanguageSelector.addItem('Deutsch')
-        self.ui.comboBoxLanguageSelector.addItem('Español')
-        self.ui.comboBoxLanguageSelector.addItem('Français')
-        self.ui.comboBoxLanguageSelector.setCurrentText(default_language)
+        self.ui.comboBoxLanguageSelector.setCurrentText(lang[default_language])
         self.ui.comboBoxLanguageSelector.currentIndexChanged.connect(self.SetLanguage)
 
         #Checkbox Size of Main Window and DockWindow
@@ -245,10 +246,11 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.Dialog_Path.insert(OpenSaveDirectory)
 
     def SetLanguage(self):
-        global actualLanguage
         settings = QSettings('Pandoc', 'PanConvert')
-        settings.setValue('default_language', str(self.ui.comboBoxLanguageSelector.currentText()))
-        actualLanguage = str(self.ui.comboBoxLanguageSelector.currentText())
+        Longname = self.ui.comboBoxLanguageSelector.currentText()
+        # asserting one code per language
+        codeLang = [key for key, value in lang.items() if value == Longname][0]
+        settings.setValue('default_language', codeLang)
         settings.sync()
         settings.status()
 

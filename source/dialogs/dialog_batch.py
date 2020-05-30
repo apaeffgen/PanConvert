@@ -34,10 +34,7 @@ def strtobool(input):
     """
     if isinstance(input,bool):
         return input
-    try:
-        return str2bool(input)
-    except:
-        print("Dear, we are in trouble ! ;)")
+    return str2bool(input)
 
 class BatchDialog(QtWidgets.QDialog):
 
