@@ -22,4 +22,4 @@ SOURCES += source/gui/panconvert_dialog_batch.py source/language/messages.py
 SOURCES += source/gui/panconvert_diag_fromformat.py source/gui/panconvert_diag_toformat.py
 SOURCES += source/gui/panconvert_diag_help.py source/gui/panconvert_diag_info.py
 SOURCES += source/gui/panconvert_diag_prefpane.py source/gui/panconvert_diag_openuri.py
-TRANSLATIONS += source/language/Panconvert_de.ts source/language/Panconvert_es.ts source/language/Panconvert_xx.ts
+TRANSLATIONS += source/language/Panconvert_de.ts source/language/Panconvert_es.ts source/language/Panconvert_fr.ts source/language/Panconvert_xx.ts

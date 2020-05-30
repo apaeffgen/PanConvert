@@ -57,6 +57,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         self.ui.comboBoxLanguageSelector.addItem('English')
         self.ui.comboBoxLanguageSelector.addItem('Deutsch')
         self.ui.comboBoxLanguageSelector.addItem('Español')
+        self.ui.comboBoxLanguageSelector.addItem('Français')
         self.ui.comboBoxLanguageSelector.currentIndexChanged.connect(self.SetLanguage)
 
         #Checkbox Size of Main Window and DockWindow
