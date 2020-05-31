@@ -46,7 +46,7 @@ class InfoDialog(QtWidgets.QDialog):
 
         if os.path.isfile(path_pandoc):
             options =  get_pandoc_options()
-            data = '\n'.join(options)
+            data = '<pre>' + '<br>'.join(options) + '</pre>'
             self.ui.textBrowser.setHtml(data)
         else:
             message = error_converter_path()
@@ -68,7 +68,7 @@ class InfoDialog(QtWidgets.QDialog):
 
      def info(self):
         options =  get_pandoc_options()
-        data = '\n'.join(options)
+        data = '<pre>' + '<br>'.join(options) + '</pre>'
         self.ui.textBrowser.setHtml(data)
 
      def moreinfo(self):
