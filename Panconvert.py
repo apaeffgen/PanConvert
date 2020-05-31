@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 __author__ = 'apaeffgen'
 # -*- coding: utf-8 -*-
 
@@ -21,6 +21,7 @@ from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5.QtCore import QPoint, QSize
 from PyQt5.QtCore import QT_VERSION_STR
+from PyQt5.QtCore import QLocale
 from source.main_gui import *
 import sys
 
@@ -35,29 +36,25 @@ def main():
 
 if __name__ == '__main__':
     import sys
-    global actualLanguage
 
     settings = QSettings('Pandoc', 'PanConvert')
+    
     actualLanguage = settings.value('default_language')
+    
     path_pandoc_tmp = settings.value('path_pandoc','')
     path_pandoc = str(path_pandoc_tmp)
 
     _translate = QtCore.QTranslator()
     script_dir = os.path.dirname(sys.argv[0])
-
-    if actualLanguage == 'Deutsch':
-        german_language = script_dir + "/Panconvert_de.qm"
-        if os.path.isfile(german_language):
-            _translate.load(german_language)
+    
+    if actualLanguage in ['de','es','fr']:
+        xx_language = script_dir + "/Panconvert_" + actualLanguage + ".qm"
+        if os.path.isfile(xx_language):
+            _translate.load(xx_language)
         else:
-            _translate.load(script_dir + "/source/language/Panconvert_de.qm")
-
-    elif actualLanguage == 'Español':
-        spanish_language = script_dir + "/Panconvert_es.qm"
-        if os.path.isfile(spanish_language):
-            _translate.load(spanish_language)
-        else:
-            _translate.load(script_dir + "source/language/Panconvert_es.qm")
+            path2trxx = script_dir + "/source/language/Panconvert_" + \
+                        actualLanguage + ".qm"
+            _translate.load(path2trxx)
 
     if not os.path.isfile(str(path_pandoc)):
         get_path_pandoc()

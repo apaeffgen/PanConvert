@@ -43,7 +43,7 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
         else:
             outputfile = os.path.basename(filename)
             args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + batch_open_path_output + '/' + outputfile + '.' + ToFormat]
-        if extra_args is not '' :
+        if extra_args != '' :
             extra_args = extra_args.split(';')
             for arg in extra_args:
                 args.append(arg)

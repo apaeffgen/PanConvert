@@ -31,7 +31,7 @@ def convert_universal(text, ToFormat, FromFormat, extra_args):
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat]
 
         output = ''
-        if extra_args is not '' :
+        if extra_args != '' :
             extra_args = extra_args.split(';')
             for arg in extra_args:
                 args.append(arg)
@@ -72,7 +72,7 @@ def convert_binary(openfile,ToFormat,FromFormat,extra_args):
 
         args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile]
 
-        if extra_args is not '' :
+        if extra_args != '' :
             extra_args = extra_args.split(';')
             for arg in extra_args:
                 args.append(arg)
