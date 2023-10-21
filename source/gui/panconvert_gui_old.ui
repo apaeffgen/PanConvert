@@ -156,11 +156,11 @@
            <x>13</x>
            <y>31</y>
            <width>92</width>
-           <height>96</height>
+           <height>115</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QRadioButton" name="ButtonToHtml">
             <property name="text">
              <string>Html</string>
@@ -173,7 +173,7 @@
           <item row="1" column="0">
            <widget class="QRadioButton" name="ButtonToMarkdown">
             <property name="text">
-             <string>Markdown</string>
+             <string>Epub</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -183,24 +183,37 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QRadioButton" name="ButtonToOpml">
             <property name="text">
              <string>Opml</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QRadioButton" name="ButtonToLyx">
             <property name="text">
              <string>Lyx</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QRadioButton" name="ButtonToLatex">
             <property name="text">
              <string>Latex</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="ButtonToEpub">
+            <property name="text">
+             <string>Markdown</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -426,7 +439,7 @@
      <x>0</x>
      <y>0</y>
      <width>820</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="acceptDrops">
@@ -727,7 +740,7 @@
   </action>
   <action name="actionOpen_URI">
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset>
      <normaloff>:/icons/open_uri.png</normaloff>:/icons/open_uri.png</iconset>
    </property>
    <property name="text">

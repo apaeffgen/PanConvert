@@ -126,6 +126,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         To_Latex = settings.value('To_Latex', False)
         To_Opml = settings.value('To_Opml', False)
         To_Lyx = settings.value('To_Lyx', False)
+        To_Epub = settings.value('To_Epub', False)
 
 
         if settings.value('From_Markdown') is not None:
@@ -139,6 +140,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToLatex.setChecked(To_Latex)
                 self.ui.ButtonToOpml.setChecked(To_Opml)
                 self.ui.ButtonToLyx.setChecked(To_Lyx)
+                self.ui.ButtonToEpub.setChecked(To_Epub)
                 self.ui.StandardConversion.setChecked(Standard_Conversion)
                 self.ui.BatchConversion.setChecked(Batch_Conversion)
                 self.ui.Window_Size.setChecked(Window_Size)
@@ -160,6 +162,7 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.ButtonToLatex.setChecked(strtobool(To_Latex))
                 self.ui.ButtonToOpml.setChecked(strtobool(To_Opml))
                 self.ui.ButtonToLyx.setChecked(strtobool(To_Lyx))
+                self.ui.ButtonToEpub.setChecked(strtobool(To_Epub))
                 self.ui.StandardConversion.setChecked(strtobool(Standard_Conversion))
                 self.ui.BatchConversion.setChecked(strtobool(Batch_Conversion))
                 self.ui.Window_Size.setChecked(strtobool(Window_Size))
@@ -213,6 +216,7 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('To_Latex', self.ui.ButtonToLatex.isChecked())
         settings.setValue('To_Opml', self.ui.ButtonToOpml.isChecked())
         settings.setValue('To_Lyx', self.ui.ButtonToLyx.isChecked())
+        settings.setValue('To_Epub', self.ui.ButtonToEpub.isChecked())
 
         Dialog_Size = settings.value('Dialog_Size')
         if Dialog_Size is True or Dialog_Size == 'true':

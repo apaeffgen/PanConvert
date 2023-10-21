@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'source/gui/panconvert_diag_prefpane.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_DialogPreferences(object):
     def setupUi(self, DialogPreferences):
@@ -15,7 +17,7 @@ class Ui_DialogPreferences(object):
         DialogPreferences.setMinimumSize(QtCore.QSize(630, 380))
         DialogPreferences.setMaximumSize(QtCore.QSize(630, 380))
         self.tabWidget = QtWidgets.QTabWidget(DialogPreferences)
-        self.tabWidget.setGeometry(QtCore.QRect(9, 9, 611, 361))
+        self.tabWidget.setGeometry(QtCore.QRect(10, 20, 611, 361))
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Triangular)
         self.tabWidget.setObjectName("tabWidget")
         self.tab_standard_pref = QtWidgets.QWidget()
@@ -46,21 +48,25 @@ class Ui_DialogPreferences(object):
         self.BoxToFormat.setGeometry(QtCore.QRect(190, 130, 111, 141))
         self.BoxToFormat.setObjectName("BoxToFormat")
         self.ButtonToHtml = QtWidgets.QRadioButton(self.BoxToFormat)
-        self.ButtonToHtml.setGeometry(QtCore.QRect(10, 30, 102, 20))
-        self.ButtonToHtml.setChecked(True)
+        self.ButtonToHtml.setGeometry(QtCore.QRect(10, 40, 102, 20))
+        self.ButtonToHtml.setChecked(False)
         self.ButtonToHtml.setObjectName("ButtonToHtml")
         self.ButtonToLatex = QtWidgets.QRadioButton(self.BoxToFormat)
-        self.ButtonToLatex.setGeometry(QtCore.QRect(10, 50, 102, 20))
+        self.ButtonToLatex.setGeometry(QtCore.QRect(10, 60, 102, 20))
         self.ButtonToLatex.setObjectName("ButtonToLatex")
         self.ButtonToMarkdown = QtWidgets.QRadioButton(self.BoxToFormat)
-        self.ButtonToMarkdown.setGeometry(QtCore.QRect(10, 70, 102, 20))
+        self.ButtonToMarkdown.setGeometry(QtCore.QRect(10, 80, 102, 20))
         self.ButtonToMarkdown.setObjectName("ButtonToMarkdown")
         self.ButtonToOpml = QtWidgets.QRadioButton(self.BoxToFormat)
-        self.ButtonToOpml.setGeometry(QtCore.QRect(10, 90, 102, 20))
+        self.ButtonToOpml.setGeometry(QtCore.QRect(10, 100, 102, 20))
         self.ButtonToOpml.setObjectName("ButtonToOpml")
         self.ButtonToLyx = QtWidgets.QRadioButton(self.BoxToFormat)
-        self.ButtonToLyx.setGeometry(QtCore.QRect(10, 110, 102, 20))
+        self.ButtonToLyx.setGeometry(QtCore.QRect(10, 120, 102, 20))
         self.ButtonToLyx.setObjectName("ButtonToLyx")
+        self.ButtonToEpub = QtWidgets.QRadioButton(self.BoxToFormat)
+        self.ButtonToEpub.setGeometry(QtCore.QRect(10, 20, 102, 20))
+        self.ButtonToEpub.setChecked(True)
+        self.ButtonToEpub.setObjectName("ButtonToEpub")
         self.ButtonPandocPath = QtWidgets.QToolButton(self.tab_standard_pref)
         self.ButtonPandocPath.setGeometry(QtCore.QRect(170, 0, 27, 23))
         self.ButtonPandocPath.setObjectName("ButtonPandocPath")
@@ -234,6 +240,7 @@ class Ui_DialogPreferences(object):
         self.ButtonToMarkdown.setText(_translate("DialogPreferences", "Markdown"))
         self.ButtonToOpml.setText(_translate("DialogPreferences", "Opml"))
         self.ButtonToLyx.setText(_translate("DialogPreferences", "Lyx"))
+        self.ButtonToEpub.setText(_translate("DialogPreferences", "EPub"))
         self.ButtonPandocPath.setText(_translate("DialogPreferences", "..."))
         self.Pandoc_Path.setPlaceholderText(_translate("DialogPreferences", "/usr/local/bin/pandoc"))
         self.Markdown_Path.setPlaceholderText(_translate("DialogPreferences", "/usr/local/bin/multimarkdown"))
@@ -271,4 +278,3 @@ class Ui_DialogPreferences(object):
         self.label.setText(_translate("DialogPreferences", "Buffer Save Suffix"))
         self.label_2.setText(_translate("DialogPreferences", "Buffer Save Name"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_size_pref), _translate("DialogPreferences", "Extra Preferences"))
-

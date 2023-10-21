@@ -1,4 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
+# Pyinstaller - Spcification file
 
 block_cipher = None
 

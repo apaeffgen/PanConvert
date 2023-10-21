@@ -280,6 +280,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.repaint()
 
     def batch_settings(self):
+        print("Initiating Batch")
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_settings.setValue('batch_convert_directory', self.ui.ParameterBatchconvertDirectory.isChecked())
         batch_settings.setValue('batch_convert_files', self.ui.ParameterBatchconvertFiles.isChecked())
@@ -674,12 +675,15 @@ class StartQT5(QtWidgets.QMainWindow):
         global fromFormat,toFormat,extraParameter
         fromFormat = self.ui.FromParameter.text()
         toFormat = self.ui.ToParameter.text()
+        self.toolbar = self.ui.toolBar
+
 
 
         ''' Old Gui Events '''
         if Button_OldGui is True or Button_OldGui == 'True' or Button_OldGui == 'true':
             extraParameter = self.ui.ExtraParameter.text()
             Standard_Conversion = self.ui.StandardConversion.isChecked()
+        # New Gui Events
         else:
             extraParameter = self.ui.ExtraParameter.toPlainText()
 
@@ -707,6 +711,8 @@ class StartQT5(QtWidgets.QMainWindow):
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
                     batch_settings(self)
+
+
 
             else:
                 currentIndex = self.ui.WidgetConvert.currentIndex()
@@ -743,15 +749,15 @@ class StartQT5(QtWidgets.QMainWindow):
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
                 self.convert_lyx()
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.convert_manual("opml", "markdown", "--atx-header")
+                self.convert_manual("opml", "markdown", "")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.convert_manual("opml", "latex", "--standalone")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.convert_manual("latex", "markdown", "--atx-header")
+                self.convert_manual("latex", "markdown", "")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
                 self.convert_manual("latex", "opml", "--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.convert_manual("html", "markdown", "--atx-header")
+                self.convert_manual("html", "markdown", "")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
                 self.convert_manual("markdown", "html", "--standalone")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
@@ -760,6 +766,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.convert_manual("html", "opml", "--standalone")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
                 self.convert_manual("latex", "html", "--standalone")
+            elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToEpub.isChecked() is True:
+                self.convert_manual("latex", "epub", "--output=/Users/apaeffgen/Downloads/Output_Panconvert.epub;--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.convert_manual("html", "latex", "--standalone")
             else:
@@ -774,15 +782,15 @@ class StartQT5(QtWidgets.QMainWindow):
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
                 self.select_batch_convert_lyx()
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.select_batch_conversion_manual("opml", "markdown", "--atx-header")
+                self.select_batch_conversion_manual("opml", "markdown", "")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.select_batch_conversion_manual("opml", "latex", "--standalone")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.select_batch_conversion_manual("latex", "markdown", "--atx-header")
+                self.select_batch_conversion_manual("latex", "markdown", "")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
                 self.select_batch_conversion_manual("latex", "opml", "--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
-                self.select_batch_conversion_manual("html", "markdown", "--atx-header")
+                self.select_batch_conversion_manual("html", "markdown", "")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
                 self.select_batch_conversion_manual("markdown", "html", "--standalone")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
@@ -826,6 +834,8 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_NewGui = settings.value('Button_NewGui', False)
 
         QtWidgets.QWidget.__init__(self, parent)
+
+
         if Button_OldGui is True or Button_OldGui == 'True' or Button_OldGui == 'true':
             self.ui = Ui_notepad()
         else:
@@ -951,6 +961,7 @@ class StartQT5(QtWidgets.QMainWindow):
         To_Latex = settings.value('To_Latex', False)
         To_Opml = settings.value('To_Opml', False)
         To_Lyx = settings.value('To_Lyx', False)
+        To_Epub = settings.value('To_Epub', False)
 
 
         Batch_Conversion = settings.value('Batch_Conversion', False)
@@ -968,6 +979,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.ui.ButtonToLatex.setChecked(To_Latex)
                 self.ui.ButtonToOpml.setChecked(To_Opml)
                 self.ui.ButtonToLyx.setChecked(To_Lyx)
+                self.ui.ButtonToEpub.setChecked(To_Epub)
                 self.ui.FromParameter.setText(fromParameter)
                 self.ui.ToParameter.setText(toParameter)
                 self.ui.ExtraParameter.setText(xtraParameter)
