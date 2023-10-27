@@ -844,6 +844,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.closeEvent = self.closeEvent
 
+
         if Button_NewGui is True or Button_NewGui == 'true' or Button_NewGui == 'true':
 
             Tab_StandardConverter = settings.value('Tab_StandardConverter', True)

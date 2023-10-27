@@ -1,9 +1,9 @@
 <project>
     <shortName>Panconvert</shortName>
     <fullName>Panconvert</fullName>
-    <version>0.2.8</version>
-    <readmeFile>C:/Panconvert_Binaries/dist/Docs/readme.txt</readmeFile>
-    <licenseFile>C:/Panconvert_Binaries/dist/Docs/license.txt</licenseFile>
+    <version>0.2.9</version>
+    <readmeFile>/Users/apaeffgen/PROG/Python/PanConvert/readme.md</readmeFile>
+    <licenseFile>/Users/apaeffgen/PROG/Python/PanConvert/license.txt</licenseFile>
     <allowLanguageSelection>1</allowLanguageSelection>
     <componentList>
         <component>
@@ -59,7 +59,7 @@
                     <platforms>linux-x64</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>C:/Panconvert_Binaries/dist/Panconvert_Linux64bit</origin>
+                            <origin>/Users/apaeffgen/PROG/Python/PanConvert/C:/Panconvert_Binaries/dist/Panconvert_Linux64bit</origin>
                             <onPackingFilterList>
                                 <fileNameFilter>
                                     <logic>matches</logic>
@@ -76,7 +76,7 @@
                     <platforms>windows</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>C:/Panconvert_Binaries/dist/Panconvert_Win32</origin>
+                            <origin>/Users/apaeffgen/PROG/Python/PanConvert/C:/Panconvert_Binaries/dist/Panconvert_Win32</origin>
                             <onPackingFilterList>
                                 <fileNameFilter>
                                     <logic>matches</logic>
@@ -85,7 +85,7 @@
                             </onPackingFilterList>
                         </distributionDirectory>
                         <distributionFile>
-                            <origin>C:/Program Files/Pandoc/pandoc.exe</origin>
+                            <origin>/Users/apaeffgen/PROG/Python/PanConvert/C:/Program Files/Pandoc/pandoc.exe</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -96,10 +96,10 @@
                     <platforms>osx</platforms>
                     <distributionFileList>
                         <distributionFile>
-                            <origin>C:/Panconvert_Binaries/dist/Panconvert.app</origin>
+                            <origin>/Users/apaeffgen/PROG/Python/PanConvert/dist/Panconvert.app</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/Users/apaeffgen/Library/Haskell/bin/pandoc</origin>
+                            <origin>/opt/homebrew/Cellar/pandoc/3.1.8/bin/pandoc</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -117,7 +117,7 @@
                 </startMenuShortcut>
                 <startMenuShortcut>
                     <comment></comment>
-                    <name>Panconvert_0.2.8</name>
+                    <name>Panconvert_0.2.9</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/Panconvert_Win32/${product_fullname}.exe</windowsExec>

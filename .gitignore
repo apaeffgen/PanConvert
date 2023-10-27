@@ -1,2 +1,6 @@
 /venv/
 /venv39/
+/build/
+/dist/
+/Installer_MacOS/
+
