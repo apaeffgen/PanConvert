@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>576</height>
+    <width>845</width>
+    <height>620</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -192,6 +192,9 @@
           </item>
           <item row="6" column="0">
            <widget class="QRadioButton" name="ButtonToLyx">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Lyx</string>
             </property>
@@ -438,7 +441,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>820</width>
+     <width>845</width>
      <height>24</height>
     </rect>
    </property>
