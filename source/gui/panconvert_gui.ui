@@ -244,14 +244,28 @@
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="ButtonToLatex">
+            <property name="text">
+             <string>Latex</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QRadioButton" name="ButtonToOpml">
+            <property name="text">
+             <string>Opml</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
            <widget class="QRadioButton" name="ButtonToEpub">
             <property name="text">
              <string>EPub</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="0" column="0">
            <widget class="QRadioButton" name="ButtonToMarkdown">
             <property name="text">
              <string>Markdown</string>
@@ -264,29 +278,9 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QRadioButton" name="ButtonToHtml">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>Html</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="ButtonToOpml">
-            <property name="text">
-             <string>Opml</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
+          <item row="10" column="0">
            <widget class="QRadioButton" name="ButtonToLyx">
-            <property name="disabled">
+            <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
@@ -298,12 +292,21 @@
             <property name="autoExclusive">
              <bool>true</bool>
             </property>
+            <property name="disabled" stdset="0">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QRadioButton" name="ButtonToLatex">
+           <widget class="QRadioButton" name="ButtonToHtml">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="text">
-             <string>Latex</string>
+             <string>Html</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>

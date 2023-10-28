@@ -1,3 +1,6 @@
+### Version 0.2.9
+- Fixed markdown problems with newer pandoc versions
+
 ### Version 0.2.8
 - Fixed some Binary Build bugs
 - Fixed some Preference bugs

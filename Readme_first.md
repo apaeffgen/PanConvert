@@ -14,8 +14,11 @@
 
 ### Installer-Version
 
-- All MacOS Versions and Intel / Silicon should be supported
-- There cames a pandoc bundled with the app, but you can use your own version
+- Unzip the Installer-Package
+- Doubble-Click on the Installer
+- All MacOS Versions and Intel+M1/2 should work
+- Pandoc is bundled with the app, but you can use your own version
+- Panconvert is installed in a folder called Pandoc in the application folder.
 
 ### DMG-Version
 
