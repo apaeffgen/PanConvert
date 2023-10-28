@@ -1,16 +1,16 @@
 ## What is Panconvert
-Panconvert is a GUI-Wrapper for the document converter [pandoc](http://pandoc.org)
+Panconvert is a GUI-Wrapper for the document converter [pandoc](https://pandoc.org)
 
 ## How to use Panconvert and Pandoc
 
-- For detailed help see [the User_Guide Section](http://panconvert.readthedocs.io/User_Guide/Basic_Usage/)
-- A [detailled installation Instruction](http://panconvert.readthedocs.io/Xtras/Install_Instructions/)
+- For detailed help see [the User_Guide Section](User_Guide/Basic_Usage.md)
+- A [detailled installation Instruction](Extras/Install_Instructions.md)
 
 ## Features
 
 * Convert documents via a graphical user interface
 * Markdown, Latex, OPML, docx, EPUB …
-* All [Pandoc-Formats](http://johnmacfarlane.net/pandoc/) are supported
+* All [Pandoc-Formats](https://pandoc.org/) are supported
 * Cross-Platform: Linux, MacOS, Windows
 * Batch conversion is possible
 
