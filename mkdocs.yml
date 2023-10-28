@@ -11,9 +11,8 @@ nav:
     - Update: Update.md
 - Extras:
     - Version History: changelog.md
+    - Install Instructions: Install_Instructions.md
     - Build Instructions: Build_Instructions.md
 
-#- ['Xtras/Install_Instructions.md', 'Prerequisits', 'Install Instructions']
-#- ['Xtras/', 'Developers', 'Building Binaries']
-#- ['changelog.md', 'Version History', 'Changelog']
+
 
