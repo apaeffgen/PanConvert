@@ -4,5 +4,6 @@
 /dist/
 /Installer_MacOS/
 
+.idea
 /Panconvert_install.xml.backup
 .idea
