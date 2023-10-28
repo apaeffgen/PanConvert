@@ -3,13 +3,15 @@ site_url: http://panconvert.readthedocs.org
 repository_url:
 nav:
 - Introduction: index.md
-    - User Guide: Basic_Usage.md
+- User Guide:
+    - Basic Usage: Basic_Usage.md
     - Customizing: Customizing_Panconvert.md
     - Known Problems: Known_Problems.md
     - Pandoc Help: Pandoc_Help.md
     - Update: Update.md
-- Version History: changelog.md
-- Build Instructions: Build_Instructions.md
+- Extras:
+    - Version History: changelog.md
+    - Build Instructions: Build_Instructions.md
 
 #- ['Xtras/Install_Instructions.md', 'Prerequisits', 'Install Instructions']
 #- ['Xtras/', 'Developers', 'Building Binaries']
