@@ -1,10 +1,10 @@
 # Readme first
 ## Help and further information
-At the ![official Website](https://panconvert.sourceforge.net) you will find more detailed information.
+At the [official Website](https://panconvert.sourceforge.net) you will find more detailed information.
 There is help available at http://panconvert.sourceforge.net/help.html
 
 ## Installation
-On Windows and Mac the ![automated installer](https://sourceforge.net/project/p/panconvert) walks you through the installation procedure 
+On Windows and Mac the [automated installer](https://sourceforge.net/project/p/panconvert) walks you through the installation procedure 
 and copies a bundled pandoc version with pandoc and an uninstaller. So you do not need to install pandoc yourself.
 
 On Linux please read the extended installation instruction.
