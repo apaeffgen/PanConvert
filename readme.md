@@ -6,6 +6,7 @@ There is help available at http://panconvert.sourceforge.net/help.html
 ## Installation
 On Windows and Mac the [automated installer](https://sourceforge.net/projects/panconvert/) walks you through the installation procedure 
 and copies a bundled pandoc version with pandoc and an uninstaller. So you do not need to install pandoc yourself.
+You will find the binaries [here](https://sourceforge.net/projects/panconvert/)
 
 On Linux please read the extended installation instruction.
 
@@ -31,21 +32,18 @@ If you find a bug / problem, submit a bug-report to the issue-tracker of github.
 
 Running the program you must have installed the following additional software-packages:
 
-- pandoc (all versions are supported)
-- multimarkdown (optional for Lyx conversion)
-- python3
+- pandoc (all newer versions are supported, tested with pandoc 3.1.8 )
+- python3 (Be awere, that the newest python version may break something)
 - QT5
 - pyqt5
 
 On Linux most actual distributions come preinstalled with the last 3 packages. Package-Managers allow to install pandoc.
-Multimarkdown has to be compiled from source
 
 On Windows you have to manually install all the packages by hand. See all the links below.
 
 On MacOS homebrew can be used to install python3, QT5 and pyqt5. Pandoc has to be downloaded from the pandoc-homepage.
 
 - http://johnmacfarlane.net/pandoc/
-- http://fletcherpenney.net/multimarkdown/
 - https://www.python.org/downloads/
 - http://qt-project.org/downloads
 - http://www.riverbankcomputing.co.uk/software/pyqt/download5

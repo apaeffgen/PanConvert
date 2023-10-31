@@ -4,7 +4,7 @@ Panconvert is a GUI-Wrapper for the document converter [pandoc](https://pandoc.o
 ## How to use Panconvert and Pandoc
 
 - For detailed help see [the User_Guide Section](User_Guide/Basic_Usage.md)
-- A [detailled installation Instruction](Extras/Install_Instructions.md)
+- A [detailled installation Instruction](User_Guide/Install_Instructions.md)
 
 ## Features
 

@@ -4,15 +4,16 @@ repository_url:
 nav:
 - Introduction: index.md
 - User Guide:
+    - Install Instructions: User_Guide/Install_Instructions.md
     - Basic Usage: User_Guide/Basic_Usage.md
     - Customizing: User_Guide/Customizing_Panconvert.md
     - Known Problems: User_Guide/Known_Problems.md
     - Pandoc Help: User_Guide/Pandoc_Help.md
     - Update: User_Guide/Update.md
-- Extras:
-    - Version History: Extras/changelog.md
-    - Install Instructions: Extras/Install_Instructions.md
-    - Build Instructions: Extras/Build_Instructions.md
+- Admin Guide:
+    - Supported Platforms: Developer/Platforms.md
+    - Version History: Developer/changelog.md
+    - Build Instructions: Developer/Build_Instructions.md
 
 
 
