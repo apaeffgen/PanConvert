@@ -27,8 +27,8 @@ path_pandoc = settings.value('path_pandoc','')
 
 _translate = QtCore.QCoreApplication.translate
 
-versionnumber = '0.2.8'
-versiondate = '04.2020'
+versionnumber = '0.2.9'
+versiondate = '11.2023'
 versionname = 'PanConvert - A Gui Wrapper for Pandoc'
 copyrightinfo = 'Copyright by APaeffgen'
 
