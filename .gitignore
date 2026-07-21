@@ -12,3 +12,7 @@
 /Qt5_to_Qt6_Migration_Analysis.md
 /.vscode/settings.json
 
+*.pyc
+source/.DS_Store
+__pycache__/output alias
+.DS_Store
