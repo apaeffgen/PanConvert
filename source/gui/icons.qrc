@@ -1,6 +1,5 @@
 <RCC>
   <qresource>
-    <file>icons/open_uri.png</file>
     <file>icons/freferences</file>
     <file>icons/help.png</file>
     <file>icons/preferences</file>

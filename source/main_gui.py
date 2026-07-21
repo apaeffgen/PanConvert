@@ -22,8 +22,8 @@ import codecs
 from os import *
 from os.path import isfile
 import urllib.request
-from PyQt5 import QtCore
-from PyQt5.QtCore import QPoint, QSize, QUrl
+from PyQt6 import QtCore
+from PyQt6.QtCore import QPoint, QSize, QUrl
 from source.dialogs.dialog_preferences import *
 from source.dialogs.dialog_batch import *
 from source.dialogs.dialog_options import *
@@ -58,7 +58,7 @@ class StartQT5(QtWidgets.QMainWindow):
     def file_open_uri(self):
         global uri
         self.OpenURIDialog = OpenURIDialog(self)
-        self.OpenURIDialog.exec_()
+        self.OpenURIDialog.exec()
 
         weburi = check_uri()
         if weburi is False:
@@ -71,9 +71,9 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.print_log_messages(logtext)
 
         elif weburi is True:
-            normalized_uri = normalize_uri()
+            uri = normalize_uri()
             try:
-                with urllib.request.urlopen(normalized_uri) as response:
+                with urllib.request.urlopen(uri) as response:
                     html = response.read()
                 self.ui.editor_window.setPlainText(str(html))
             except:
@@ -353,7 +353,8 @@ class StartQT5(QtWidgets.QMainWindow):
         return error
 
     '''Export Functions'''
-    ''' Function for the seperate multimarkdown to lyx converter. Only works, when multimarkdown is installed '''
+    ''' Function for the seperate multimarkdown to lyx converter. 
+        Only works, when multimarkdown is installed '''
 
     def convert_lyx(self):
         settings = QSettings('Pandoc', 'PanConvert')
@@ -469,7 +470,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.print_log_messages(message)
 
 
-    ''' Standard Converter for quick conversion: Parameters are fix coded in the function event_triggered(self) '''
+    ''' Standard Converter for quick conversion: 
+        Parameters are fix coded in the function event_triggered(self) '''
 
 
 
@@ -633,10 +635,10 @@ class StartQT5(QtWidgets.QMainWindow):
     def about_dialog(self):
         ## About Dialog with some Version info##
         msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("About Panconvert")
         msg.setText(version())
-        msg.setWindowTitle("About Dialog")
-        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msg.exec_()
+        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+        msg.exec()
 
 
     def preference_dialog(self):
@@ -767,7 +769,8 @@ class StartQT5(QtWidgets.QMainWindow):
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
                 self.convert_manual("latex", "html", "--standalone")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToEpub.isChecked() is True:
-                self.convert_manual("latex", "epub", "--output=/Users/apaeffgen/Downloads/Output_Panconvert.epub;--standalone")
+                self.convert_manual("latex", "epub",
+                         "--output=/Users/apaeffgen/Downloads/Output_Panconvert.epub;--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
                 self.convert_manual("html", "latex", "--standalone")
             else:
@@ -776,31 +779,40 @@ class StartQT5(QtWidgets.QMainWindow):
 
         elif Standard_Conversion is True and Batch_Conversion is True:
             if self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.select_batch_conversion_manual("markdown", "latex", "--standalone")
+                self.select_batch_conversion_manual("markdown",
+                                                    "latex", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-                self.select_batch_conversion_manual("markdown", "opml", "--standalone")
+                self.select_batch_conversion_manual("markdown",
+                                                    "opml", "--standalone")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToLyx.isChecked() is True:
                 self.select_batch_convert_lyx()
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
                 self.select_batch_conversion_manual("opml", "markdown", "")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.select_batch_conversion_manual("opml", "latex", "--standalone")
+                self.select_batch_conversion_manual("opml",
+                                                    "latex", "--standalone")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
                 self.select_batch_conversion_manual("latex", "markdown", "")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToOpml.isChecked()is True:
-                self.select_batch_conversion_manual("latex", "opml", "--standalone")
+                self.select_batch_conversion_manual("latex",
+                                                    "opml", "--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToMarkdown.isChecked() is True:
                 self.select_batch_conversion_manual("html", "markdown", "")
             elif self.ui.ButtonFromMarkdown.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.select_batch_conversion_manual("markdown", "html", "--standalone")
+                self.select_batch_conversion_manual("markdown",
+                                                    "html", "--standalone")
             elif self.ui.ButtonFromOpml.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.select_batch_conversion_manual("opml", "html", "--standalone")
+                self.select_batch_conversion_manual("opml",
+                                                    "html", "--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToOpml.isChecked() is True:
-                self.select_batch_conversion_manual("html", "opml", "--standalone")
+                self.select_batch_conversion_manual("html",
+                                                    "opml", "--standalone")
             elif self.ui.ButtonFromLatex.isChecked() is True and self.ui.ButtonToHtml.isChecked() is True:
-                self.select_batch_conversion_manual("latex", "html", "--standalone")
+                self.select_batch_conversion_manual("latex",
+                                                    "html", "--standalone")
             elif self.ui.ButtonFromHtml.isChecked() is True and self.ui.ButtonToLatex.isChecked() is True:
-                self.select_batch_conversion_manual("html", "latex", "--standalone")
+                self.select_batch_conversion_manual("html",
+                                                    "latex", "--standalone")
             else:
                 message = error_equal_formats()
                 self.print_log_messages(message)
@@ -851,7 +863,8 @@ class StartQT5(QtWidgets.QMainWindow):
             Tab_ManualConverter = settings.value('Tab_ManualConverter', False)
             Hide_Batch = settings.value('Hide_Batch', False)
 
-            if Tab_StandardConverter is True or Tab_StandardConverter == 'True' or Tab_StandardConverter == 'true':
+            if (Tab_StandardConverter is True or
+                    Tab_StandardConverter == 'True' or Tab_StandardConverter == 'true'):
                 self.ui.WidgetConvert.setCurrentIndex(0)
                 Standard_Conversion = settings.value('Standard_Conversion')
                 if Standard_Conversion is False:

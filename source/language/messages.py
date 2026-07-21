@@ -17,7 +17,7 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 import datetime
 from source.dialogs.dialog_preferences import *
 import os

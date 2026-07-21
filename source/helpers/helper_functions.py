@@ -18,7 +18,7 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from PyQt5.QtCore import QSettings
+from PyQt6.QtCore import QSettings
 from urllib.parse import urlparse, unquote
 #from source.main_gui import StartQT5
 
@@ -50,8 +50,8 @@ def parse_uri():
 def normalize_uri():
     global uri
     if 'http://' not in uri:
-        normalized_uri = 'http://' + uri
-    return normalized_uri
+        uri = 'http://' + uri
+    return uri
 
 
 

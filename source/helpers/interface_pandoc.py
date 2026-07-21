@@ -21,7 +21,7 @@ import os, shutil, io, sys
 from os import path
 import platform
 import subprocess
-from PyQt5.QtCore import QSettings
+from PyQt6.QtCore import QSettings
 from source.language.messages import *
 
 

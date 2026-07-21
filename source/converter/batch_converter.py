@@ -39,10 +39,13 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
 
         filename, file_extension = os.path.splitext(openfile)
         if batch_open_path_output == '':
-            args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + filename + '.' + ToFormat]
+            args = [path_pandoc, '--from=' + FromFormat,
+                    '--to=' + ToFormat, openfile, '--output=' + filename + '.' + ToFormat]
         else:
             outputfile = os.path.basename(filename)
-            args = [path_pandoc, '--from=' + FromFormat, '--to=' + ToFormat, openfile, '--output=' + batch_open_path_output + '/' + outputfile + '.' + ToFormat]
+            args = [path_pandoc, '--from=' + FromFormat,
+                    '--to=' + ToFormat, openfile, '--output=' + batch_open_path_output +
+                    '/' + outputfile + '.' + ToFormat]
         if extra_args != '' :
             extra_args = extra_args.split(';')
             for arg in extra_args:

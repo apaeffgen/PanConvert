@@ -20,7 +20,7 @@ __author__ = 'apaeffgen'
 import os
 import subprocess
 
-from PyQt5.QtCore import QSettings
+from PyQt6.QtCore import QSettings
 
 from source.helpers.interface_pandoc import *
 

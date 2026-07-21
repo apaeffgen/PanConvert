@@ -17,10 +17,10 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
-from PyQt5.QtCore import QSettings
-from PyQt5.QtCore import QPoint, QSize
+from PyQt6 import QtWidgets
+from PyQt6 import QtCore
+from PyQt6.QtCore import QSettings
+from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_dialog_batch import Ui_DialogBatch
 from distutils.util import strtobool as str2bool
 import platform
@@ -162,4 +162,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     myapp = BatchDialog()
     myapp.show()
-    myapp.exec_()
+    myapp.exec()

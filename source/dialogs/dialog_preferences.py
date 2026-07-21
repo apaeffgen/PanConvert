@@ -17,10 +17,10 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import QSettings
-from PyQt5 import QtCore
-from PyQt5.QtCore import QPoint, QSize
+from PyQt6 import QtWidgets
+from PyQt6.QtCore import QSettings
+from PyQt6 import QtCore
+from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
 from distutils.util import strtobool as str2bool
 import platform, os
@@ -65,10 +65,14 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
 
         #Language Settings
-        for longLang in lang.values():
-            self.ui.comboBoxLanguageSelector.addItem(longLang)
-        default_language = settings.value('default_language')
-        self.ui.comboBoxLanguageSelector.setCurrentText(default_language)
+        for code, longLang in lang.items():
+            self.ui.comboBoxLanguageSelector.addItem(longLang, code)
+        default_language = settings.value('default_language', 'en')
+        # Set the current language by matching the stored code
+        for i in range(self.ui.comboBoxLanguageSelector.count()):
+            if self.ui.comboBoxLanguageSelector.itemData(i) == default_language:
+                self.ui.comboBoxLanguageSelector.setCurrentIndex(i)
+                break
         self.ui.comboBoxLanguageSelector.currentIndexChanged.connect(self.SetLanguage)
 
         #Checkbox Size of Main Window and DockWindow
@@ -258,6 +262,19 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.sync()
         settings.status()
 
+        # Actually apply the language change at runtime
+        from source.language import load_language
+        if self.parent() and hasattr(self.parent(), 'ui'):
+            parent_app = self.parent().window()
+            if parent_app:
+                load_language(parent_app, codeLang)
+            else:
+                # Fallback: try to get QApplication.instance()
+                from PyQt6.QtWidgets import QApplication
+                app = QApplication.instance()
+                if app:
+                    load_language(app, codeLang)
+
 
 if __name__ == "__main__":
     import sys
@@ -265,4 +282,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     myapp = PreferenceDialog()
     myapp.show()
-    myapp.exec_()
+    myapp.exec()

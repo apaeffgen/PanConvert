@@ -17,10 +17,10 @@ __author__ = 'apaeffgen'
     # You should have received a copy of the GNU General Public License
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
-from PyQt5.QtCore import QSettings
-from PyQt5.QtCore import QPoint, QSize
+from PyQt6 import QtWidgets
+from PyQt6 import QtCore
+from PyQt6.QtCore import QSettings
+from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_help import Ui_Information_Dialog
 #from source.converter.interface_pandoc import get_pandoc_options
 
@@ -65,7 +65,7 @@ class HelpDialog(QtWidgets.QDialog):
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
      def helpPandoc(self):
-        website = 'http://pandoc.org/README.html'
+        website = 'http://pandoc.org/MANUAL.html'
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
      def back(self):

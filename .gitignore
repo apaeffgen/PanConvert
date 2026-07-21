@@ -8,3 +8,7 @@
 /Panconvert_install.xml.backup
 /binaries
 /output/
+
+/Qt5_to_Qt6_Migration_Analysis.md
+/.vscode/settings.json
+
