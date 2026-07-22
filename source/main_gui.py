@@ -257,22 +257,22 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def logviewer_above(self):
         self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.TopDockWidgetArea, self.ui.dockLogWindow)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.TopDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def logviewer_bottom(self):
         self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self.ui.dockLogWindow)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.BottomDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def logviewer_left(self):
         self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.ui.dockLogWindow)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.LeftDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def logviewer_right(self):
         self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.RightDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def batch_mode_toggle(self):
@@ -955,7 +955,9 @@ class StartQT5(QtWidgets.QMainWindow):
         Dock_Size = settings.value('Dock_Size')
         if Dock_Size is True or Dock_Size == 'true':
 
-            self.restoreState(settings.value('geometry'))
+            saved_state = settings.value('geometry')
+            if saved_state is not None:
+                self.restoreState(saved_state)
         if Window_Size is True or Window_Size == 'true':
             self.resize(settings.value("size", QSize(270, 225)))
             self.move(settings.value("pos", QPoint(50, 50)))
