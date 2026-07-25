@@ -1,0 +1,14 @@
+# PanConvert - Platform-independent pip dependencies
+# Install with: pip install -r requirements.txt
+
+# GUI framework
+PyQt6>=6.5.0
+
+# Resource access (backport for Python < 3.9, or consistent API)
+importlib_resources>=5.0
+
+# ── External tool (NOT a pip package) ──
+# pandoc must be installed separately:
+#   macOS: brew install pandoc
+#   Linux: sudo apt install pandoc  (or equivalent)
+#   Windows: choco install pandoc  or download from https://pandoc.org

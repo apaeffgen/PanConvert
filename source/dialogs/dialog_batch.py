@@ -22,7 +22,6 @@ from PyQt6 import QtCore
 from PyQt6.QtCore import QSettings
 from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_dialog_batch import Ui_DialogBatch
-from distutils.util import strtobool as str2bool
 import platform
 
 global openfiles, batch_open_path
@@ -32,9 +31,15 @@ def strtobool(input):
         safe strtobool : if input is a boolean
         it return the input
     """
-    if isinstance(input,bool):
+    if isinstance(input, bool):
         return input
-    return str2bool(input)
+    if isinstance(input, str):
+        val = input.lower().strip()
+        if val in ('y', 'yes', 't', 'true', '1'):
+            return True
+        if val in ('n', 'no', 'f', 'false', '0'):
+            return False
+    return bool(input)
 
 class BatchDialog(QtWidgets.QDialog):
 
