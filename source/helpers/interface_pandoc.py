@@ -233,7 +233,7 @@ def which(target):
             return path_pandoc
 
 def where(target):
-    pathlist_tmp = 'C:\Program Files\Pandoc\:'
+    pathlist_tmp = r'C:\Program Files\Pandoc\:'
     pathlist = pathlist_tmp.split(":")
     for p in pathlist:
         fullpath = p + "\\" + target

@@ -256,23 +256,23 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.dockLogWindow.show()
 
     def logviewer_above(self):
-        self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.TopDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.setFloating(False)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.TopDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def logviewer_bottom(self):
-        self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.setFloating(False)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.BottomDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def logviewer_left(self):
-        self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.setFloating(False)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.LeftDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def logviewer_right(self):
-        self.ui.dockLogWindow.close()
-        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.ui.dockLogWindow)
+        self.ui.dockLogWindow.setFloating(False)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.RightDockWidgetArea, self.ui.dockLogWindow)
         self.ui.dockLogWindow.show()
 
     def batch_mode_toggle(self):
