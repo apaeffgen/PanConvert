@@ -190,6 +190,8 @@ class StartQT5(QtWidgets.QMainWindow):
             fd.setDirectory(path_dialog)
 
         self.filename = fd.getSaveFileName(self)
+        if not self.filename[0]:
+            return  # User cancelled the dialog
         file = codecs.open(self.filename[0], 'w', 'utf-8')
         filedata = self.ui.editor_window.toPlainText()
         file.write(filedata)
