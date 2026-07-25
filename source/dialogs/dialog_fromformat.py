@@ -63,7 +63,6 @@ class FromFormatDialog(QtWidgets.QDialog):
 
 
         settings.sync()
-        settings.status()
         FromFormatDialog.close(self)
 
      def info(self):

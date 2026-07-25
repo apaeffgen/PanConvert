@@ -25,15 +25,19 @@ from PyQt6.QtCore import QSettings
 from source.language.messages import *
 
 
-global fromFormat
+global fromFormat, path_pandoc
 
-settings = QSettings('Pandoc', 'PanConvert')
-path_pandoc_tmp = settings.value('path_pandoc','')
-path_pandoc = str(path_pandoc_tmp)
+# Module-level path_pandoc - lazily initialized via get_path_pandoc()
+path_pandoc = ''
+
+
+def _get_settings():
+    """Lazy QSettings getter - avoids module-level instantiation."""
+    return QSettings('Pandoc', 'PanConvert')
 
 def get_path_pandoc():
 
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_pandoc_tmp = settings.value('path_pandoc','')
     path_pandoc = str(path_pandoc_tmp)
 
@@ -50,7 +54,7 @@ def get_path_pandoc():
 
 
 def get_path_multimarkdown():
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_multimarkdown = settings.value('path_multimarkdown','')
 
     if getattr( sys, 'frozen', False ):
@@ -65,7 +69,7 @@ def get_path_multimarkdown():
                     stdin=subprocess.PIPE,
                     stdout=subprocess.PIPE)
 
-                path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+                path_multimarkdown = p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8').rstrip()
                 settings.setValue('path_multimarkdown', path_multimarkdown)
                 settings.sync()
                 return path_multimarkdown
@@ -78,7 +82,7 @@ def get_path_multimarkdown():
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
 
-            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+            path_multimarkdown = p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8').rstrip()
             settings.setValue('path_multimarkdown', path_multimarkdown)
             settings.sync()
             return path_multimarkdown
@@ -90,7 +94,7 @@ def get_path_multimarkdown():
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE)
 
-            path_multimarkdown = str.rstrip(p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8'))
+            path_multimarkdown = p.communicate(path_multimarkdown.encode('utf-8'))[0].decode('utf-8').rstrip()
             settings.setValue('path_multimarkdown', path_multimarkdown)
             settings.sync()
             return path_multimarkdown
@@ -98,7 +102,7 @@ def get_path_multimarkdown():
 
 def get_pandoc_version():
 
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_pandoc = settings.value('path_pandoc','')
 
     if os.path.isfile(path_pandoc):
@@ -110,13 +114,14 @@ def get_pandoc_version():
         output = p.communicate()[0].decode().splitlines(False)
         versionstr = output[0]
 
-
-        if platform.system() == 'Windows':
-            version_tmp = versionstr.replace(".","")
-            version = int(version_tmp[10:15])
+        # Extract major version number (handles pandoc 2.x and 3.x)
+        # Examples: "pandoc 2.11.4", "pandoc 3.10.1"
+        import re
+        match = re.search(r'pandoc\s+(\d+)', versionstr)
+        if match:
+            version = int(match.group(1))
         else:
-            version_tmp = versionstr.replace(".","")
-            version = int(version_tmp[7:10])
+            version = 0
 
     return version
 
@@ -127,14 +132,16 @@ def get_pandoc_formats():
     Dynamic preprocessor for Pandoc formats.
     Return 2 lists. "from_formats" and "to_formats".
     """
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_pandoc = settings.value('path_pandoc','')
 
     if os.path.isfile(path_pandoc):
 
         version = get_pandoc_version()
 
-        if version < 118:
+        # Pandoc >= 2.18 supports --list-input-formats / --list-output-formats
+        # version is now the MAJOR version number (2, 3, etc.)
+        if version < 2:
 
                 p = subprocess.Popen(
                     [path_pandoc, '-h'],
@@ -184,7 +191,7 @@ def get_pandoc_options():
     """
     Get the Options of the Pandoc help section
     """
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_pandoc = settings.value('path_pandoc','')
     if os.path.isfile(path_pandoc):
 

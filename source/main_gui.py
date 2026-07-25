@@ -289,7 +289,6 @@ class StartQT5(QtWidgets.QMainWindow):
         batch_settings.setValue('batch_open_path_output', self.ui.OpenPathOutput.text())
         batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
         batch_settings.sync()
-        batch_settings.status()
 
     def check_path(self):
         global error
@@ -709,7 +708,6 @@ class StartQT5(QtWidgets.QMainWindow):
                         Standard_Conversion = settings.value('Standard_Conversion')
 
                 settings.sync()
-                settings.status()
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
                     batch_settings(self)
@@ -735,7 +733,6 @@ class StartQT5(QtWidgets.QMainWindow):
                         Standard_Conversion = bool(settings.value('Standard_Conversion'))
 
                 settings.sync()
-                settings.status()
                 Standard_Conversion = settings.value('Standard_Conversion')
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':

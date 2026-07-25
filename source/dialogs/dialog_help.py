@@ -56,7 +56,6 @@ class HelpDialog(QtWidgets.QDialog):
 
 
         settings.sync()
-        settings.status()
 
         HelpDialog.close(self)
 

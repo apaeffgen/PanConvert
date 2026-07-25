@@ -62,7 +62,6 @@ class OpenURIDialog(QtWidgets.QDialog):
             settings.setValue("OpenURI_pos", self.pos())
 
         settings.sync()
-        settings.status()
         OpenURIDialog.close(self)
 
     def openuri(self):

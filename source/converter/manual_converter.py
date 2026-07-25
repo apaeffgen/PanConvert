@@ -18,13 +18,20 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
-
+import os
+from PyQt6.QtCore import QSettings
+from PyQt6.QtWidgets import QMessageBox
 from source.language.messages import *
 
-settings = QSettings('Pandoc', 'PanConvert')
+
+def _get_settings():
+    """Lazy QSettings getter - avoids module-level instantiation."""
+    return QSettings('Pandoc', 'PanConvert')
+
 
 def convert_universal(text, ToFormat, FromFormat, extra_args):
-    path_pandoc = settings.value('path_pandoc')
+    settings = _get_settings()
+    path_pandoc = settings.value('path_pandoc', '')
     try:
         os.path.isfile(path_pandoc)
 
@@ -66,7 +73,8 @@ def convert_universal(text, ToFormat, FromFormat, extra_args):
         error_converter_path()
 
 def convert_binary(openfile,ToFormat,FromFormat,extra_args):
-    path_pandoc = settings.value('path_pandoc')
+    settings = _get_settings()
+    path_pandoc = settings.value('path_pandoc', '')
     try:
         os.path.isfile(path_pandoc)
 

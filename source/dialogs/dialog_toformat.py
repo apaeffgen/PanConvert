@@ -60,7 +60,6 @@ class ToFormatDialog(QtWidgets.QDialog):
 
 
         settings.sync()
-        settings.status()
         ToFormatDialog.close(self)
 
      def info(self):

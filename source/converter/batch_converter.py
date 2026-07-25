@@ -20,11 +20,16 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import fnmatch, glob
+import os
+import subprocess
+from PyQt6.QtCore import QSettings
 from source.helpers.interface_pandoc import *
+from source.language.messages import *
 
-settings = QSettings('Pandoc', 'PanConvert')
-path_pandoc = settings.value('path_pandoc')
-batch_settings = QSettings('Pandoc', 'PanConvert')
+
+def _get_settings():
+    """Lazy QSettings getter - avoids module-level instantiation."""
+    return QSettings('Pandoc', 'PanConvert')
 
 
 global openfiles, filelist
@@ -32,7 +37,8 @@ global openfiles, filelist
 
 def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
     # ReturnValues: OpenedText, ToFormat, FromFormat, ExtraArguments (divided by blanks, if empty, use '')
-    batch_open_path_output = batch_settings.value('batch_open_path_output')
+    settings = _get_settings()
+    batch_open_path_output = settings.value('batch_open_path_output', '')
     path_pandoc = settings.value('path_pandoc', '')
     try:
         os.path.isfile(path_pandoc)
@@ -78,7 +84,7 @@ def batch_convert_manual(openfile,FromFormat,ToFormat,extra_args):
 
 def create_filelist(directory):
 
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     filefilter = settings.value('batch_convert_filter','')
 
     matches = []
@@ -108,9 +114,9 @@ def create_filelist(directory):
 
 
 def create_simplefilelist():
-    settings = QSettings('Pandoc', 'PanConvert')
-    batch_settings = QSettings('Pandoc', 'PanConvert')
-    batch_open_path = batch_settings.value('batch_open_path')
+    settings = _get_settings()
+    batch_settings = _get_settings()
+    batch_open_path = batch_settings.value('batch_open_path', '')
     filefilter = settings.value('batch_convert_filter','')
     message = ''
 
