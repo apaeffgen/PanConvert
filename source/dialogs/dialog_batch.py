@@ -108,7 +108,6 @@ class BatchDialog(QtWidgets.QDialog):
 
 
         settings.sync()
-        settings.status()
         BatchDialog.close(self)
 
     def batch_settings(self):
@@ -122,7 +121,6 @@ class BatchDialog(QtWidgets.QDialog):
         batch_settings.setValue('batch_open_path_output', self.ui.OpenPath_Output.text())
         batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
         batch_settings.sync()
-        batch_settings.status()
 
         BatchDialog.close(self)
 

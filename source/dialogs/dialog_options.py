@@ -63,7 +63,6 @@ class InfoDialog(QtWidgets.QDialog):
 
 
         settings.sync()
-        settings.status()
         InfoDialog.close(self)
 
      def info(self):

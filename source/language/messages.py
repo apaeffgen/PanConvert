@@ -18,12 +18,16 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import QSettings
 import datetime
 from source.dialogs.dialog_preferences import *
 import os
 
-settings = QSettings('Pandoc', 'PanConvert')
-path_pandoc = settings.value('path_pandoc','')
+
+def _get_settings():
+    """Lazy QSettings getter - avoids module-level instantiation."""
+    return QSettings('Pandoc', 'PanConvert')
+
 
 _translate = QtCore.QCoreApplication.translate
 

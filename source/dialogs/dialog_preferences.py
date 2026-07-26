@@ -233,7 +233,6 @@ class PreferenceDialog(QtWidgets.QDialog):
             settings.setValue("Preference_pos", self.pos())
 
         settings.sync()
-        settings.status()
 
         PreferenceDialog.close(self)
 
@@ -265,7 +264,6 @@ class PreferenceDialog(QtWidgets.QDialog):
         codeLang = [key for key, value in lang.items() if value == Longname][0]
         settings.setValue('default_language', codeLang)
         settings.sync()
-        settings.status()
 
         # Actually apply the language change at runtime
         from source.language import load_language

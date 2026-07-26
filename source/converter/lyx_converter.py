@@ -24,11 +24,14 @@ from PyQt6.QtCore import QSettings
 
 from source.helpers.interface_pandoc import *
 
-settings = QSettings('Pandoc', 'PanConvert')
-path_pandoc = settings.value('path_pandoc')
+
+def _get_settings():
+    """Lazy QSettings getter - avoids module-level instantiation."""
+    return QSettings('Pandoc', 'PanConvert')
+
 
 def convert_markdown2lyx(text):
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_multimarkdown = settings.value('path_multimarkdown','')
 
     if os.path.isfile(path_multimarkdown):
@@ -44,10 +47,10 @@ def convert_markdown2lyx(text):
 
 def batch_convert_markdown2lyx(openfile):
 
-    settings = QSettings('Pandoc', 'PanConvert')
+    settings = _get_settings()
     path_multimarkdown = settings.value('path_multimarkdown','')
-    batch_settings = QSettings('Pandoc', 'PanConvert')
-    batch_open_path_output = batch_settings.value('batch_open_path_output')
+    batch_settings = _get_settings()
+    batch_open_path_output = batch_settings.value('batch_open_path_output', '')
 
     if os.path.isfile(path_multimarkdown):
 

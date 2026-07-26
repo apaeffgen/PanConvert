@@ -2,7 +2,15 @@
 # Install with: pip install -r requirements.txt
 
 # GUI framework
-PyQt6>=6.5.0
+# Windows: pinned to 6.6.x due to Qt6Core.dll stack-buffer-overflow crash (0xc0000409) in 6.8+
+PyQt6>=6.6.0,<6.7.0; sys_platform == "win32"
+PyQt6>=6.5.0; sys_platform != "win32"
+PyQt6-Qt6>=6.6.0,<6.7.0; sys_platform == "win32"
+PyQt6-Qt6>=6.5.0; sys_platform != "win32"
+PyQt6-WebEngine>=6.6.0,<6.7.0; sys_platform == "win32"
+PyQt6-WebEngine>=6.5.0; sys_platform != "win32"
+PyQt6-WebEngine-Qt6>=6.6.0,<6.7.0; sys_platform == "win32"
+PyQt6-WebEngine-Qt6>=6.5.0; sys_platform != "win32"
 
 # Resource access (backport for Python < 3.9, or consistent API)
 importlib_resources>=5.0
