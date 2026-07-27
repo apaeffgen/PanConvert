@@ -1,3 +1,6 @@
+### Version 0.3.1
+- Fixed Batch Conversion
+
 ### Version 0.3.0
 - Changed to qt6
 - Now works on Windows11_x68 again

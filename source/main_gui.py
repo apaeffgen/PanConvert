@@ -190,6 +190,8 @@ class StartQT5(QtWidgets.QMainWindow):
             fd.setDirectory(path_dialog)
 
         self.filename = fd.getSaveFileName(self)
+        if not self.filename[0]:
+            return
         file = codecs.open(self.filename[0], 'w', 'utf-8')
         filedata = self.ui.editor_window.toPlainText()
         file.write(filedata)
@@ -613,7 +615,7 @@ class StartQT5(QtWidgets.QMainWindow):
     def convert_batch_drectory_recursive(self, fromFormat, toFormat, extraParameter):
         batch_settings = QSettings('Pandoc', 'PanConvert')
         batch_open_path = batch_settings.value('batch_open_path')
-        path_pandoc = settings.value('path_pandoc', '')
+        path_pandoc = batch_settings.value('path_pandoc', '')
         message = ''
 
         filelistrecursive, message = create_filelist(batch_open_path)
@@ -710,7 +712,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 settings.sync()
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
-                    batch_settings(self)
+                    self.batch_settings()
 
 
 
@@ -736,7 +738,7 @@ class StartQT5(QtWidgets.QMainWindow):
                 Standard_Conversion = settings.value('Standard_Conversion')
 
                 if Batch_Conversion is True or Batch_Conversion == 'true':
-                    batch_settings(self)
+                    self.batch_settings()
 
                 Standard_Conversion = convert_boolean(Standard_Conversion)
 
