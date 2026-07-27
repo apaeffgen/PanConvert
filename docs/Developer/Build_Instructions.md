@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Installing QT5.11.0, PyQT5.11.2, Python3.5.6. With other versions you are on your own. They may fail.
+- Installing QT6 PyQT6, Python3.12.x. The Version QT6.11 on Windows seems to make problems.
 - Installing the pyinstaller scripts for your platform (See http://pyinstaller.readthedocs.io)
 - Test that you can run Panconvert.py with your Python3 interpreter
 
@@ -15,8 +15,7 @@
 
 ## Known Issues:
 
-- The source code is not fully compatible with the --windowed option. Expect some glitches of
-autodetection of pandoc
+- Not thourougly tested. 
 
 
 
