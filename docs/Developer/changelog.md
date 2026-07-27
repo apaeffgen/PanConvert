@@ -1,4 +1,4 @@
-### Version 03.0
+### Version 0.3.0
 - Changed to qt6
 - Now works on Windows11_x68 again
 
