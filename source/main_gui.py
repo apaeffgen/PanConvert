@@ -101,6 +101,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 fd.setDirectory(path_dialog)
 
             self.filename = fd.getOpenFileName()
+            if not self.filename[0]:  # User canceled the dialog
+                return
             openfile = self.filename[0]
 
             if isfile(self.filename[0]):
@@ -124,6 +126,8 @@ class StartQT5(QtWidgets.QMainWindow):
                 fd.setDirectory(batch_open_path)
 
             self.filename = fd.getOpenFileNames()
+            if not self.filename[0]:  # User canceled the dialog
+                return
             openfile = self.filename[0]
 
             data = ('\n').join(openfile)
@@ -172,11 +176,14 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def file_save(self):
         try:
-            isfile(self.filename[0])
-            file = codecs.open(self.filename[0], 'w', 'utf-8')
-            file.write(self.ui.editor_window.toPlainText())
-            file.close()
-        except AttributeError:
+            if hasattr(self, 'filename') and self.filename and self.filename[0]:
+                isfile(self.filename[0])
+                file = codecs.open(self.filename[0], 'w', 'utf-8')
+                file.write(self.ui.editor_window.toPlainText())
+                file.close()
+            else:
+                self.file_save_as()
+        except (AttributeError, IndexError, TypeError):
             self.file_save_as()
 
     def file_save_as(self):
@@ -190,6 +197,8 @@ class StartQT5(QtWidgets.QMainWindow):
             fd.setDirectory(path_dialog)
 
         self.filename = fd.getSaveFileName(self)
+        if not self.filename[0]:  # User canceled the dialog
+            return
         file = codecs.open(self.filename[0], 'w', 'utf-8')
         filedata = self.ui.editor_window.toPlainText()
         file.write(filedata)
@@ -203,10 +212,12 @@ class StartQT5(QtWidgets.QMainWindow):
         BufferSaveSuffix = settings.value('BufferSaveSuffix')
         BufferSaveName = settings.value('BufferSaveName')
 
+        file_exists = 0
         try:
-            os.path.exists(self.filename[0])
-            file_exists = 1
-        except:
+            if hasattr(self, 'filename') and self.filename and self.filename[0]:
+                if os.path.exists(self.filename[0]):
+                    file_exists = 1
+        except Exception:
             file_exists = 0
 
         if file_exists == 1:
@@ -244,7 +255,8 @@ class StartQT5(QtWidgets.QMainWindow):
         if Window_Size is True or Window_Size == 'true':
             settings.setValue("size", self.size())
             settings.setValue("pos", self.pos())
-        self.close()
+        settings.sync()
+        event.accept()
 
     def print_log_messages(self, message):
         global number
@@ -842,7 +854,7 @@ class StartQT5(QtWidgets.QMainWindow):
         Button_OldGui = settings.value('Button_OldGui', True)
         Button_NewGui = settings.value('Button_NewGui', False)
 
-        QtWidgets.QWidget.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
 
 
         if Button_OldGui is True or Button_OldGui == 'True' or Button_OldGui == 'true':
@@ -910,7 +922,7 @@ class StartQT5(QtWidgets.QMainWindow):
         self.ui.actionSave.triggered.connect(self.buffer_save)
         self.ui.actionSave_AS.triggered.connect(self.file_save_as)
         self.ui.actionNew.triggered.connect(self.file_new)
-        self.ui.actionQuit.triggered.connect(self.closeEvent)
+        self.ui.actionQuit.triggered.connect(self.close)
 
         '''File-Edit Menu Functions'''
         self.ui.actionUndo.triggered.connect(self.undo)
