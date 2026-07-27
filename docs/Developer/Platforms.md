@@ -1,10 +1,11 @@
 # Supported OS / Hardware Platforms
 
-## Platforms tested: (Binary Version 0.2.9)
+## Platforms tested: (Binary Version 0.3.0)
 
-*  Windows 10 (64bit)
-*  Mac OS: Ventura 13.6 (M2)
+*  Windows 11 (64bit)
+*  Mac OS: Sequioa 15.7
+* Linux Mint 23.3
 
 ## Platforms that should be supported (All Panconvert Versions)
 
-* Any Platform that supports QT5, PyQT5, Python from Version QT5.11 - QT5.15
+* Any Platform that supports QT6, PyQT6, Python3

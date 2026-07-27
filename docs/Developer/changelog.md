@@ -1,3 +1,7 @@
+### Version 03.0
+- Changed to qt6
+- Now works on Windows11_x68 again
+
 ### Version 0.2.9
 - Fixed markdown problems with newer pandoc versions
 
