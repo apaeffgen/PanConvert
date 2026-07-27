@@ -4,8 +4,9 @@
 
 *  Windows 11 (64bit)
 *  Mac OS: Sequioa 15.7
-* Linux Mint 23.3
+*  Linux Mint 23.3 (Auf Ubuntu 24.04  LTS)
 
 ## Platforms that should be supported (All Panconvert Versions)
 
 * Any Platform that supports QT6, PyQT6, Python3
+* The binary versions may fail. Use the source code instead
