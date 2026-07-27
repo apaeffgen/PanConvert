@@ -1,5 +1,6 @@
 ### Version 0.3.1
 - Fixed Batch Conversion
+- Fixed Save aborted
 
 ### Version 0.3.0
 - Changed to qt6
