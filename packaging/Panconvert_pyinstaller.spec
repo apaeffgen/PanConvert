@@ -3,7 +3,7 @@
 PyInstaller spec file for Panconvert.
 
 Build command:
-    pyinstaller Panconvert.spec
+    pyinstaller packaging/Panconvert_pyinstaller.spec
 
 This bundles Panconvert with PyQt6, all source files, and icon assets
 into a standalone executable.
@@ -12,6 +12,15 @@ into a standalone executable.
 import os
 import sys
 from PyInstaller.utils.hooks import collect_submodules
+
+# Resolve paths relative to the project root (parent of packaging/)
+try:
+    spec_dir = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    # PyInstaller may not set __file__
+    spec_dir = os.path.dirname(os.path.abspath(sys.argv[-1]))
+project_root = os.path.abspath(os.path.join(spec_dir, '..'))
+sys.path.insert(0, project_root)
 
 # ── Collect PyQt6 resource files (translations, platform plugins) ──
 hiddenimports = []
@@ -24,16 +33,16 @@ hiddenimports += collect_submodules('PyQt6.QtCore')
 
 # ── Collect all data files from the source package ──
 datas = []
-for root, dirs, files in os.walk('source'):
+for root, dirs, files in os.walk(os.path.join(project_root, 'source')):
     for f in files:
         src = os.path.join(root, f)
-        dst = os.path.relpath(root, os.getcwd())
+        dst = os.path.relpath(root, project_root)
         datas.append((src, dst))
 
 # ── App name and output directory ──
 a = Analysis(
-    ['Panconvert.py'],
-    pathex=[],
+    [os.path.join(project_root, 'Panconvert.py')],
+    pathex=[project_root],
     binaries=[],
     datas=datas,
     hiddenimports=hiddenimports,
@@ -78,7 +87,7 @@ coll = BUNDLE(
     strip=False,
     upx=True,
     upx_exclude=[],
-    icon='source/gui/icons/icon.icns',
+    icon=os.path.join(project_root, 'source/gui/icons/icon.icns'),
     version=None,
     bundle_identifier='com.panconvert.app',
 )

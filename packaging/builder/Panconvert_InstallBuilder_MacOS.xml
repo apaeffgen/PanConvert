@@ -1,22 +1,19 @@
 <project>
     <shortName>Panconvert</shortName>
     <fullName>Panconvert</fullName>
-    <version>0.2.9</version>
+    <version>0.3.1</version>
     <readmeFile>/Users/apaeffgen/PROG/Python/PanConvert/readme.md</readmeFile>
     <licenseFile>/Users/apaeffgen/PROG/Python/PanConvert/docs/license.txt</licenseFile>
     <allowLanguageSelection>1</allowLanguageSelection>
     <componentList>
-        <component>
-            <name>default</name>
+        <component name="default">
             <description>Default Component</description>
             <canBeEdited>1</canBeEdited>
             <selected>1</selected>
             <show>1</show>
             <folderList>
-                <folder>
+                <folder destination="${installdir}" name="programfiles">
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfiles</name>
                     <platforms>all</platforms>
                     <shortcutList>
                         <shortcut>
@@ -35,36 +32,24 @@
                         </shortcut>
                     </shortcutList>
                 </folder>
-                <folder>
+                <folder destination="${installdir}" name="programfileslinux">
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfileslinux</name>
                     <platforms>linux-x64</platforms>
                 </folder>
-                <folder>
+                <folder destination="${installdir}" name="programfileswindows">
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfileswindows</name>
                     <platforms>windows</platforms>
                 </folder>
-                <folder>
+                <folder destination="${installdir}" name="programfilesosx">
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfilesosx</name>
                     <platforms>osx</platforms>
                     <distributionFileList>
                         <distributionFile>
                             <origin>/Users/apaeffgen/PROG/Python/PanConvert/dist/Panconvert.app</origin>
                         </distributionFile>
                         <distributionDirectory>
-                            <origin>/opt/homebrew/Cellar/pandoc/3.1.8/etc</origin>
+                            <origin>/Users/apaeffgen/PROG/Python/PanConvert/pandoc</origin>
                         </distributionDirectory>
-                        <distributionDirectory>
-                            <origin>/opt/homebrew/Cellar/pandoc/3.1.8/share</origin>
-                        </distributionDirectory>
-                        <distributionFile>
-                            <origin>/opt/homebrew/Cellar/pandoc/3.1.8/bin/pandoc</origin>
-                        </distributionFile>
                     </distributionFileList>
                 </folder>
             </folderList>
@@ -81,7 +66,7 @@
                 </startMenuShortcut>
                 <startMenuShortcut>
                     <comment></comment>
-                    <name>Panconvert_0.2.9</name>
+                    <name>Panconvert_0.3.1</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/Panconvert_Win32/${product_fullname}.exe</windowsExec>
@@ -110,6 +95,7 @@
             </shortcutList>
         </createShortcuts>
     </postInstallationActionList>
+    <addQtMode>1</addQtMode>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <vendor>Andreas Paeffgen</vendor>

@@ -31,7 +31,7 @@ rm -rf dist/ build/
 
 # Build
 echo "[→] Building Panconvert.app..."
-pyinstaller --clean Panconvert.spec
+pyinstaller --clean packaging/Panconvert_pyinstaller.spec
 
 echo ""
 echo "=== Build Complete ==="
@@ -39,4 +39,7 @@ echo "Output: dist/Panconvert.app"
 echo ""
 echo "To launch:"
 echo "    open dist/Panconvert.app"
+echo ""
+echo "To build a .pkg installer, run:"
+echo "    bash build_pkg.sh"
 echo ""
