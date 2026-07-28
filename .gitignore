@@ -16,4 +16,5 @@
 source/.DS_Store
 __pycache__/output alias
 .DS_Store
-/.panconvert_debug_notes.md
+*.zip
+Migration/Qt5_to_Qt6_Migration_Analysis.md
