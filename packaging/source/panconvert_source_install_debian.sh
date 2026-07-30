@@ -101,17 +101,16 @@ SYSTEM_PACKAGES=(
     "python3-pip"
     "python3-venv"
     "python3-dev"
-    "python3-distutils"
 
     # Qt6 framework
     "qt6-base-dev"
     "qt6-webengine-dev"
     "qt6-webengine-dev-tools"
-    "libqt6core6"
-    "libqt6gui6"
+    "libqt6core6t64"
+    "libqt6gui6t64"
     "libqt6webenginecore6"
-    "libqt6webenginewidget6"
-    "libqt6webengine-data"
+    "libqt6webenginewidgets6"
+    "libqt6webengine6-data"
 
     # Qt6 dependencies (transitive but sometimes needed explicitly)
     "libxcb-xinerama0"
@@ -151,7 +150,7 @@ SYSTEM_PACKAGES=(
     "libxcomposite1"
     "libxdamage1"
     "libxrandr2"
-    "libasound2"
+    "libasound2t64"
     "libpulse0"
     "libxshmfence1"
 
