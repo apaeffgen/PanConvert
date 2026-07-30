@@ -27,22 +27,32 @@ def _get_qm_path(lang_code: str):
 
     Works in both source mode and PyInstaller bundled mode.
     """
-    # Try importlib_resources first (works in both dev and bundled)
+    filename = f'Panconvert_{lang_code}.qm'
+    
+    # PyInstaller bundled mode: files are in sys._MEIPASS
+    if getattr(sys, '_MEIPASS', None):
+        meipass = sys._MEIPASS
+        # Check common locations where PyInstaller may place bundled data
+        for subdir in ['language', 'MacOS', '']:
+            if subdir:
+                qm_path = os.path.join(meipass, subdir, filename)
+            else:
+                qm_path = os.path.join(meipass, filename)
+            if os.path.isfile(qm_path):
+                return qm_path
+
+    # Try importlib_resources (works in dev mode)
     try:
-        res = files('source.language').joinpath(f'Panconvert_{lang_code}.qm')
+        res = files('source.language').joinpath(filename)
         return str(res)
     except Exception:
         pass
 
     # Fallback: look in the same directory as this module (dev mode)
-    mod_dir = __file__
-    candidates = [
-        f'{mod_dir}/Panconvert_{lang_code}.qm',
-        f'{mod_dir}/Panconvert_{lang_code}.qm',
-    ]
-    for c in candidates:
-        if os.path.isfile(c):
-            return c
+    mod_dir = os.path.dirname(os.path.abspath(__file__))
+    qm_path = os.path.join(mod_dir, filename)
+    if os.path.isfile(qm_path):
+        return qm_path
     return None
 
 
