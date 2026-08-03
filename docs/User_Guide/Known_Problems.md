@@ -8,8 +8,8 @@ are manually deleted
 
 ## Binary problems
 
-- Windows: the binary version only works for 32bit systems
-- Linux: On older Systems there are needen glibs missing (The installed ones are outdated)
+- Linux: On older systems, required glibc versions may be missing. Use the source install if the binary fails.
+- macOS: Notarization may require re-downloading the app from Gatekeeper.
 
 # Manual Converter
 ## Options Field

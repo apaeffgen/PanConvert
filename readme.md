@@ -22,32 +22,42 @@ If Panconvert previously had been used, the previous settings may have to be del
 - On Linux delete /home/<USERNAME>/.config/Pandoc/PanConvert.conf
 
 ## Known Problems
-Not working is python2, QT4 and pyqt4. There can be some issues with older or newer versions of QT5 and pyqt5. QT5.11.0 to
-15 is tested for the actual source code, and is working. 
 
-Also some pandoc versions may make some problems, due to changed behaviour of pandoc or some faults in pandonvert.
-If you find a bug / problem, submit a bug-report to the issue-tracker of github.
+* Python 2, Qt4, and PyQt4 are no longer supported. PanConvert requires Python 3.12+ and PyQt6.
+* There may be issues with older or newer versions of PyQt6. PyQt6 >=6.5.0 and <6.7.0 (on Windows) is tested.
+* Some pandoc versions may cause problems due to changed behavior or bugs in PanConvert.
+* Linux binaries may not work on older distributions due to glibc requirements. Use the source install.
+
+If you find a bug or problem, submit a bug report to the GitHub issue tracker.
 
 ## Extended installation instructions for running the source code or running on Linux
 
-Running the program you must have installed the following additional software-packages:
+Running the program requires the following additional software packages:
 
-- pandoc (all newer versions are supported, tested with pandoc 3.1.8 )
-- python3 (Be awere, that the newest python version may break something)
-- QT5
-- pyqt5
+- [pandoc](https://pandoc.org/) (all newer versions are supported, tested with 3.1.8+)
+- [Python 3.12+](https://www.python.org/downloads/)
+- [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) (>=6.5.0)
+- Qt6 WebEngine
 
-On Linux most actual distributions come preinstalled with the last 3 packages. Package-Managers allow to install pandoc.
+On Linux, most current distributions come preinstalled with Python3. Use package managers to install pandoc and PyQt6.
 
-On Windows you have to manually install all the packages by hand. See all the links below.
+On Windows, install all packages manually:
+```bash
+pip install "PyQt6<6.7.0"
+pip install PyQt6-WebEngine
+```
 
-On MacOS homebrew can be used to install python3, QT5 and pyqt5. Pandoc has to be downloaded from the pandoc-homepage.
+On macOS, Homebrew can be used:
+```bash
+brew install pandoc
+brew install python@3.12
+pip3 install PyQt6 PyQt6-WebEngine
+```
 
-- http://johnmacfarlane.net/pandoc/
-- https://www.python.org/downloads/
-- http://qt-project.org/downloads
-- http://www.riverbankcomputing.co.uk/software/pyqt/download5
-- http://brew.sh
+If all dependencies are properly installed, you can run the program:
+- On Windows: double-click `Panconvert.py`
+- On Linux: `python3 Panconvert.py`
+- On macOS: `python3 Panconvert.py`
 
 If all the dependencies are properly installed, you can run the program:
 On the commandline you have to first cd into the appropriate directory.

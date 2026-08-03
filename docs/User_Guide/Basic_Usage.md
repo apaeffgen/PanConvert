@@ -2,10 +2,15 @@
 
 ## Two Versions of the GUI
 
-* You can select the Gui-Style in the Preferences
-* The Gui`s have a standard, manual and batch conversion mode
-* By switching the standard / manual mode in the new Gui-Style, you do not need to check / uncheck
-the standard checkbox
+* You can select the GUI style in the Preferences (New or Legacy).
+* Both GUI styles have standard, manual, and batch conversion modes.
+* By switching between standard and manual mode in the new GUI style, you do not need to check/uncheck
+  the standard checkbox.
+
+### GUI Styles
+
+* **New GUI (default):** Modern interface with integrated panels. Recommended.
+* **Legacy GUI:** Classic interface. Available for users who prefer the original layout.
 
 ## Errors and Information
 * All Errors are written to a log window

@@ -12,16 +12,14 @@ If that fails, you can use the preferences dialog in the Edit – Menu to
 manually save the path to the executable.
 
 
-## System Requirements 
+## System Requirements
 
-The binaries are self-contained. Only [pandoc](http://johnmacfarlane.net/pandoc/installing.html) and optionally [multimarkdown](http://fletcherpenney.net/multimarkdown/download/) have to be installed
+The binaries are self-contained. Only [pandoc](https://pandoc.org/installing.html) and optionally [multimarkdown](http://fletcherpenney.net/multimarkdown/download/) have to be installed.
 
-For the source-code to be run, these additional Software-Packages have to be installed for running
-PanConvert.
+For the source-code to be run, these additional software packages have to be installed:
 
-*  Python3
-*  QT5
-*  PyQT5
+*  Python 3.12+
+*  PyQt6 (>=6.5.0)
+*  Qt6 WebEngine
 
-
-Some older Versions of Python3 or QT5 might not work
+Some older versions of Python3 or PyQt6 might not work.

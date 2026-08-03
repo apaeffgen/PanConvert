@@ -1,21 +1,47 @@
-# Building selfcontained executables
+# Building Self-Contained Executables
 
 ## Prerequisites
 
-- Installing QT6 PyQT6, Python3.12.x. The Version QT6.11 on Windows seems to make problems.
-- Installing the pyinstaller scripts for your platform (See http://pyinstaller.readthedocs.io)
-- Test that you can run Panconvert.py with your Python3 interpreter
+- Python 3.12+ (tested with 3.12 and 3.14)
+- PyQt6 (>=6.5.0). **On Windows, pin to <6.7.0** due to a known stack-buffer-overflow crash.
+- PyInstaller >=6.0
+- Test that you can run `Panconvert.py` with your Python3 interpreter
 
+## Running the Build Script
 
-## Running the Build-Script
-- Run pyinstaller Panconvert.spec
-- some usefull optins for all plattforms: --onefile --windowed
-- The programs can be to packaged: create-dmg for Macos, Inno Setup for windows or Zipped for Linux
+### Mac OS
+```bash
+cd packaging/macos
+./build.sh
+```
 
+### Windows
+```bash
+cd packaging/windows
+python build_exe.py
+```
 
-## Known Issues:
+### Linux
+```bash
+cd packaging/linux
+./build_linux.sh
+```
 
-- Not thourougly tested. 
+### Common PyInstaller Options
+
+- `--onefile`: Create a single executable file
+- `--windowed`: No console window (GUI mode)
+
+### Packaging
+
+- **macOS:** `create-dmg` for DMG creation
+- **Windows:** Inno Setup for installer
+- **Linux:** ZIP archive
+
+## Known Issues
+
+- Builds are not thoroughly tested on all platforms.
+- Windows builds require `PyQt6<6.7.0` to avoid crashes. 
 
 
 

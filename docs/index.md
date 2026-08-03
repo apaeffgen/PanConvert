@@ -1,6 +1,7 @@
 ## What is Panconvert
-Panconvert is a GUI-Wrapper for the document converter [pandoc](https://pandoc.org)
-The official homepage is at [Panconvert-Home](https://panconvert.free.nf/)
+
+Panconvert is a GUI wrapper for the document converter [pandoc](https://pandoc.org).
+The official homepage is at [Panconvert-Home](https://panconvert.sourceforge.net).
 
 ## How to use Panconvert and Pandoc
 

@@ -1,12 +1,17 @@
 # Supported OS / Hardware Platforms
 
-## Platforms tested: (Binary Version 0.3.0)
+## Platforms Tested (Binary Version 0.3.1+)
 
-*  Windows 11 (64bit)
-*  Mac OS: Sequioa 15.7
-*  Linux Mint 23.3 (Auf Ubuntu 24.04  LTS)
+| Platform | Version | Status |
+|----------|---------|--------|
+| Windows 10/11 (64-bit) | All | ✅ Tested |
+| macOS | 13+ (Intel + Apple Silicon) | ✅ Tested |
+| Linux Mint | 23.3 (Ubuntu 24.04 LTS) | ✅ Tested |
+| Ubuntu | 22.04+ | ✅ Tested |
+| Debian | 12+ | ✅ Tested |
 
-## Platforms that should be supported (All Panconvert Versions)
+## Platforms That Should Be Supported
 
-* Any Platform that supports QT6, PyQT6, Python3
-* The binary versions may fail. Use the source code instead
+* Any platform that supports **Qt6**, **PyQt6**, and **Python 3.12+**
+* Binary versions may fail on older systems due to glibc requirements. Use the source code instead.
+* **32-bit systems are no longer supported.** PanConvert requires 64-bit only.

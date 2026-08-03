@@ -29,11 +29,11 @@
 
 ## Linux Binary
 
-Attention: Because there are so many flavours of linux with a lot of different versions of the basic system, it can be,
-that the binary will not start. Also because of the hassle, in future releases no binary versions will be produced but testet.
+Because there are many Linux distributions with different system library versions, binaries may not start on older systems.
 
-- So use the the source code version if you run into troubles with the old binaries.
-- Mainly glibc versions could be to old or to new. But when something goes wrong, your are in the wild.
+- Use the source code version if you run into trouble with the binaries.
+- glibc version mismatches are the most common issue on older distributions.
+- Linux binaries are provided where possible; source install is recommended for older systems.
 
 ## To Install from Source
 
@@ -43,12 +43,12 @@ that the binary will not start. Also because of the hassle, in future releases n
 * The newest source code supports all pandoc versions
 * (Optional: Multimarkdown: for markdown to Lyx-Support)
 
-###  Installation Checklist
-Check which packets are already installed on your system. Normally Python3 exists on many supported platforms. On Linux somethimes QT5 is preinstalled.
+### Installation Checklist
 
-* Install Python3
-* Install QT5.11. Other versions of QT may or may not work
-* Install Pyqt5.11.3
-* Install Pandoc
-* Optional_Install: multimarkdown
-* See also http://panconvert.readthedocks.io
+Check which packages are already installed on your system. Normally Python3 exists on many supported platforms.
+
+* Install Python 3.12+
+* Install PyQt6 (>=6.5.0). On Windows, pin to <6.7.0.
+* Install Pandoc (>=2.0)
+* Optional: Install multimarkdown
+* See also https://panconvert.sourceforge.net

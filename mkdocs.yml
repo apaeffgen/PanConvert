@@ -1,6 +1,6 @@
 site_name: Panconvert Documentation
-site_url: http://panconvert.readthedocs.org
-repository_url:
+site_url: https://panconvert.sourceforge.net
+repository_url: https://github.com/apaeffgen/PanConvert
 nav:
 - Introduction: index.md
 - User Guide:
