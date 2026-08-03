@@ -37,7 +37,9 @@ cd packaging/linux
 - Windows builds require `PyQt6<6.7.0` to avoid crashes. 
 
 ## Manual Installation
-You need the following Software and the sourcecode installed.
+
+You need the following Software and the sourcecode installed:
+
 - Panconvert source code
 - pandoc binary
 - Python 3.12+ (tested with 3.12 and 3.14)
