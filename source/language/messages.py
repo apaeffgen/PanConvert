@@ -150,8 +150,9 @@ def error_empty_formats():
 
 def error_unknown():
     time = timestamp()
+
     unknown_error = _translate('message', 'If you can read this message, something went wrong. Get some help at ' \
-                 'http://panconvert.sourceforge.net/help')
+                 'https://panconvert.readthedocs.io/en/latest/')
     QString = unknown_error
     message = time +  '\n' + unknown_error +  '\n'
     return unknown_error

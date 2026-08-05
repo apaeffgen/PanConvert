@@ -1,7 +1,8 @@
 # Readme first
 ## Help and further information
 At the [official Website](https://panconvert.sourceforge.net) you will find more detailed information.
-There is help available at http://panconvert.sourceforge.net/help.html
+There is help available at [ReadTheDocs](https://panconvert.readthedocs.io/en/latest/)
+
 
 ## Installation
 On Windows and Mac the [automated installer](https://sourceforge.net/projects/panconvert/) walks you through the installation procedure 

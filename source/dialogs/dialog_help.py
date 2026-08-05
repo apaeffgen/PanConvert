@@ -37,7 +37,8 @@ class HelpDialog(QtWidgets.QDialog):
         self.ui.ButtonBackward.clicked.connect(self.back)
         self.ui.ButtonForward.clicked.connect(self.forward)
 
-        website = 'http://panconvert.readthedocs.io'
+
+        website = 'https://panconvert.readthedocs.io'
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
         #Initialize Settings
@@ -60,11 +61,13 @@ class HelpDialog(QtWidgets.QDialog):
         HelpDialog.close(self)
 
      def helpPanconvert(self):
-        website = 'http://panconvert.readthedocs.io'
+
+        website = 'https://panconvert.readthedocs.io'
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
      def helpPandoc(self):
-        website = 'http://pandoc.org/MANUAL.html'
+
+        website = 'https://pandoc.org/MANUAL.html'
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
      def back(self):

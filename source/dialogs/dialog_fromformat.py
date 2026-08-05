@@ -72,7 +72,8 @@ class FromFormatDialog(QtWidgets.QDialog):
         self.ui.textBrowser.setHtml(data)
 
      def moreinfo(self):
-        website = 'http://pandoc.org/README.html'
+
+        website = 'https://pandoc.org/MANUAL.html'
         self.ui.textBrowser.load(QtCore.QUrl(website))
 
      def back(self):

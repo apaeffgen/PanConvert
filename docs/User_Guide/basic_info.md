@@ -14,7 +14,8 @@ manually save the path to the executable.
 
 ## System Requirements
 
-The binaries are self-contained. Only [pandoc](https://pandoc.org/installing.html) and optionally [multimarkdown](http://fletcherpenney.net/multimarkdown/download/) have to be installed.
+The binaries are self-contained. Only [pandoc](https://pandoc.org/installing.html) and optionally [multimarkdown](https://fletcherpenney.net/multimarkdown/download/) have to be installed.
+
 
 For the source-code to be run, these additional software packages have to be installed:
 
