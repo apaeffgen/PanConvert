@@ -86,7 +86,7 @@ echo "[→] Project root: $PACKAGING_DIR"
 
 # Find spec file location
 SPEC_FILE=""
-for candidate in "$PACKAGING_DIR/packaging/linux/Panconvert.spec" "$PACKAGING_DIR/Panconvert.spec" "$SCRIPT_DIR/Panconvert.spec"; do
+for candidate in "$PACKAGING_DIR/packaging/Panconvert_pyinstaller.spec" "$PACKAGING_DIR/packaging/linux/Panconvert.spec" "$PACKAGING_DIR/Panconvert.spec"; do
     if [ -f "$candidate" ]; then
         SPEC_FILE="$candidate"
         break
@@ -94,11 +94,11 @@ for candidate in "$PACKAGING_DIR/packaging/linux/Panconvert.spec" "$PACKAGING_DI
 done
 
 if [ -z "$SPEC_FILE" ]; then
-    echo "[✗] Panconvert.spec not found."
+    echo "[✗] Panconvert spec file not found."
     echo "    Searched:"
+    echo "      - $PACKAGING_DIR/packaging/Panconvert_pyinstaller.spec"
     echo "      - $PACKAGING_DIR/packaging/linux/Panconvert.spec"
     echo "      - $PACKAGING_DIR/Panconvert.spec"
-    echo "      - $SCRIPT_DIR/Panconvert.spec"
     exit 1
 fi
 echo "[→] Using spec file: $SPEC_FILE"
