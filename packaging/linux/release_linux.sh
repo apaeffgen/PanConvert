@@ -170,6 +170,10 @@ fi
 
 # ── Push tag ──────────────────────────────────────────────────────────────────
 echo "📤 Pushing tag to GitHub..."
+# Configure git to use GH_TOKEN for HTTPS remote
+if [ -n "${GH_TOKEN:-}" ]; then
+    git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/apaeffgen/Panconvert.git"
+fi
 git push origin "$TAG"
 echo "✅ Tag pushed"
 
