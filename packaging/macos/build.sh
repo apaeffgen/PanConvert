@@ -31,7 +31,7 @@ rm -rf dist/ build/
 
 # Build
 echo "[→] Building Panconvert.app..."
-pyinstaller --clean packaging/macos/Panconvert_pyinstaller.spec
+pyinstaller --clean packaging/Panconvert_pyinstaller.spec
 
 echo ""
 echo "=== Build Complete ==="

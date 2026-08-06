@@ -3,7 +3,7 @@
 PyInstaller spec file for Panconvert.
 
 Build command:
-    pyinstaller --clean packaging/macos/Panconvert_pyinstaller.spec
+    pyinstaller --clean packaging/Panconvert_pyinstaller.spec
 
 This bundles Panconvert with PyQt6, all source files, and icon assets
 into a standalone executable.
@@ -19,8 +19,8 @@ try:
 except NameError:
     # PyInstaller may not set __file__
     spec_dir = os.path.dirname(os.path.abspath(sys.argv[-1]))
-# spec_dir is packaging/macos/; go up two levels to reach project root
-project_root = os.path.abspath(os.path.join(spec_dir, '../..'))
+# spec_dir is packaging/; go up one level to reach project root
+project_root = os.path.abspath(os.path.join(spec_dir, '..'))
 sys.path.insert(0, project_root)
 
 # ── Collect PyQt6 resource files (translations, platform plugins) ──
