@@ -46,7 +46,7 @@ export PANVERSION="$VERSION"
 
 # Build
 echo "[→] Building Panconvert Linux binary..."
-pyinstaller --clean --distpath="${PACKAGING_DIR}/dist" --workpath="${PACKAGING_DIR}/build" "${SCRIPT_DIR}/Panconvert.spec"
+pyinstaller --clean --distpath="${PACKAGING_DIR}/dist" --workpath="${PACKAGING_DIR}/build" "${PACKAGING_DIR}/packaging/Panconvert_pyinstaller.spec"
 
 echo ""
 echo "=== Build Complete ==="
