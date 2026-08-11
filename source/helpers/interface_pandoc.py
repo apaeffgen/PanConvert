@@ -43,14 +43,19 @@ def get_path_pandoc():
 
     if not os.path.isfile(path_pandoc):
 
-        if platform.system() == 'Darwin' or os.name == 'posix':
-            path_pandoc = which("pandoc")
+        try:
+            if platform.system() == 'Darwin' or os.name == 'posix':
+                path_pandoc = which("pandoc")
+            else:
+                path_pandoc = where("pandoc.exe")
             settings.setValue('path_pandoc', path_pandoc)
             settings.sync()
-        else:
-            path_pandoc = where("pandoc.exe")
+        except FileNotFoundError:
+            path_pandoc = ''
             settings.setValue('path_pandoc', path_pandoc)
             settings.sync()
+
+    return path_pandoc
 
 
 def get_path_multimarkdown():
@@ -135,6 +140,14 @@ def get_pandoc_formats():
     settings = _get_settings()
     path_pandoc = settings.value('path_pandoc','')
 
+    if not os.path.isfile(path_pandoc):
+        path_pandoc = get_path_pandoc()
+        path_pandoc = settings.value('path_pandoc','')
+        if not os.path.isfile(path_pandoc):
+            message = error_converter_path()
+            print(message)
+            return None, None
+
     if os.path.isfile(path_pandoc):
 
         version = get_pandoc_version()
@@ -179,20 +192,21 @@ def get_pandoc_formats():
             return [f.strip() for f in in_], [f.strip() for f in out]
 
 
-    else:
-        path_pandoc = get_path_pandoc()
-        path_pandoc = settings.value('path_pandoc','')
-        if not os.path.isfile(path_pandoc):
-            message = error_converter_path()
-            return message
-
-
 def get_pandoc_options():
     """
     Get the Options of the Pandoc help section
     """
     settings = _get_settings()
     path_pandoc = settings.value('path_pandoc','')
+
+    if not os.path.isfile(path_pandoc):
+        path_pandoc = get_path_pandoc()
+        path_pandoc = settings.value('path_pandoc','')
+        if not os.path.isfile(path_pandoc):
+            message = error_converter_path()
+            print(message)
+            return None
+
     if os.path.isfile(path_pandoc):
 
         version = get_pandoc_version()
@@ -222,32 +236,28 @@ def get_pandoc_options():
 
             return aux
 
-    else:
-        path_pandoc = get_path_pandoc()
-        path_pandoc = settings.value('path_pandoc','')
-        if not os.path.isfile(path_pandoc):
-            message = error_converter_path()
-            return message
-
 def which(target):
-    pathlist_tmp = '/Applications/Panconvert:~/Panconvert:/opt/Panconvert:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:'
-    pathlist = pathlist_tmp.split(":")
-    for p in pathlist:
-        fullpath = p + "/" + target
-        if os.path.isfile(fullpath) and os.access(fullpath, os.X_OK):
-            path_pandoc = fullpath
+    """Search for an executable in the system PATH.
 
-            return path_pandoc
+    Raises:
+        FileNotFoundError: If the executable is not found in PATH.
+    """
+    result = shutil.which(target)
+    if result is None:
+        raise FileNotFoundError(f"Executable '{target}' not found in system PATH")
+    return result
+
 
 def where(target):
-    pathlist_tmp = r'C:\Program Files\Pandoc\:'
-    pathlist = pathlist_tmp.split(":")
-    for p in pathlist:
-        fullpath = p + "\\" + target
-        if os.path.isfile(fullpath) and os.access(fullpath, os.X_OK):
-            path_pandoc = fullpath
+    """Search for an executable in the system PATH (Windows alias).
 
-            return path_pandoc
+    Raises:
+        FileNotFoundError: If the executable is not found in PATH.
+    """
+    result = shutil.which(target)
+    if result is None:
+        raise FileNotFoundError(f"Executable '{target}' not found in system PATH")
+    return result
 
 
 

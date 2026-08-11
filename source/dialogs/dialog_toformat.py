@@ -64,6 +64,8 @@ class ToFormatDialog(QtWidgets.QDialog):
 
      def info(self):
         formats =  get_pandoc_formats()
+        if formats is None or formats[1] is None:
+            return
         toformats = formats[1]
         data = '<br>'.join(toformats)
         self.ui.textBrowser.setHtml(data)

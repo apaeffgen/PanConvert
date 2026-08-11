@@ -20,6 +20,9 @@ __author__ = 'apaeffgen'
 from source.helpers.interface_pandoc import get_pandoc_formats, get_path_pandoc
 from source.gui.panconvert_diag_fromformat import Ui_From_Format_Dialog
 from source.language.messages import *
+from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtCore import QSettings, QSize, QPoint, QUrl
+import os
 
 
 class FromFormatDialog(QtWidgets.QDialog):
@@ -50,8 +53,9 @@ class FromFormatDialog(QtWidgets.QDialog):
             data = '<br>'.join(fromformats)
             self.ui.textBrowser.setHtml(data)
         else:
-                message = error_converter_path()
-                return message
+            message = error_converter_path()
+            QMessageBox.critical(self, 'Pandoc nicht gefunden', message)
+            self.ui.textBrowser.setHtml('<p style="color:red;">' + message + '</p>')
 
      def closeEvent(self, event):
 
@@ -67,6 +71,8 @@ class FromFormatDialog(QtWidgets.QDialog):
 
      def info(self):
         formats =  get_pandoc_formats()
+        if formats is None or formats[0] is None:
+            return
         fromformats = formats[0]
         data = '<br>'.join(fromformats)
         self.ui.textBrowser.setHtml(data)
