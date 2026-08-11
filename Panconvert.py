@@ -41,11 +41,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # Check for pandoc path on first run
-    settings = QSettings('Pandoc', 'PanConvert')
-    path_pandoc = settings.value('path_pandoc', '')
-
-    if not os.path.isfile(str(path_pandoc)):
-        get_path_pandoc()
-
     main()

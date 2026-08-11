@@ -31,7 +31,7 @@ class Ui_notepad(object):
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setMinimumSize(QtCore.QSize(710, 500))
         self.centralwidget.setBaseSize(QtCore.QSize(710, 700))
-        self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.WaitCursor))
+        self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
         self.centralwidget.setMouseTracking(False)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.centralwidget)

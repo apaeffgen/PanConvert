@@ -63,7 +63,7 @@
     </size>
    </property>
    <property name="cursor">
-    <cursorShape>WaitCursor</cursorShape>
+    <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="mouseTracking">
     <bool>false</bool>
