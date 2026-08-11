@@ -69,4 +69,4 @@ On the commandline you have to first cd into the appropriate directory.
 
 ## License
 
-The software is licensed under the [GNU General Public License](docs/license.txt)
+The software is licensed under the [GNU General Public License V3](docs/license.txt)
