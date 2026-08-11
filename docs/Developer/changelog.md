@@ -1,3 +1,8 @@
+### Version 0.3.2
+- Fixed Crash of Linux AppImage 
+- Fixed some Mouse Pointer Glitches
+- Fixed some Pandoc Path Issues
+
 ### Version 0.3.1
 - Fixed Batch Conversion
 - Fixed Save aborted
