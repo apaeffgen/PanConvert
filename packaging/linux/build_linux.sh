@@ -114,6 +114,31 @@ if [ -f "${PROJECT_ROOT}/dist/Panconvert" ]; then
     mv "${PROJECT_ROOT}/dist/Panconvert" "${PROJECT_ROOT}/dist/${BINARY_NAME}"
     chmod +x "${PROJECT_ROOT}/dist/${BINARY_NAME}"
     echo "[✓] Renamed to ${BINARY_NAME}"
+
+    # Bundle all missing XCB libraries (required by Qt 6.5+ on RHEL/Rocky)
+    # Qt xcb platform plugin needs: libxcb-cursor, libxcb-icccm, libxcb-keysyms, etc.
+    XCB_LIBS=(
+        'libxcb-cursor.so.0'
+        'libxcb-icccm.so.4'
+        'libxcb-keysyms.so.1'
+        'libxcb-randr.so.0'
+        'libxcb-render-util.so.0'
+        'libxcb-shape.so.0'
+        'libxcb-xinerama.so.0'
+        'libxcb-xfixes.so.0'
+        'libxcb-xkb.so.1'
+        'libxcb-util.so.1'
+        'libxcb-image.so.0'
+    )
+    for lib in "${XCB_LIBS[@]}"; do
+        FOUND=$(find /usr/lib64 /usr/lib /lib64 /lib -name "$lib" 2>/dev/null | head -1)
+        if [[ -n "$FOUND" ]]; then
+            cp "$FOUND" "${PROJECT_ROOT}/dist/"
+            echo "[✓] Bundled $lib"
+        else
+            echo "[!] $lib not found. Install xcb-util-cursor, xcb-util-wm, xcb-util-keysym packages."
+        fi
+    done
 else
     echo "[✗] Expected binary not found at ${PROJECT_ROOT}/dist/Panconvert"
     exit 1

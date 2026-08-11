@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PanConvert
+Comment=Pandoc GUI frontend for document conversion
+Exec=Panconvert
+Icon=panconvert
+Categories=Office;TextEditor;
+Terminal=false
+MimeType=text/x-markdown;text/html;text/plain;application/pdf;application/vnd.oasis.opendocument.text;application/vnd.openxmlformats-officedocument.wordprocessingml.document;
+StartupNotify=false
+X-AppImage-Integrate=false

@@ -3,6 +3,7 @@
 
 Usage:
     python release_crossplatform.py [version]
+    python release_crossplatform.py [version] --force   # Force re-upload if release exists
 
 Prerequisites:
     1. Set GH_TOKEN environment variable with a GitHub Personal Access Token
@@ -136,6 +137,8 @@ def main() -> int:
 
     parser = argparse.ArgumentParser(description="Publish dist/ artifacts to a GitHub release")
     parser.add_argument("version", nargs="?", help="Release version (e.g. 0.4.0)")
+    parser.add_argument("--force", "-f", action="store_true",
+                        help="Force re-upload of assets even if release already exists")
     args = parser.parse_args()
 
     # ── Detect platform ───────────────────────────────────────────────────────
@@ -176,7 +179,19 @@ def main() -> int:
         print("❌ dist/ folder not found. Build your release first.")
         return 1
 
-    dist_files = [f for f in dist_dir.iterdir() if f.is_file()]
+    # Exclude platform-specific shared libraries (bundled for dev only)
+    SO_EXCLUDE = {"libxcb-cursor.so.0", "libxcb-icccm.so.4", "libxcb-keysyms.so.1",
+                  "libxcb-randr.so.0", "libxcb-render-util.so.0", "libxcb-shape.so.0",
+                  "libxcb-xinerama.so.0", "libxcb-xfixes.so.0", "libxcb-xkb.so.1",
+                  "libxcb-util.so.1", "libxcb-image.so.0", "libxcb-composite.so.0",
+                  "libxcb-damage.so.0", "libxcb-dri2.so.0", "libxcb-dri3.so.0",
+                  "libxcb-glx.so.0", "libxcb-present.so.0", "libxcb-record.so.0",
+                  "libxcb-render.so.0", "libxcb-res.so.0", "libxcb-screensaver.so.0",
+                  "libxcb-shm.so.0", "libxcb.so.1", "libxcb-sync.so.1",
+                  "libxcb-xf86dri.so.0", "libxcb-xinput.so.0", "libxcb-xselinux.so.0",
+                  "libxcb-xtest.so.0", "libxcb-xv.so.0"}
+
+    dist_files = [f for f in dist_dir.iterdir() if f.is_file() and f.name not in SO_EXCLUDE]
     if not dist_files:
         print("❌ dist/ folder is empty. Nothing to publish.")
         return 1
@@ -243,23 +258,26 @@ def main() -> int:
     if result.returncode == 0:
         print()
         print(f"⚠️  Release {tag} already exists.")
-        print()
-        print("Existing assets:")
-        assets_result = run(["gh", "release", "view", tag, "--json", "name,assets"])
-        if assets_result.returncode == 0:
-            try:
-                import json
-                data = json.loads(assets_result.stdout)
-                for asset in data.get("assets", []):
-                    print(f"  {asset['name']}")
-            except (json.JSONDecodeError, KeyError):
-                pass
-        print()
-        reply = input("Re-upload the files from dist/? (y/N) ").strip().lower()
-        if reply != "y":
-            print("📋 Skipping upload. Release already exists.")
-            print(f"   View at: https://github.com/apaeffgen/PanConvert/releases/tag/{tag}")
-            return 0
+        if not args.force:
+            print()
+            print("Existing assets:")
+            assets_result = run(["gh", "release", "view", tag, "--json", "name,assets"])
+            if assets_result.returncode == 0:
+                try:
+                    import json
+                    data = json.loads(assets_result.stdout)
+                    for asset in data.get("assets", []):
+                        print(f"  {asset['name']}")
+                except (json.JSONDecodeError, KeyError):
+                    pass
+            print()
+            reply = input("Re-upload the files from dist/? (y/N) ").strip().lower()
+            if reply != "y":
+                print("📋 Skipping upload. Release already exists.")
+                print(f"   View at: https://github.com/apaeffgen/PanConvert/releases/tag/{tag}")
+                return 0
+        else:
+            print("🔄 Force mode: will re-upload all assets.")
 
     # ── Generate release notes ────────────────────────────────────────────────
     lines = [
@@ -285,19 +303,20 @@ def main() -> int:
     print()
     print("🚀 Creating GitHub release...")
 
-    dist_glob = str(dist_dir / "*")
+    # Upload only release artifacts, not bundled dev libraries
     result = run(["gh", "release", "view", tag])
     if result.returncode == 0:
-        # Update existing release
-        run(["gh", "release", "upload", tag, dist_glob, "--clobber"])
-        print(f"✅ Release v{version} updated!")
+        # Update existing release - update notes and re-upload assets
+        run(["gh", "release", "edit", tag, "--notes", release_notes])
+        run(["gh", "release", "upload", tag, *dist_files, "--clobber"])
+        print(f"✅ Release v{version} updated with new assets!")
     else:
         # Create new release
         run([
             "gh", "release", "create", tag,
             "--title", f"Panconvert {tag}",
             "--notes", release_notes,
-            dist_glob,
+            *dist_files,
         ])
         print(f"✅ Release v{version} published!")
 
