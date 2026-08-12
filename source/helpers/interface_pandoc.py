@@ -18,7 +18,6 @@ __author__ = 'apaeffgen'
     # along with Panconvert.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, shutil, io, sys
-from os import path
 import platform
 import subprocess
 from PyQt6.QtCore import QSettings
@@ -44,12 +43,72 @@ def get_path_pandoc():
     if not os.path.isfile(path_pandoc):
 
         try:
-            if platform.system() == 'Darwin' or os.name == 'posix':
-                path_pandoc = which("pandoc")
+            if getattr(sys, 'frozen', False):
+                # In a bundled app, shutil.which may not see the full system PATH
+                # because PyInstaller modifies the environment. Use multiple strategies:
+
+                # Strategy 1: Check common macOS/Unix locations where pandoc is installed
+                common_paths = [
+                    '/usr/local/bin/pandoc',   # macOS .pkg installer, Homebrew on Intel
+                    '/opt/homebrew/bin/pandoc', # Homebrew on Apple Silicon
+                    '/opt/local/bin/pandoc',    # MacPorts
+                    '/usr/bin/pandoc',          # System default (rare)
+                ]
+                for p in common_paths:
+                    if os.path.isfile(p):
+                        path_pandoc = p
+                        break
+
+                # Strategy 2: If not found in common paths, try 'which' with explicit PATH
+                if not os.path.isfile(path_pandoc):
+                    if platform.system() == 'Darwin' or os.name == 'posix':
+                        # Build a comprehensive PATH that includes common locations
+                        user_path = os.environ.get('PATH', '')
+                        # Add common paths that might be missing from subprocess env
+                        extra_paths = ['/usr/local/bin', '/opt/homebrew/bin', '/opt/local/bin',
+                                       '/usr/bin', '/bin', '/usr/sbin', '/sbin']
+                        # Merge: user PATH + extra paths not already in user PATH
+                        existing = set(user_path.split(':')) if user_path else set()
+                        for ep in extra_paths:
+                            if ep not in existing:
+                                user_path = user_path + ':' + ep if user_path else ep
+                        env = os.environ.copy()
+                        env['PATH'] = user_path
+                        p_proc = subprocess.Popen(
+                            ['which', 'pandoc'],
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            env=env)
+                        stdout, _ = p_proc.communicate()
+                        found = stdout.decode('utf-8').strip()
+                        if found and os.path.isfile(found):
+                            path_pandoc = found
+                    else:
+                        # Windows: use 'where' command
+                        p_proc = subprocess.Popen(
+                            ['where', 'pandoc'],
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+                        stdout, _ = p_proc.communicate()
+                        found = stdout.decode('utf-8').strip().split('\n')[-1].strip()
+                        if found and os.path.isfile(found):
+                            path_pandoc = found
+
+                if path_pandoc and os.path.isfile(path_pandoc):
+                    settings.setValue('path_pandoc', path_pandoc)
+                    settings.sync()
+                else:
+                    raise FileNotFoundError("pandoc not found")
             else:
-                path_pandoc = where("pandoc.exe")
-            settings.setValue('path_pandoc', path_pandoc)
-            settings.sync()
+                # Normal (non-bundled) mode: use shutil.which
+                if platform.system() == 'Darwin' or os.name == 'posix':
+                    path_pandoc = which("pandoc")
+                else:
+                    path_pandoc = where("pandoc.exe")
+                settings.setValue('path_pandoc', path_pandoc)
+                settings.sync()
         except FileNotFoundError:
             path_pandoc = ''
             settings.setValue('path_pandoc', path_pandoc)
