@@ -18,3 +18,4 @@ __pycache__/output alias
 .DS_Store
 *.zip
 Migration/Qt5_to_Qt6_Migration_Analysis.md
+/packaging/windows/pandoc.exe

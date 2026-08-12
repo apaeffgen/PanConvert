@@ -40,6 +40,11 @@ for root, dirs, files in os.walk(os.path.join(project_root, 'source')):
         dst = os.path.relpath(root, project_root)
         datas.append((src, dst))
 
+# ── Include bundled pandoc binary (Windows only) ──
+pandoc_src = os.path.join(project_root, 'packaging', 'windows', 'pandoc.exe')
+if os.path.exists(pandoc_src):
+    datas.append((pandoc_src, 'pandoc'))
+
 # ── App name and output directory ──
 a = Analysis(
     [os.path.join(project_root, 'Panconvert.py')],

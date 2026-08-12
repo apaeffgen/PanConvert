@@ -47,17 +47,25 @@ def get_path_pandoc():
                 # In a bundled app, shutil.which may not see the full system PATH
                 # because PyInstaller modifies the environment. Use multiple strategies:
 
+                # Strategy 0: Check for bundled pandoc (Windows standalone)
+                if platform.system() == 'Windows':
+                    # Check if pandoc.exe exists alongside the app
+                    bundled_pandoc = os.path.join(os.path.dirname(sys.executable), 'pandoc.exe')
+                    if os.path.isfile(bundled_pandoc):
+                        path_pandoc = bundled_pandoc
+
                 # Strategy 1: Check common macOS/Unix locations where pandoc is installed
-                common_paths = [
-                    '/usr/local/bin/pandoc',   # macOS .pkg installer, Homebrew on Intel
-                    '/opt/homebrew/bin/pandoc', # Homebrew on Apple Silicon
-                    '/opt/local/bin/pandoc',    # MacPorts
-                    '/usr/bin/pandoc',          # System default (rare)
-                ]
-                for p in common_paths:
-                    if os.path.isfile(p):
-                        path_pandoc = p
-                        break
+                if not os.path.isfile(path_pandoc):
+                    common_paths = [
+                        '/usr/local/bin/pandoc',   # macOS .pkg installer, Homebrew on Intel
+                        '/opt/homebrew/bin/pandoc', # Homebrew on Apple Silicon
+                        '/opt/local/bin/pandoc',    # MacPorts
+                        '/usr/bin/pandoc',          # System default (rare)
+                    ]
+                    for p in common_paths:
+                        if os.path.isfile(p):
+                            path_pandoc = p
+                            break
 
                 # Strategy 2: If not found in common paths, try 'which' with explicit PATH
                 if not os.path.isfile(path_pandoc):

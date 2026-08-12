@@ -43,6 +43,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 ; Include all files from the PyInstaller dist folder
 ; Note: PyInstaller builds a single-file exe with all dependencies bundled inside
 Source: "..\..\dist\Panconvert.exe"; DestDir: "{app}"; Flags: ignoreversion
+; Include bundled pandoc binary
+Source: "pandoc.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; Include source files if needed (uncomment to distribute source code)
 ; Source: "..\..\source\*"; DestDir: "{app}\source"; Flags: ignoreversion recursesubdirs
 
