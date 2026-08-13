@@ -134,6 +134,7 @@ def get_path_multimarkdown():
                 path_multimarkdown = which("multimarkdown")
                 settings.setValue('path_multimarkdown', path_multimarkdown)
                 settings.sync()
+                return path_multimarkdown
             else:
                 args = ['where', 'multimarkdown']
                 p = subprocess.Popen(
@@ -177,6 +178,8 @@ def get_pandoc_version():
     settings = _get_settings()
     path_pandoc = settings.value('path_pandoc','')
 
+    version = 0
+
     if os.path.isfile(path_pandoc):
 
         p = subprocess.Popen(
@@ -184,16 +187,17 @@ def get_pandoc_version():
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE)
         output = p.communicate()[0].decode().splitlines(False)
-        versionstr = output[0]
+        if output:
+            versionstr = output[0]
 
-        # Extract major version number (handles pandoc 2.x and 3.x)
-        # Examples: "pandoc 2.11.4", "pandoc 3.10.1"
-        import re
-        match = re.search(r'pandoc\s+(\d+)', versionstr)
-        if match:
-            version = int(match.group(1))
-        else:
-            version = 0
+            # Extract major version number (handles pandoc 2.x and 3.x)
+            # Examples: "pandoc 2.11.4", "pandoc 3.10.1"
+            import re
+            match = re.search(r'pandoc\s+(\d+)', versionstr)
+            if match:
+                version = int(match.group(1))
+            else:
+                version = 0
 
     return version
 
