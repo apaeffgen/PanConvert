@@ -9,6 +9,13 @@
 * **Pandoc Path:** Configure the path to your pandoc executable.
 * **Open/Save Path:** Set the default directory for file open/save dialogs.
 
+## Default Values
+
+Dependant of the choosen gui
+- Which standard parameters are checked 
+- Which manual converters are filled out
+- Which name.extension for tmp buffer. When empty the function does notwork
+
 ## Size Settings
 
 Here you can configure Panconvert to remember the size and position of windows and dialogs.

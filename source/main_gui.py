@@ -201,6 +201,7 @@ class StartQT5(QtWidgets.QMainWindow):
         global text, text_undo
         text_undo = text
 
+        settings = QSettings('Pandoc', 'PanConvert')
         path_dialog = settings.value('path_dialog')
         BufferSaveSuffix = settings.value('BufferSaveSuffix')
         BufferSaveName = settings.value('BufferSaveName')

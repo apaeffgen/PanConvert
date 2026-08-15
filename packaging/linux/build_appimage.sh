@@ -106,13 +106,43 @@ do_build() {
         info "Root icon installed."
     fi
 
+    # ── Bundle pandoc ──
+    # Pandoc is the core conversion engine for PanConvert.
+    # Bundling it eliminates the need for users to install it separately.
+    BUNDLE_PANDOC="y"
+    
+    if [[ -x "/usr/bin/pandoc" ]]; then
+        # Ask user if they want to bundle pandoc
+        echo -n "Pandoc found at /usr/bin/pandoc. Bundle it in the AppImage? [Y/n]: "
+        read -r RESPONSE
+        BUNDLE_PANDOC="${RESPONSE:-y}"
+        BUNDLE_PANDOC="${BUNDLE_PANDOC,,}"  # Convert to lowercase
+        
+        if [[ "$BUNDLE_PANDOC" == "y" || "$BUNDLE_PANDOC" == "yes" ]]; then
+            cp /usr/bin/pandoc "$APPDIR/usr/bin/pandoc"
+            chmod +x "$APPDIR/usr/bin/pandoc"
+
+            # Copy pandoc data files (templates, init.lua)
+            mkdir -p "$APPDIR/usr/share/pandoc/data"
+            if [[ -d "/usr/share/pandoc/data" ]]; then
+                cp -r /usr/share/pandoc/data/* "$APPDIR/usr/share/pandoc/data/"
+            fi
+            info "Pandoc bundled (v$(pandoc --version 2>/dev/null | head -1 | cut -d' ' -f3))."
+        else
+            info "Pandoc will not be bundled. The AppImage will require a system pandoc."
+        fi
+    else
+        warn "pandoc not found at /usr/bin/pandoc. The AppImage will require a system pandoc."
+    fi
+
     # ── Bundle libxcb-cursor (required by Qt 6.5+ on RHEL/Rocky) ──
     # Qt 6.5+ requires libxcb-cursor.so.0 for the xcb platform plugin.
     # appimagetool doesn't bundle this, so we copy it manually.
     info "Bundling libxcb-cursor for Qt 6.5+ compatibility..."
+    local LIBCURSOR
 
     # Find libxcb-cursor.so.0 on the system
-    LIBCURSOR=$(find /usr/lib64 /usr/lib /lib64 /lib -name 'libxcb-cursor.so.0' 2>/dev/null | head -1)
+    LIBCURSOR="$(find /usr/lib64 /usr/lib /lib64 /lib -name 'libxcb-cursor.so.0' 2>/dev/null | head -1)"
 
     if [[ -n "$LIBCURSOR" ]]; then
         cp "$LIBCURSOR" "$APPDIR/usr/lib64/" 2>/dev/null || cp "$LIBCURSOR" "$APPDIR/usr/lib/" 2>/dev/null || true

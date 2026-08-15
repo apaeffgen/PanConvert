@@ -47,9 +47,13 @@ def get_path_pandoc():
                 # In a bundled app, shutil.which may not see the full system PATH
                 # because PyInstaller modifies the environment. Use multiple strategies:
 
-                # Strategy 0: Check for bundled pandoc (Windows standalone)
-                if platform.system() == 'Windows':
-                    # Check if pandoc.exe exists alongside the app
+                # Strategy 0: Check for bundled pandoc (AppImage / Windows standalone)
+                # Check AppImage layout: pandoc lives at <AppDir>/usr/bin/pandoc
+                bundled_pandoc = os.path.join(os.path.dirname(sys.executable), 'usr', 'bin', 'pandoc')
+                if os.path.isfile(bundled_pandoc):
+                    path_pandoc = bundled_pandoc
+                # Also check alongside the executable (Windows standalone)
+                if not os.path.isfile(path_pandoc) and platform.system() == 'Windows':
                     bundled_pandoc = os.path.join(os.path.dirname(sys.executable), 'pandoc.exe')
                     if os.path.isfile(bundled_pandoc):
                         path_pandoc = bundled_pandoc

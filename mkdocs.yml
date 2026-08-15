@@ -6,6 +6,7 @@ nav:
 - User Guide:
     - Install Instructions: User_Guide/Install_Instructions.md
     - Basic Usage: User_Guide/Basic_Usage.md
+    - Pandoc Parameters: Pandoc_Parameters.md
     - Customizing: User_Guide/Customizing_Panconvert.md
     - Known Problems: User_Guide/Known_Problems.md
     - Pandoc Help: User_Guide/Pandoc_Help.md
