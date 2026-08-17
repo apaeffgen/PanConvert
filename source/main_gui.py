@@ -203,8 +203,8 @@ class StartQT5(QtWidgets.QMainWindow):
 
         settings = QSettings('Pandoc', 'PanConvert')
         path_dialog = settings.value('path_dialog')
-        BufferSaveSuffix = settings.value('BufferSaveSuffix')
         BufferSaveName = settings.value('BufferSaveName')
+        BufferSaveSuffix = settings.value('BufferSaveSuffix')
 
         try:
             os.path.exists(self.filename[0])
@@ -215,7 +215,7 @@ class StartQT5(QtWidgets.QMainWindow):
         if file_exists == 1:
             file, file_extension = os.path.splitext(self.filename[0])
             if BufferSaveSuffix != '':
-                buffer = io.open(file + BufferSaveSuffix, "w")
+                buffer = codecs.open(file + BufferSaveSuffix + file_extension, 'w', 'utf-8')
                 buffer.write(self.ui.editor_window.toPlainText())
                 buffer.close()
             else:
@@ -223,8 +223,13 @@ class StartQT5(QtWidgets.QMainWindow):
                 self.print_log_messages(message)
         else:
             if BufferSaveName != '':
-                file_tmp = path_dialog + '/' +  BufferSaveName
-                buffer = io.open(file_tmp, "w")
+                file_base, file_ext = os.path.splitext(BufferSaveName)
+                if BufferSaveSuffix != '':
+                    buffer_name = file_base + BufferSaveSuffix + file_ext
+                else:
+                    buffer_name = BufferSaveName
+                file_tmp = os.path.join(path_dialog, buffer_name)
+                buffer = codecs.open(file_tmp, 'w', 'utf-8')
                 buffer.write(self.ui.editor_window.toPlainText())
                 buffer.close()
             else:
