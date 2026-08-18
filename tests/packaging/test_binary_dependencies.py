@@ -1237,8 +1237,18 @@ class TestBinaryErrorHandling:
             # GUI app may hang - this is acceptable for a GUI app
             pytest.skip("Binary timed out (GUI app may not handle CLI errors well)")
 
-    def test_binary_does_not_crash_on_no_args(self, binary):
-        """Verify binary doesn't crash when run without arguments."""
+    def test_binary_does_not_crash_on_no_args(self, binary, app_bundle):
+        """Verify binary doesn't crash when run without arguments.
+        
+        On macOS, prefer the .app bundle binary which has proper code signing.
+        Falls back to the dist binary if no bundle is available.
+        """
+        # Prefer .app bundle binary on macOS (properly codesigned)
+        if app_bundle is not None and platform.system().lower() == "darwin":
+            bundle_binary = app_bundle / "Contents" / "MacOS" / "Panconvert"
+            if bundle_binary.exists():
+                binary = bundle_binary
+        
         if binary is None:
             pytest.skip("No binary available")
         try:
