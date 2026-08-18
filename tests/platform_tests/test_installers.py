@@ -37,7 +37,6 @@ def _find_installer(dist_dir, pattern):
 # ─── Windows Installer Tests ──────────────────────────────────────────────────
 
 
-@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestWindowsInstaller:
     """Test Windows installer (Inno Setup).
     
@@ -51,7 +50,7 @@ class TestWindowsInstaller:
         if platform.system().lower() != "windows":
             pytest.skip("Windows-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-win*-installer.exe")
+        installer = _find_installer(dist, "PanConvert-*-win*-installer.exe")
         assert installer is not None, (
             "No Windows installer found in dist/. "
             "Build it with: python packaging/windows/build_installer.py"
@@ -62,7 +61,7 @@ class TestWindowsInstaller:
         if platform.system().lower() != "windows":
             pytest.skip("Windows-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-win*-installer.exe")
+        installer = _find_installer(dist, "PanConvert-*-win*-installer.exe")
         if installer is None:
             pytest.skip("No installer available")
         assert installer.is_file()
@@ -72,7 +71,7 @@ class TestWindowsInstaller:
         if platform.system().lower() != "windows":
             pytest.skip("Windows-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-win*-installer.exe")
+        installer = _find_installer(dist, "PanConvert-*-win*-installer.exe")
         if installer is None:
             pytest.skip("No installer available")
         size = installer.stat().st_size
@@ -84,7 +83,7 @@ class TestWindowsInstaller:
         if platform.system().lower() != "windows":
             pytest.skip("Windows-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-win*-installer.exe")
+        installer = _find_installer(dist, "PanConvert-*-win*-installer.exe")
         if installer is None:
             pytest.skip("No installer available")
         import re
@@ -96,7 +95,6 @@ class TestWindowsInstaller:
 # ─── macOS Installer Tests ────────────────────────────────────────────────────
 
 
-@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestMacOSInstaller:
     """Test macOS PKG installer.
     
@@ -110,7 +108,7 @@ class TestMacOSInstaller:
         if platform.system().lower() != "darwin":
             pytest.skip("macOS-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-macos.pkg")
+        installer = _find_installer(dist, "PanConvert-*-macos.pkg")
         if installer is None:
             pytest.skip("No macOS PKG installer found (not built yet)")
 
@@ -119,7 +117,7 @@ class TestMacOSInstaller:
         if platform.system().lower() != "darwin":
             pytest.skip("macOS-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-macos.pkg")
+        installer = _find_installer(dist, "PanConvert-*-macos.pkg")
         if installer is None:
             pytest.skip("No installer available")
         assert installer.is_file()
@@ -129,7 +127,7 @@ class TestMacOSInstaller:
         if platform.system().lower() != "darwin":
             pytest.skip("macOS-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-macos.pkg")
+        installer = _find_installer(dist, "PanConvert-*-macos.pkg")
         if installer is None:
             pytest.skip("No installer available")
         size = installer.stat().st_size
@@ -141,7 +139,7 @@ class TestMacOSInstaller:
         if platform.system().lower() != "darwin":
             pytest.skip("macOS-only test")
         dist = _get_dist_dir()
-        installer = _find_installer(dist, "Panconvert-*-macos.pkg")
+        installer = _find_installer(dist, "PanConvert-*-macos.pkg")
         if installer is None:
             pytest.skip("No installer available")
         try:
@@ -161,7 +159,6 @@ class TestMacOSInstaller:
 # ─── Linux AppImage Tests ─────────────────────────────────────────────────────
 
 
-@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestLinuxAppImage:
     """Test Linux AppImage.
     
@@ -238,7 +235,6 @@ class TestLinuxAppImage:
 # ─── Cross-Platform Installer Tests ───────────────────────────────────────────
 
 
-@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestInstallerCrossPlatform:
     """Cross-platform installer availability checks.
     
@@ -257,11 +253,11 @@ class TestInstallerCrossPlatform:
         has_installer = False
 
         if system == "windows":
-            has_installer = bool(_find_installer(dist, "Panconvert-*-win*-installer.exe"))
+            has_installer = bool(_find_installer(dist, "PanConvert-*-win*-installer.exe"))
         elif system == "darwin":
-            has_installer = bool(_find_installer(dist, "Panconvert-*-macos.pkg"))
+            has_installer = bool(_find_installer(dist, "PanConvert-*-macos.pkg"))
         elif system == "linux":
-            has_installer = bool(_find_installer(dist, "Panconvert*.AppImage"))
+            has_installer = bool(_find_installer(dist, "PanConvert*.AppImage"))
 
         # This is informational - we don't fail if no installer exists
         # since the binary itself may be sufficient for distribution

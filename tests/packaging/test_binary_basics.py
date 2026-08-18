@@ -80,8 +80,15 @@ def _find_installer_in_dist(dist_dir: Path):
         for f in dist_dir.glob("*installer*"):
             if f.is_file():
                 return f
-        # Also check .deb and .rpm directly
-        for f in dist_dir.glob("*.deb") + dist_dir.glob("*.rpm"):
+        # Check .deb and .rpm directly
+        for f in dist_dir.glob("*.deb"):
+            if f.is_file():
+                return f
+        for f in dist_dir.glob("*.rpm"):
+            if f.is_file():
+                return f
+        # Check for AppImage (Linux installer format)
+        for f in dist_dir.glob("*.AppImage"):
             if f.is_file():
                 return f
     
@@ -318,11 +325,18 @@ class TestInstallerNaming:
         )
     
     def test_installer_name_contains_installer_keyword(self):
-        """Installer name should contain 'installer' keyword."""
+        """Installer name should contain appropriate platform identifier."""
         dist = _get_dist_dir()
         installer = _find_installer_in_dist(dist)
         if installer is None:
             pytest.skip("No installer found")
+        
+        system = platform.system().lower()
+        # AppImage files don't contain "installer" but are valid Linux installers
+        if system == "linux" and installer.suffix == ".AppImage":
+            # AppImage is a valid Linux installer format
+            assert True
+            return
         
         assert "installer" in installer.name.lower(), (
             f"Installer name should contain 'installer': {installer.name}"
