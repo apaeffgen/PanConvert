@@ -157,7 +157,7 @@ class TestLinuxAppImage:
         if platform.system().lower() != "linux":
             pytest.skip("Linux-only test")
         dist = _get_dist_dir()
-        appimage = _find_installer(dist, "Panconvert*.AppImage")
+        appimage = _find_installer(dist, "PanConvert*.AppImage")
         assert appimage is not None, (
             "No AppImage found in dist/. "
             "Build it with: bash packaging/linux/build_appimage.sh"
@@ -168,7 +168,7 @@ class TestLinuxAppImage:
         if platform.system().lower() != "linux":
             pytest.skip("Linux-only test")
         dist = _get_dist_dir()
-        appimage = _find_installer(dist, "Panconvert*.AppImage")
+        appimage = _find_installer(dist, "PanConvert*.AppImage")
         if appimage is None:
             pytest.skip("No AppImage available")
         assert appimage.is_file()
@@ -178,7 +178,7 @@ class TestLinuxAppImage:
         if platform.system().lower() != "linux":
             pytest.skip("Linux-only test")
         dist = _get_dist_dir()
-        appimage = _find_installer(dist, "Panconvert*.AppImage")
+        appimage = _find_installer(dist, "PanConvert*.AppImage")
         if appimage is None:
             pytest.skip("No AppImage available")
         assert os.access(appimage, os.X_OK), "AppImage is not executable"
@@ -188,7 +188,7 @@ class TestLinuxAppImage:
         if platform.system().lower() != "linux":
             pytest.skip("Linux-only test")
         dist = _get_dist_dir()
-        appimage = _find_installer(dist, "Panconvert*.AppImage")
+        appimage = _find_installer(dist, "PanConvert*.AppImage")
         if appimage is None:
             pytest.skip("No AppImage available")
         size = appimage.stat().st_size
@@ -196,18 +196,22 @@ class TestLinuxAppImage:
         assert size < 500_000_000, f"AppImage suspiciously large ({size / 1_000_000_000:.2f} GB)"
 
     def test_linux_appimage_has_appimage_magic(self):
-        """AppImage should contain the AppImage magic string."""
+        """AppImage should contain the valid AppImage magic bytes."""
         if platform.system().lower() != "linux":
             pytest.skip("Linux-only test")
         dist = _get_dist_dir()
-        appimage = _find_installer(dist, "Panconvert*.AppImage")
+        appimage = _find_installer(dist, "PanConvert*.AppImage")
         if appimage is None:
             pytest.skip("No AppImage available")
         try:
             with open(appimage, "rb") as f:
-                content = f.read(1024)
-                assert b"AppImage" in content, (
-                    "File doesn't contain 'AppImage' magic string"
+                # AppImage type 2 magic: ELF header + "AI\x02\x00" at offset 8
+                content = f.read(16)
+                assert len(content) >= 16, "File too small to be an AppImage"
+                # Check for AppImage type 2 magic at offset 8: AI\x02\x00
+                assert content[8:12] == b"AI\x02\x00", (
+                    f"Invalid AppImage magic bytes: {content[8:12]}. "
+                    f"Expected b'AI\\x02\\x00' for AppImage type 2"
                 )
         except Exception as e:
             pytest.fail(f"Could not read AppImage: {e}")
