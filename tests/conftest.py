@@ -200,7 +200,26 @@ class ResponsiveTableReporter:
             f"Time: {elapsed:.2f}s"
         )
         print(f"{'='*self.term_width}")
-        print(f"{summary}\n")
+        print(f"{summary}")
+
+        # Print failed tests summary
+        if stats['failed'] > 0:
+            print(f"\n{'='*self.term_width}")
+            print(f"FAILED TESTS SUMMARY")
+            print(f"{'-'*self.term_width}")
+            failed_tests = [test for test in self.tests if test.failed]
+            for i, test in enumerate(failed_tests, 1):
+                nodeid = test.nodeid
+                if "::" in nodeid:
+                    display_name = nodeid.split("::")[-1]
+                else:
+                    display_name = nodeid
+                display_name = self._truncate_name(display_name, max_name_width)
+                print(f"  {i}. {display_name}")
+            print(f"{'='*self.term_width}\n")
+        else:
+            print()
+
 
     def _reset_color(self):
         """Reset color codes."""

@@ -250,11 +250,33 @@ def build_inno_setup(version: str, pandoc_exe: Path):
         print_fail(f"Inno Setup script not found: {iss_path}")
         return False
     
+    # Update ISS file with the correct version from messages.py
+    iss_content = iss_path.read_text(encoding="utf-8")
+    
+    # Update the version in the ISS file to match messages.py
+    old_version_line = '#define MyAppVersion "0.3.1"'
+    new_version_line = f'#define MyAppVersion "{version}"'
+    if old_version_line in iss_content:
+        iss_content = iss_content.replace(old_version_line, new_version_line)
+        iss_path.write_text(iss_content, encoding="utf-8")
+        print_ok(f"Inno Setup script updated with version {version}")
+    else:
+        # Try to find and update any MyAppVersion definition
+        import re
+        version_pattern = r'#define MyAppVersion "[^"]+"'
+        if re.search(version_pattern, iss_content):
+            iss_content = re.sub(version_pattern, f'#define MyAppVersion "{version}"', iss_content)
+            iss_path.write_text(iss_content, encoding="utf-8")
+            print_ok(f"Inno Setup script updated with version {version}")
+        else:
+            print_warn("Could not find version definition in ISS file")
+    
     # Update ISS file to include pandoc
     iss_content = iss_path.read_text(encoding="utf-8")
     
-    # Add pandoc to the [Files] section if not already present
-    if "pandoc.exe" not in iss_content:
+    # Add pandoc to the [Files] section if not already present (only if not already added)
+    # Note: pandoc entry may have been added in update_pyinstaller_spec, check ISS file directly
+    if 'Source: "pandoc.exe"' not in iss_content:
         # Add pandoc file entry
         files_section = "[Files]"
         pandoc_entry = f'; Include bundled pandoc binary\nSource: "pandoc.exe"; DestDir: "{{app}}"; Flags: ignoreversion\n'
@@ -262,6 +284,8 @@ def build_inno_setup(version: str, pandoc_exe: Path):
         iss_content = iss_content.replace(files_section, new_files_section, 1)
         iss_path.write_text(iss_content, encoding="utf-8")
         print_ok("Inno Setup script updated with pandoc binary")
+    else:
+        print_ok("Inno Setup script already contains pandoc binary")
     
     print_step("Building installer...")
     result = subprocess.run(

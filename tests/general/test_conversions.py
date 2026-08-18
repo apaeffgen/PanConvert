@@ -147,6 +147,7 @@ def _convert_text_via_pandoc(text, from_fmt, to_fmt):
         input=text,
         capture_output=True,
         text=True,
+        encoding="utf-8",
         timeout=30,
     )
     return result

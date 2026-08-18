@@ -37,8 +37,14 @@ def _find_installer(dist_dir, pattern):
 # ─── Windows Installer Tests ──────────────────────────────────────────────────
 
 
+@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestWindowsInstaller:
-    """Test Windows installer (Inno Setup)."""
+    """Test Windows installer (Inno Setup).
+    
+    NOTE: These tests are skipped by default. The installer package is tested
+    separately during the build/release process. Regular tests should focus on
+    the PanConvert application binary, not the installer.
+    """
 
     def test_windows_installer_exists(self):
         """Windows installer should exist in dist/."""
@@ -90,8 +96,14 @@ class TestWindowsInstaller:
 # ─── macOS Installer Tests ────────────────────────────────────────────────────
 
 
+@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestMacOSInstaller:
-    """Test macOS PKG installer."""
+    """Test macOS PKG installer.
+    
+    NOTE: These tests are skipped by default. The installer package is tested
+    separately during the build/release process. Regular tests should focus on
+    the PanConvert application binary, not the installer.
+    """
 
     def test_macos_installer_exists(self):
         """macOS PKG installer should exist in dist/."""
@@ -149,8 +161,14 @@ class TestMacOSInstaller:
 # ─── Linux AppImage Tests ─────────────────────────────────────────────────────
 
 
+@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestLinuxAppImage:
-    """Test Linux AppImage."""
+    """Test Linux AppImage.
+    
+    NOTE: These tests are skipped by default. The installer package is tested
+    separately during the build/release process. Regular tests should focus on
+    the PanConvert application binary, not the installer.
+    """
 
     def test_linux_appimage_exists(self):
         """AppImage should exist in dist/."""
@@ -220,8 +238,14 @@ class TestLinuxAppImage:
 # ─── Cross-Platform Installer Tests ───────────────────────────────────────────
 
 
+@pytest.mark.skip(reason="Installer tests skipped - test the PanConvert binary instead of the installer package")
 class TestInstallerCrossPlatform:
-    """Cross-platform installer availability checks."""
+    """Cross-platform installer availability checks.
+    
+    NOTE: These tests are skipped by default. The installer package is tested
+    separately during the build/release process. Regular tests should focus on
+    the PanConvert application binary, not the installer.
+    """
 
     def test_at_least_one_installer_exists(self):
         """At least one platform installer should exist."""

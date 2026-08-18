@@ -28,7 +28,7 @@ def _find_binary_in_dist(dist_dir: Path):
     system = platform.system().lower()
     if system == "windows":
         for f in dist_dir.glob("Panconvert*.exe"):
-            if f.is_file():
+            if f.is_file() and "-installer" not in f.name.lower():
                 return f
     elif system == "darwin":
         # First check for direct binary at dist/Panconvert
