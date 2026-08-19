@@ -31,7 +31,7 @@ def _get_settings():
 
 _translate = QtCore.QCoreApplication.translate
 
-versionnumber = '0.3.3'
+versionnumber = '0.3.4'
 versiondate = '8.2026'
 versionname = 'PanConvert - A Gui Wrapper for Pandoc'
 copyrightinfo = 'Copyright by APaeffgen'

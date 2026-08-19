@@ -20,15 +20,15 @@
 * Look at the log viewer, if something unexpected had happend. If you need more information,
 go to the Discussion Forum on Sourceforge
 
-## The preconfigured conversion sets
+## The [preconfigured conversion](Basic_Conversion.md) sets
 
 * These are the preconfigured standard converters. All documents are Standalone-Versions of the document.
-* Make sure the Standard-Conversion Checkbox is marked. Otherwise you have to use the manual converter
+* Make sure the [Standard-Conversion](Basic_Conversion.md) Checkbox is marked. Otherwise you have to use the manual converter
 * The Batch-Conversion Checkbox has to be unchecked
 * Chose one From Format
 * Chose one To Format. The formats should not be the same
 
-## Usage of the manual converter
+## Usage of the [manual converter](Pandoc_Parameters.md)
 
 * The Standard – Checkbox has to be unchecked.
 * The Batch-Conversion Checkbox has to be unchecked

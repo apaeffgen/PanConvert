@@ -114,13 +114,62 @@ def get_path_pandoc():
                 else:
                     raise FileNotFoundError("pandoc not found")
             else:
-                # Normal (non-bundled) mode: use shutil.which
+                # Normal (non-bundled) mode: use shutil.which first
                 if platform.system() == 'Darwin' or os.name == 'posix':
-                    path_pandoc = which("pandoc")
+                    try:
+                        path_pandoc = which("pandoc")
+                    except FileNotFoundError:
+                        # Fallback Strategy 1: Check common macOS/Unix locations
+                        common_paths = [
+                            '/usr/local/bin/pandoc',   # macOS .pkg installer, Homebrew on Intel
+                            '/opt/homebrew/bin/pandoc', # Homebrew on Apple Silicon
+                            '/opt/local/bin/pandoc',    # MacPorts
+                            '/usr/bin/pandoc',          # System default (rare)
+                        ]
+                        for p in common_paths:
+                            if os.path.isfile(p):
+                                path_pandoc = p
+                                break
+                        
+                        # Fallback Strategy 2: If not found in common paths, try 'which' with explicit PATH
+                        if not os.path.isfile(path_pandoc):
+                            user_path = os.environ.get('PATH', '')
+                            extra_paths = ['/usr/local/bin', '/opt/homebrew/bin', '/opt/local/bin',
+                                           '/usr/bin', '/bin', '/usr/sbin', '/sbin']
+                            existing = set(user_path.split(':')) if user_path else set()
+                            for ep in extra_paths:
+                                if ep not in existing:
+                                    user_path = user_path + ':' + ep if user_path else ep
+                            env = os.environ.copy()
+                            env['PATH'] = user_path
+                            p_proc = subprocess.Popen(
+                                ['which', 'pandoc'],
+                                stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                env=env)
+                            stdout, _ = p_proc.communicate()
+                            found = stdout.decode('utf-8').strip()
+                            if found and os.path.isfile(found):
+                                path_pandoc = found
                 else:
-                    path_pandoc = where("pandoc.exe")
-                settings.setValue('path_pandoc', path_pandoc)
-                settings.sync()
+                    # Windows: use 'where' command with fallback
+                    try:
+                        path_pandoc = where("pandoc.exe")
+                    except FileNotFoundError:
+                        p_proc = subprocess.Popen(
+                            ['where', 'pandoc'],
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+                        stdout, _ = p_proc.communicate()
+                        found = stdout.decode('utf-8').strip().split('\n')[-1].strip()
+                        if found and os.path.isfile(found):
+                            path_pandoc = found
+                
+                if path_pandoc and os.path.isfile(path_pandoc):
+                    settings.setValue('path_pandoc', path_pandoc)
+                    settings.sync()
         except FileNotFoundError:
             path_pandoc = ''
             settings.setValue('path_pandoc', path_pandoc)

@@ -1,3 +1,9 @@
+### Version 0.3.3
+- Fixed broken Buffer_save function
+- Linux fixes and documentation enhancement
+- Extended tests for path check
+- Bundled Pandoc with the windows installer
+
 ### Version 0.3.2
 - Fixed Crash of Linux AppImage 
 - Fixed some Mouse Pointer Glitches
