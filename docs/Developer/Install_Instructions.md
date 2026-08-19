@@ -20,7 +20,7 @@ Check which packages are already installed on your system. Normally Python3 exis
 
 * Install Python 3.12+
 * Install [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) (>=6.5.0).
-  **Note:** On Windows, pin to `PyQt6<6.7.0` due to a known stack-buffer-overflow crash (see `requirements.txt`).
+  **Note:** On Windows, pin to `PyQt6<6.7.0` due to a known stack-buffer-overflow crash (see `../../requirements.txt`).
 * Install [pandoc](https://pandoc.org/installing.html)
 * Optional: Install [multimarkdown](https://fletcherpenney.net/multimarkdown/download/)
 

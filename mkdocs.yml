@@ -4,17 +4,16 @@ repository_url: https://github.com/apaeffgen/PanConvert
 nav:
 - Introduction: index.md
 - User Guide:
-    - Install Instructions: User_Guide/Install_Instructions.md
+    - Prerequisites: User_Guide/Basic_info.md
     - Basic Usage: User_Guide/Basic_Usage.md
-    - Pandoc Parameters: User_Guide/Pandoc_Parameters.md
+    - Standard Converters: Basic_Conversion.md
+    - Manual Converter: User_Guide/Pandoc_Parameters.md
     - Customizing: User_Guide/Customizing_Panconvert.md
     - Known Problems: User_Guide/Known_Problems.md
     - Pandoc Help: User_Guide/Pandoc_Help.md
     - Update: User_Guide/Update.md
 - Admin Guide:
+    - Install Instructions: Developer/Install_Instructions.md
     - Supported Platforms: Developer/Platforms.md
     - Version History: Developer/changelog.md
     - Build Instructions: Developer/Build_Instructions.md
-
-
-

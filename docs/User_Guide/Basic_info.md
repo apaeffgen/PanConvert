@@ -16,11 +16,11 @@ manually save the path to the executable.
 
 The binaries are self-contained. Only [pandoc](https://pandoc.org/installing.html) and optionally [multimarkdown](https://fletcherpenney.net/multimarkdown/download/) have to be installed.
 
-
 For the source-code to be run, these additional software packages have to be installed:
 
 *  Python 3.12+
 *  PyQt6 (>=6.5.0)
 *  Qt6 WebEngine
+*  See [requirements.txt](https://github.com/apaeffgen/PanConvert/blob/master/requirements.txt)
 
 Some older versions of Python3 or PyQt6 might not work.
