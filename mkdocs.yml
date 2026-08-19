@@ -6,7 +6,7 @@ nav:
 - User Guide:
     - Prerequisites: User_Guide/Basic_info.md
     - Basic Usage: User_Guide/Basic_Usage.md
-    - Standard Converters: Basic_Conversion.md
+    - Standard Converters: User_Guide/Basic_Conversion.md
     - Manual Converter: User_Guide/Pandoc_Parameters.md
     - Customizing: User_Guide/Customizing_Panconvert.md
     - Known Problems: User_Guide/Known_Problems.md
