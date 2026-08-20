@@ -170,6 +170,8 @@ def get_path_pandoc():
                 if path_pandoc and os.path.isfile(path_pandoc):
                     settings.setValue('path_pandoc', path_pandoc)
                     settings.sync()
+                else:
+                    raise FileNotFoundError("pandoc not found")
         except FileNotFoundError:
             path_pandoc = ''
             settings.setValue('path_pandoc', path_pandoc)

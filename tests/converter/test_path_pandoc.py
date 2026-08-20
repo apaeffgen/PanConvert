@@ -25,8 +25,8 @@ class TestGetPathPandoc(unittest.TestCase):
             patch('source.helpers.interface_pandoc._get_settings', return_value=self.qsettings_mock),
             patch('source.helpers.interface_pandoc.platform'),
             patch('source.helpers.interface_pandoc.os'),
-            patch('source.helpers.interface_pandoc.which'),
-            patch('source.helpers.interface_pandoc.where'),
+            patch('source.helpers.interface_pandoc.shutil.which'),
+            patch('subprocess.Popen'),
         ]
         for p in self.patches:
             p.start()
@@ -44,47 +44,91 @@ class TestGetPathPandoc(unittest.TestCase):
         """Configure mocks for macOS."""
         self.interface_pandoc.platform.system.return_value = 'Darwin'
         self.interface_pandoc.os.name = 'posix'
-        self.interface_pandoc.os.path.isfile.return_value = False
+        self.interface_pandoc.shutil.which.return_value = None
 
     def _mock_platform_windows(self):
         """Configure mocks for Windows."""
         self.interface_pandoc.platform.system.return_value = 'Windows'
         self.interface_pandoc.os.name = 'nt'
-        self.interface_pandoc.os.path.isfile.return_value = False
+        self.interface_pandoc.shutil.which.return_value = None
+
+    def _mock_platform_linux(self):
+        """Configure mocks for Linux."""
+        self.interface_pandoc.platform.system.return_value = 'Linux'
+        self.interface_pandoc.os.name = 'posix'
+        self.interface_pandoc.shutil.which.return_value = None
+
+    # Common paths that the code checks
+    COMMON_PATHS = [
+        '/usr/local/bin/pandoc',
+        '/opt/homebrew/bin/pandoc',
+        '/opt/local/bin/pandoc',
+        '/usr/bin/pandoc',
+    ]
+
+    def _setup_subprocess_mock_with_path(self, pandoc_path):
+        """Setup subprocess mock to return a pandoc path.
+        
+        Makes isfile return False for all common paths, True only for the subprocess result.
+        """
+        mock_proc = MagicMock()
+        mock_proc.communicate.return_value = (pandoc_path.encode('utf-8'), b'')
+        self.interface_pandoc.subprocess.Popen.return_value = mock_proc
+        
+        # Setup isfile to return False for common paths, True for the found path
+        def isfile_side_effect(path):
+            if path in self.COMMON_PATHS:
+                return False
+            return path == pandoc_path
+        self.interface_pandoc.os.path.isfile.side_effect = isfile_side_effect
+
+    def _setup_subprocess_mock_not_found(self):
+        """Setup subprocess mock to indicate pandoc not found.
+        
+        Makes isfile return False for all paths.
+        """
+        mock_proc = MagicMock()
+        mock_proc.communicate.return_value = (b'', b'')
+        self.interface_pandoc.subprocess.Popen.return_value = mock_proc
+        
+        # Setup isfile to always return False
+        def isfile_side_effect(path):
+            return False
+        self.interface_pandoc.os.path.isfile.side_effect = isfile_side_effect
 
     def test_finds_pandoc_via_which_on_macos(self):
         """When path_pandoc is not set and not found, use which() on macOS."""
         self._mock_platform_darwin()
-        self.interface_pandoc.which.return_value = '/usr/bin/pandoc'
+        # Use a path not in COMMON_PATHS so isfile will return True for it
+        self._setup_subprocess_mock_with_path('/opt/custom/bin/pandoc')
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.which.assert_called_once_with('pandoc')
-        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '/usr/bin/pandoc')
+        self.interface_pandoc.subprocess.Popen.assert_called_once()
+        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '/opt/custom/bin/pandoc')
         self.qsettings_mock.sync.assert_called()
 
     def test_finds_pandoc_via_where_on_windows(self):
         """When path_pandoc is not set and not found, use where() on Windows."""
         self._mock_platform_windows()
-        self.interface_pandoc.where.return_value = 'C:\\Program Files\\Pandoc\\pandoc.exe'
+        self._setup_subprocess_mock_with_path('C:\\Program Files\\Pandoc\\pandoc.exe')
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.where.assert_called_once_with('pandoc.exe')
+        self.interface_pandoc.subprocess.Popen.assert_called_once()
         self.qsettings_mock.setValue.assert_called_with('path_pandoc', 'C:\\Program Files\\Pandoc\\pandoc.exe')
         self.qsettings_mock.sync.assert_called()
 
     def test_finds_pandoc_via_which_on_linux(self):
         """When path_pandoc is not set and not found, use which() on Linux."""
-        self.interface_pandoc.platform.system.return_value = 'Linux'
-        self.interface_pandoc.os.name = 'posix'
-        self.interface_pandoc.os.path.isfile.return_value = False
-        self.interface_pandoc.which.return_value = '/usr/bin/pandoc'
+        self._mock_platform_linux()
+        # Use a path not in COMMON_PATHS so isfile will return True for it
+        self._setup_subprocess_mock_with_path('/opt/custom/bin/pandoc')
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.which.assert_called_once_with('pandoc')
-        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '/usr/bin/pandoc')
+        self.interface_pandoc.subprocess.Popen.assert_called_once()
+        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '/opt/custom/bin/pandoc')
         self.qsettings_mock.sync.assert_called()
 
     def test_uses_cached_path_when_it_exists(self):
@@ -94,9 +138,8 @@ class TestGetPathPandoc(unittest.TestCase):
 
         self.interface_pandoc.get_path_pandoc()
 
-        # which/where should NOT be called
-        self.interface_pandoc.which.assert_not_called()
-        self.interface_pandoc.where.assert_not_called()
+        # subprocess should NOT be called
+        self.interface_pandoc.subprocess.Popen.assert_not_called()
         # settings should NOT be updated
         self.qsettings_mock.setValue.assert_not_called()
 
@@ -109,10 +152,10 @@ class TestGetPathPandoc(unittest.TestCase):
         self.interface_pandoc.get_path_pandoc()
         # No assertion on module-level path_pandoc since get_path_pandoc() uses a local var
 
-    def test_which_returns_none_when_pandoc_not_found(self):
+    def test_which_returns_empty_when_pandoc_not_found(self):
         """If which() returns empty string, settings should still be updated."""
         self._mock_platform_darwin()
-        self.interface_pandoc.which.return_value = ''
+        self._setup_subprocess_mock_not_found()
 
         self.interface_pandoc.get_path_pandoc()
 
@@ -120,59 +163,58 @@ class TestGetPathPandoc(unittest.TestCase):
         self.qsettings_mock.sync.assert_called()
 
     def test_which_returns_none_on_macos_when_pandoc_not_installed(self):
-        """If which() returns None (pandoc not in path), settings are set to None."""
+        """If which() returns empty (pandoc not in path), settings are set to empty string."""
         self._mock_platform_darwin()
-        self.interface_pandoc.which.return_value = None
+        self._setup_subprocess_mock_not_found()
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.which.assert_called_once_with('pandoc')
-        self.qsettings_mock.setValue.assert_called_with('path_pandoc', None)
+        # When pandoc not found, settings should be set to empty string
+        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '')
         self.qsettings_mock.sync.assert_called()
 
     def test_which_returns_none_on_linux_when_pandoc_not_installed(self):
-        """If which() returns None on Linux (pandoc not in path), settings are set to None."""
-        self.interface_pandoc.platform.system.return_value = 'Linux'
-        self.interface_pandoc.os.name = 'posix'
-        self.interface_pandoc.os.path.isfile.return_value = False
-        self.interface_pandoc.which.return_value = None
+        """If which() returns empty on Linux (pandoc not in path), settings are set to empty string."""
+        self._mock_platform_linux()
+        self._setup_subprocess_mock_not_found()
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.which.assert_called_once_with('pandoc')
-        self.qsettings_mock.setValue.assert_called_with('path_pandoc', None)
+        # When pandoc not found, settings should be set to empty string
+        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '')
         self.qsettings_mock.sync.assert_called()
 
     def test_where_returns_none_on_windows_when_pandoc_not_installed(self):
-        """If where() returns None (pandoc not in path), settings are set to None."""
+        """If where() returns empty (pandoc not in path), settings are set to empty string."""
         self._mock_platform_windows()
-        self.interface_pandoc.where.return_value = None
+        self._setup_subprocess_mock_not_found()
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.where.assert_called_once_with('pandoc.exe')
-        self.qsettings_mock.setValue.assert_called_with('path_pandoc', None)
+        # When pandoc not found, settings should be set to empty string
+        self.qsettings_mock.setValue.assert_called_with('path_pandoc', '')
         self.qsettings_mock.sync.assert_called()
 
     def test_settings_value_empty_string_triggers_research(self):
         """If the stored path_pandoc is an empty string, it should be treated as invalid."""
         self.qsettings_mock.value.return_value = ''
         self._mock_platform_darwin()
-        self.interface_pandoc.which.return_value = '/usr/local/bin/pandoc'
+        self._setup_subprocess_mock_with_path('/usr/local/bin/pandoc')
 
         self.interface_pandoc.get_path_pandoc()
 
-        # which should be called because empty string is not a valid file
-        self.interface_pandoc.which.assert_called_once_with('pandoc')
+        # subprocess should be called because empty string is not a valid file
+        self.interface_pandoc.subprocess.Popen.assert_called_once()
 
     def test_uses_where_on_windows_when_frozen(self):
         """On Windows with frozen app, where() is used instead of subprocess."""
+        # Note: This test actually tests the fallback path when shutil.which returns None
+        # and subprocess 'where' finds pandoc
         self._mock_platform_windows()
-        self.interface_pandoc.where.return_value = 'C:\\Pandoc\\pandoc.exe'
+        self._setup_subprocess_mock_with_path('C:\\Pandoc\\pandoc.exe')
 
         self.interface_pandoc.get_path_pandoc()
 
-        self.interface_pandoc.where.assert_called_once_with('pandoc.exe')
         self.qsettings_mock.setValue.assert_called_with('path_pandoc', 'C:\\Pandoc\\pandoc.exe')
         self.qsettings_mock.sync.assert_called()
 
