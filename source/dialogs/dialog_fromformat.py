@@ -20,21 +20,22 @@ __author__ = 'apaeffgen'
 from source.helpers.interface_pandoc import get_pandoc_formats, get_path_pandoc
 from source.gui.panconvert_diag_fromformat import Ui_From_Format_Dialog
 from source.language.messages import *
-from PyQt6.QtWidgets import QMessageBox
-from PyQt6.QtCore import QSettings, QSize, QPoint, QUrl
+from PyQt6.QtWidgets import QMessageBox, QListWidgetItem
+from PyQt6.QtCore import QSettings, QSize, QPoint
 import os
 
 
 class FromFormatDialog(QtWidgets.QDialog):
 
-     def __init__(self, parent=None):
+    def __init__(self, parent=None):
 
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_From_Format_Dialog()
         self.ui.setupUi(self)
-        #self.ui.ButtonInfo.clicked.connect(self.info)
+        
+        # Connect list selection signal
+        self.ui.formatList.itemClicked.connect(self._on_format_selected)
         self.ui.ButtonCancel.clicked.connect(self.closeEvent)
-        #self.ui.ButtonMoreInfo.clicked.connect(self.moreinfo)
 
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
@@ -50,14 +51,30 @@ class FromFormatDialog(QtWidgets.QDialog):
         if os.path.isfile(path_pandoc):
             formats =  get_pandoc_formats()
             fromformats = formats[0]
-            data = '<br>'.join(fromformats)
-            self.ui.textBrowser.setHtml(data)
+            
+            # Populate QListWidget with format items
+            for fmt in fromformats:
+                item = QListWidgetItem(fmt)
+                self.ui.formatList.addItem(item)
         else:
             message = error_converter_path()
             QMessageBox.critical(self, 'Pandoc nicht gefunden', message)
-            self.ui.textBrowser.setHtml('<p style="color:red;">' + message + '</p>')
 
-     def closeEvent(self, event):
+    def _on_format_selected(self, item):
+        """Called when a format item is clicked."""
+        format_name = item.text()
+        # Store selected format and close dialog
+        settings = QSettings('Pandoc', 'PanConvert')
+        settings.setValue('selected_from_format', format_name)
+        settings.sync()
+        self.accept()
+
+    def get_selected_format(self):
+        """Return the selected format."""
+        settings = QSettings('Pandoc', 'PanConvert')
+        return settings.value('selected_from_format', '')
+
+    def closeEvent(self, event):
 
         settings = QSettings('Pandoc', 'PanConvert')
         Dialog_Size = settings.value('Dialog_Size')
@@ -68,20 +85,3 @@ class FromFormatDialog(QtWidgets.QDialog):
 
         settings.sync()
         FromFormatDialog.close(self)
-
-     def info(self):
-        formats =  get_pandoc_formats()
-        if formats is None or formats[0] is None:
-            return
-        fromformats = formats[0]
-        data = '<br>'.join(fromformats)
-        self.ui.textBrowser.setHtml(data)
-
-     def moreinfo(self):
-
-        website = 'https://pandoc.org/MANUAL.html'
-        self.ui.textBrowser.load(QtCore.QUrl(website))
-
-     def back(self):
-         back = 'href="javascript:history.go(-1)'
-         self.ui.textBrowser.load(QtCore.QUrl(back))

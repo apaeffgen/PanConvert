@@ -664,12 +664,20 @@ class StartQT5(QtWidgets.QMainWindow):
         self.InfoDialog.show()
 
     def fromformats_dialog(self):
+        """Open From Format dialog and populate FromParameter field."""
         self.FromFormatDialog = FromFormatDialog(self)
-        self.FromFormatDialog.show()
+        if self.FromFormatDialog.exec() == QtWidgets.QDialog.DialogCode.Accepted:
+            selected = self.FromFormatDialog.get_selected_format()
+            if selected:
+                self.ui.FromParameter.setText(selected)
 
     def toformats_dialog(self):
+        """Open To Format dialog and populate ToParameter field."""
         self.ToFormatsDialog = ToFormatDialog(self)
-        self.ToFormatsDialog.show()
+        if self.ToFormatsDialog.exec() == QtWidgets.QDialog.DialogCode.Accepted:
+            selected = self.ToFormatsDialog.get_selected_format()
+            if selected:
+                self.ui.ToParameter.setText(selected)
 
     """Gui-Trigger-Function for RadioButtons"""
 

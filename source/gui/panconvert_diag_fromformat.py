@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '/Users/apaeffgen/PROG/Python/PanConvert/source/gui/panconvert_diag_fromformat.ui'
+# Form implementation generated from reading ui file 'source/gui/panconvert_diag_fromformat.ui'
 #
 # Created by: PyQt6 UI code generator 6.11.0
 #
@@ -21,10 +21,12 @@ class Ui_From_Format_Dialog(object):
         self.ButtonCancel.setObjectName("ButtonCancel")
         self.verticalLayout.addWidget(self.ButtonCancel)
         self.gridLayout.addLayout(self.verticalLayout, 1, 0, 1, 1)
-        self.textBrowser = QtWebEngineWidgets.QWebEngineView(parent=From_Format_Dialog)
-        self.textBrowser.setMinimumSize(QtCore.QSize(200, 100))
-        self.textBrowser.setObjectName("textBrowser")
-        self.gridLayout.addWidget(self.textBrowser, 0, 0, 1, 1)
+        self.formatList = QtWidgets.QListWidget(parent=From_Format_Dialog)
+        self.formatList.setMinimumSize(QtCore.QSize(200, 100))
+        self.formatList.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
+        self.formatList.setAlternatingRowColors(True)
+        self.formatList.setObjectName("formatList")
+        self.gridLayout.addWidget(self.formatList, 0, 0, 1, 1)
 
         self.retranslateUi(From_Format_Dialog)
         QtCore.QMetaObject.connectSlotsByName(From_Format_Dialog)
@@ -33,4 +35,3 @@ class Ui_From_Format_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         From_Format_Dialog.setWindowTitle(_translate("From_Format_Dialog", "Pandoc From Formats"))
         self.ButtonCancel.setText(_translate("From_Format_Dialog", "Cancel"))
-from PyQt6 import QtWebEngineWidgets
