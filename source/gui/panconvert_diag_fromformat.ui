@@ -6,16 +6,50 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>224</width>
-    <height>234</height>
+    <width>300</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Pandoc From Formats</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
+   <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="searchLayout">
+       <item>
+        <widget class="QLineEdit" name="searchInput">
+         <property name="placeholderText">
+          <string>Search formats...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="searchClearButton">
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="formatList">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="ButtonCancel">
        <property name="text">
@@ -24,22 +58,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="0" column="0">
-    <widget class="QListWidget" name="formatList">
-     <property name="minimumSize">
-      <size>
-       <width>200</width>
-       <height>100</height>
-      </size>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

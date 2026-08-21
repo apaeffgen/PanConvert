@@ -33,9 +33,15 @@ class ToFormatDialog(QtWidgets.QDialog):
         self.ui = Ui_To_Format_Dialog()
         self.ui.setupUi(self)
         
-        # Connect list selection signal
+        # Store formats for filtering
+        self.all_formats = []
+        self.filtered_formats = []
+        
+        # Connect signals
         self.ui.formatList.itemClicked.connect(self._on_format_selected)
         self.ui.ButtonCancel.clicked.connect(self.closeEvent)
+        self.ui.searchInput.textChanged.connect(self._on_search_text_changed)
+        self.ui.searchClearButton.clicked.connect(self._on_clear_search)
 
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
@@ -48,13 +54,44 @@ class ToFormatDialog(QtWidgets.QDialog):
             formats =  get_pandoc_formats()
             toformats = formats[1]
             
-            # Populate QListWidget with format items
-            for fmt in toformats:
-                item = QListWidgetItem(fmt)
-                self.ui.formatList.addItem(item)
+            # Store and populate formats
+            self._populate_formats(toformats)
         else:
             message = error_converter_path()
             self.ui.formatList.addItem(message)
+
+    def _populate_formats(self, formats):
+        """Populate list with all formats, store for filtering."""
+        self.all_formats = list(formats)
+        self.filtered_formats = list(formats)
+        self._render_list()
+
+    def _render_list(self):
+        """Clear and repaint the format list with current filtered_formats."""
+        self.ui.formatList.clear()
+        for fmt in self.filtered_formats:
+            item = QListWidgetItem(fmt)
+            self.ui.formatList.addItem(item)
+
+    def _on_search_text_changed(self, text):
+        """Filter formats based on search text."""
+        search_lower = text.lower()
+        if not search_lower:
+            self.filtered_formats = list(self.all_formats)
+        else:
+            self.filtered_formats = [
+                fmt for fmt in self.all_formats 
+                if search_lower in fmt.lower()
+            ]
+        self._render_list()
+        
+        # Auto-select first item if only one match
+        if len(self.filtered_formats) == 1:
+            self.ui.formatList.setCurrentRow(0)
+
+    def _on_clear_search(self):
+        """Clear search field and show all formats."""
+        self.ui.searchInput.clear()
 
     def _on_format_selected(self, item):
         """Called when a format item is clicked."""
