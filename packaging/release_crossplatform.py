@@ -129,6 +129,67 @@ def file_size_human(filepath: Path) -> str:
     return f"{size:.1f}TB"
 
 
+def merge_release_notes(existing_notes: str, new_notes: str, platform_files: dict[str, list[Path]]) -> str:
+    """Merge existing release notes with new file entries, preserving all historical binaries.
+
+    This prevents the Downloads table from being overwritten when updating a release
+    with new platform binaries.
+    """
+    import re
+
+    # Extract the Downloads table from existing notes
+    # Pattern to match the entire table from "| Platform | File |" to the next section
+    table_pattern = r'(\| Platform \| File \|\n\|[-\s|]+\|)([^\n]*\n)*?([^\n]*(?:\n|$))'
+
+    existing_entries = set()
+    new_entries = set()
+
+    # Extract existing file entries from existing notes
+    table_match = re.search(r'## Downloads\s+\n\n\| Platform \| File \|\n\|[-\s|]+\|(.*?)(?=\n\n##|\n\n##|\Z)', existing_notes, re.DOTALL)
+    if table_match:
+        table_content = table_match.group(1)
+        # Extract each row: | platform | filename |
+        for line in table_content.strip().split('\n'):
+            line = line.strip()
+            if line.startswith('|') and not line.startswith('|-') and not line.startswith('| '):
+                # Parse: | platform | filename |
+                parts = [p.strip() for p in line.split('|') if p.strip()]
+                if len(parts) >= 2:
+                    existing_entries.add((parts[0].lower(), parts[1]))
+
+    # Extract new file entries from current platform_files
+    for plat in ("debian", "rhel", "arch", "macos", "windows", "linux"):
+        for f in platform_files[plat]:
+            new_entries.add((plat, f.name))
+
+    # Merge: keep existing entries and add new ones (avoid duplicates)
+    merged_entries = existing_entries.union(new_entries)
+
+    # Rebuild the release notes
+    lines = [
+        "## Changes",
+        "- See [changelog](docs/Developer/changelog.md) for full details",
+        "",
+        "## Downloads",
+        "",
+        "| Platform | File |",
+        "|----------|------|",
+    ]
+
+    # Sort entries for consistent output
+    sorted_entries = sorted(merged_entries, key=lambda x: (x[0], x[1]))
+    for plat, filename in sorted_entries:
+        lines.append(f"| {plat} | {filename} |")
+
+    lines.extend([
+        "",
+        "## Installation",
+        "See [ReadTheDocs](https://panconvert.readthedocs.io/en/latest/) for installation instructions.",
+    ])
+
+    return "\n".join(lines)
+
+
 # ── Main logic ────────────────────────────────────────────────────────────────
 
 def main() -> int:
@@ -306,8 +367,22 @@ def main() -> int:
     # Upload only release artifacts, not bundled dev libraries
     result = run(["gh", "release", "view", tag])
     if result.returncode == 0:
-        # Update existing release - update notes and re-upload assets
-        run(["gh", "release", "edit", tag, "--notes", release_notes])
+        # Update existing release - preserve existing assets in release notes
+        # Fetch current release notes
+        notes_result = run(["gh", "release", "view", tag, "--json", "body"])
+        if notes_result.returncode == 0:
+            import json
+            try:
+                notes_data = json.loads(notes_result.stdout)
+                existing_notes = notes_data.get("body", "")
+            except (json.JSONDecodeError, KeyError):
+                existing_notes = release_notes
+        else:
+            existing_notes = release_notes
+
+        # Parse existing Downloads table and merge with new entries
+        merged_notes = merge_release_notes(existing_notes, release_notes, platform_files)
+        run(["gh", "release", "edit", tag, "--notes", merged_notes])
         run(["gh", "release", "upload", tag, *dist_files, "--clobber"])
         print(f"✅ Release v{version} updated with new assets!")
     else:
