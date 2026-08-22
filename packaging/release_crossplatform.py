@@ -257,6 +257,16 @@ def main() -> int:
         print("❌ dist/ folder is empty. Nothing to publish.")
         return 1
 
+    # ── Platform-specific filtering ───────────────────────────────────────────
+    # On macOS, only upload .pkg files (not .dmg or other artifacts)
+    if current_platform == "macos":
+        pkg_files = [f for f in dist_files if f.suffix.lower() == ".pkg"]
+        if pkg_files:
+            print()
+            print(f"📦 macOS filter: Only uploading .pkg files ({len(pkg_files)} file(s))")
+            print(f"   Excluding: {len(dist_files) - len(pkg_files)} non-.pkg file(s)")
+            dist_files = pkg_files
+
     # ── Classify files ────────────────────────────────────────────────────────
     platform_files: dict[str, list[Path]] = {
         "debian": [],
@@ -269,7 +279,7 @@ def main() -> int:
     }
 
     print()
-    print("📁 Classifying artifacts in dist/:")
+    print("📁 Classifying artifacts in dist/: (will be uploaded)")
     for f in sorted(dist_files):
         plat = classify_file(f)
         platform_files[plat].append(f)
