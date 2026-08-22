@@ -54,6 +54,27 @@ def normalize_uri():
     return uri
 
 
+def save_dialog_position(dialog, size_key, pos_key):
+    """
+    Save dialog position and size to settings.
+
+    This is a centralized function to save dialog window position and size
+    to prevent position drift when dialogs are reopened.
+
+    Args:
+        dialog: The dialog widget instance (must have pos() and size() methods)
+        size_key: Settings key for dialog size (e.g., "FromFormat_size")
+        pos_key: Settings key for dialog position (e.g., "FromFormat_pos")
+    """
+    settings = QSettings('Pandoc', 'PanConvert')
+    Dialog_Size = settings.value('Dialog_Size')
+
+    if Dialog_Size is True or Dialog_Size == 'true':
+        settings.setValue(size_key, dialog.size())
+        settings.setValue(pos_key, dialog.pos())
+        settings.sync()
+
+
 
 
 

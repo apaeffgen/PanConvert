@@ -22,6 +22,7 @@ from PyQt6 import QtCore
 from PyQt6.QtCore import QSettings
 from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_help import Ui_Information_Dialog
+from source.helpers.helper_functions import save_dialog_position
 #from source.converter.interface_pandoc import get_pandoc_options
 
 class HelpDialog(QtWidgets.QDialog):
@@ -32,7 +33,7 @@ class HelpDialog(QtWidgets.QDialog):
         self.ui = Ui_Information_Dialog()
         self.ui.setupUi(self)
         self.ui.ButtonHelpPanconvert.clicked.connect(self.helpPanconvert)
-        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
+        self.ui.ButtonCancel.clicked.connect(self._on_cancel)
         self.ui.ButtonHelpPandoc.clicked.connect(self.helpPandoc)
         self.ui.ButtonBackward.clicked.connect(self.back)
         self.ui.ButtonForward.clicked.connect(self.forward)
@@ -45,20 +46,26 @@ class HelpDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
 
         self.resize(settings.value("Help_size", QSize(270, 225)))
-        self.move(settings.value("Help_pos", QPoint(50, 50)))
+        # Position restored in showEvent, NOT here
+
+     def showEvent(self, event):
+        """Restore position when dialog is shown (fixed timing)."""
+        super().showEvent(event)
+        
+        settings = QSettings('Pandoc', 'PanConvert')
+        pos = settings.value("Help_pos", None)
+        
+        if pos:
+            self.move(pos)
+
+     def _on_cancel(self):
+        """Handle Cancel button click."""
+        save_dialog_position(self, "Help_size", "Help_pos")
+        self.close()
 
      def closeEvent(self, event):
-
-        settings = QSettings('Pandoc', 'PanConvert')
-        Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True or Dialog_Size == 'true':
-            settings.setValue("Help_size", self.size())
-            settings.setValue("Help_pos", self.pos())
-
-
-        settings.sync()
-
-        HelpDialog.close(self)
+        save_dialog_position(self, "Help_size", "Help_pos")
+        event.accept()
 
      def helpPanconvert(self):
 

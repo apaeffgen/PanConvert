@@ -20,6 +20,7 @@ __author__ = 'apaeffgen'
 from source.gui.panconvert_diag_openuri import Ui_DialogOpenURI
 from source.language.messages import *
 from source.main_gui import *
+from source.helpers.helper_functions import save_dialog_position
 import builtins
 import codecs
 from os.path import isfile
@@ -34,16 +35,26 @@ class OpenURIDialog(QtWidgets.QDialog):
         self.ui = Ui_DialogOpenURI()
         self.ui.setupUi(self)
         self.ui.ButtonOpenURI.clicked.connect(self.openuri)
-        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
+        self.ui.ButtonCancel.clicked.connect(self._on_cancel)
         self.ui.CheckBoxStayOnTop.stateChanged.connect(self.stayOnTop)
 
         #Initialize Settings
         settings = QSettings('Pandoc', 'PanConvert')
 
         self.resize(settings.value("OpenURI_size", QSize(270, 225)))
-        self.move(settings.value("OpenURI_pos", QPoint(50, 50)))
+        # Position restored in showEvent, NOT here
         uri = ''
 
+
+    def showEvent(self, event):
+        """Restore position when dialog is shown (fixed timing)."""
+        super().showEvent(event)
+        
+        settings = QSettings('Pandoc', 'PanConvert')
+        pos = settings.value("OpenURI_pos", None)
+        
+        if pos:
+            self.move(pos)
 
     def stayOnTop(self):
         if self.ui.CheckBoxStayOnTop.isChecked():
@@ -54,17 +65,20 @@ class OpenURIDialog(QtWidgets.QDialog):
                 self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
         self.show()
 
-    def closeEvent(self, event):
-        settings = QSettings('Pandoc', 'PanConvert')
-        Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True or Dialog_Size == 'true':
-            settings.setValue("OpenURI_size", self.size())
-            settings.setValue("OpenURI_pos", self.pos())
+    def _on_cancel(self):
+        """Handle Cancel button click."""
+        save_dialog_position(self, "OpenURI_size", "OpenURI_pos")
+        self.close()
 
-        settings.sync()
+    def closeEvent(self, event):
+        save_dialog_position(self, "OpenURI_size", "OpenURI_pos")
         OpenURIDialog.close(self)
 
     def openuri(self):
         uri = self.ui.URI.toPlainText()
         builtins.uri = uri
+
+        # Save position and size BEFORE closing
+        save_dialog_position(self, "OpenURI_size", "OpenURI_pos")
+
         OpenURIDialog.close(self)

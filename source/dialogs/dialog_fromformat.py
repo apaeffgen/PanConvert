@@ -22,6 +22,7 @@ from source.gui.panconvert_diag_fromformat import Ui_From_Format_Dialog
 from source.language.messages import *
 from PyQt6.QtWidgets import QMessageBox, QListWidgetItem
 from PyQt6.QtCore import QSettings, QSize, QPoint
+from source.helpers.helper_functions import save_dialog_position
 import os
 
 
@@ -39,7 +40,7 @@ class FromFormatDialog(QtWidgets.QDialog):
         
         # Connect signals
         self.ui.formatList.itemClicked.connect(self._on_format_selected)
-        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
+        self.ui.ButtonCancel.clicked.connect(self._on_cancel)
         self.ui.searchInput.textChanged.connect(self._on_search_text_changed)
         self.ui.searchClearButton.clicked.connect(self._on_clear_search)
 
@@ -48,7 +49,7 @@ class FromFormatDialog(QtWidgets.QDialog):
         path_pandoc = settings.value('path_pandoc','')
 
         self.resize(settings.value("FromFormat_size", QSize(270, 225)))
-        self.move(settings.value("FromFormat_pos", QPoint(50, 50)))
+        # Position restored in showEvent, NOT here
 
         if not os.path.isfile(path_pandoc):
             path_pandoc = get_path_pandoc()
@@ -97,9 +98,23 @@ class FromFormatDialog(QtWidgets.QDialog):
         """Clear search field and show all formats."""
         self.ui.searchInput.clear()
 
+    def showEvent(self, event):
+        """Restore position when dialog is shown (fixed timing)."""
+        super().showEvent(event)
+        
+        settings = QSettings('Pandoc', 'PanConvert')
+        pos = settings.value("FromFormat_pos", None)
+        
+        if pos:
+            self.move(pos)
+
     def _on_format_selected(self, item):
         """Called when a format item is clicked."""
         format_name = item.text()
+
+        # Save position and size BEFORE accepting (dialog closes)
+        save_dialog_position(self, "FromFormat_size", "FromFormat_pos")
+
         # Store selected format and close dialog
         settings = QSettings('Pandoc', 'PanConvert')
         settings.setValue('selected_from_format', format_name)
@@ -111,14 +126,12 @@ class FromFormatDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
         return settings.value('selected_from_format', '')
 
+    def _on_cancel(self):
+        """Handle Cancel button click."""
+        save_dialog_position(self, "FromFormat_size", "FromFormat_pos")
+        self.close()
+
     def closeEvent(self, event):
-
-        settings = QSettings('Pandoc', 'PanConvert')
-        Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True or Dialog_Size == 'true':
-            settings.setValue("FromFormat_size", self.size())
-            settings.setValue("FromFormat_pos", self.pos())
-
-
-        settings.sync()
-        FromFormatDialog.close(self)
+        """Handle dialog close event properly."""
+        save_dialog_position(self, "FromFormat_size", "FromFormat_pos")
+        event.accept()

@@ -20,6 +20,8 @@ __author__ = 'apaeffgen'
 from source.helpers.interface_pandoc import get_pandoc_options, get_path_pandoc
 from source.gui.panconvert_diag_info import Ui_Information_Dialog
 from source.language.messages import *
+from source.helpers.helper_functions import save_dialog_position
+import os
 
 
 class InfoDialog(QtWidgets.QDialog):
@@ -30,7 +32,7 @@ class InfoDialog(QtWidgets.QDialog):
         self.ui = Ui_Information_Dialog()
         self.ui.setupUi(self)
         self.ui.ButtonInfo.clicked.connect(self.info)
-        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
+        self.ui.ButtonCancel.clicked.connect(self._on_cancel)
         self.ui.ButtonMoreInfo.clicked.connect(self.moreinfo)
 
         #Initialize Settings
@@ -38,7 +40,7 @@ class InfoDialog(QtWidgets.QDialog):
         path_pandoc = settings.value('path_pandoc','')
 
         self.resize(settings.value("Option_size", QSize(270, 225)))
-        self.move(settings.value("Option_pos", QPoint(50, 50)))
+        # Position restored in showEvent, NOT here
 
         if not os.path.isfile(path_pandoc):
             path_pandoc = get_path_pandoc()
@@ -53,16 +55,23 @@ class InfoDialog(QtWidgets.QDialog):
             self.ui.textBrowser.setHtml(message)
 
 
-     def closeEvent(self, event):
-
+     def showEvent(self, event):
+        """Restore position when dialog is shown (fixed timing)."""
+        super().showEvent(event)
+        
         settings = QSettings('Pandoc', 'PanConvert')
-        Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True or Dialog_Size == 'true':
-            settings.setValue("Option_size", self.size())
-            settings.setValue("Option_pos", self.pos())
+        pos = settings.value("Option_pos", None)
+        
+        if pos:
+            self.move(pos)
 
+     def _on_cancel(self):
+        """Handle Cancel button click."""
+        save_dialog_position(self, "Option_size", "Option_pos")
+        self.close()
 
-        settings.sync()
+     def closeEvent(self, event):
+        save_dialog_position(self, "Option_size", "Option_pos")
         InfoDialog.close(self)
 
      def info(self):

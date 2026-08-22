@@ -22,6 +22,7 @@ from PyQt6.QtCore import QSettings
 from PyQt6 import QtCore
 from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_diag_prefpane import Ui_DialogPreferences
+from source.helpers.helper_functions import save_dialog_position
 import platform, os
 
 global path_pandoc, path_dialog
@@ -98,7 +99,7 @@ class PreferenceDialog(QtWidgets.QDialog):
 
         #Size of Dialog Windows
         self.resize(settings.value("Preference_size", QSize(270, 225)))
-        self.move(settings.value("Preference_pos", QPoint(50, 50)))
+        # Position restored in showEvent, NOT here
 
         #Paths and Parameters
         path_pandoc = settings.value('path_pandoc')
@@ -183,8 +184,20 @@ class PreferenceDialog(QtWidgets.QDialog):
                 self.ui.Tab_ManualConverter.setChecked(strtobool(Tab_ManualConverter))
                 self.ui.Hide_Batch.setChecked(strtobool(Hide_Batch))
 
+    def showEvent(self, event):
+        """Restore position when dialog is shown (fixed timing)."""
+        super().showEvent(event)
+        
+        settings = QSettings('Pandoc', 'PanConvert')
+        pos = settings.value("Preference_pos", None)
+        
+        if pos:
+            self.move(pos)
+
     def cancel_dialog(self):
-        PreferenceDialog.close(self)
+        """Handle Cancel button click."""
+        save_dialog_position(self, "Preference_size", "Preference_pos")
+        self.close()
 
     def settings(self):
 
@@ -227,10 +240,8 @@ class PreferenceDialog(QtWidgets.QDialog):
         settings.setValue('To_Lyx', self.ui.ButtonToLyx.isChecked())
         settings.setValue('To_Epub', self.ui.ButtonToEpub.isChecked())
 
-        Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True or Dialog_Size == 'true':
-            settings.setValue("Preference_size", self.size())
-            settings.setValue("Preference_pos", self.pos())
+        # Save position and size BEFORE closing
+        save_dialog_position(self, "Preference_size", "Preference_pos")
 
         settings.sync()
 
@@ -277,6 +288,11 @@ class PreferenceDialog(QtWidgets.QDialog):
                 app = QApplication.instance()
                 if app:
                     load_language(app, codeLang)
+
+    def closeEvent(self, event):
+        """Handle window close event."""
+        save_dialog_position(self, "Preference_size", "Preference_pos")
+        event.accept()
 
 
 if __name__ == "__main__":

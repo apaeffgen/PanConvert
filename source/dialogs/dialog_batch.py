@@ -22,6 +22,7 @@ from PyQt6 import QtCore
 from PyQt6.QtCore import QSettings
 from PyQt6.QtCore import QPoint, QSize
 from source.gui.panconvert_dialog_batch import Ui_DialogBatch
+from source.helpers.helper_functions import save_dialog_position
 import platform
 
 global openfiles, batch_open_path
@@ -51,7 +52,7 @@ class BatchDialog(QtWidgets.QDialog):
         self.ui = Ui_DialogBatch()
         self.ui.setupUi(self)
         self.ui.ButtonSave.clicked.connect(self.batch_settings)
-        self.ui.ButtonCancel.clicked.connect(self.closeEvent)
+        self.ui.ButtonCancel.clicked.connect(self._on_cancel)
         self.ui.Button_Open_Path.clicked.connect(self.directory_dialog)
         self.ui.Button_Open_Path_Output.clicked.connect(self.directory_dialog_Output)
 
@@ -61,7 +62,7 @@ class BatchDialog(QtWidgets.QDialog):
         settings = QSettings('Pandoc', 'PanConvert')
 
         self.resize(settings.value("Batch_size", QSize(270, 225)))
-        self.move(settings.value("Batch_pos", QPoint(50, 50)))
+        # Position restored in showEvent, NOT here
 
         # Path Settings
         batch_open_path = batch_settings.value('batch_open_path')
@@ -98,17 +99,24 @@ class BatchDialog(QtWidgets.QDialog):
 
 
 
-    def closeEvent(self, event):
-
+    def showEvent(self, event):
+        """Restore position when dialog is shown (fixed timing)."""
+        super().showEvent(event)
+        
         settings = QSettings('Pandoc', 'PanConvert')
-        Dialog_Size = settings.value('Dialog_Size')
-        if Dialog_Size is True or Dialog_Size == 'true':
-            settings.setValue("Batch_size", self.size())
-            settings.setValue("Batch_pos", self.pos())
+        pos = settings.value("Batch_pos", None)
+        
+        if pos:
+            self.move(pos)
 
+    def _on_cancel(self):
+        """Handle Cancel button click."""
+        save_dialog_position(self, "Batch_size", "Batch_pos")
+        self.close()
 
-        settings.sync()
-        BatchDialog.close(self)
+    def closeEvent(self, event):
+        save_dialog_position(self, "Batch_size", "Batch_pos")
+        event.accept()
 
     def batch_settings(self):
         global batch_open_path, openfiles, batch_open_path_output
@@ -121,6 +129,9 @@ class BatchDialog(QtWidgets.QDialog):
         batch_settings.setValue('batch_open_path_output', self.ui.OpenPath_Output.text())
         batch_settings.setValue('batch_convert_filter', self.ui.Filter.text())
         batch_settings.sync()
+
+        # Save position and size BEFORE closing
+        save_dialog_position(self, "Batch_size", "Batch_pos")
 
         BatchDialog.close(self)
 

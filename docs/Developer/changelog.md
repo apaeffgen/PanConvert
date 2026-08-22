@@ -1,3 +1,8 @@
+### Version 0.3.4
+- Fixed dialog window position drift on macOS, Windows, and Linux
+- Added search Dialog
+- Added Format click function
+
 ### Version 0.3.3
 - Fixed broken Buffer_save function
 - Linux fixes and documentation enhancement
